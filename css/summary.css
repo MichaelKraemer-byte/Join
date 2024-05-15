@@ -1,0 +1,52 @@
+#summary {
+    position: relative;
+    top: 206px;
+    left: 328px;
+    width: 562px;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+}
+
+#summaryTitle {
+    padding-right: 30px;
+    margin: 7px 0px 7px 0px;
+    width: 264px;
+    box-sizing: border-box;
+}
+
+#blueVerticalLine{
+    width: 3px;
+    height: 59px;
+    background-color: #29ABE2;;
+    border-radius: 32px;
+}
+
+.subTitle{
+    padding-left: 30px;
+    color: #2A3647;
+}
+
+#greyVerticalLine {
+
+}
+
+#summaryMainSection {
+    display: flex;
+    align-items: center;
+}
+
+#greetName{
+    margin: 0px;
+    color: #29ABE2;
+}
+
+.greetingIntro{
+    font-size: 47px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    margin-top: 0px;
+    color: #2A3647;
+}
