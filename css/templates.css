@@ -140,3 +140,17 @@ body {
     font-size: 27px;
     font-weight: 400;
 }
+
+.radius-30 {
+    border-radius: 30px;
+}
+
+.backgroundcolor-white {
+    background-color: white;
+}
+
+.countContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

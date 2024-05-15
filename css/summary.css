@@ -2,7 +2,10 @@
     position: relative;
     top: 206px;
     left: 328px;
-    width: 562px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
 }
 
 .titleContainer {
@@ -13,7 +16,6 @@
 #summaryTitle {
     padding-right: 30px;
     margin: 7px 0px 7px 0px;
-    width: 264px;
     box-sizing: border-box;
 }
 
@@ -49,4 +51,31 @@
     margin-bottom: 3px;
     margin-top: 0px;
     color: #2A3647;
+}
+
+.summaryNumContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.summaryCount{
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.toDoAndDoneSection {
+    display: flex;
+    gap: 32px;
+}
+
+.toDoAndDoneContainer{
+    display: flex;
+    gap: 18px;
+    Padding: 38px 19px 38px 19px;
+}
+
+.boardProgressFeedbackSection{
+    display: flex;
+    
 }
