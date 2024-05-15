@@ -1,0 +1,10 @@
+.add_task_container {
+    background-color: rgb(246, 247, 248);
+}
+
+.add_task_container h1 {
+    width: 278px;
+    height: 73px;    
+    margin-block-start: 0;
+    margin-block-end: 0;
+} 
