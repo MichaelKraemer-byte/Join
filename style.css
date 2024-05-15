@@ -126,8 +126,9 @@ body {
 }
 
 .add_task_container {
-    background-color: rgb(246, 247, 248);    
+    background-color: rgb(246, 247, 248);
     padding: 110px 96px 0 96px;
+    margin-left: 232px;
 }
 
 .add_task_container h1 {
@@ -136,7 +137,11 @@ body {
     font-weight: 700;
     margin-block-start: 0;
     margin-block-end: 0;
-} 
+}
+
+.add_task_container b {
+    color: red;
+}
 
 .add_task_form_row {
     display: flex;
@@ -156,12 +161,13 @@ body {
 }
 
 .add_task_width50 {
-    width: 50%;    
+    width: 50%;
 }
 
 .add_task_line {
     width: 1px;
-    margin: 0 45px;
+    margin: 50px 45px 0;
+    padding-top: 20px;
     background-color: #D1D1D1;
 }
 
@@ -189,6 +195,13 @@ body {
     cursor: pointer;
 }
 
+.add_task_hober_button:hover {
+    -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+}
+
+
 .add_task_button_group button {
     width: 136px;
     height: 56px;
@@ -210,7 +223,7 @@ body {
 .add_task_button_medium {
     background-color: #FFA800;
     font-weight: 700;
-    color: white;
+    /* color: white; */
 }
 
 .add_task_button_vector {
@@ -227,7 +240,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 146px 0 80px 0;
+    padding: 146px 0 50px ;
 }
 
 .add_task_footer p {
@@ -252,12 +265,18 @@ body {
 
 .add_task_button_clear {
     color: #2A3647;
+    background-color: white;
     border: 1px solid #2A3647;
     width: 110px;
     height: 56px;
     padding: 16px;
     gap: 4px;
 }
+
+.add_task_button_clear:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
+} 
 
 .add_task_button_create {
     font-weight: 700;
@@ -267,6 +286,11 @@ body {
     height: 56px;
     padding: 16px;
     gap: 4px;
+}
+
+.add_task_button_create:hover {
+    border: 2px solid #29ABE2;
+    background-color: #29ABE2;
 }
 
 .add_task_title {
