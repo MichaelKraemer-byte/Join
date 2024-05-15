@@ -4,11 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./fonts/inter.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
+    <script src="js/script.js"></script>
 </head>
 
-<body>
+<body onload="includeHTML()">
+
+    <div w3-include-html="templates/navBar.html"></div>
+
+    <div w3-include-html="templates/header.html"></div>
+
     <div class="add_task_container">
         <h1>Add Task</h1>
         <div class="add_task_form">
