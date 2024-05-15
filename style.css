@@ -76,6 +76,13 @@ body {
     padding: 146px 0 80px 0;
 }
 
+.add_task_footer p {
+    font-size: 20px;
+    line-height: 24px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 .add_task_button_group_footer {
     display: flex;
     justify-content: space-between;
@@ -83,13 +90,14 @@ body {
 }
 
 .add_task_button_group_footer button {
-    border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 16px;
     font-size: 20px;
 }
 
 .add_task_button_clear {
+    color: #2A3647;
+    border: 1px solid #2A3647;
     width: 110px;
     height: 56px;
     padding: 16px;
@@ -97,6 +105,9 @@ body {
 }
 
 .add_task_button_create {
+    font-weight: 700;
+    background-color: #2A3647;
+    color: white;
     width: 183px;
     height: 56px;
     padding: 16px;
