@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="add_task_container">
+        <h1>Add Task</h1>
+        <div style="display: flex;">
+            <div class="add_task_left" style="padding-right: 30px;">
+                <form action="">
+                    <div style="display: flex; flex-direction: column; width: 440px;">
+                        <label for="">Title*</label>
+                        <input type="text" placeholder="Enter a title" required>
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 440px;">
+                        <label for="">Description</label>
+                        <textarea name="" id="" placeholder="Enter a Description"></textarea>
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 440px;">
+                        <label for="">Assignet to</label>
+                        <select name="select">
+                            <option value="" hidden>Select contact to assign</option>
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div style="width: 1px; background-color: #D1D1D1;"></div>
+            <div class="add_task_right" style="padding-left: 30px;">
+                <form action="">
+                    <div style="display: flex; flex-direction: column; width: 440px;">
+                        <label for="">Due date*</label>
+                        <input type="date" required>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <p>Prio</p>
+                        <div>
+                            <button>Urgent</button>
+                            <button>Medium</button>
+                            <button>Low</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 440px;">
+                        <label for="">Categoriy*</label>
+                        <select name="" id="" required>
+                            <option value="" hidden>Select task categoriy</option>
+                            <option value="">Technical Task</option>
+                            <option value="">User Story</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <div class="add_task_footer" style="display: flex; align-items: center; justify-content: space-between; padding: 30px;">
+            <p>*This field is required</p>
+            <div>
+                <button>Clear X</button>
+                <button>Create Task</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
