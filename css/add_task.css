@@ -95,8 +95,12 @@
 
 .add_task_button_medium {
     /* background-color: #FFA800; */
-    font-weight: 700;
+    /* font-weight: 700; */
     /* color: white; */
+}
+
+.add_task_button_medium img {
+    filter: drop-shadow(0px 0px 0 #FFA800);
 }
 
 .add_task_button_vector {
