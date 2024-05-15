@@ -82,6 +82,12 @@ body {
     justify-content: center;
 }
 
+.add_task_button_medium {
+    background-color: #FFA800;
+    font-weight: 700;
+    color: white;
+}
+
 .add_task_button_vector {
     width: 20px;
     display: flex;
