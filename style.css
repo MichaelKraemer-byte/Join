@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 .add_task_container {
     background-color: rgb(246, 247, 248);
 }
