@@ -195,7 +195,7 @@ body {
     cursor: pointer;
 }
 
-.add_task_hober_button:hover {
+.add_task_hover_button:hover {
     -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
@@ -221,7 +221,7 @@ body {
 }
 
 .add_task_button_medium {
-    background-color: #FFA800;
+    /* background-color: #FFA800; */
     font-weight: 700;
     /* color: white; */
 }
@@ -240,7 +240,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 146px 0 50px ;
+    padding: 146px 0 90px ;
 }
 
 .add_task_footer p {
