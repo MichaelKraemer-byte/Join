@@ -12,17 +12,17 @@
     <div class="add_task_container">
         <h1>Add Task</h1>
         <div class="add_task_form">
-            <div class="add_task_left">
+            <div class="add_task_width50">
                 <form action="">
-                    <div class="add_task_form_row">
+                    <div class="add_task_title add_task_form_row">
                         <label for="">Title*</label>
                         <input class="add_task_input" type="text" placeholder="Enter a title" required>
                     </div>
-                    <div class="add_task_form_row">
+                    <div class="add_task_descripion add_task_form_row">
                         <label for="">Description</label>
                         <textarea class="add_task_textarea" name="" id="" placeholder="Enter a Description"></textarea>
                     </div>
-                    <div class="add_task_form_row">
+                    <div class="add_task_assignet add_task_form_row">
                         <label for="">Assignet to</label>
                         <select class="add_task_input" name="select">
                             <option value="" hidden>Select contact to assign</option>
@@ -36,13 +36,13 @@
 
             <div class="add_task_line"></div>
 
-            <div class="add_task_right">
+            <div class="add_task_width50">
                 <form action="">
-                    <div class="add_task_form_row">
+                    <div class="add_task_date add_task_form_row">
                         <label for="">Due date*</label>
                         <input class="add_task_input" type="date" required>
                     </div>
-                    <div class="add_task_form_row">
+                    <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
                             <button>Urgent</button>
@@ -50,7 +50,7 @@
                             <button>Low</button>
                         </div>
                     </div>
-                    <div class="add_task_form_row">
+                    <div class="add_task_category add_task_form_row">
                         <label for="">Categoriy*</label>
                         <select class="add_task_input" name="" id="" required>
                             <option value="" hidden>Select task categoriy</option>
@@ -58,7 +58,7 @@
                             <option value="">User Story</option>
                         </select>
                     </div>
-                    <div class="add_task_form_row">
+                    <div class="add_task_subtask add_task_form_row">
                         <label for="">Subtasks</label>
                         <select class="add_task_input" name="" id=""></select>
                     </div>
@@ -66,11 +66,11 @@
             </div>
             
         </div>
-        <div class="add_task_footer" style="display: flex; align-items: center; justify-content: space-between; padding: 30px;">
+        <div class="add_task_footer">
             <p>*This field is required</p>
             <div class="add_task_button_group_footer">
-                <button>Clear X</button>
-                <button>Create Task</button>
+                <button class="add_task_button_clear">Clear X</button>
+                <button class="add_task_button_create">Create Task</button>
             </div>
         </div>
     </div>
