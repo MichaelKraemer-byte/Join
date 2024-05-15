@@ -11,20 +11,20 @@
 <body>
     <div class="add_task_container">
         <h1>Add Task</h1>
-        <div style="display: flex;">
-            <div class="add_task_left" style="padding-right: 30px;">
+        <div class="add_task_form">
+            <div class="add_task_left">
                 <form action="">
-                    <div style="display: flex; flex-direction: column; width: 440px;">
+                    <div class="add_task_form_row">
                         <label for="">Title*</label>
-                        <input type="text" placeholder="Enter a title" required>
+                        <input class="add_task_input" type="text" placeholder="Enter a title" required>
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 440px;">
+                    <div class="add_task_form_row">
                         <label for="">Description</label>
-                        <textarea name="" id="" placeholder="Enter a Description"></textarea>
+                        <textarea class="add_task_textarea" name="" id="" placeholder="Enter a Description"></textarea>
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 440px;">
+                    <div class="add_task_form_row">
                         <label for="">Assignet to</label>
-                        <select name="select">
+                        <select class="add_task_input" name="select">
                             <option value="" hidden>Select contact to assign</option>
                             <option value="">1</option>
                             <option value="">2</option>
@@ -33,28 +33,34 @@
                     </div>
                 </form>
             </div>
-            <div style="width: 1px; background-color: #D1D1D1;"></div>
-            <div class="add_task_right" style="padding-left: 30px;">
+
+            <div class="add_task_line"></div>
+
+            <div class="add_task_right">
                 <form action="">
-                    <div style="display: flex; flex-direction: column; width: 440px;">
+                    <div class="add_task_form_row">
                         <label for="">Due date*</label>
-                        <input type="date" required>
+                        <input class="add_task_input" type="date" required>
                     </div>
-                    <div style="display: flex; flex-direction: column;">
+                    <div class="add_task_form_row">
                         <p>Prio</p>
-                        <div>
+                        <div class="add_task_button_group">
                             <button>Urgent</button>
                             <button>Medium</button>
                             <button>Low</button>
                         </div>
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 440px;">
+                    <div class="add_task_form_row">
                         <label for="">Categoriy*</label>
-                        <select name="" id="" required>
+                        <select class="add_task_input" name="" id="" required>
                             <option value="" hidden>Select task categoriy</option>
                             <option value="">Technical Task</option>
                             <option value="">User Story</option>
                         </select>
+                    </div>
+                    <div class="add_task_form_row">
+                        <label for="">Subtasks</label>
+                        <select class="add_task_input" name="" id=""></select>
                     </div>
                 </form>
             </div>
@@ -62,7 +68,7 @@
         </div>
         <div class="add_task_footer" style="display: flex; align-items: center; justify-content: space-between; padding: 30px;">
             <p>*This field is required</p>
-            <div>
+            <div class="add_task_button_group_footer">
                 <button>Clear X</button>
                 <button>Create Task</button>
             </div>
