@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="add_task_container">
+        <h1>Add Task</h1>
+        <div class="add_task_form">
+            <div class="add_task_width50">
+                <form action="">
+                    <div class="add_task_title add_task_form_row">
+                        <label for="">Title*</label>
+                        <input class="add_task_input" type="text" placeholder="Enter a title" required>
+                    </div>
+                    <div class="add_task_descripion add_task_form_row">
+                        <label for="">Description</label>
+                        <textarea class="add_task_textarea" name="" id="" placeholder="Enter a Description"></textarea>
+                    </div>
+                    <div class="add_task_assignet add_task_form_row">
+                        <label for="">Assignet to</label>
+                        <select class="add_task_input" name="select">
+                            <option value="" hidden>Select contact to assign</option>
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="add_task_line"></div>
+
+            <div class="add_task_width50">
+                <form action="">
+                    <div class="add_task_date add_task_form_row">
+                        <label for="">Due date*</label>
+                        <input class="add_task_input" type="date" required>
+                    </div>
+                    <div class="add_task_prio add_task_form_row">
+                        <p>Prio</p>
+                        <div class="add_task_button_group">
+                            <button class="add_task_button_urgent">Urgent
+                                <div class="add_task_button_vector">
+                                    <img src="./img/vector_red.svg">
+                                    <img src="./img/vector_red.svg">
+                                </div>
+                            </button>
+                            <button class="add_task_button_medium add_task_button_urgent">Medium
+                                <div class="add_task_button_vector">
+                                    <img src="./img/vector_strich.svg">
+                                    <img src="./img/vector_strich.svg">
+                                </div>
+                            </button>
+                            <button class="add_task_button_low add_task_button_urgent">Low
+                                <div class="add_task_button_vector">
+                                    <img src="./img/vector_green.svg">
+                                    <img src="./img/vector_green.svg">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="add_task_category add_task_form_row">
+                        <label for="">Categoriy*</label>
+                        <select class="add_task_input" name="" id="" required>
+                            <option value="" hidden>Select task categoriy</option>
+                            <option value="">Technical Task</option>
+                            <option value="">User Story</option>
+                        </select>
+                    </div>
+                    <div class="add_task_subtask add_task_form_row">
+                        <label for="">Subtasks</label>
+                        <select class="add_task_input" name="" id=""></select>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <div class="add_task_footer">
+            <p>*This field is required</p>
+            <div class="add_task_button_group_footer">
+                <button class="add_task_button_clear">Clear X</button>
+                <button class="add_task_button_create">Create Task</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

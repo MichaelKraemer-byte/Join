@@ -77,4 +77,192 @@ body {
     width: 30px;
     height: 30px;
     padding-right: 16px;
+    margin: 0;
+}
+
+.add_task_container {
+    background-color: rgb(246, 247, 248);    
+    padding: 110px 96px 0 96px;
+}
+
+.add_task_container h1 {
+    font-size: 61px;
+    line-height: 73.2px;
+    font-weight: 700;
+    margin-block-start: 0;
+    margin-block-end: 0;
+} 
+
+.add_task_form_row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    cursor: pointer;
+}
+
+.add_task_form {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #2A3647;
+    cursor: pointer;
+}
+
+.add_task_width50 {
+    width: 50%;    
+}
+
+.add_task_line {
+    width: 1px;
+    margin: 0 45px;
+    background-color: #D1D1D1;
+}
+
+.add_task_input {
+    font-size: 20px;
+    height: 48px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding-left: 6px;
+    cursor: pointer;
+}
+
+.add_task_textarea {
+    font-size: 20px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.add_task_button_group {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.add_task_button_group button {
+    width: 136px;
+    height: 56px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 16px 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.add_task_button_urgent {
+    display: flex;
+    background-color: white;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_task_button_medium {
+    background-color: #FFA800;
+    font-weight: 700;
+    color: white;
+}
+
+.add_task_button_vector {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_task_button_vector img {
+    height: 8.76px;
+}
+
+.add_task_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 146px 0 80px 0;
+}
+
+.add_task_footer p {
+    font-size: 20px;
+    line-height: 24px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.add_task_button_group_footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.add_task_button_group_footer button {
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.add_task_button_clear {
+    color: #2A3647;
+    border: 1px solid #2A3647;
+    width: 110px;
+    height: 56px;
+    padding: 16px;
+    gap: 4px;
+}
+
+.add_task_button_create {
+    font-weight: 700;
+    background-color: #2A3647;
+    color: white;
+    width: 183px;
+    height: 56px;
+    padding: 16px;
+    gap: 4px;
+}
+
+.add_task_title {
+    margin-top: 48px;
+    height: 96px;
+    gap: 8px;
+}
+
+.add_task_descripion {
+    height: 168px;
+    margin: 16px 0;
+    gap: 8px;
+}
+
+.add_task_assignet {
+    height: 80px;
+    gap: 8px;
+}
+
+.add_task_date {
+    margin-top: 48px;
+    height: 96px;
+    gap: 8px;
+}
+
+.add_task_prio {
+    height: 88px;
+    margin: 24px 0;
+    gap: 8px;
+}
+
+.add_task_prio p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.add_task_category {
+    gap: 8px;
+    margin: 24px 0;
+}
+
+.add_task_subtask {
+    gap: 8px
 }
