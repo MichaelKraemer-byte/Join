@@ -18,6 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    cursor: pointer;
 }
 
 .add_task_form {
@@ -27,6 +28,7 @@ body {
     line-height: 24px;
     font-weight: 400;
     color: #2A3647;
+    cursor: pointer;
 }
 
 .add_task_width50 {
@@ -45,6 +47,7 @@ body {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 6px;
+    cursor: pointer;
 }
 
 .add_task_textarea {
@@ -52,12 +55,14 @@ body {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     height: 120px;
+    cursor: pointer;
 }
 
 .add_task_button_group {
     display: flex;
     justify-content: space-between;
     gap: 8px;
+    cursor: pointer;
 }
 
 .add_task_button_group button {
@@ -67,6 +72,24 @@ body {
     border-radius: 10px;
     padding: 16px 10px;
     font-size: 20px;
+    cursor: pointer;
+}
+
+.add_task_button_urgent {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_task_button_vector {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_task_button_vector img {
+    height: 8.76px;
 }
 
 .add_task_footer {
@@ -93,6 +116,7 @@ body {
     border-radius: 10px;
     padding: 16px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .add_task_button_clear {
