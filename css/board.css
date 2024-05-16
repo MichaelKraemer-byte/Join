@@ -23,8 +23,46 @@
 .title {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     padding: 80px 64px 0;
+    gap: 10px;
+}
+
+.task_navigation {
+    display: flex;
+    align-items: center;
+}
+
+.task_navigation input {
+    border: 1px solid #A8A8A8;
+    height: 48px;
+    width: 312px;
+    border-radius: 10px;
+    margin-right: 32px;
+    cursor: pointer;
+}
+
+.task_navigation button {
+    border: 1px solid #2A3647;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 25.2px;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 10px;
+    width: 160px;
+    height: 52px;
+    padding: 8px 16px;
+    gap: 4px;  
+    cursor: pointer;  
+}
+
+.task_navigation button:hover {
+    border: 2px solid #29ABE2;
+    background-color: #29ABE2;
+    -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
 }
 
 .column_section {
@@ -39,7 +77,8 @@
 .columm_section_add {
     display: flex;
     justify-content: space-between;
-    width: 25%;   
+    width: 25%;  
+    align-items: center; 
 }
 
 .columm_section_add_inprogress {
@@ -54,6 +93,20 @@
 .columm_section_add_await {
     margin-left: 16px;
     margin-right: 12px;
+}
+
+.column_section button {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    border: 2px solid #2A3647;
+    border-radius: 6px;
+    color: #2A3647;
+}
+
+.column_section button:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
 }
 
 .board_content {
