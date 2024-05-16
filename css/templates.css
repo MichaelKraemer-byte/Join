@@ -89,19 +89,33 @@ body {
     align-items: center;
     justify-content: start;
     font-size: 16px;
+    padding: 8px 0px 8px 0px;
 }
 
 .navButton:hover {
     cursor: pointer;
 }
 
-.textButton {
+.mainNavButtonTransition{
+    transition: background-color 0.08s ease-in-out;
+}
+
+.mainNavButtonTransition:hover {
+    background-color: #2A3D59;
+}
+
+.footerButton {
     padding: 8px;
     gap: 8px;
     text-align: left;
-    width: 121px;
+    width: 128px;
     font-size: 16px;
     color: rgb(168,168,168);
+}
+
+.footerButton:hover {
+    color: #29ABE2;
+    font-weight: 700;
 }
 
 .footerContainer {
@@ -128,6 +142,15 @@ body {
     height: 30px;
     padding-right: 16px;
     margin: 0;
+    transition: transform 0.075s ease-in-out;
+}
+
+.navImg:hover {
+    transform: scale(1.04);
+}
+
+#initialCircle:hover .circle-background {
+    fill: rgba(128, 128, 128, 0.2);
 }
 
 .title {
@@ -154,3 +177,12 @@ body {
     flex-direction: column;
     text-align: center;
 }
+
+.helpIcon {
+    transition: transform 0.075s ease-in-out;
+}
+
+.helpIcon:hover {
+    transform: scale(1.2);
+}
+

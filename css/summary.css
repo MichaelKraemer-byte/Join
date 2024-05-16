@@ -31,13 +31,10 @@
     color: #2A3647;
 }
 
-#greyVerticalLine {
-
-}
-
 #summaryMainSection {
     display: flex;
     align-items: center;
+    gap: 80px;
 }
 
 #greetName{
@@ -57,25 +54,87 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
+    width: 560px;
 }
 
 .summaryCount{
     font-size: 64px;
     font-weight: 600;
+    margin: 0px;
 }
 
 .toDoAndDoneSection {
     display: flex;
     gap: 32px;
+    justify-content: space-between;
 }
 
 .toDoAndDoneContainer{
     display: flex;
     gap: 18px;
-    Padding: 38px 19px 38px 19px;
+    Padding: 38px 58px 38px 58px;
+    align-items: center;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    justify-content: center;
+    text-align: center;
+    width: 264px;
 }
 
 .boardProgressFeedbackSection{
     display: flex;
-    
+    justify-content: space-between;
+}
+
+
+#greyVerticalLine {
+    border: 2px solid #D1D1D1;
+    width: 0px;
+    height: 102.02px;
+}
+
+.urgentContainer{
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    height: 168px;
+    display: flex;
+    box-sizing: border-box;
+    padding: 28px 48px 28px 48px;
+    gap: 61px;
+    align-items: center;
+    justify-content: center;
+}
+
+.urgentCountContainer{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.urgentCountContainerWithImg{
+    display: flex;
+    gap: 18px;
+}
+
+.upcomingContainer {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+#upcomingDeadline{
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.deadlinePhrase{
+    font-size: 16px;
+}
+
+.summaryBottomContainer{
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    width: 168px;
+    height: auto;
+    padding: 25px 0px 25px 0px;
 }

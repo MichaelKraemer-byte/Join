@@ -25,35 +25,38 @@
                 </div>
             </div>
 
-            <div id="urgentContainer radius-30 backgroundcolor-white">
-                <div>
+            <div class="urgentContainer radius-30 backgroundcolor-white">
+                <div class="urgentCountContainerWithImg">
                     <img src="assets/img/urgentIcon.svg">
-                    <num id="urgent">0</num>
+                    <div class="urgentCountContainer">
+                        <num id="urgent" class="summaryCount">0</num>
+                        <span>Tasks in Board</span>
+                    </div>
                 </div>
 
                 <div id="greyVerticalLine">
                 </div>
                 
-                <div>
-                    <h3></h3>
-                    <p>Upcoming Deadline</p>
+                <div class="upcomingContainer">
+                    <span id="upcomingDeadline">Date,</span>
+                    <span class="deadlinePhrase">Upcoming Deadline</span>
                 </div>
             </div>
 
             <div class="boardProgressFeedbackSection">
-                <div class="countContainer radius-30 backgroundcolor-white">
+                <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer">
                     <num class="summaryCount">0</num>
-                    <h3>Tasks in Board</h3>
+                    <span class="bottomContainerText">Tasks in<br>Board</span>
                 </div>
                     
-                <div class="countContainer radius-30 backgroundcolor-white">
+                <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer">
                     <num class="summaryCount">0</num>
-                    <h3>Tasks in Progress</h3>
+                    <span class="bottomContainerText">Tasks in<br>Progress</span>
                 </div>
 
-                <div class="countContainer radius-30 backgroundcolor-white">
+                <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer">
                     <num class="summaryCount">0</num>
-                    <h3>Awaiting Feedback</h3>
+                    <span class="bottomContainerText">Awaiting<br>Feedback</span>
                 </div>
             </div>
         </div>
