@@ -9,24 +9,36 @@
 </head>
 
 <body>
-    <div class="content d-center">
-        <div class="login-box">
-            <h1>Log in</h1>
-            <form onsubmit="login(); return false;">
-                <input type="email" required id="email" placeholder="Email">
-                <input type="password" required id="password" placeholder="Password">
-                <div class="login-input-area">
-                    <div class="login-rememberme">
-                        <input type="radio" name="rememberme" id="rememberme">
-                        <label for="rememberme">Remember me</label>
+    <div class="content">
+
+        <section class="d-space-b">
+            <img src="/assets/img/logo.svg" class="logo" alt="logo">
+            <div class="signUp">
+                <p>Not a Join user?</p>
+                <button class="button" id="signUp">Sign up</button>
+            </div>
+        </section>
+
+        <section class="d-center">
+            <div class="login-box">
+                <h1>Log in</h1>
+                <div class="login-stripe"></div>
+                <form onsubmit="login(); return false;">
+                    <input type="email" required id="email" placeholder="Email">
+                    <input type="password" required id="password" placeholder="Password">
+                    <div class="login-input-area">
+                        <div class="login-rememberme">
+                            <input type="checkbox" name="rememberme" id="rememberme">
+                            <label for="rememberme">Remember me</label>
+                        </div>
+                        <div class="login-buttons d-center">
+                            <button class="button" id="login-button">Log in</button>
+                            <button class="button" id="guest-login-button">Guest Log in</button>
+                        </div>
                     </div>
-                    <div class="login-button d-center">
-                        <button>Log in</button>
-                        <button>Guest Log in</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </section>
     </div>
 
     <div id="msgBox"></div>
