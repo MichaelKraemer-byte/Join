@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
 </head>
+
 <body>
-    <form onsubmit="login(); return false;">
-        <input type="email" required id="email">
-        <input type="password" required id="password">
-        <button>Login</button>
-    </form>
+    <div class="content d-center">
+        <div class="login-box">
+            <h1>Log in</h1>
+            <form onsubmit="login(); return false;">
+                <input type="email" required id="email" placeholder="Email">
+                <input type="password" required id="password" placeholder="Password">
+                <div class="login-input-area">
+                    <div class="login-rememberme">
+                        <input type="radio" name="rememberme" id="rememberme">
+                        <label for="rememberme">Remember me</label>
+                    </div>
+                    <div class="login-button d-center">
+                        <button>Log in</button>
+                        <button>Guest Log in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div id="msgBox"></div>
 
     <script src="js/login.js"></script>
     <script src="js/register.js"></script>
 </body>
+
 </html>
