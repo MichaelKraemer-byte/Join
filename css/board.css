@@ -77,8 +77,8 @@
 .columm_section_add {
     display: flex;
     justify-content: space-between;
-    width: 25%;  
     align-items: center; 
+    width: 25%;  
 }
 
 .columm_section_add_inprogress {
@@ -96,12 +96,14 @@
 }
 
 .column_section button {
-    height: 24px;
+    height: 25px;
+    text-align: center;
     font-size: 19px;
     font-weight: 700;
     border: 2px solid #2A3647;
     border-radius: 6px;
     color: #2A3647;
+    cursor: pointer;
 }
 
 .column_section button:hover {
