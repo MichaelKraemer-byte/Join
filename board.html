@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">   
-        <link rel="stylesheet" href="css/fonts/inter.css">
-        <link rel="stylesheet" href="css/board.css">
-        <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
-        <script src="js/script.js"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/fonts/inter.css">
+    <link rel="stylesheet" href="css/board.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
+    <script src="js/script.js"></script>
+</head>
+
 <body onload="includeHTML()">
     <div w3-include-html="templates/navBar.html"></div>
 
     <div w3-include-html="templates/header.html"></div>
 
-    <div class="bord_container">
-        
+    <div class="board_container">
+        <div class="board_header">           
+            <div class="title">
+                <h1>Board</h1>
+                <div class="task_navigation">
+                    <input type="text">
+                    <button>Add task +</button>
+                </div>
+            </div>
+            <div class="column_section">
+                <div class="columm_section_add columm_section_add_todo">
+                    <span>To do</span>
+                    <button>+</button>
+                </div>
+                <div class="columm_section_add columm_section_add_inprogress">
+                    <span>In progress</span>
+                    <button>+</button>
+                </div>
+                <div class="columm_section_add columm_section_add_await">
+                    <span>Await feedback</span>
+                    <button>+</button>
+                </div>
+                <div class="columm_section_add columm_section_add_done">
+                    <span>Done</span>
+                </div>
+            </div>      
+        </div>
+        <div class="board_content">
+            <div style="background-color: aqua; height: 200px; width: 25%; margin-left: 64px; margin-right: 12px;">
+
+            </div>
+            <div style="background-color: rgb(76, 0, 255); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
+
+            </div>
+            <div style="background-color: rgb(0, 255, 34); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
+
+            </div>
+            <div style="background-color: aqua; height: 200px; width: 25%; margin-left: 12px; margin-right: 64px;">
+
+            </div>
+        </div>
+
     </div>
 
 </body>
+
 </html>
