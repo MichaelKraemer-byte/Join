@@ -93,15 +93,10 @@
     justify-content: center;
 }
 
-.add_task_button_medium {
-    /* background-color: #FFA800; */
-    /* font-weight: 700; */
-    /* color: white; */
-}
 
-.add_task_button_medium img {
+/* .add_task_button_medium img {
     filter: drop-shadow(0px 0px 0 #FFA800);
-}
+} */
 
 .add_task_button_vector {
     width: 20px;
@@ -110,7 +105,7 @@
 }
 
 .add_task_button_vector img {
-    height: 8.76px;
+    width: 35px;
 }
 
 .add_task_footer {

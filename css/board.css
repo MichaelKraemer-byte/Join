@@ -120,3 +120,12 @@
 .columm_section_add_todo {
     margin-right: 8px;
 }
+
+.task {
+    height: 40px;
+    width: 50px;
+    background-color: aliceblue;
+    margin: 20px;
+    border: 2px solid red;
+    border-radius: 5px;
+}

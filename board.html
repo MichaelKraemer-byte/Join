@@ -16,8 +16,26 @@
 
     <div w3-include-html="templates/header.html"></div>
 
+
+    <script>
+        let todos = [{
+            'id': 0,
+            'title': 'Putzen',
+            'category': 'open'
+        }, {
+            'id': 1,
+            'title': 'Kochen',
+            'category': 'open'
+        }, {
+            'id': 2,
+            'title': 'Einkaufen',
+            'category': 'closed'
+        }];
+
+    </script>
+
     <div class="board_container">
-        <div class="board_header">           
+        <div class="board_header">
             <div class="title">
                 <h1>Board</h1>
                 <div class="task_navigation">
@@ -25,12 +43,12 @@
                     <button>Add task +</button>
                 </div>
             </div>
-            <div class="column_section">
+            <div class="column_section" id="open">
                 <div class="columm_section_add columm_section_add_todo">
                     <span>To do</span>
                     <button>+</button>
                 </div>
-                <div class="columm_section_add columm_section_add_inprogress">
+                <div class="columm_section_add columm_section_add_inprogress" id="closed">
                     <span>In progress</span>
                     <button>+</button>
                 </div>
@@ -41,16 +59,18 @@
                 <div class="columm_section_add columm_section_add_done">
                     <span>Done</span>
                 </div>
-            </div>      
+            </div>
         </div>
         <div class="board_content">
             <div style="background-color: aqua; height: 200px; width: 25%; margin-left: 64px; margin-right: 12px;">
-                <div>hallo</div>
+                <div class="task">task1</div>
             </div>
-            <div style="background-color: rgb(76, 0, 255); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
-
+            <div
+                style="background-color: rgb(76, 0, 255); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
+                <div class="task">task2</div>
             </div>
-            <div style="background-color: rgb(0, 255, 34); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
+            <div
+                style="background-color: rgb(0, 255, 34); height: 200px; width: 25%; margin-right: 12px; margin-left: 12px;">
 
             </div>
             <div style="background-color: aqua; height: 200px; width: 25%; margin-left: 12px; margin-right: 64px;">
