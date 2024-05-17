@@ -1,6 +1,6 @@
 .board_container {
     background-color: rgb(246, 247, 248);
-    /* padding: 110px 96px 0 96px; */
+    padding: 110px 96px 0 96px;
     margin-left: 232px;
 }
 
@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 80px 64px 0;
+    /* padding: 80px 64px 0; */
     gap: 10px;
 }
 
@@ -68,7 +68,7 @@
 .column_section {
     display: flex;
     justify-content: space-between;
-    padding: 0 64px 15px;
+    padding-bottom: 15px;
     font-weight: 700;
     font-size: 24px;
     color: #42526E;
@@ -125,7 +125,25 @@
     height: 40px;
     width: 50px;
     background-color: aliceblue;
-    margin: 20px;
     border: 2px solid red;
     border-radius: 5px;
+}
+
+.bord_content_colum {
+    height: 200px;
+    width: 25%;
+    margin-right: 13px;
+    margin-left: 13px;
+}
+
+.bord_content_colum_left {
+    height: 200px;
+    width: 25%;
+    margin-right: 13px;
+}
+
+.bord_content_colum_right {
+    height: 200px;
+    width: 25%;
+    margin-left: 13px;
 }
