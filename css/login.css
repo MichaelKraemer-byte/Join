@@ -17,11 +17,13 @@ body {
 }
 
 .content {
-    height: 100vh;
     padding-top: 100px;
-    padding: 24px;
+    padding: 32px;
     width: 100%;
     max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
 }
 
 .logo {
@@ -39,45 +41,61 @@ body {
 #signUp {
     color: white;
     background-color: #2a3648;
-    height: 32px;
+    border: none;
+}
+
+#signUp:hover {
+    background-color: #2dabe1;
 }
 
 .login-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    width: 300px;
+    gap: 32px;
     background-color: white;
-    padding: 24px;
-    padding-left: 64px;
-    padding-right: 80px;
+    padding: 48px 115px;
     border-radius: 16px;
     box-shadow: 1px 1px 3px rgba(180, 180, 180, 0.253);
 }
 
+.login-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
 .login-box h1 {
+    font-size: 61px;
     margin: 0;
     font-family: Inter-Bold;
+    line-height: 73.2px;
 }
 
 .login-box form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 100%;
-    margin-top: 16px;
+    width: 422px;
 }
 
 .login-box input {
-    width: 100%;
+    padding: 12px 21px;
     border: solid 1px #d1d1d1;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 8px;
-    padding-left: 16px;
+    padding: 12px 21px;
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 12px;
+    gap: 10px;
+}
+
+.login-input-area {
+    display: flex;
+    flex-direction: column;
+    height: 152px;
+    gap: 32px;
 }
 
 #email {
@@ -97,29 +115,17 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-left: 39px;
+    margin-bottom: 32px;
+    font-size: 16px;
 }
 
 .login-rememberme input {
-    width: max-content;
     margin: 0;
-    border-radius: 2px;
-}
-
-.login-stripe {
-    background-color: #2dabe1;
-    height: 2px;
-    width: 25%;
     border-radius: 3px;
-}
-
-.login-input-area {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 32px;
-    padding-bottom: 0;
-    padding-top: 0;
-    box-sizing: border-box;
+    border: solid 3px black;
+    width: 16px;
+    height: 16px;
 }
 
 .login-buttons {
@@ -127,15 +133,19 @@ body {
 }
 
 .button {
-    padding: 6px;
-    padding-left: 12px;
-    padding-right: 12px;
-    font-weight: bold;
-    border-radius: 4px;
+    padding: 15px 24px;
+    box-sizing: border-box;
+    border-radius: 8px;
     border-width: 1px;
     cursor: pointer;
-    width: max-content;
     transition: 150ms;
+    height: 48px;
+    font-family: Inter-Bold;
+    font-weight: 700;
+    font-size: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #login-button {
@@ -154,6 +164,29 @@ body {
 
 #guest-login-button:hover {
     color: #2dabe1;
+    border-color: #2dabe1;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: -130px;
+}
+
+.footer-links {
+    display: flex;
+    width: 246px;
+    height: 35px;
+    gap: 24px;
+}
+
+.footer-links a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #CDCDCD;
+    text-decoration: none;
 }
 
 .d-space-b {
