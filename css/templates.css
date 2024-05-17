@@ -145,7 +145,7 @@ body {
     transition: transform 0.075s ease-in-out;
 }
 
-.navImg:hover {
+.navButton:hover .navImg {
     transform: scale(1.04);
 }
 

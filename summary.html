@@ -13,21 +13,24 @@
                     <img class="summarySvg" src="assets/img/penIcon.svg">
                     <div class="countContainer">
                         <num id="toDo" class="summaryCount">0</num>
-                        <span>To-do</span>
+                        <span class="summarySpan">To-do</span>
                     </div>
                 </div>
                 <div class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
-                    <img class="summarySvg" src="assets/img/checkIcon.svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
+                        <circle class="whiteFill" cx="35" cy="35" r="34.5" fill="#2A3647"/>
+                        <path class="darkBlueStroke" d="M20.0283 35.0001L31.2571 46.0662L49.9717 23.9341" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <div class="countContainer">
                         <num id="done" class="summaryCount">0</num>
                         <span>Done</span>
                     </div>
                 </div>
-            </div>
+            </div>            
 
             <div class="urgentContainer radius-30 backgroundcolor-white invert">
                 <div class="urgentCountContainerWithImg">
-                    <img class="summarySvg" src="assets/img/urgentIcon.svg">
+                    <img src="assets/img/urgentIcon.svg">
                     <div class="urgentCountContainer">
                         <num id="urgent" class="summaryCount">0</num>
                         <span class="urgentSpan">Urgent</span>
@@ -37,7 +40,7 @@
                 <div id="greyVerticalLine">
                 </div>
                 
-                <div class="upcomingContainer invert">
+                <div class="upcomingContainer">
                     <span id="upcomingDeadline">Date,</span>
                     <span class="deadlinePhrase">Upcoming Deadline</span>
                 </div>
@@ -45,17 +48,17 @@
 
             <div class="boardProgressFeedbackSection">
                 <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
-                    <num class="summaryCount">0</num>
+                    <num class="summaryCount bottomSummaryCount">0</num>
                     <span class="bottomContainerText">Tasks in<br>Board</span>
                 </div>
                     
                 <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
-                    <num class="summaryCount">0</num>
+                    <num class="summaryCount bottomSummaryCount">0</num>
                     <span class="bottomContainerText">Tasks in<br>Progress</span>
                 </div>
 
                 <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
-                    <num class="summaryCount">0</num>
+                    <num class="summaryCount bottomSummaryCount">0</num>
                     <span class="bottomContainerText">Awaiting<br>Feedback</span>
                 </div>
             </div>

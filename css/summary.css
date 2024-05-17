@@ -5,7 +5,7 @@
     width: fit-content;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 48px;
 }
 
 .titleContainer {
@@ -15,7 +15,8 @@
 
 #summaryTitle {
     padding-right: 30px;
-    margin: 7px 0px 7px 0px;
+    margin-bottom: -16px;
+    margin-top: -16px;
     box-sizing: border-box;
 }
 
@@ -53,50 +54,54 @@
 .summaryNumContainer{
     display: flex;
     flex-direction: column;
-    gap: 28px;
-    width: 560px;
+    gap: 16px;
+    max-width: 480px;
 }
 
 .summaryCount{
-    font-size: 64px;
+    font-size: 56px;
     font-weight: 600;
+    margin-top: 0px;
 }
 
 .toDoAndDoneSection {
     display: flex;
-    gap: 32px;
+    gap: 16px;
     justify-content: space-between;
+    flex: 1;
 }
 
 .toDoAndDoneContainer{
     display: flex;
     gap: 18px;
-    Padding: 38px 58px 38px 58px;
+    Padding: 32px 38px 32px 38px;
     align-items: center;
     box-shadow: 0px 0px 4px 0px #0000001A;
     justify-content: center;
     text-align: center;
-    width: 264px;
+    flex: 1;
 }
 
 .boardProgressFeedbackSection{
     display: flex;
     justify-content: space-between;
+    gap: 16px;
 }
 
 
 #greyVerticalLine {
     border: 2px solid #D1D1D1;
     width: 0px;
-    height: 102.02px;
+    height: 88px;
+    border-radius: 30px;
 }
 
 .urgentContainer{
     box-shadow: 0px 0px 4px 0px #0000001A;
-    height: 168px;
+    height: auto;
     display: flex;
     box-sizing: border-box;
-    padding: 28px 48px 28px 48px;
+    padding: 28px 38px 28px 38px;
     gap: 61px;
     align-items: center;
     justify-content: center;
@@ -138,31 +143,51 @@
     padding: 25px 0px 25px 0px;
 }
 
-.summaryBottomContainer, .urgentContainer, .toDoAndDoneContainer {
-    transition: transform 0.075s ease; 
+.bottomSummaryCount {
+    margin-top: -8px;
 }
 
-.summaryBottomContainer:hover,
-.urgentContainer:hover, 
-.toDoAndDoneContainer:hover {
-    transform: scale(1.05);
-    opacity: 1;
+.invert {
+    transition: background-color 0.125s ease-in-out; 
+}
+
+.invert:hover {
+    transform: scale(1.06);
     cursor: pointer;
     background-color: #2A3647;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .invert:hover .bottomContainerText,
 .invert:hover .summaryCount,
 .invert:hover .urgentSpan,
-.invert:hover .summarySvg,
 .invert:hover .countContainer,
-.invert:hover #greyVerticalLine,
 .invert:hover .deadlinePhrase,
 .invert:hover #upcomingDeadline {
-    filter: brightness(0) invert(1);
+    color: inherit;
 }
 
-.invert {
-    transform: filter 0.0001s, opacity 0.075s;
+.invert:hover .summarySvg {
+    filter: sepia(50%) invert(91%) brightness(200%);
 }
 
+.invert:hover #greyVerticalLine{
+    border: 2px solid #FFFFFF;
+}
+
+.invert:hover .darkBlueStroke {
+    stroke: #2A3647;
+}
+
+.invert:hover .whiteFill {
+    fill: white;
+}
+
+.invert:hover .darkBlueFill {
+    fill: #2A3647;
+}
+
+.summarySpan {
+    width: max-content;
+}
