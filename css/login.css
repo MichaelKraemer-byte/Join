@@ -48,7 +48,7 @@ body {
     background-color: #2dabe1;
 }
 
-.login-box {
+.box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,27 +59,27 @@ body {
     box-shadow: 1px 1px 3px rgba(180, 180, 180, 0.253);
 }
 
-.login-title {
+.title {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
 }
 
-.login-box h1 {
+.box h1 {
     font-size: 61px;
     margin: 0;
     font-family: Inter-Bold;
     line-height: 73.2px;
 }
 
-.login-box form {
+.box form {
     display: flex;
     flex-direction: column;
     width: 422px;
 }
 
-.login-box input {
+.box input {
     padding: 12px 21px;
     border: solid 1px #d1d1d1;
     border-radius: 10px;
@@ -91,7 +91,7 @@ body {
     gap: 10px;
 }
 
-.login-input-area {
+.input-area {
     display: flex;
     flex-direction: column;
     height: 152px;
@@ -107,11 +107,11 @@ body {
     background-image: url('/assets/img/lock.svg');
 }
 
-.login-box input::placeholder {
+.box input::placeholder {
     color: #d1d1d1;
 }
 
-.login-rememberme {
+.rememberme {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -120,7 +120,7 @@ body {
     font-size: 16px;
 }
 
-.login-rememberme input {
+.rememberme input {
     margin: 0;
     border-radius: 3px;
     border: solid 3px black;
@@ -128,7 +128,7 @@ body {
     height: 16px;
 }
 
-.login-buttons {
+.buttons {
     gap: 16px;
 }
 
