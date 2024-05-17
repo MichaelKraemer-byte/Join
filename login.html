@@ -11,15 +11,15 @@
 <body>
     <div class="content">
 
-        <section class="d-space-b">
+        <header class="d-space-b">
             <img src="/assets/img/logo.svg" class="logo" alt="logo">
             <div class="signUp">
                 <p>Not a Join user?</p>
-                <button class="button" id="signUp">Sign up</button>
+                <button class="button blue-button" id="signUp">Sign up</button>
             </div>
-        </section>
+        </header>
 
-        <section class="d-center">
+        <section class="d-none" id="login-section">
             <div class="box">
                 <div class="title">
                     <h1>Log in</h1>
@@ -30,15 +30,41 @@
                         <input type="email" required id="email" placeholder="Email">
                         <input type="password" required id="password" placeholder="Password">
                     </div>
-                    <div class="rememberme">
+                    <div class="checkbox m-left-48">
                         <input type="checkbox" name="rememberme" id="rememberme">
                         <label for="rememberme">Remember me</label>
                     </div>
                     <div class="buttons d-center">
-                        <button class="button" id="login-button">Log in</button>
-                        <button class="button" id="guest-login-button">Guest Log in</button>
+                        <button class="button blue-button" id="login-button">Log in</button>
+                        <button class="button white-button" id="guest-login-button">Guest Log in</button>
                     </div>
 
+                </form>
+            </div>
+        </section>
+
+        <section class="d-center" id="register-section">
+            <div class="box">
+                <img src="/assets/img/arrow-left-line.svg" alt="back" class="arrow-left-line">
+                <div class="title">
+                    <h1>Sign up</h1>
+                    <img src="/assets/img/stripe.svg" alt="stripe">
+                </div>
+                <form onsubmit="register(); return false;">
+                    <div class="input-area">
+                        <input type="text" required id="name" placeholder="Name">
+                        <input type="email" required id="email" placeholder="Email">
+                        <input type="password" required id="password" placeholder="Password">
+                        <input type="password" required id="password" placeholder="Confirm Password">
+                    </div>
+                    <div class="checkbox d-center">
+                        <input type="checkbox" required name="PrivacyPolicy">
+                        <label for="PrivacyPolicy">I accept the <a href="#privacypolicy">Privacy Policy</a></label>
+                    </div>
+                    <div class="buttons d-center">
+                        <button class="button blue-button" id="signup-button">Sign up</button>
+                    </div>
+                
                 </form>
             </div>
         </section>

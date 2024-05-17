@@ -17,17 +17,25 @@ body {
 }
 
 .content {
-    padding-top: 100px;
     padding: 32px;
+    padding-bottom: 0;
     width: 100%;
     max-width: 1440px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    box-sizing: border-box;
+    min-height: 100vh;
 }
 
 .logo {
     width: 100px;
+}
+
+.arrow-left-line {
+    position: absolute;
+    top: 64px;
+    left: 48px;
+    cursor: pointer;
 }
 
 .signUp {
@@ -38,17 +46,8 @@ body {
    height: min-content;
 }
 
-#signUp {
-    color: white;
-    background-color: #2a3648;
-    border: none;
-}
-
-#signUp:hover {
-    background-color: #2dabe1;
-}
-
 .box {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,6 +76,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 422px;
+    gap: 32px;
 }
 
 .box input {
@@ -94,7 +94,6 @@ body {
 .input-area {
     display: flex;
     flex-direction: column;
-    height: 152px;
     gap: 32px;
 }
 
@@ -111,21 +110,25 @@ body {
     color: #d1d1d1;
 }
 
-.rememberme {
+.checkbox {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 39px;
-    margin-bottom: 32px;
+    margin-top: 16px;
     font-size: 16px;
 }
 
-.rememberme input {
+.checkbox input {
     margin: 0;
     border-radius: 3px;
     border: solid 3px black;
     width: 16px;
     height: 16px;
+}
+
+.checkbox a {
+    text-decoration: none;
+    color: #29ABE2;
 }
 
 .buttons {
@@ -148,21 +151,21 @@ body {
     align-items: center;
 }
 
-#login-button {
+.blue-button {
     color: white;
     background-color: #2a3648;
     border: none;
 }
 
-#login-button:hover {
+.blue-button:hover {
     background-color: #2dabe1;
 }
 
-#guest-login-button {
+.white-button {
     background-color: white;
 }
 
-#guest-login-button:hover {
+.white-button:hover {
     color: #2dabe1;
     border-color: #2dabe1;
 }
@@ -170,9 +173,8 @@ body {
 footer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    bottom: -130px;
+    align-items: end;
+    flex: 1;
 }
 
 .footer-links {
@@ -180,10 +182,10 @@ footer {
     width: 246px;
     height: 35px;
     gap: 24px;
+    margin-bottom: 40px;
 }
 
 .footer-links a {
-    font-size: 16px;
     font-weight: 400;
     color: #CDCDCD;
     text-decoration: none;
@@ -198,4 +200,12 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.d-none {
+    display: none;
+}
+
+.m-left-48 {
+    margin-left: 48px;
 }
