@@ -179,6 +179,8 @@ footer {
     justify-content: center;
     align-items: end;
     flex: 1;
+    box-sizing: border-box;
+    padding: 8px;
 }
 
 .footer-links {
@@ -186,7 +188,6 @@ footer {
     width: 246px;
     height: 35px;
     gap: 24px;
-    margin-bottom: 40px;
 }
 
 .footer-links a {
