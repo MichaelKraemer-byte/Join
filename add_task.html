@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
-    <link rel="stylesheet" href="css/add_task.css"> 
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/add_task.css">
+    <link rel="stylesheet" href="css/templates.css">
     <link rel="stylesheet" href="css/fonts/inter.css">
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="js/script.js"></script>
@@ -19,9 +20,9 @@
 
     <div class="add_task_container">
         <h1>Add Task</h1>
-        <div class="add_task_form">
-            <div class="add_task_width50">
-                <form action="">
+        <form action="">
+            <div class="add_task_form">
+                <div class="add_task_width50">
                     <div class="add_task_title add_task_form_row">
                         <label for="">Title<b>*</b></label>
                         <input class="add_task_input" type="text" placeholder="Enter a title" required>
@@ -39,13 +40,11 @@
                             <option value="">3</option>
                         </select>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div class="add_task_line"></div>
+                <div class="add_task_line"></div>
 
-            <div class="add_task_width50">
-                <form action="">
+                <div class="add_task_width50">
                     <div class="add_task_date add_task_form_row">
                         <label for="">Due date<b>*</b></label>
                         <input class="add_task_input" type="date" required>
@@ -56,18 +55,15 @@
                             <button class="add_task_button_urgent add_task_hover_button">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
-                                    <img src="./assets/img/vector_red.svg">
                                 </div>
                             </button>
                             <button class="add_task_button_medium add_task_button_urgent add_task_hover_button">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
-                                    <img src="./assets/img/vector_strich.svg">
                                 </div>
                             </button>
                             <button class="add_task_button_low add_task_button_urgent add_task_hover_button">Low
                                 <div class="add_task_button_vector">
-                                    <img src="./assets/img/vector_green.svg">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
                             </button>
@@ -85,19 +81,19 @@
                         <label for="">Subtasks</label>
                         <select class="add_task_input" name="" id=""></select>
                     </div>
-                </form>
+                </div>
+
             </div>
-            
-        </div>
-        <div class="add_task_footer">
-            <p><b>*</b>This field is required</p>
-            <div class="add_task_button_group_footer">
-                <button class="add_task_button_clear add_task_hover_button">Clear X</button>
-                <button class="add_task_button_create add_task_hover_button">Create Task
-                    <img src="./assets/img/vector_check.svg">
-                </button>
+            <div class="add_task_footer">
+                <p><b>*</b>This field is required</p>
+                <div class="add_task_button_group_footer">
+                    <button class="add_task_button_clear add_task_hover_button">Clear X</button>
+                    <button class="add_task_button_create add_task_hover_button">Create Task
+                        <img src="./assets/img/vector_check.svg">
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 
