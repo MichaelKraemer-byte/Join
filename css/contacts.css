@@ -1,0 +1,56 @@
+.contactsHTMLContainer{
+    display: flex;
+    height: 100%;
+    position: fixed;
+}
+
+#listSection {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    padding: 32px 48px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    overflow: auto;
+}
+
+.innerListContainer{
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Align children vertically */
+    height: 100%;
+    width: 100%;
+}
+
+.addContactButton{
+    padding: 12px 38px 12px 38px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(42,54,71);
+    border-radius: 10px;
+    gap: 16px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.contactViewSection {
+    display: flex; /* Use flex to ensure it takes full height */
+    flex-direction: column;
+    padding: 80px 48px 80px 48px;
+    flex: 1;
+}
+
+.addContactButton:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    background-color: #29ABE2;
+    border: 2px solid #29ABE2;
+}
+
+.addContactButton:focus {
+    background-color: #091931;
+
+}

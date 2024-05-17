@@ -8,11 +8,6 @@
     gap: 48px;
 }
 
-.titleContainer {
-    display: flex;
-    align-items: center;
-}
-
 #summaryTitle {
     padding-right: 30px;
     margin-bottom: -16px;
@@ -62,6 +57,7 @@
     font-size: 56px;
     font-weight: 600;
     margin-top: 0px;
+    color: black;
 }
 
 .toDoAndDoneSection {
