@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./css/login.css">
+    <script src="/js/login.js"></script>
 </head>
 
 <body>
@@ -13,13 +14,13 @@
 
         <header class="d-space-b">
             <img src="/assets/img/logo.svg" class="logo" alt="logo">
-            <div class="signUp">
+            <div class="signUp" id="signup-button-area">
                 <p>Not a Join user?</p>
-                <button class="button blue-button" id="signUp">Sign up</button>
+                <button class="button blue-button" id="signUp" onclick="showSignUpBox()">Sign up</button>
             </div>
         </header>
 
-        <section class="d-none" id="login-section">
+        <section class="d-center" id="login-section">
             <div class="box">
                 <div class="title">
                     <h1>Log in</h1>
@@ -43,9 +44,9 @@
             </div>
         </section>
 
-        <section class="d-center" id="register-section">
+        <section class="d-none" id="register-section">
             <div class="box">
-                <img src="/assets/img/arrow-left-line.svg" alt="back" class="arrow-left-line">
+                <img src="/assets/img/arrow-left-line.svg" alt="back" class="arrow-left-line" onclick="showLoginBox()">
                 <div class="title">
                     <h1>Sign up</h1>
                     <img src="/assets/img/stripe.svg" alt="stripe">

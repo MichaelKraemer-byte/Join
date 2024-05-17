@@ -97,6 +97,10 @@ body {
     gap: 32px;
 }
 
+#name {
+    background-image: url(/assets/img/person.svg);
+}
+
 #email {
     background-image: url('/assets/img/mail.svg');
     background-size: 14px;
