@@ -2,12 +2,13 @@
     display: flex;
     height: 100%;
     position: fixed;
+    width: 100%;
 }
 
 #listSection {
     display: flex;
     flex-direction: column;
-    width: 33%;
+    width: 25%;
     padding: 32px 48px;
     height: 100%;
     background-color: white;
@@ -52,5 +53,47 @@
 
 .addContactButton:focus {
     background-color: #091931;
+    border: 2px solid #091931;
+}
 
+.subTitleContainer {
+    width: 100%;
+}
+
+.addContactPopUp{
+    display: flex;
+    border-radius: 30px;
+    height: 60vh;
+    width: 80vw;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+}
+
+.addContactPopUpTitleContainer{
+    background-color: rgba(42,54,71);
+    width: 50%;
+    padding: 66px 48px 66px 48px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addContactJoinLogo{
+    Width: 17%;
+    Height: auto;
+}
+
+.padding-left-0px{
+    padding-left: 0px;
+}
+
+.addContactFormContainer{
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 30px;
+    padding: 66px 48px 66px 48px;
 }

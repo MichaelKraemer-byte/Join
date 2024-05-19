@@ -2,9 +2,9 @@
 
     <Section id="listSection">
         <div class="innerListContainer">
-            <button class="addContactButton">
+            <button class="addContactButton" onclick="displayGreyBackground()">
                 Add new contact 
-                <img src="assets/img/person_add.svg">
+                <img src="./assets/img/person_add.svg">
             </button>
 
             <div id="contactList">
@@ -16,9 +16,11 @@
     <section class="contactViewSection">
         <div class="titleContainer">
             <h1 id="summaryTitle" class="title">Contacts</h1>
-            <div id="blueVerticalLine">
+            <div class="blueVerticalLine">
             </div>
-            <h2 class="subTitle">Better with a team</h2>
+            <div class="subTitleContainer">
+                <h2 class="subTitle">Better with a team</h2>
+            </div>
         </div>
 
         <div id="contactView">
@@ -26,4 +28,26 @@
         </div>
     </section>
 
+    <popUp id="addContactPopUp" class="addContactPopUp">
+        <div class="addContactPopUpTitleContainer">
+            <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
+            <h2 class="title whiteColor">Add contact</h2>
+            <p class="subTitle whiteColor padding-left-0px">Tasks are better with a team!</p>
+            <div class="blueHorizontalLine">
+            </div>
+        </div>
+
+        <div class="addContactFormContainer">
+            <div>
+                <img src="./assets/img/ProfileImg.svg">
+                <form>
+                    <input type="text">
+                    <input type="email">
+                    <input type="tel">
+                </form>
+            </div>
+
+            
+        </div>
+    </popUp>
 </div>

@@ -1,7 +1,23 @@
-html, body {
-    height: 100%;
-    margin: 0;
+/* CSS TOOLS */
+/* CSS TOOLS */
+/* CSS TOOLS */
+
+.d-none {
+    display: none;
 }
+
+.d-flex {
+    display: flex;
+}
+
+.d-block {
+    display: block;
+}
+
+/* CSS TOOLS */
+/* CSS TOOLS */
+/* CSS TOOLS */
+
 
 body {
     margin: 0px;
@@ -10,7 +26,7 @@ body {
     color: #2A3647;
 }
 
-#content{
+.content{
     padding-top: 96px;
     padding-left: 232px;
     height: 100%;
@@ -21,6 +37,24 @@ body {
     display: flex;
     align-items: center;
     position: relative;
+}
+
+.mainTitleContainer{
+    width: 100%;
+}
+
+.blueVerticalLine{
+    width: 3px;
+    height: 59px;
+    background-color: #29ABE2;;
+    border-radius: 32px;
+}
+
+.blueHorizontalLine{
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;;
+    border-radius: 32px;
 }
 
 .header {
@@ -176,11 +210,13 @@ body {
     font-size: 61px;
     font-weight: 700;
     color: #000000;
+    margin: 0px;
 }
 
 .subTitle {
     font-size: 27px;
     font-weight: 400;
+    margin: 0px;
 }
 
 .radius-30 {
@@ -205,3 +241,11 @@ body {
     transform: scale(1.2);
 }
 
+#greyBackground{
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.3;
+    width: 100%;
+    z-index: 2;
+    position: absolute;
+}
