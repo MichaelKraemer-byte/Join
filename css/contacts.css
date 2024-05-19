@@ -42,6 +42,7 @@
     flex-direction: column;
     padding: 80px 48px 80px 48px;
     flex: 1;
+    gap: 32px;
 }
 
 .addContactButton:hover {
@@ -60,7 +61,7 @@
     width: 100%;
 }
 
-.addContactPopUp{
+.contactPopUp{
     display: flex;
     border-radius: 30px;
     height: 60vh;
@@ -256,3 +257,94 @@
     transform: translateY(-50%);
     margin-right: -28px;
 }
+
+.viewContactContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.viewContactSVG {
+    border-radius: 100px;
+    border: 3px solid white;
+    outline: 1.6px solid rgb(239, 239, 239);
+}
+
+.viewContactButton{
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 0px solid black;
+    gap: 8px;
+}
+
+.viewContactButton:hover {
+    cursor: pointer;
+    text-shadow: 0.25px 0.25px 0.25px #29ABE2, 
+                 -0.25px -0.25px 0.25px #29ABE2, 
+                 0.25px -0.25px 0.25px #29ABE2, 
+                 -0.25px 0.25px 0.25px #29ABE2;    
+    color: #29ABE2;
+}
+
+.editAndDeleteIcon{
+    filter: invert(16%) sepia(50%) saturate(3598%) hue-rotate(176deg) brightness(20%) contrast(82%);
+}
+
+.viewContactButton:hover .editAndDeleteIcon {
+    filter: invert(16%) sepia(100%) saturate(3598%) hue-rotate(176deg) brightness(125%) contrast(82%);
+}
+
+.viewContactButtonsContainer {
+    display: flex;
+    gap: 16px;
+}
+
+.viewContactName{
+    margin: 0px;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.viewContactNameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.viewContactHeadContainer {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.viewContactSubTitle {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.emailPhoneTitle {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.emailPhoneTitleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.emailPhoneContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.email,
+.phone {
+    text-decoration: none;
+    color: #007CEE;
+}
+
