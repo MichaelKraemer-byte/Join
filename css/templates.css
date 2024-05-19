@@ -24,6 +24,7 @@ body {
     font-family: 'Inter';
     background-color: #F6F7F8;
     color: #2A3647;
+    height: 100vh;
 }
 
 .content{
@@ -246,6 +247,13 @@ body {
     background-color: #000000;
     opacity: 0.3;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
     position: absolute;
+}
+
+.popUpTitle{
+    font-size: 61px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0px;
 }

@@ -1,8 +1,8 @@
 <div class="contactsHTMLContainer">
 
-    <Section id="listSection">
+    <section id="listSection">
         <div class="innerListContainer">
-            <button class="addContactButton" onclick="displayGreyBackground()">
+            <button class="addContactButton" onclick="openAddContactPopUp()">
                 Add new contact 
                 <img src="./assets/img/person_add.svg">
             </button>
@@ -11,7 +11,7 @@
              <!-- Javascript shows contacts on click -->
             </div>
         </div>
-    </Section>
+    </section>
 
     <section class="contactViewSection">
         <div class="titleContainer">
@@ -28,26 +28,4 @@
         </div>
     </section>
 
-    <popUp id="addContactPopUp" class="addContactPopUp">
-        <div class="addContactPopUpTitleContainer">
-            <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
-            <h2 class="title whiteColor">Add contact</h2>
-            <p class="subTitle whiteColor padding-left-0px">Tasks are better with a team!</p>
-            <div class="blueHorizontalLine">
-            </div>
-        </div>
-
-        <div class="addContactFormContainer">
-            <div>
-                <img src="./assets/img/ProfileImg.svg">
-                <form>
-                    <input type="text">
-                    <input type="email">
-                    <input type="tel">
-                </form>
-            </div>
-
-            
-        </div>
-    </popUp>
 </div>
