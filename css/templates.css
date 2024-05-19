@@ -242,18 +242,45 @@ body {
     transform: scale(1.2);
 }
 
-#greyBackground{
-    height: 100%;
-    background-color: #000000;
-    opacity: 0.3;
-    width: 100%;
-    z-index: 1;
-    position: absolute;
-}
 
 .popUpTitle{
     font-size: 61px;
     font-weight: 700;
     color: #FFFFFF;
     margin: 0px;
+}
+
+#greyBackground{
+    height: 100%;
+    background-color: #000000;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    opacity: 0;
+}
+
+.addGreyBackgroundOpacity {
+    animation: addGreyBackgroundOpacity 0.3s ease-in-out forwards;
+}
+
+@keyframes addGreyBackgroundOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.removeGreyBackgroundOpacity {
+    animation: removeGreyBackgroundOpacity 0.3s ease-in-out forwards;
+}
+
+@keyframes removeGreyBackgroundOpacity {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+    }
 }

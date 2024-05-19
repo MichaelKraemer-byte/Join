@@ -1,18 +1,24 @@
 function displayGreyBackground() {
     document.getElementById('greyBackground').classList.remove('d-none');
-    // document.getElementById('greyBackground').classList.add('d-block');
+    greyBackground.classList.remove('removeGreyBackgroundOpacity');
+    document.getElementById('greyBackground').classList.add('addGreyBackgroundOpacity');
 }
 
 
 function removeGreyBackground(){
-    // document.getElementById('greyBackground').classList.remove('d-block');
-    document.getElementById('greyBackground').classList.add('d-none'); 
+    let greyBackground = document.getElementById('greyBackground');
+    greyBackground.classList.remove('addGreyBackgroundOpacity');
+    greyBackground.classList.add('removeGreyBackgroundOpacity');
+    setTimeout(() => {
+        greyBackground.classList.add('d-none');
+    }, 300); 
 }
 
 
 function closeAddContactPopUp() {
+    slideOut();    
     removeGreyBackground();
-    slideOut();
+
 }
 
 
