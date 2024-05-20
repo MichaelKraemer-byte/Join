@@ -109,10 +109,10 @@
 }
 
 .board_content {
-    height: 500px;
+    /* height: 100vh; */
     display: flex;
-    justify-content: space-between;
-
+    justify-content: space-between;    
+    margin-bottom: 50px;
 }
 
 .columm_section_add_todo {
@@ -132,22 +132,26 @@
 }
 
 .bord_content_colum {
-    height: 200px;
     width: 25%;
+    height: 100%;
     margin-right: 13px;
     margin-left: 13px;
+    display: inline-block;
+    flex-wrap: wrap-reverse;
 }
 
 .bord_content_colum_left {
-    height: 200px;
     width: 25%;
     margin-right: 13px;
+    display: inline-block;
+    flex-wrap: wrap-reverse;
 }
 
 .bord_content_colum_right {
-    height: 200px;
     width: 25%;
     margin-left: 13px;
+    display: inline-block;
+    flex-wrap: wrap-reverse;
 }
 
 .board_task_category {
@@ -211,3 +215,10 @@
     font-size: 22px;
     background-color: white;
 }
+/* 
+.draggable {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    cursor: move;
+} */

@@ -58,23 +58,20 @@
             </div>
 
             <div class="board_content">
-
-                <div class="bord_content_colum_left" id="board_to_do">
+                <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')" ondragover="allowDrop(event)">
                     <div></div>
                 </div>
 
-                <div class="bord_content_colum" id="board_in_progress">
+                <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')" ondragover="allowDrop(event)">
                     <div></div>
                 </div>
 
-                <div class="bord_content_colum" id="board_await_feedback">
+                <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')" ondragover="allowDrop(event)">
                     <div></div>
                 </div>
 
-                <div class="bord_content_colum_right" id="board_done">
+                <div class="bord_content_colum_right" id="board_done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                     <div></div>
-
-
                 </div>
             </div>
 

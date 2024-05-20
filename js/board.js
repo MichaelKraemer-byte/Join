@@ -40,7 +40,6 @@ let todos = [{
 let currentElement;
 
 
-
 function init() {
 
     let task = document.getElementById('board_to_do');
@@ -56,19 +55,22 @@ function init() {
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(await, awaitFeedback);
-    generateToDo(done, doneId);
+    generateToDo(done, doneId);  
+    
 }
 
-function generateToDo(arr, id) {
-    
+
+function generateToDo(arr, categorie_id) {
+
+    categorie_id.innerHTML = '';
+
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        
-        id.innerHTML += /*html*/`
+
+        categorie_id.innerHTML += /*html*/`
         <div class="task" draggable="true" ondragstart="startDragging(${element['id']})">
             <div class="board_task_category">
-                ${element['status']}
-                
+                ${element['status']}                
             </div>
             <div class="board_task_title">
                 ${element['title']}
@@ -82,14 +84,28 @@ function generateToDo(arr, id) {
                     <img src="${element['priority']}">
                 </div>
             </div>
-        </div>`       
-    
+        </div>`
+
     }
 }
 
 
-function startDragging(id) {
 
+function startDragging(id) {
+    currentElement = id;
+}
+
+
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+
+
+function moveTo(category) {
+    todos[currentElement]['category'] = category;
+    init();
 }
 
 
@@ -98,6 +114,8 @@ function addTask() {
     let idAddTask = document.getElementById('pop_add_task');
     idAddTask.style.visibility = 'initial';
 }
+
+
 
 function closeWindow() {
     let idAddTask = document.getElementById('pop_add_task');
