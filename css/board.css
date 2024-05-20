@@ -1,7 +1,5 @@
 .board_container {
-    background-color: rgb(246, 247, 248);
-    padding: 206px 96px 0 96px;
-    margin-left: 232px;
+    padding: 110px 96px 0 96px;
 }
 
 .board_header {
@@ -24,7 +22,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 80px 64px 0; */
     gap: 10px;
 }
 

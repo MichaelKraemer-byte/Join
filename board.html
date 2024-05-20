@@ -8,77 +8,79 @@
     <link rel="stylesheet" href="css/fonts/inter.css">
     <link rel="stylesheet" href="css/board.css">
     <link rel="stylesheet" href="css/templates.css">
-    <link rel="stylesheet" href="css/add_task.css">    
-    
+    <link rel="stylesheet" href="css/add_task.css">
+
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="js/script.js"></script>
     <script src="js/board.js"></script>
 </head>
 
 <body onload="includeHTML(), init()">
-    
+
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/navBar.html"></div>
-   
-    <div class="board_container" id="board_container">
+    <div class="content">
+        <div class="board_container" id="board_container">
 
-        <div class="pop_add_task" id="pop_add_task">
-            <div class="show_add_task">
-                <button id="close_pop_add_task" onclick="closeWindow()">X</button>
-                <div w3-include-html="templates/add_task_templates.html"></div>
+            <div class="pop_add_task" id="pop_add_task">
+                <div class="show_add_task">
+                    <button id="close_pop_add_task" onclick="closeWindow()">X</button>
+                    <div w3-include-html="templates/add_task_templates.html"></div>
+                </div>
             </div>
+
+            <div class="board_header">
+                <div class="title">
+                    <h1>Board</h1>
+                    <div class="task_navigation">
+                        <input type="text">
+                        <button>Add task +</button>
+                    </div>
+                </div>
+
+                <div class="column_section">
+                    <div class="columm_section_add columm_section_add_todo">
+                        <span>To do</span>
+                        <button onclick="addTask()">+</button>
+                    </div>
+                    <div class="columm_section_add columm_section_add_inprogress">
+                        <span>In progress</span>
+                        <button onclick="addTask()">+</button>
+                    </div>
+                    <div class="columm_section_add columm_section_add_await">
+                        <span>Await feedback</span>
+                        <button onclick="addTask()">+</button>
+                    </div>
+                    <div class="columm_section_add columm_section_add_done">
+                        <span onclick="addTask()">Done</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board_content">
+
+                <div class="bord_content_colum_left" id="board_to_do">
+                    <div></div>
+                </div>
+
+                <div class="bord_content_colum" id="board_in_progress">
+                    <div></div>
+                </div>
+
+                <div class="bord_content_colum" id="board_await_feedback">
+                    <div></div>
+                </div>
+
+                <div class="bord_content_colum_right" id="board_done">
+                    <div></div>
+
+
+                </div>
+            </div>
+
         </div>
-
-        <div class="board_header">
-            <div class="title">
-                <h1>Board</h1>
-                <div class="task_navigation">
-                    <input type="text">
-                    <button>Add task +</button>
-                </div>
-            </div>
-
-            <div class="column_section">
-                <div class="columm_section_add columm_section_add_todo">
-                    <span>To do</span>
-                    <button onclick="addTask()">+</button>
-                </div>
-                <div class="columm_section_add columm_section_add_inprogress">
-                    <span>In progress</span>
-                    <button onclick="addTask()">+</button>
-                </div>
-                <div class="columm_section_add columm_section_add_await">
-                    <span>Await feedback</span>
-                    <button onclick="addTask()">+</button>
-                </div>
-                <div class="columm_section_add columm_section_add_done">
-                    <span onclick="addTask()">Done</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="board_content">
-
-            <div class="bord_content_colum_left" id="board_to_do">
-                <div></div>                 
-            </div>
-
-            <div class="bord_content_colum" id="board_in_progress">
-                <div></div>
-            </div>
-
-            <div class="bord_content_colum" id="board_await_feedback">
-                <div></div>
-            </div>
-
-            <div class="bord_content_colum_right" id="board_done">
-                <div</div>
-
-
-            </div>
-        </div>
-
     </div>
+
 
 </body>
 
