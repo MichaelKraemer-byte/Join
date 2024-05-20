@@ -16,6 +16,7 @@
     font-size: 61px;
     line-height: 73.2px;
     font-weight: 700;
+    display: flex;
 }
 
 .title {
@@ -109,7 +110,7 @@
 }
 
 .board_content {
-    /* height: 100vh; */
+    height: 100%;
     display: flex;
     justify-content: space-between;    
     margin-bottom: 50px;
@@ -133,7 +134,6 @@
 
 .bord_content_colum {
     width: 25%;
-    height: 100%;
     margin-right: 13px;
     margin-left: 13px;
     display: inline-block;
@@ -145,6 +145,7 @@
     margin-right: 13px;
     display: inline-block;
     flex-wrap: wrap-reverse;
+
 }
 
 .bord_content_colum_right {
