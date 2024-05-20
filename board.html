@@ -7,60 +7,28 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/fonts/inter.css">
     <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/templates.css"> 
+    <link rel="stylesheet" href="css/templates.css">
+    <link rel="stylesheet" href="css/add_task.css">    
+    
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="js/script.js"></script>
+    <script src="js/board.js"></script>
 </head>
 
 <body onload="includeHTML(), init()">
     
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/navBar.html"></div>
+   
+    <div class="board_container" id="board_container">
 
-    <script>
-        let todos = [{
-            'id': 0,
-            'title': 'Kochwelt Page & Recipe',
-            'description': 'Build start page with recipe recommendation...',
-            'status': './assets/img/vector_strich.svg',
-            'category': 'open'
-        }, {
-            'id': 1,
-            'title': 'Kochen',
-            'category': 'open'
-        }, {
-            'id': 2,
-            'title': 'Einkaufen',
-            'category': 'closed'
-        }];
+        <div class="pop_add_task" id="pop_add_task">
+            <div class="show_add_task">
+                <button id="close_pop_add_task" onclick="closeWindow()">X</button>
+                <div w3-include-html="templates/add_task_templates.html"></div>
+            </div>
+        </div>
 
-
-        function init() {
-            let task = document.getElementById('bord_content_task');
-            task.innerHTML += `
-                <div class="board_task_category">
-                    User Story
-                </div>
-                <div class="board_task_title">
-                    ${todos[0]['title']}
-                </div>
-                <div class="board_task_toDo">
-                    ${todos[0]['description']}
-                </div>
-                <div class="board_task_footer">
-                    <div class="board_task_footer_names"></div>
-                    <div class="board_task_footer_status">
-                        <img src="${todos[0]['status']}">
-                    </div>
-                </div>
-            ` 
-        }
-
-
-
-    </script>
-
-    <div class="board_container">
         <div class="board_header">
             <div class="title">
                 <h1>Board</h1>
@@ -69,60 +37,42 @@
                     <button>Add task +</button>
                 </div>
             </div>
-            <div class="column_section" id="open">
+
+            <div class="column_section">
                 <div class="columm_section_add columm_section_add_todo">
                     <span>To do</span>
-                    <button>+</button>
+                    <button onclick="addTask()">+</button>
                 </div>
-                <div class="columm_section_add columm_section_add_inprogress" id="closed">
+                <div class="columm_section_add columm_section_add_inprogress">
                     <span>In progress</span>
-                    <button>+</button>
+                    <button onclick="addTask()">+</button>
                 </div>
                 <div class="columm_section_add columm_section_add_await">
                     <span>Await feedback</span>
-                    <button>+</button>
+                    <button onclick="addTask()">+</button>
                 </div>
                 <div class="columm_section_add columm_section_add_done">
-                    <span>Done</span>
+                    <span onclick="addTask()">Done</span>
                 </div>
             </div>
         </div>
+
         <div class="board_content">
+
             <div class="bord_content_colum_left" id="board_to_do">
-                <div class="task" id="bord_content_task">
-                    
-                </div>
-                
-                <div class="task">
-                    hallo
-                </div>
+                <div></div>                 
             </div>
-            <div class="bord_content_colum" id="in_progress">
-                <div class="task">
-                    <div class="board_task_category">
-                        User Story
-                    </div>
-                    <div class="board_task_title">
-                        HTML Base Template Creation
-                    </div>
-                    <div class="board_task_toDo">
-                        Create reusable HTML base templates...
-                    </div>
-                    <div class="board_task_footer">
-                        <div class="board_task_footer_names"></div>
-                        <div class="board_task_footer_status">
-                            <img src="./assets/img/vector_red.svg">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bord_content_colum" id="aweit_feedback">
-                <div class="task">task3</div>
 
-
+            <div class="bord_content_colum" id="board_in_progress">
+                <div></div>
             </div>
-            <div class="bord_content_colum_right" id="done">
-                <div class="task">task4</div>
+
+            <div class="bord_content_colum" id="board_await_feedback">
+                <div></div>
+            </div>
+
+            <div class="bord_content_colum_right" id="board_done">
+                <div</div>
 
 
             </div>

@@ -115,6 +115,7 @@
     height: 500px;
     display: flex;
     justify-content: space-between;
+
 }
 
 .columm_section_add_todo {
@@ -181,4 +182,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.pop_add_task {
+    min-width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(23, 31, 52, 0.3);
+    visibility: hidden;
+}
+
+.show_add_task {
+    background-color: white;
+    height: 90%;
+    width: 80%;
+    position: fixed;
+    border-radius: 20px;
+}
+
+#close_pop_add_task {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    border-radius: 50%;
+    font-size: 22px;
+    background-color: white;
 }
