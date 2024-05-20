@@ -284,3 +284,37 @@ body {
         opacity: 0;
     }
 }
+
+.listedContactContainer{
+    display: flex;
+    justify-content: start;
+    gap: 35px;
+    align-items: center;
+    padding: 15px 24px 15px 24px;
+}
+
+.listedContactSVGContainer{
+    width: 42px;
+}
+
+.listedContactSVG {
+    display: flex;
+    justify-content: center;
+}
+
+.listedContactSVGCircle {
+    outline: 1.6px solid rgb(239, 239, 239);
+}
+
+.listedEmail{
+    font-size: 16px;
+    color: #007CEE;
+    margin: 0px;
+}
+
+.listedName {
+    font-size: 20px;
+    margin: 0px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}

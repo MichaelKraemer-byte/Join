@@ -1,4 +1,3 @@
-let contactColors = [ '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B'];
 
 
 function displayGreyBackground() {
@@ -89,6 +88,7 @@ function openEditPopUp() {
     displayGreyBackground();
 }
 
+
 function editContactFormHTML() {
     return /*html*/`
         <div class="addContactPopUpTitleContainer">
@@ -117,7 +117,7 @@ function editContactFormHTML() {
                     </div>
                     <div class="cancelAndCreateContainer">
                         <button onclick="closeAddContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-                        <button class="contactCreateButton">Edit Contact <img src="./assets/img/miniCheckIcon.svg"></button>
+                        <button class="contactCreateButton">Save <img src="./assets/img/miniCheckIcon.svg"></button>
                     </div>                  
                 </form>
             </div>
@@ -125,3 +125,66 @@ function editContactFormHTML() {
     `;
 }
 
+
+function renderContactList() {
+    let contactList = document.getElementById('contactList');
+
+    if (user === 'guest') {
+        contactList.innerHTML = guestContactListHTML();
+    } else {
+        contactList.innerHTML = contactListHTML();
+    }
+}
+
+
+function guestContactListHTML() {
+
+    let container = document.createElement('div');
+
+    for (let i = 0; i < guestData.length; i++) {
+        let contact = guestData[i];
+        
+        let listedContact = createContactForList(contact);
+        container.appendChild(listedContact);
+
+    }
+    
+    return container.innerHTML; 
+}
+
+
+function createContactForList(contact) {
+    let initials = getInitials(contact);
+
+    let container = document.createElement('div');
+
+    container.innerHTML = /*html*/`
+        <div class="listedContactContainer">
+            <div class="listedContactSVGContainer">
+                <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
+                    <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
+                    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="12" font-family="Arial" fill="white">${initials}</text>
+                </svg>
+            </div>
+            <div>
+                <p class="listedName">${contact['name']}</p>
+                <p class="listedEmail">${contact['email']}</p>
+            </div>
+        </div>
+    `;
+
+    return container;
+}
+
+
+function getInitials(contact) {
+    let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+    let initials = [...contact['name'].matchAll(rgx)] || [];
+
+    initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+    ).toUpperCase();
+
+    return initials;
+}
