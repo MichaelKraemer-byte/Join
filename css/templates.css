@@ -291,6 +291,10 @@ body {
     gap: 35px;
     align-items: center;
     padding: 15px 24px 15px 24px;
+    border: 0px solid black;
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .listedContactSVGContainer{
@@ -317,4 +321,21 @@ body {
     margin: 0px;
     font-weight: 400;
     margin-bottom: 5px;
+}
+
+.listedContactContainer:hover {
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+    cursor: pointer;
+}
+
+.listedContactContainer:focus {
+    background: none;
+    background-color: #2A3647;
+    color: white;
+}
+
+.listedContactContainer:focus:hover {
+    background: none;
+    background-color: #2A3647;
+    color: white;
 }

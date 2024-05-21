@@ -125,31 +125,68 @@ function editContactFormHTML() {
     `;
 }
 
+let allGuestNames = [];
+let currentAlphabetNames = [];
+let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
 
 function renderContactList() {
-    let contactList = document.getElementById('contactList');
 
-    if (user === 'guest') {
-        contactList.innerHTML = guestContactListHTML();
+    if (user === 'guest') {        
+
+        for (let AZindex = 0; AZindex < 26; AZindex++) { //
+            let list = document.getElementById(`list${AZindex}`);
+            list.innerHTML = guestContactListHTML(); // alle jeweiligen conacts der Alphabets-Kategorie
+            setCurrentAlphabetNames(AZindex);
+        }
     } else {
-        contactList.innerHTML = contactListHTML();
+        // contactList.innerHTML = contactListHTML();
     }
 }
+
+function setAllGuestNames(){
+    allGuestNames = guestData.map(obj => obj['name']);
+}
+
+
+function setCurrentAlphabetNamesWithA() {
+    currentAlphabetNames = guestData.filter(obj => obj['name'].startsWith('A')).map(obj => obj['name']);
+}
+
+
+function setCurrentAlphabetNames(AZindex) {
+    AZindex++;
+    currentAlphabetNames = guestData.filter(obj => obj['name'].startsWith(`${alphabet[AZindex]}`)).map(obj => obj['name']);
+}
+
+
+
+// function alphabetLoop() {
+//     for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
+//         let letter = String.fromCharCode(i);
+
+//     }
+// }
+
+
+
 
 
 function guestContactListHTML() {
 
     let container = document.createElement('div');
+    currentAlphabetNames.sort();
 
-    for (let i = 0; i < guestData.length; i++) {
-        let contact = guestData[i];
+    for (let i = 0; i < currentAlphabetNames.length; i++) {
+
+        let contact = guestData.find(obj => obj.name === currentAlphabetNames[i]);
         
         let listedContact = createContactForList(contact);
         container.appendChild(listedContact);
-
     }
-    
+
     return container.innerHTML; 
+
 }
 
 
@@ -159,7 +196,7 @@ function createContactForList(contact) {
     let container = document.createElement('div');
 
     container.innerHTML = /*html*/`
-        <div class="listedContactContainer">
+        <button id="${contact['name']}" class="listedContactContainer">
             <div class="listedContactSVGContainer">
                 <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
@@ -170,7 +207,7 @@ function createContactForList(contact) {
                 <p class="listedName">${contact['name']}</p>
                 <p class="listedEmail">${contact['email']}</p>
             </div>
-        </div>
+        </button>
     `;
 
     return container;

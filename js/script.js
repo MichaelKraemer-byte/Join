@@ -40,6 +40,8 @@ function includeHTML() {
 
 async function init(path) {
   await getData(path);
+  setAllGuestNames();
+  setCurrentAlphabetNamesWithA();
   renderContactList();
 }
 
