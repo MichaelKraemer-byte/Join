@@ -10,15 +10,20 @@
     <link rel="stylesheet" href="css/fonts/inter.css">
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="./js/add_task.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), initAddTask()">
 
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/navBar.html"></div>
 
     <div class="content">
-        <div w3-include-html="templates/add_task_templates.html"></div>
+        <!-- <div w3-include-html="templates/add_task_templates.html"></div> -->
+        <div class="add_task">           
+            <div id="add_task_form"></div>
+        </div>
     </div>
 </body>
 
