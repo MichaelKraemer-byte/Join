@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="css/board.css">
     <link rel="stylesheet" href="css/templates.css">
     <link rel="stylesheet" href="css/add_task.css">
-
+    
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="js/script.js"></script>
     <script src="js/board.js"></script>
+    <script src="./js/add_task.js"></script>
 </head>
 
 <body onload="includeHTML(), init()">
@@ -24,8 +25,8 @@
 
             <div class="pop_add_task" id="pop_add_task">
                 <div class="show_add_task">
+                    <div id="add_task_form"></div>
                     <button id="close_pop_add_task" onclick="closeWindow()">X</button>
-                    <div w3-include-html="templates/add_task_templates.html"></div>
                 </div>
             </div>
 
@@ -58,7 +59,7 @@
             </div>
 
             <div class="board_content">
-                <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')" ondragover="allowDrop(event)">
+                <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')" ondragover="allowDrop(event)" >
                     <div></div>
                 </div>
 

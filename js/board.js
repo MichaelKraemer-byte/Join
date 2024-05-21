@@ -42,6 +42,8 @@ let currentElement;
 
 function init() {
 
+
+
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -109,10 +111,15 @@ function moveTo(category) {
 }
 
 
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
 
 function addTask() {
     let idAddTask = document.getElementById('pop_add_task');
-    idAddTask.style.visibility = 'initial';
+    idAddTask.style.visibility = 'initial';  
+    initAddTask();
 }
 
 
