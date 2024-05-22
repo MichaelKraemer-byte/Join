@@ -125,6 +125,7 @@ function editContactFormHTML() {
     `;
 }
 
+
 let allGuestNames = [];
 let currentAlphabetNames = [];
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -135,8 +136,10 @@ function renderContactList() {
     if (user === 'guest') {        
 
         for (let AZindex = 0; AZindex < 26; AZindex++) { //
+            renderAlphabetCategoryOfLetter(AZindex);
             let list = document.getElementById(`list${AZindex}`);
             list.innerHTML = guestContactListHTML(); // alle jeweiligen conacts der Alphabets-Kategorie
+            hideOrDisplayCategories(AZindex);            
             setCurrentAlphabetNames(AZindex);
         }
     } else {
@@ -144,8 +147,40 @@ function renderContactList() {
     }
 }
 
+
+function renderAlphabetCategoryOfLetter(AZindex) {
+    let contactList = document.getElementById('contactList');
+    contactList.innerHTML += /*html*/`
+
+    <div id="category${AZindex}" class="">
+        <div class="alphabetCategoryContainer">
+            <p class="alphabetCategoryLetter">${alphabet[AZindex]}</p>
+        </div>
+        <div class="alphabetSplitLine">
+        </div> 
+        <div id="list${AZindex}">
+        </div>   
+    </div>        
+    `;
+}
+
+
+function hideOrDisplayCategories(AZindex) {
+    let category = document.getElementById(`category${AZindex}`);
+    let list = document.getElementById(`list${AZindex}`);
+    if (list.innerHTML === '') {
+    category.classList.add('d-none');      
+    } else {
+        category.classList.remove('d-none');
+        return;
+    }
+
+}
+
+
 function setAllGuestNames(){
     allGuestNames = guestData.map(obj => obj['name']);
+    setCurrentAlphabetNamesWithA();
 }
 
 
@@ -161,7 +196,7 @@ function setCurrentAlphabetNames(AZindex) {
 
 
 
-// function alphabetLoop() {
+// function getAlphabetLetter() {
 //     for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
 //         let letter = String.fromCharCode(i);
 
