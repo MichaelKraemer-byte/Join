@@ -39,11 +39,11 @@ body {
 }
 
 .signUp {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   gap: 24px;
-   height: min-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    height: min-content;
 }
 
 .box {
@@ -207,10 +207,73 @@ footer {
     align-items: center;
 }
 
+.d-end {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
 .d-none {
     display: none;
 }
 
 .m-left-48 {
     margin-left: 48px;
+}
+
+.fade-in {
+    animation: fadeIn 1.2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.logo-fullscreen {
+    width: 274px;
+    height: 334.07px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.animation-logo {
+    animation: shrinkAndMove 1s ease-in-out forwards;
+    /* Verwende die Animation */
+    animation-delay: 800ms;
+    /* Verzögerung der Animation um 1 Sekunde */
+}
+
+@keyframes shrinkAndMove {
+    0% {
+        width: 274px;
+        height: 334.07px;
+    }
+
+    100% {
+        width: 100.03px;
+        height: 121.97px;
+        top: 15%;
+        left: 15%;
+    }
+}
+
+.logo-placeholder {
+    width: 177px;
+    height: 208px;
+    top: 67px;
+    left: 75px;
+    background-color: blue;
 }
