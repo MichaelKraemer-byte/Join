@@ -56,3 +56,20 @@ async function getData(path) {
   }
 
 }
+
+
+function openHeadNav() {
+  let nav = document.getElementById('headerNav');
+  nav.classList.remove('d-none');
+  document.addEventListener('click', closeNavOnOutsideClick);
+}
+
+
+function closeNavOnOutsideClick(event) {
+  let nav = document.getElementById('headerNav');
+  let initialCircle = document.getElementById('initialCircle');
+
+  if (!initialCircle.contains(event.target)) {
+    nav.classList.add('d-none');
+  }
+}

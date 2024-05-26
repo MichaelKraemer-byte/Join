@@ -5,22 +5,6 @@
     width: 100%;
 }
 
-#listSection {
-    display: flex;
-    flex-direction: column;
-    width: 24%;
-    padding: 32px 48px;
-    background-color: white;
-    box-shadow: 4px 0px 6px 0px #00000014;
-    overflow: auto;
-}
-
-.innerListContainer{
-    display: flex; /* Make it a flex container */
-    flex-direction: column; /* Align children vertically */
-    height: 100%;
-    width: 100%;
-}
 
 .addContactButton{
     padding: 12px 38px 12px 38px;
@@ -42,6 +26,7 @@
     padding: 80px 48px 80px 48px;
     flex: 1;
     gap: 32px;
+    overflow: hidden;
 }
 
 .addContactButton:hover {
@@ -73,7 +58,6 @@
     overflow: hidden; 
 }
 
-
 .slideIn {
     animation: slideIn 0.4s ease-in-out forwards;
 }
@@ -84,7 +68,7 @@
 
 @keyframes slideIn {
     from {
-        right: -100%;
+        right: -50%;
     }
     to {
         right: 50%;
@@ -96,7 +80,28 @@
         right: 50%;
     }
     to {
-        right: -100%;
+        right: -50%;
+    }
+}
+
+.viewContactContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    right: -120%;
+    position: relative;
+}
+
+.slideInContactView {
+    animation: slideInContactView 0.4s ease-in-out forwards;
+}
+
+@keyframes slideInContactView {
+    from {
+        right: -120%;
+    }
+    to {
+        right: 0%;
     }
 }
 
@@ -257,12 +262,6 @@
     margin-right: -28px;
 }
 
-.viewContactContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 21px;
-}
-
 .viewContactSVG {
     border-radius: 100px;
     border: 3px solid white;
@@ -345,4 +344,87 @@
 .phone {
     text-decoration: none;
     color: #007CEE;
+}
+
+.listButtonContainer {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    padding: 24px 24px 24px 16px;
+    z-index: 1;
+    top: 96px;
+}
+
+.contactList {
+    position: relative;
+    padding: 64px 0px 40px 0px;
+}
+
+#listSection {
+    display: flex;
+    flex-direction: column;
+    width: 344px;
+    padding: 32px 48px;
+    background-color: white;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    overflow: auto;
+    align-items: center;
+    position: relative;
+}
+
+.innerListContainer{
+    display: flex; 
+    flex-direction: column; 
+    height: 100%;
+    width: 100%;
+}
+
+body {
+  --sb-track-color: #ffffff;
+  --sb-thumb-color: #a8a8a8;
+  --sb-size: 24px;
+}
+
+/* Scrollbar-Stile für WebKit-basierte Browser */
+#listSection::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+#listSection::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 50px;
+}
+
+#listSection::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 50px;
+  border: 8px solid #ffffff;
+}
+
+/* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
+@supports not selector(::-webkit-scrollbar) {
+  #listSection {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+
+.alphabetCategoryContainer{
+    padding: 0px 36px 0px 36px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.alphabetSplitLineContainer {
+    padding: 8px 0px 8px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alphabetSplitLine{
+    height: 1px;
+    background-color: #D1D1D1;
+    width: 100%;
 }

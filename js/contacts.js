@@ -156,7 +156,9 @@ function renderAlphabetCategoryOfLetter(AZindex) {
         <div class="alphabetCategoryContainer">
             <p class="alphabetCategoryLetter">${alphabet[AZindex]}</p>
         </div>
-        <div class="alphabetSplitLine">
+        <div class="alphabetSplitLineContainer">
+            <div class="alphabetSplitLine">
+            </div> 
         </div> 
         <div id="list${AZindex}">
         </div>   
@@ -174,7 +176,6 @@ function hideOrDisplayCategories(AZindex) {
         category.classList.remove('d-none');
         return;
     }
-
 }
 
 
@@ -195,16 +196,12 @@ function setCurrentAlphabetNames(AZindex) {
 }
 
 
-
 // function getAlphabetLetter() {
 //     for (let i = 'a'.charCodeAt(0); i <= 'z'.charCodeAt(0); i++) {
 //         let letter = String.fromCharCode(i);
 
 //     }
 // }
-
-
-
 
 
 function guestContactListHTML() {
@@ -221,7 +218,6 @@ function guestContactListHTML() {
     }
 
     return container.innerHTML; 
-
 }
 
 
@@ -231,7 +227,7 @@ function createContactForList(contact) {
     let container = document.createElement('div');
 
     container.innerHTML = /*html*/`
-        <button id="${contact['name']}" class="listedContactContainer">
+        <button onclick="slideInContact('${contact['name']}', '${initials}')" id="${contact['name']}" class="listedContactContainer">
             <div class="listedContactSVGContainer">
                 <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
@@ -244,8 +240,47 @@ function createContactForList(contact) {
             </div>
         </button>
     `;
-
     return container;
+}
+
+
+function slideInContact(contactName, initials) {
+
+    let contactView = document.getElementById('contactView');
+
+    let contact = guestData.find(obj => obj['name'] === contactName);
+
+    contactView.innerHTML = /*html*/`
+        <div class="viewContactHeadContainer">
+            <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
+                <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
+            </svg>
+
+            <div class="viewContactNameContainer">
+                <h3 class="viewContactName">${contact['name']}</h3>
+                <div class="viewContactButtonsContainer">
+                    <button onclick="openEditPopUp()" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit</button>
+                    <button onclick="openDeletePopUp()" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete</button>
+                </div>
+            </div>
+        </div>
+            
+        <h4 class="viewContactSubTitle">Contact Information</h4>
+
+        <div class="emailPhoneContainer">
+            <div class="emailPhoneTitleContainer">
+                <p class="emailPhoneTitle">Email</p>
+                <a id="email" class="email" href="mailto:antonmayer@gmail.com">${contact['email']}</a>
+            </div>
+               <div class="emailPhoneTitleContainer">
+                <p class="emailPhoneTitle">Phone</p>
+                <a id="phone" class="phone" type="tel" href="tel:+491234567890">${contact['phone']}</a>
+            </div>
+        </div>
+    `;
+
+    contactView.classList.add('slideInContactView');
 }
 
 
