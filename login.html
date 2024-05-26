@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./css/login.css">
-    <script src="/js/login.js"></script>
+    <script src="/js/register.js"></script>
 </head>
 
 <body>
@@ -28,16 +28,16 @@
                 </div>
                 <form onsubmit="login(); return false;">
                     <div class="input-area">
-                        <input type="email" required id="email" placeholder="Email">
-                        <input type="password" required id="password" placeholder="Password">
+                        <input type="email" id="login-email" placeholder="Email" required>
+                        <input type="password" id="login-password" placeholder="Password" required>
                     </div>
                     <div class="checkbox m-left-48">
-                        <input type="checkbox" name="rememberme" id="rememberme">
+                        <input type="checkbox" name="rememberme" id="login-rememberme">
                         <label for="rememberme">Remember me</label>
                     </div>
                     <div class="buttons d-center">
                         <button class="button blue-button" id="login-button">Log in</button>
-                        <button class="button white-button" id="guest-login-button">Guest Log in</button>
+                        <button class="button white-button" type="button" id="guest-login-button">Guest Log in</button>
                     </div>
                 </form>
             </div>
@@ -50,12 +50,12 @@
                     <h1>Sign up</h1>
                     <img src="/assets/img/stripe.svg" alt="stripe">
                 </div>
-                <form onsubmit="register(); return false;">
+                <form id="registerForm" onsubmit="return register()">
                     <div class="input-area">
-                        <input type="text" required id="name" placeholder="Name">
-                        <input type="email" required id="email" placeholder="Email">
-                        <input type="password" required id="password" placeholder="Password">
-                        <input type="password" required id="password" placeholder="Confirm Password">
+                        <input type="text" required id="register-name" placeholder="Name">
+                        <input type="email" required id="register-email" placeholder="Email">
+                        <input type="password" required id="register-password" placeholder="Password">
+                        <input type="password" required id="register-password-check" placeholder="Confirm Password">
                     </div>
                     <div class="checkbox d-center">
                         <input type="checkbox" required name="PrivacyPolicy">
@@ -64,7 +64,6 @@
                     <div class="buttons d-center">
                         <button class="button blue-button" id="signup-button">Sign up</button>
                     </div>
-
                 </form>
             </div>
         </section>
