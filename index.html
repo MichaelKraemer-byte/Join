@@ -15,7 +15,7 @@
 </head> 
 <body onload="includeHTML(); init('/guestContacts');">  <!-- put in init a path for firebase, to get the right data -->
 
-    <div id="greyBackground" class="addGreyBackgroundOpacity d-none" onclick="closeAddContactPopUp()"></div>
+    <div id="greyBackground" class="addGreyBackgroundOpacity d-none" onclick="closeContactPopUp(); closeDeletePopUp();"></div>
         <!-- Templates -->
         <div w3-include-html="./templates/header.html"></div>
         <div w3-include-html="./templates/navBar.html"></div>

@@ -216,15 +216,15 @@
     font-weight: 700;
 }
 
-.contactPopUpProfileImg{
-    padding-bottom: 48px;
-}
-
 .contactCreateButton:hover {
     background-color: #29ABE2;
     cursor: pointer;
     border: 2px solid #29ABE2;
     box-shadow: 0px 4px 4px 0px #00000029;
+}
+
+.contactPopUpProfileImg{
+    padding-bottom: 48px;
 }
 
 .addContactCancelX{
@@ -427,4 +427,56 @@ body {
     height: 1px;
     background-color: #D1D1D1;
     width: 100%;
+}
+
+.deletePopUp{
+    background-color:  white;
+    color: rgba(42,54,71);
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 32px 24px 32px;
+    position: fixed;
+    z-index: 3;
+    gap: 24px;
+    width: fit-content;
+    border-radius: 10px;
+    transform: translate(-10%, 60%);
+}
+
+.deleteRequestParagraphContainer{
+    text-align: center;
+    color: rgba(42,54,71);
+    font-size: 20px;
+}
+
+.deleteName{
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(42,54,71);
+}
+
+.deleteRequestParagraph{
+    color: rgba(42,54,71);
+    margin: 0px;
+}  
+
+.yesNoButtonContainer{
+    display: flex;
+    gap: 32px;
+}
+
+.yesButton{
+    background-color: rgba(42,54,71) !important;
+}
+
+.yesButton:hover {
+    background-color: #29ABE2 !important;
+    color: white;
+}
+
+.discriptionAndDeleteContainer{
+    display: flex;
+    gap: 32px;
 }

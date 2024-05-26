@@ -17,7 +17,7 @@ function removeGreyBackground(){
 }
 
 
-function closeAddContactPopUp() {
+function closeContactPopUp() {
     slideOut();
     removeGreyBackground();
 }
@@ -55,7 +55,7 @@ function addContactFormHTML() {
         </div>
 
         <div class="addContactFormContainer">
-            <img onclick="closeAddContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
+            <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
                 <img class="contactPopUpProfileImg" src="./assets/img/ProfileImg.svg">
                 <form class="formContainer" action="onsubmit">
@@ -72,7 +72,7 @@ function addContactFormHTML() {
                         <img src="./assets/img/call.svg" class="contactsInputIcon">
                     </div>
                     <div class="cancelAndCreateContainer">
-                        <button onclick="closeAddContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
+                        <button onclick="closeContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
                         <button class="contactCreateButton">Create Contact <img src="./assets/img/miniCheckIcon.svg"></button>
                     </div>                  
                 </form>
@@ -82,14 +82,16 @@ function addContactFormHTML() {
 }
 
 
-function openEditPopUp() {
-    document.getElementById('contactPopUp').innerHTML = editContactFormHTML(); 
+function openEditPopUp(contactName, initials) {
+    document.getElementById('contactPopUp').innerHTML = editContactFormHTML(contactName, initials); 
     slideIn();
     displayGreyBackground();
 }
 
 
-function editContactFormHTML() {
+function editContactFormHTML(contactName, initials) {
+    let contact = guestData.find(obj => obj['name'] === contactName);
+
     return /*html*/`
         <div class="addContactPopUpTitleContainer">
             <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
@@ -99,24 +101,27 @@ function editContactFormHTML() {
         </div>
 
         <div class="addContactFormContainer">
-            <img onclick="closeAddContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
+            <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
-                <img class="contactPopUpProfileImg" src="./assets/img/ProfileImg.svg">
+                <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                    <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
+                    <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
+                </svg>
                 <form class="formContainer" action="onsubmit">
                     <div class="contactsInputContainer">
-                        <input type="text" required class="nameEmailTel" placeholder="Name">
+                        <input type="text" required class="nameEmailTel" placeholder="Name" value="${contact['name']}">
                         <img src="./assets/img/person.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input type="email" required class="nameEmailTel" placeholder="Email">
+                        <input type="email" required class="nameEmailTel" placeholder="Email" value="${contact['email']}">
                         <img src="./assets/img/mail.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input type="tel" required pattern="[0-9]{10}" class="nameEmailTel" placeholder="Phone">
+                        <input type="tel" required pattern="[0-9]{10}" class="nameEmailTel" placeholder="Phone" value="${contact['phone']}">
                         <img src="./assets/img/call.svg" class="contactsInputIcon">
                     </div>
                     <div class="cancelAndCreateContainer">
-                        <button onclick="closeAddContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
+                        <button onclick="closeContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
                         <button class="contactCreateButton">Save <img src="./assets/img/miniCheckIcon.svg"></button>
                     </div>                  
                 </form>
@@ -260,8 +265,10 @@ function slideInContact(contactName, initials) {
             <div class="viewContactNameContainer">
                 <h3 class="viewContactName">${contact['name']}</h3>
                 <div class="viewContactButtonsContainer">
-                    <button onclick="openEditPopUp()" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit</button>
-                    <button onclick="openDeletePopUp()" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete</button>
+                    <button onclick="openEditPopUp('${contactName}', '${initials}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit</button>
+                    <button onclick="openDeletePopUp('${contactName}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete</button>
+                </div>
+                <div id="deletePopUp" class="deletePopUp d-none">
                 </div>
             </div>
         </div>
@@ -273,7 +280,7 @@ function slideInContact(contactName, initials) {
                 <p class="emailPhoneTitle">Email</p>
                 <a id="email" class="email" href="mailto:antonmayer@gmail.com">${contact['email']}</a>
             </div>
-               <div class="emailPhoneTitleContainer">
+            <div class="emailPhoneTitleContainer">
                 <p class="emailPhoneTitle">Phone</p>
                 <a id="phone" class="phone" type="tel" href="tel:+491234567890">${contact['phone']}</a>
             </div>
@@ -281,6 +288,41 @@ function slideInContact(contactName, initials) {
     `;
 
     contactView.classList.add('slideInContactView');
+}
+
+
+function openDeletePopUp(contactName) {
+    let deletePopUp = document.getElementById('deletePopUp');
+    deletePopUp.innerHTML = deletePopUpHTML(contactName);
+    deletePopUp.classList.remove('d-none');
+    displayGreyBackground();
+}
+
+
+function closeDeletePopUp(){
+    let deletePopUp = document.getElementById('deletePopUp');
+
+    if(deletePopUp.innerHTML){
+        deletePopUp.innerHTML = '';
+        deletePopUp.classList.add('d-none');
+        removeGreyBackground();        
+    }   else {
+        return;
+    }
+
+}
+
+
+function deletePopUpHTML(contactName) {
+    return /*html*/`
+        <div class="deleteRequestParagraphContainer">
+            <p class="deleteRequestParagraph">Are you sure you want to delete <br><span class="deleteName">${contactName}<span>?</p>
+        </div>
+        <div class="yesNoButtonContainer">
+            <button class="contactCancelButton noButton" onclick="closeDeletePopUp()">No<img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
+            <button class="contactCreateButton yesButton" onclick="deleteContact(${contactName})" class="btn">Yes<img src="./assets/img/miniCheckIcon.svg"></button>
+        </div>
+    `;
 }
 
 
