@@ -88,6 +88,7 @@ body {
     background-color: #FFFFFF;
     right: 0;
     left: 0;
+    z-index: 2;
 }
 
 #initialCircle{
@@ -141,6 +142,7 @@ body {
     width: 232px;
     Padding: 64px 0px 64px 0px;
     box-sizing: border-box;
+    z-index: 2;
 }
 
 #footer {
@@ -272,7 +274,7 @@ body {
     height: 100%;
     background-color: #000000;
     width: 100%;
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     opacity: 0;
 }
@@ -356,4 +358,31 @@ body {
     background: none;
     background-color: #2A3647;
     color: white;
+}
+
+.headerNavContainer{
+    width: 128px;
+    height: auto;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 0px 20px 20px;
+    background-color: #2A3647;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    font-weight: 400;
+    position: fixed;
+    z-index: 1;
+    top: 96px;
+    right: 16px;
+}
+
+.headerNavButton {
+    padding: 13.5px;
+    color: #CDCDCD;
+    font-size: 16px;
+    background-color: #2A3647;
+    border-radius: 8px;
+}
+
+.headerNavButton:hover {
+    cursor: pointer;
+    background-color: #2A3D59;
 }
