@@ -85,28 +85,4 @@
     `;
 }
 
-async function addTaskToTasks() {
 
-    let task_title = document.getElementById('task_title').value;
-    let task_description = document.getElementById('task_description').value;
-    let task_assignet = document.getElementById('task_assignet').value;
-    let task_date = document.getElementById('task_date').value;
-    let task_category = 'done';
-    let task_status = document.getElementById('task_category').value;
-    let task_subtasks = document.getElementById('task_subtasks').value;
-
-    let task = {
-        'category': task_category,
-        'date': task_date,
-        'description': task_description,
-        'id': 'id',
-        'name': task_assignet,
-        'priority': './assets/img/vector_check.svg',
-        'status': task_status,
-        'subtask': task_subtasks,
-        'title': task_title    
-    };
-
-    postTasksToDb("/tasks", task);
-    initAddTask();
-}
