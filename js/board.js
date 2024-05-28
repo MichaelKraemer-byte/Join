@@ -1,39 +1,10 @@
-let todos = [];
-let currentElement;
-loadTaskFromLocalStorage();
-
-
 const BASE_URL = "https://tasks-6f30e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function loadTasksFromDb(path="") {
-    let response = await fetch(BASE_URL + path + ".json");
-    return responseAsJson = await response.json();
-}
+let todos = [];
+let currentElement;
 
-
-async function postTasksToDb(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseAsJson = await response.json();
-}
-
-
-async function putTasksToDb(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseAsJson = await response.json();
-}
-
+loadTaskFromLocalStorage();
+loadTasksFromServer();
 
 
 async function deleteTaskFromDb(arr, i) {
@@ -45,33 +16,55 @@ async function deleteTaskFromDb(arr, i) {
    return responseAsJson = await response.json(); 
 }
            
-    
-async function init() {
-    
-    // let data = await loadTasksFromDb("/tasks");
 
+async function saveTasksToServer() {
+    try {
+        const response = await fetch(`${BASE_URL}/tasks.json`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(todos)
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Tasks saved to server');
+    } catch (error) {
+        console.error('Failed to save tasks to server:', error);
+    }
+}
+    
+
+async function loadTasksFromServer() {
+    try {
+        const response = await fetch(`${BASE_URL}/tasks.json`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data) {
+            todos = data;
+            saveTaskToLocalStorage();
+        }
+        console.log('Tasks loaded from server');
+    } catch (error) {
+        console.error('Failed to load tasks from server:', error);
+    }
+}
+
+
+async function init() {
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
     let awaitFeedback = document.getElementById('board_await_feedback');
     let doneId = document.getElementById('board_done');
 
-
-    
-    // for (let index in data) {
-    //     let task = data[index];
-    //     todos.push(task);          
-    // }
-
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
-
-    // generateToDo(toDo, task, data);
-    // generateToDo(inProgress, progress, data);
-    // generateToDo(feedback, awaitFeedback, data);
-    // generateToDo(done, doneId, data); 
-
+    
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
@@ -80,19 +73,12 @@ async function init() {
 
 
 
-
-
-
-async function generateToDo(arr, categorie_id) { //data
+async function generateToDo(arr, categorie_id) {
 
     categorie_id.innerHTML = '';
 
-    // let keys = Object.keys(data);
-    
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        // let index = keys[i];
-
         categorie_id.innerHTML += /*html*/`
         <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})">
         <div class="board_task_category">${element['category']}</div>
@@ -115,15 +101,7 @@ async function generateToDo(arr, categorie_id) { //data
 }
 
 
-function addTaskToTasks() { //async
-
-    // let data = await loadTasksFromDb("/tasks");    
-    
-    // for (let index in data) {
-    //     let task = data[index];
-    //     todos.push(task);          
-    // }
-
+function addTaskToTasks() {
     let task_title = document.getElementById('task_title').value;
     let task_description = document.getElementById('task_description').value;
     let task_assignet = document.getElementById('task_assignet').value;
@@ -148,16 +126,18 @@ function addTaskToTasks() { //async
 
     todos.push(task)
     saveTaskToLocalStorage();
-    // initAddTask();
     init();
-    postTasksToDb("/tasks/", task);
+    initAddTask();
+    saveTasksToServer();
 }
+
 
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos); 
     localStorage.setItem('tasks', todosAsText)
 }
+
 
 
 function loadTaskFromLocalStorage() {
@@ -168,14 +148,12 @@ function loadTaskFromLocalStorage() {
 }
 
 
+
 function deleteTaskFromLocalStorage(i) {
     todos.splice(i, 1);
     saveTaskToLocalStorage();
     init();
 }
-
-
-
 
 
 
@@ -194,30 +172,12 @@ function allowDrop(ev) {
 async function moveTo(category) {
     console.log(todos[currentElement]['category']);
     todos[currentElement]['category'] = category;
-    // let task = todos[currentElement];
-    // putTasksToDb("/tasks/", todos);
-    // putTasksToDb("/tasks/", todos);
-    // init()
-    // location.reload();
-    // console.log(task)
-
-    
-    // // deleteTaskFromDb("/tasks");
-    // for (let i = 0; i < todos.length; i++) {
-    //     let task = todos[i];
-
-    //     console.log(task);
-    //     postTasksToDb("/tasks", task);
-    // }
-
-    
     console.log(todos);
-
-
-    // // postTasksToDb("/tasks", todos[i]);
     init();    
     saveTaskToLocalStorage();
+    saveTasksToServer();
 }
+
 
 
 function highlight(id) {
@@ -225,12 +185,12 @@ function highlight(id) {
 }
 
 
+
 function addTask() {
     let idAddTask = document.getElementById('pop_add_task');
     idAddTask.style.visibility = 'initial';  
     initAddTask();
 }
-
 
 
 
