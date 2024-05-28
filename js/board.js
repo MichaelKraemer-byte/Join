@@ -25,24 +25,24 @@ async function postTasksToDb(path="", data={}) {
 async function deleteTaskFromDb(arr, i) {
    console.log(arr);
    console.log(i);
-   // let response = await fetch(BASE_URL + path + ".json", {
-   //     method: "DELETE",        
-   // });
-   // return responseAsJson = await response.json(); 
+   let response = await fetch(BASE_URL + path + ".json", {
+       method: "DELETE",        
+   });
+   return responseAsJson = await response.json(); 
 }
 
 
 
 async function init() {
     
-    // let taskID = document.getElementById('board_to_do');    
+    let data = await loadTasksFromDb("/tasks");
+
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
     let doneId = document.getElementById('board_done');
 
 
-    let data = await loadTasksFromDb("/tasks");    
     
     for (let index in data) {
         let task = data[index];
