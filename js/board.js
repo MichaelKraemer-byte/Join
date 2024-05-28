@@ -8,8 +8,6 @@ loadTasksFromServer();
 
 
 async function deleteTaskFromDb(arr, i) {
-   console.log(arr);
-   console.log(i);
    let response = await fetch(BASE_URL + path + ".json", {
        method: "DELETE",        
    });
@@ -74,7 +72,6 @@ async function init() {
 
 
 async function generateToDo(arr, categorie_id) {
-
     categorie_id.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
@@ -170,9 +167,7 @@ function allowDrop(ev) {
 
 
 async function moveTo(category) {
-    console.log(todos[currentElement]['category']);
     todos[currentElement]['category'] = category;
-    console.log(todos);
     init();    
     saveTaskToLocalStorage();
     saveTasksToServer();
