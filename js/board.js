@@ -1,5 +1,7 @@
 let todos = [];
 let currentElement;
+loadTaskFromLocalStorage();
+
 
 const BASE_URL = "https://tasks-6f30e-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -12,6 +14,18 @@ async function loadTasksFromDb(path="") {
 async function postTasksToDb(path="", data={}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseAsJson = await response.json();
+}
+
+
+async function putTasksToDb(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
@@ -34,7 +48,7 @@ async function deleteTaskFromDb(arr, i) {
     
 async function init() {
     
-    let data = await loadTasksFromDb("/tasks");
+    // let data = await loadTasksFromDb("/tasks");
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
@@ -43,20 +57,25 @@ async function init() {
 
 
     
-    for (let index in data) {
-        let task = data[index];
-        todos.push(task);          
-    }
+    // for (let index in data) {
+    //     let task = data[index];
+    //     todos.push(task);          
+    // }
 
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
 
-    generateToDo(toDo, task, data);
-    generateToDo(inProgress, progress, data);
-    generateToDo(feedback, awaitFeedback, data);
-    generateToDo(done, doneId, data); 
+    // generateToDo(toDo, task, data);
+    // generateToDo(inProgress, progress, data);
+    // generateToDo(feedback, awaitFeedback, data);
+    // generateToDo(done, doneId, data); 
+
+    generateToDo(toDo, task);
+    generateToDo(inProgress, progress);
+    generateToDo(feedback, awaitFeedback);
+    generateToDo(done, doneId); 
 }
 
 
@@ -64,25 +83,26 @@ async function init() {
 
 
 
-async function generateToDo(arr, categorie_id, data) {
+async function generateToDo(arr, categorie_id) { //data
 
     categorie_id.innerHTML = '';
 
-    let keys = Object.keys(data);
-
+    // let keys = Object.keys(data);
+    
     for (let i = 0; i < arr.length; i++) {
-
         const element = arr[i];
+        // let index = keys[i];
 
         categorie_id.innerHTML += /*html*/`
-        <div class="task" draggable="true" ondragstart=" startDragging(${i})">
+        <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})">
         <div class="board_task_category">${element['category']}</div>
         <div class="board_task_title">${element['title']}</div>
 
-        <div>${i}</div>
+        <div>${element['id']}</div>
 
         <div class="board_task_toDo">${element['description']}</div>
         <div class="board_task_footer">
+            <button onclick="deleteTaskFromLocalStorage(${i})">delete</button>
 
         </div>
         <div class="board_task_footer_status">
@@ -95,14 +115,14 @@ async function generateToDo(arr, categorie_id, data) {
 }
 
 
-async function addTaskToTasks() {
+function addTaskToTasks() { //async
 
-    let data = await loadTasksFromDb("/tasks");    
+    // let data = await loadTasksFromDb("/tasks");    
     
-    for (let index in data) {
-        let task = data[index];
-        todos.push(task);          
-    }
+    // for (let index in data) {
+    //     let task = data[index];
+    //     todos.push(task);          
+    // }
 
     let task_title = document.getElementById('task_title').value;
     let task_description = document.getElementById('task_description').value;
@@ -126,9 +146,37 @@ async function addTaskToTasks() {
         'title': task_title    
     };
 
-    postTasksToDb("/tasks", task);
-    initAddTask();
+    todos.push(task)
+    saveTaskToLocalStorage();
+    // initAddTask();
+    init();
+    postTasksToDb("/tasks/", task);
 }
+
+
+function saveTaskToLocalStorage() {
+    let todosAsText = JSON.stringify(todos); 
+    localStorage.setItem('tasks', todosAsText)
+}
+
+
+function loadTaskFromLocalStorage() {
+    let todosAsText = localStorage.getItem('tasks');
+    if (todosAsText) {
+        todos = JSON.parse(todosAsText);
+    }
+}
+
+
+function deleteTaskFromLocalStorage(i) {
+    todos.splice(i, 1);
+    saveTaskToLocalStorage();
+    init();
+}
+
+
+
+
 
 
 function startDragging(i) {
@@ -143,10 +191,11 @@ function allowDrop(ev) {
 
 
 
-function moveTo(category) {
-
+async function moveTo(category) {
+    console.log(todos[currentElement]['category']);
     todos[currentElement]['category'] = category;
     // let task = todos[currentElement];
+    // putTasksToDb("/tasks/", todos);
     // putTasksToDb("/tasks/", todos);
     // init()
     // location.reload();
@@ -166,7 +215,8 @@ function moveTo(category) {
 
 
     // // postTasksToDb("/tasks", todos[i]);
-    // init();    
+    init();    
+    saveTaskToLocalStorage();
 }
 
 
