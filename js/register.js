@@ -29,12 +29,12 @@ async function postData(path='', data={}) {
     return responseToJson = await response.json();
 }
 
-function login() {
+async function login() {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     const rememberMe = document.getElementById('login-rememberme').checked;
     
-    const users = loadData('/users');
+    const users = await loadData('/users');
     users.forEach(element => {
         if(element['email'] == email) {
             alert('Login Succesfull');
