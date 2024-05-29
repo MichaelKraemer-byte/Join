@@ -50,7 +50,7 @@
                     <h1>Sign up</h1>
                     <img src="/assets/img/stripe.svg" alt="stripe">
                 </div>
-                <form id="registerForm" onsubmit="return register()">
+                <form id="registerForm" onsubmit="register(); return false;">
                     <div class="input-area">
                         <input type="text" required id="register-name" placeholder="Name">
                         <input type="email" required id="register-email" placeholder="Email">
