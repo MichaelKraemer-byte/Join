@@ -90,7 +90,7 @@ function openEditPopUp(contactName, initials) {
 
 
 function editContactFormHTML(contactName, initials) {
-    let contact = guestData.find(obj => obj['name'] === contactName);
+    let contact = data.find(obj => obj['name'] === contactName);
 
     return /*html*/`
         <div class="addContactPopUpTitleContainer">
@@ -185,19 +185,19 @@ function hideOrDisplayCategories(AZindex) {
 
 
 function setAllGuestNames(){
-    allGuestNames = guestData.map(obj => obj['name']);
+    allGuestNames = data.map(obj => obj['name']);
     setCurrentAlphabetNamesWithA();
 }
 
 
 function setCurrentAlphabetNamesWithA() {
-    currentAlphabetNames = guestData.filter(obj => obj['name'].startsWith('A')).map(obj => obj['name']);
+    currentAlphabetNames = data.filter(obj => obj['name'].startsWith('A')).map(obj => obj['name']);
 }
 
 
 function setCurrentAlphabetNames(AZindex) {
     AZindex++;
-    currentAlphabetNames = guestData.filter(obj => obj['name'].startsWith(`${alphabet[AZindex]}`)).map(obj => obj['name']);
+    currentAlphabetNames = data.filter(obj => obj['name'].startsWith(`${alphabet[AZindex]}`)).map(obj => obj['name']);
 }
 
 
@@ -216,7 +216,7 @@ function guestContactListHTML() {
 
     for (let i = 0; i < currentAlphabetNames.length; i++) {
 
-        let contact = guestData.find(obj => obj.name === currentAlphabetNames[i]);
+        let contact = data.find(obj => obj.name === currentAlphabetNames[i]);
         
         let listedContact = createContactForList(contact);
         container.appendChild(listedContact);
@@ -253,7 +253,7 @@ function slideInContact(contactName, initials) {
 
     let contactView = document.getElementById('contactView');
 
-    let contact = guestData.find(obj => obj['name'] === contactName);
+    let contact = data.find(obj => obj['name'] === contactName);
 
     contactView.innerHTML = /*html*/`
         <div class="viewContactHeadContainer">
@@ -320,10 +320,29 @@ function deletePopUpHTML(contactName) {
         </div>
         <div class="yesNoButtonContainer">
             <button class="contactCancelButton noButton" onclick="closeDeletePopUp()">No<img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-            <button class="contactCreateButton yesButton" onclick="deleteContact(${contactName})" class="btn">Yes<img src="./assets/img/miniCheckIcon.svg"></button>
+            <button class="contactCreateButton yesButton" onclick="deleteContact('${path}', '${contactName}')" class="btn">Yes<img src="./assets/img/miniCheckIcon.svg"></button>
         </div>
     `;
 }
+
+
+async function deleteContact(path, contactName) {
+    let response = await fetch(baseUrl + path + ".json");
+    let responseAsJson = await response.json();
+
+    let tokens = Object.keys(responseAsJson);
+    let index = data.findIndex(obj => obj['name'] === contactName);
+
+    const token = '/' + tokens[index];
+
+    response = await fetch(baseUrl + path + token + '.json', { 
+        method: "DELETE",
+    });
+    responseAsJson = await response.json();
+    return responseAsJson;
+}
+
+
 
 
 function getInitials(contact) {
