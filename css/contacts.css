@@ -105,6 +105,19 @@
     }
 }
 
+.slideOutContactView {
+    animation: slideOutContactView 0.4s ease-in-out forwards;
+}
+
+@keyframes slideOutContactView {
+    from {
+        right: 0%;
+    }
+    to {
+        right: -120%;
+    }
+}
+
 .addContactPopUpTitleContainer{
     background-color: rgba(42,54,71);
     width: 50%;
@@ -344,6 +357,11 @@
 .phone {
     text-decoration: none;
     color: #007CEE;
+    width: fit-content;
+}
+
+.nameAndMailListContainer{
+    min-width: 200px;
 }
 
 .listButtonContainer {

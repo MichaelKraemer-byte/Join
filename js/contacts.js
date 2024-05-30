@@ -3,6 +3,8 @@ let allGuestNames = [];
 let currentAlphabetNames = [];
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let renderContactListFunctionActive = false;
+let deleteContactFunctionActive = false;
+
 
 
 
@@ -95,6 +97,12 @@ async function addContact() {
     await postContactInFirebase(newContact);
     await getData();
     renderNewContact(newContact);
+    let underscoredName = newContact['name'].replace(/\s/g, '_');
+    let newContactContainer = document.getElementById(`${underscoredName}`);
+    newContactContainer.focus();
+    newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
+    let initials = getInitials(newContact);
+    slideInContact(newContact['name'], initials);
 }
 
 
@@ -248,9 +256,15 @@ function renderNewContact(newContact) {
 
 
 function getAZindexOfName(newContact) {
-    let firstLetterOfName = newContact['name'].charAt(0);
-    let AZindex = alphabet.findIndex(letter => letter === firstLetterOfName);
-    return AZindex;
+    if (deleteContactFunctionActive === true) {
+        let firstLetterOfName = newContact.charAt(0); 
+        let AZindex = alphabet.findIndex(letter => letter === firstLetterOfName);
+        return AZindex;
+    } else {
+        let firstLetterOfName = newContact['name'].charAt(0);
+        let AZindex = alphabet.findIndex(letter => letter === firstLetterOfName);
+        return AZindex;
+    }
 }
 
 
@@ -303,7 +317,7 @@ function contactListCategoryHTML(AZindex) {
 function hideOrDisplayCategories(AZindex) {
     let category = document.getElementById(`category${AZindex}`);
     let list = document.getElementById(`list${AZindex}`);
-    if (list.innerHTML === '') {
+    if (list.innerHTML == '') {
     category.classList.add('d-none');      
     } else {
         category.classList.remove('d-none');
@@ -351,16 +365,16 @@ function createContactForList(contact) {
     let underscoredName = contact['name'].replace(/\s/g, '_');
 
     let container = document.createElement('div');
-
+    container.id = `${underscoredName}`; 
     container.innerHTML = /*html*/`
-        <button onclick="slideInContact('${contact['name']}', '${initials}')" id="${underscoredName}" class="listedContactContainer">
+        <button onclick="slideInContact('${contact['name']}', '${initials}')" class="listedContactContainer">
             <div class="listedContactSVGContainer">
                 <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
                     <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="12" font-family="Arial" fill="white">${initials}</text>
                 </svg>
             </div>
-            <div>
+            <div class="nameAndMailListContainer">
                 <p class="listedName">${contact['name']}</p>
                 <p class="listedEmail">${contact['email']}</p>
             </div>
@@ -407,8 +421,15 @@ function slideInContact(contactName, initials) {
             </div>
         </div>
     `;
-
+    contactView.classList.remove('slideOutContactView');
     contactView.classList.add('slideInContactView');
+}
+
+
+function slideOutContact(){
+    let contactView = document.getElementById('contactView');
+    contactView.classList.remove('slideInContact');
+    contactView.classList.add('slideOutContactView');
 }
 
 
@@ -430,7 +451,6 @@ function closeDeletePopUp(){
     }   else {
         return;
     }
-
 }
 
 
@@ -448,6 +468,8 @@ function deletePopUpHTML(contactName) {
 
 
 async function deleteContact(contactName) {
+    deleteContactFunctionActive = true;
+
     let response = await fetch(baseUrl + path + ".json");
     let responseAsJson = await response.json();
 
@@ -462,6 +484,10 @@ async function deleteContact(contactName) {
     responseAsJson = await response.json();
     closeDeletePopUp();
     removeDeletedContact(contactName);
+    slideOutContact();
+    let AZindex = getAZindexOfName(contactName);
+    hideOrDisplayCategories(AZindex);
+    deleteContactFunctionActive = false;            
     return responseAsJson;
 }
 
@@ -470,7 +496,6 @@ function removeDeletedContact(contactName) {
     let underscoredName = contactName.replace(/\s/g, '_');
     document.getElementById(`${underscoredName}`).remove();
 }
-
 
 
 function getInitials(contact) {
