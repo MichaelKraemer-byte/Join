@@ -1,3 +1,6 @@
+const BASE_URL = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app/';
+SetRememberData();
+
 function showSignUpBox() {
     document.getElementById('login-section').classList.replace('d-center', 'd-none');
     document.getElementById('register-section').classList.replace('d-none', 'd-center');
@@ -9,8 +12,6 @@ function showLoginBox() {
     document.getElementById('register-section').classList.replace('d-center', 'd-none');
     document.getElementById('signup-button-area').classList.replace('d-none', 'signUp');
 }
-
-const BASE_URL = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function loadData(path = '') {
     let response = await fetch(BASE_URL + path + '.json');
@@ -29,8 +30,6 @@ async function postData(path = '', data = {}) {
     return responseToJson = await response.json();
 }
 
-
-
 async function login() {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
@@ -40,6 +39,9 @@ async function login() {
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
         alert('Login succesfull');
+        if (rememberMe) {
+            setEmailToLocalstorage(email);
+        } else { removeEmailFromLocalstorage() }
     } else { alert('Login failed!') }
 }
 
@@ -53,6 +55,27 @@ function checkPasswortInDB(data, checkPassword) {
         if (data[indexOfEmail]['passwort'] == checkPassword) {
             return true;
         }
+    }
+}
+
+function setEmailToLocalstorage(email, password) {
+    localStorage.setItem('login-name', email);
+}
+
+function removeEmailFromLocalstorage() {
+    localStorage.removeItem('login-name');
+}
+
+async function SetRememberData() {
+    const email = localStorage.getItem('login-name');
+    if (email !== null) {
+        const data = await loadData('/users');
+        const indexOfEmail = data.findIndex(element => element['email'] == email);
+        const password = data[indexOfEmail]['passwort'];
+
+        document.getElementById('login-email').value = email;
+        document.getElementById('login-password').value = password;
+        document.getElementById('login-rememberme').checked = true;
     }
 }
 
