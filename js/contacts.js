@@ -99,7 +99,7 @@ async function addContact() {
     renderNewContact(newContact);
     let underscoredName = newContact['name'].replace(/\s/g, '_');
     let newContactContainer = document.getElementById(`${underscoredName}`);
-    newContactContainer.focus();
+    newContactContainer.focus(); // focus needs to be integrated, didnt work so far. (manage first the display of contacts when added on the second attempt)
     newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
     let initials = getInitials(newContact);
     slideInContact(newContact['name'], initials);
@@ -245,13 +245,11 @@ function editContactFormHTML(contactName, initials) {
 
 function renderNewContact(newContact) {
     let AZindex = getAZindexOfName(newContact);
+    let category = document.getElementById(`category${AZindex}`);
     let list = document.getElementById(`list${AZindex}`);
     setCurrentAlphabetNames(AZindex);
     list.innerHTML = guestContactListHTML(); 
-
-    if (!list.innerHTML === '') {
-        list.classList.remove('d-none'); 
-    }
+    category.classList.remove('d-none'); 
 }
 
 
