@@ -20,7 +20,7 @@ async function loadData(path = '') {
 
 async function postData(path = '', data = {}) {
     let response = await fetch(BASE_URL + path + '.json', {
-        method: 'PUT',
+        method: 'POST',
         header: {
             'Content-Type': 'application/json',
         },
@@ -35,19 +35,25 @@ async function login() {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
     const rememberMe = document.getElementById('login-rememberme').checked;
+    const data = await loadData('/users');
+    let indexOfEmail;
 
-    const users = await loadData('/users');
-    users.forEach(element => {
-        if (element['email'] == email) {
-            alert('Login Succesfull');
+    if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
+        alert('Login succesfull');
+    } else { alert('Login failed!') }
+}
+
+function checkEmailInDB(data, email) {
+    indexOfEmail = data.findIndex(element => element['email'] == email);
+    return true
+}
+
+function checkPasswortInDB(data, checkPassword) {
+    if (indexOfEmail >= 0) {
+        if (data[indexOfEmail]['passwort'] == checkPassword) {
+            return true;
         }
-        else if (element == null) {
-            console.log('null');
-        }
-        else {
-            alert('Login failed!');
-        }
-    });
+    }
 }
 
 async function register() {
@@ -55,10 +61,9 @@ async function register() {
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const passwordCheck = document.getElementById('register-password-check').value;
-    
-    const users = await loadData('/users');
+
     if (password == passwordCheck) {
-        users.push(
+        postData('/usersObjects',
             {
                 'name': name,
                 'email': email,
@@ -66,7 +71,6 @@ async function register() {
                 'color': randomContactColor(),
             }
         );
-        await postData('/users', users);
         showLoginBox();
     } else {
         alert('Passwort stimmt nicht überein!');
@@ -77,11 +81,11 @@ async function deleteUser(username) {
     const users = await loadData('/users');
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
-        if(user['email'] == username){
-            users.splice(i,1);
-        }
+        if (user['email'] == username) {
+            users.splice(i, 1);
+        };
     }
-    postData('/users',users);
+    postData('/users', users);
 }
 
 function randomContactColor() {
@@ -112,24 +116,24 @@ const contactColor = {
 function postTestData() {
     const users = [
         {
-            'email':'test1@example.de',
-            'name':'user1',
-            'passwort':'123',
-            'color':'rgb(255, 187, 44)'
+            'email': 'test1@example.de',
+            'name': 'user1',
+            'passwort': '123',
+            'color': 'rgb(255, 187, 44)'
         },
         {
-            'email':'test2@example.de',
-            'name':'user2',
-            'passwort':'123',
-            'color':'rgb(255, 70, 70)'
+            'email': 'test2@example.de',
+            'name': 'user2',
+            'passwort': '123',
+            'color': 'rgb(255, 70, 70)'
         },
         {
-            'email':'test3@example.de',
-            'name':'user3',
-            'passwort':'123',
-            'color':'rgb(255, 230, 44)'
+            'email': 'test3@example.de',
+            'name': 'user3',
+            'passwort': '123',
+            'color': 'rgb(255, 230, 44)'
         }
     ];
 
-    postData('/users',users);
+    postData('/users', users);
 }
