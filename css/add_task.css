@@ -177,7 +177,7 @@ b {
 
 .add_task_assignet {
     height: 80px;
-    gap: 8px;
+    margin-top: 8px;
 }
 
 .add_task_date {
@@ -204,4 +204,57 @@ b {
 
 .add_task_subtask {
     gap: 8px
+}
+
+.multipleSelection {
+    width: 300px;
+    background-color: #BCC2C1;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkBoxes {
+    display: none;
+}
+
+.checkbox_name {
+    border-radius: 10px;
+}
+
+#checkBoxes label {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 20px;    
+    background-color: white;
+}
+
+#checkBoxes label p {
+   margin-block-start: 0;
+   margin-block-end: 0;
+}
+
+#checkBoxes label:hover {
+    background-color: #D1D1D1;
+    /* color: white; */
+    /* Added text color for better visibility */
+}
+
+#assignet_to {
+    margin-bottom: 8px;
 }

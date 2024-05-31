@@ -1,10 +1,14 @@
 const BASE_URL = "https://tasks-6f30e-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 
 let todos = [];
 let currentElement;
+let guest = [];
+let token = [];
 
 loadTaskFromLocalStorage();
 loadTasksFromServer();
+// loadGuestFromServer(); 
 
 
 async function deleteTaskFromDb(arr, i) {
@@ -40,9 +44,11 @@ async function loadTasksFromServer() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+        const data = await response.json();        
         if (data) {
             todos = data;
+            const keysTasks = Object.keys(data);
+            // token.push(keysTasks);
             saveTaskToLocalStorage();
         }
         console.log('Tasks loaded from server');
@@ -51,13 +57,19 @@ async function loadTasksFromServer() {
     }
 }
 
+async function loadGuestFromServer(path) {
+    let response = await fetch(BASE_URL_GUEST + path + ".json");
+    return responseToJson = await response.json();
+}
 
-async function init() {
+
+async function init() {     
+    // console.log(token);
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
     let awaitFeedback = document.getElementById('board_await_feedback');
     let doneId = document.getElementById('board_done');
-
+    
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
@@ -70,10 +82,37 @@ async function init() {
 }
 
 
+async function generateGuestsToTask() {
+
+    
+     
+    let response = await fetch(BASE_URL_GUEST + "/guestContacts" + ".json");
+    let responseToJson = await response.json();
+
+    let names = [];
+    const keysGuest = Object.keys(responseToJson);
+    const valuesGuest = Object.values(responseToJson);
+
+    for (let i = 0; i < valuesGuest.length; i++) {
+        const element = valuesGuest[i];
+        let contactName = element['name'];
+
+        // let contactName = element['name'];
+        console.log(contactName);
+        names.push(contactName);
+        // let colorContact = element['color'];
+        // console.log(colorContact);
+    }
+    return names.toString
+}
+
+
 
 async function generateToDo(arr, categorie_id) {
-    categorie_id.innerHTML = '';
+    // console.log(token);
 
+    categorie_id.innerHTML = '';
+    
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
         categorie_id.innerHTML += /*html*/`
@@ -81,12 +120,12 @@ async function generateToDo(arr, categorie_id) {
         <div class="board_task_category">${element['category']}</div>
         <div class="board_task_title">${element['title']}</div>
 
-        <div>${element['id']}</div>
+        <div>${token[i]}</div>
+        <div></div>
 
         <div class="board_task_toDo">${element['description']}</div>
         <div class="board_task_footer">
             <button onclick="deleteTaskFromLocalStorage(${i})">delete</button>
-
         </div>
         <div class="board_task_footer_status">
                 <img src="${element['priority']}">
@@ -98,15 +137,14 @@ async function generateToDo(arr, categorie_id) {
 }
 
 
-function addTaskToTasks() {
+function addTaskToTasks(category) {
     let task_title = document.getElementById('task_title').value;
     let task_description = document.getElementById('task_description').value;
     let task_assignet = document.getElementById('task_assignet').value;
     let task_date = document.getElementById('task_date').value;
-    let task_category = 'to_do';
+    let task_category = category;
     let task_status = document.getElementById('task_category').value;
     let task_subtasks = document.getElementById('task_subtasks').value;
-
     let id = todos.length;
     
     let task = {

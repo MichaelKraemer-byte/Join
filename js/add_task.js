@@ -1,9 +1,19 @@
+let show = true;
+
+ 
 
 
- async function initAddTask() {
-    
-    let add_task_form = document.getElementById('add_task_form'); 
-          
+
+
+async function initAddTask() {
+
+    // let a = await loadGuestFromServer("/guestContacts/");
+    // console.log(a);
+
+
+
+    let add_task_form = document.getElementById('add_task_form');
+
 
     add_task_form.innerHTML = /*html*/`
     <h1>Add Task</h1>
@@ -19,13 +29,34 @@
                     <textarea id="task_description" class="add_task_textarea" name="" id="" placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="add_task_assignet add_task_form_row">
-                    <label for="">Assignet to</label>
-                    <select id="task_assignet" class="add_task_input" name="select">
-                        <option value="" hidden>Select contact to assign</option>
-                        <option value="">Name 1</option>
-                        <option value="">Name 2</option>
-                        <option value="">Name 3</option>
-                    </select>
+                    <label for="" id="assignet_to">Assignet to</label>
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select class="add_task_input">
+                            <option>Select options</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+        
+                    <div class="checkbox_name" id="checkBoxes">
+                        <label for="first">
+                            <p>checkBox1</p>
+                            <input type="checkbox" id="first" />
+                        </label>
+        
+                        <label for="second">
+                            <p>checkBox2</p>
+                            <input type="checkbox" id="second" />
+                        </label>
+                        <label for="third">
+                            <p>checkBox3</p>
+                            <input type="checkbox" id="third" />
+                        </label>
+                        <label for="fourth">
+                            <p>checkBox4</p>
+                            <input type="checkbox" id="fourth" />
+                        </label>
+                       
+                    </div>
                 </div>
             </div>
 
@@ -77,7 +108,7 @@
             <p><b>*</b>This field is required</p>
             <div class="add_task_button_group_footer">
                 <button class="add_task_button_clear add_task_hover_button">Clear X</button>
-                <button class="add_task_button_create add_task_hover_button" onclick="addTaskToTasks()">Create Task
+                <button class="add_task_button_create add_task_hover_button" onclick="addTaskToTasks('to_do')">Create Task
                     <img src="./assets/img/vector_check.svg">
                 </button>
             </div>
@@ -86,3 +117,14 @@
 }
 
 
+function showCheckboxes() {
+    let checkboxes = document.getElementById("checkBoxes");
+
+    if (show) {
+        checkboxes.style.display = "block";
+        show = false;
+    } else {
+        checkboxes.style.display = "none";
+        show = true;
+    }
+}
