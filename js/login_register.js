@@ -21,7 +21,7 @@ async function loadData(path = '') {
 
 async function postData(path = '', data = {}) {
     let response = await fetch(BASE_URL + path + '.json', {
-        method: 'POST',
+        method: 'PUT',
         header: {
             'Content-Type': 'application/json',
         },
@@ -86,11 +86,11 @@ async function register() {
     const passwordCheck = document.getElementById('register-password-check').value;
 
     if (password == passwordCheck) {
-        postData('/usersObjects',
+        postData('/users',
             {
                 'name': name,
                 'email': email,
-                'passwort': password,
+                'password': password,
                 'color': randomContactColor(),
             }
         );
@@ -141,19 +141,19 @@ function postTestData() {
         {
             'email': 'test1@example.de',
             'name': 'user1',
-            'passwort': '123',
+            'password': '123',
             'color': 'rgb(255, 187, 44)'
         },
         {
             'email': 'test2@example.de',
             'name': 'user2',
-            'passwort': '123',
+            'password': '123',
             'color': 'rgb(255, 70, 70)'
         },
         {
             'email': 'test3@example.de',
             'name': 'user3',
-            'passwort': '123',
+            'password': '123',
             'color': 'rgb(255, 230, 44)'
         }
     ];
