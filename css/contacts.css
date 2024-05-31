@@ -93,7 +93,7 @@
 }
 
 .slideInContactView {
-    animation: slideInContactView 0.4s ease-in-out forwards;
+    animation: slideInContactView 0.1s ease-in-out forwards;
 }
 
 @keyframes slideInContactView {
@@ -106,7 +106,7 @@
 }
 
 .slideOutContactView {
-    animation: slideOutContactView 0.4s ease-in-out forwards;
+    animation: slideOutContactView 0.1s ease-in-out forwards;
 }
 
 @keyframes slideOutContactView {

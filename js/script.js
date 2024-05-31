@@ -31,7 +31,12 @@ function includeHTML() {
 
   let baseUrl = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
   let data = [];
-  let user = 'guest';
+  let user = {
+          name:'Maike Muster',
+          email: 'maikemuster@gmail.com',
+          password: '0123456789',
+          color: '#FC71FF'
+  }
   let path = '/guestContacts';
   let contactColors = [ '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B'];
   let colorIndex = 0;

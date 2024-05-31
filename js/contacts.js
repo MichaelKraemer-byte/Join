@@ -99,7 +99,8 @@ async function addContact() {
     renderNewContact(newContact);
     let underscoredName = newContact['name'].replace(/\s/g, '_');
     let newContactContainer = document.getElementById(`${underscoredName}`);
-    newContactContainer.focus(); // focus needs to be integrated, didnt work so far. (manage first the display of contacts when added on the second attempt)
+    newContactContainer.setAttribute("tabindex", "0");
+    newContactContainer.focus(); 
     newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
     let initials = getInitials(newContact);
     slideInContact(newContact['name'], initials);
@@ -246,9 +247,8 @@ function editContactFormHTML(contactName, initials) {
 function renderNewContact(newContact) {
     let AZindex = getAZindexOfName(newContact);
     let category = document.getElementById(`category${AZindex}`);
-    let list = document.getElementById(`list${AZindex}`);
     setCurrentAlphabetNames(AZindex);
-    list.innerHTML = guestContactListHTML(); 
+    renderCategoryContacts(AZindex); 
     category.classList.remove('d-none'); 
 }
 
@@ -269,18 +269,13 @@ function getAZindexOfName(newContact) {
 function renderContactList() {
     renderContactListFunctionActive = true;
 
-    if (user === 'guest') {        
+    for (let AZindex = 0; AZindex < 26; AZindex++) {
+        renderAlphabetCategoryOfLetter(AZindex); 
+        renderCategoryContacts(AZindex); 
+        hideOrDisplayCategories(AZindex);            
+        setCurrentAlphabetNames(AZindex);
+    };
 
-        for (let AZindex = 0; AZindex < 26; AZindex++) {
-            renderAlphabetCategoryOfLetter(AZindex); 
-            let list = document.getElementById(`list${AZindex}`);
-            list.innerHTML = guestContactListHTML(); 
-            hideOrDisplayCategories(AZindex);            
-            setCurrentAlphabetNames(AZindex);
-        }
-    } else {
-        // contactList.innerHTML = contactListHTML();
-    }
     renderContactListFunctionActive = false;
 }
 
@@ -305,8 +300,7 @@ function contactListCategoryHTML(AZindex) {
             <div class="alphabetSplitLine">
             </div> 
         </div> 
-        <div id="list${AZindex}">
-        </div>   
+        <div id="list${AZindex}"></div>   
     </div>        
     `;    
 }
@@ -315,7 +309,7 @@ function contactListCategoryHTML(AZindex) {
 function hideOrDisplayCategories(AZindex) {
     let category = document.getElementById(`category${AZindex}`);
     let list = document.getElementById(`list${AZindex}`);
-    if (list.innerHTML == '') {
+    if (list.children.length == 0) {
     category.classList.add('d-none');      
     } else {
         category.classList.remove('d-none');
@@ -343,29 +337,25 @@ function setCurrentAlphabetNames(AZindex) {
 }
 
 
-function guestContactListHTML() {
-    let container = document.createElement('div');
+function renderCategoryContacts(AZindex) {
     currentAlphabetNames.sort();
 
     for (let i = 0; i < currentAlphabetNames.length; i++) {
+    let list = document.getElementById(`list${AZindex}`);
+
 
         let contact = data.find(obj => obj.name === currentAlphabetNames[i]);
         
-        let listedContact = createContactForList(contact);
-        container.appendChild(listedContact);
-    }
-    return container.innerHTML; 
+        list.innerHTML += listedContactHTML(contact);
+    } 
 }
 
 
-function createContactForList(contact) {
+function listedContactHTML(contact) {
     let initials = getInitials(contact);
     let underscoredName = contact['name'].replace(/\s/g, '_');
-
-    let container = document.createElement('div');
-    container.id = `${underscoredName}`; 
-    container.innerHTML = /*html*/`
-        <button onclick="slideInContact('${contact['name']}', '${initials}')" class="listedContactContainer">
+    return /*html*/`
+        <button onclick="slideInContact('${contact['name']}', '${initials}')" id="${underscoredName}" class="listedContactContainer">
             <div class="listedContactSVGContainer">
                 <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
                     <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
@@ -378,7 +368,6 @@ function createContactForList(contact) {
             </div>
         </button>
     `;
-    return container;
 }
 
 
