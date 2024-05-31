@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="./css/contacts.css">
     <link rel="stylesheet" href="./css/templates.css">
     <link rel="icon" type="image/x-icon" href="./assets/img/joinIconSmall.svg">
-    <script src="./js/script.js"></script>
-    <script src="./js/contacts.js"></script>    
+
     <title>Join</title>
 </head> 
-<body onload="includeHTML(); init(`${path}`);">  <!-- put in init a specific path for the firebase, to get the right data -->
+<body onload="includeHTML()">  <!-- put in init a specific path for the firebase, to get the right data -->
 
     <div id="greyBackground" class="addGreyBackgroundOpacity d-none" onclick="closeContactPopUp(); closeDeletePopUp();"></div>
         <!-- Templates -->
@@ -29,6 +28,8 @@
 
     <div id="contactPopUp" class="contactPopUp">
     </div>
-        
+    
+    <script src="./js/script.js"></script>
+    <script src="./js/contacts.js"></script>            
 </body>
 </html>

@@ -24,6 +24,7 @@ function includeHTML() {
         return;
       }
     }
+    init();
   }
 
 
@@ -31,26 +32,23 @@ function includeHTML() {
   let baseUrl = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
   let data = [];
   let user = 'guest';
-  let path = '/guestContacts'
+  let path = '/guestContacts';
   let contactColors = [ '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B'];
+  let colorIndex = 0;
 
-
-async function init(path) {
-  await getData(path);
+  
+async function init() {
+  await getData();
   setAllGuestNames();
   renderContactList();
+  loadColorIndex();
 }
 
 
-async function getData(path) {
+async function getData() {
   response = await fetch(baseUrl + path + ".json");
   responseAsJson = await response.json();
-  if(path == '/guestContacts') {
   data = Object.values(responseAsJson);
-  } else {
-    // hier kommt folgende Gleichung hin: accountData = responseAsJson; Sobald wir richtige accounts erstellen koennen... //
-    console.log('missmatch - accountData = responseAsJson; kommt erst noch');
-  }
 }
 
 
