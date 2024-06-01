@@ -44,9 +44,9 @@ function includeHTML() {
   
 async function init() {
   await getData();
-  setAllGuestNames();
-  renderContactList();
-  loadColorIndex();
+  // setAllGuestNames();
+  // renderContactList();
+  // loadColorIndex();
 }
 
 

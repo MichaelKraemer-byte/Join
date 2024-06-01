@@ -4,11 +4,10 @@ let todos = [];
 let currentElement;
 let token = [];
 
-loadTaskFromLocalStorage();
-loadTasksFromServer();
-
 
 async function deleteTaskFromDb(arr, i) {
+    console.log(arr);
+    console.log(i);
    let response = await fetch(BASE_URL + path + ".json", {
        method: "DELETE",        
    });
@@ -54,7 +53,9 @@ async function loadTasksFromServer() {
 
 
 
-function initBoardTasks() { 
+async function initBoardTasks() {
+    await loadTasksFromServer();
+    console.log(todos)
   
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
@@ -85,7 +86,7 @@ async function generateToDo(arr, categorie_id) {
         <div class="board_task_category">${element['category']}</div>
         <div class="board_task_title">${element['title']}</div>
 
-        <div>${token[i]}</div>
+        <div>${i}</div>
         <div></div>
 
         <div class="board_task_toDo">${element['description']}</div>
@@ -127,22 +128,21 @@ function addTaskToTasks() {
     };
 
     todos.push(task)
-    saveTaskToLocalStorage();
-    initAddTask();
     saveTasksToServer();
+    initAddTask();
 }
 
 
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos); 
-    localStorage.setItem('tasks', todosAsText)
+    localStorage.setItem('boardTasks', todosAsText)
 }
 
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('tasks');
+    let todosAsText = localStorage.getItem('boardTasks');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -152,8 +152,9 @@ function loadTaskFromLocalStorage() {
 
 function deleteTaskFromLocalStorage(i) {
     todos.splice(i, 1);
-    saveTaskToLocalStorage();
+    saveTasksToServer();
     initBoardTasks();
+    initAddTask();
 }
 
 
@@ -172,9 +173,8 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
     todos[currentElement]['category'] = category;
-    initBoardTasks();    
-    saveTaskToLocalStorage();
     saveTasksToServer();
+    initBoardTasks();    
 }
 
 
