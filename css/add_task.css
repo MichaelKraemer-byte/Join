@@ -258,3 +258,8 @@ b {
 #assignet_to {
     margin-bottom: 8px;
 }
+
+.dropdown_users_name {
+    background-color: white;
+    border-radius: 10px;
+}

@@ -1,17 +1,13 @@
 const BASE_URL = "https://tasks-6f30e-default-rtdb.europe-west1.firebasedatabase.app/";
-const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 
 let todos = [];
 let currentElement;
-let guest = [];
 let token = [];
-
-loadTaskFromLocalStorage();
-loadTasksFromServer();
-// loadGuestFromServer(); 
 
 
 async function deleteTaskFromDb(arr, i) {
+    console.log(arr);
+    console.log(i);
    let response = await fetch(BASE_URL + path + ".json", {
        method: "DELETE",        
    });
@@ -47,8 +43,6 @@ async function loadTasksFromServer() {
         const data = await response.json();        
         if (data) {
             todos = data;
-            const keysTasks = Object.keys(data);
-            // token.push(keysTasks);
             saveTaskToLocalStorage();
         }
         console.log('Tasks loaded from server');
@@ -57,14 +51,12 @@ async function loadTasksFromServer() {
     }
 }
 
-async function loadGuestFromServer(path) {
-    let response = await fetch(BASE_URL_GUEST + path + ".json");
-    return responseToJson = await response.json();
-}
 
 
-async function init() {     
-    // console.log(token);
+async function initBoardTasks() {
+    await loadTasksFromServer();
+    console.log(todos)
+  
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -82,34 +74,8 @@ async function init() {
 }
 
 
-async function generateGuestsToTask() {
-
-    
-     
-    let response = await fetch(BASE_URL_GUEST + "/guestContacts" + ".json");
-    let responseToJson = await response.json();
-
-    let names = [];
-    const keysGuest = Object.keys(responseToJson);
-    const valuesGuest = Object.values(responseToJson);
-
-    for (let i = 0; i < valuesGuest.length; i++) {
-        const element = valuesGuest[i];
-        let contactName = element['name'];
-
-        // let contactName = element['name'];
-        console.log(contactName);
-        names.push(contactName);
-        // let colorContact = element['color'];
-        // console.log(colorContact);
-    }
-    return names.toString
-}
-
-
 
 async function generateToDo(arr, categorie_id) {
-    // console.log(token);
 
     categorie_id.innerHTML = '';
     
@@ -120,7 +86,7 @@ async function generateToDo(arr, categorie_id) {
         <div class="board_task_category">${element['category']}</div>
         <div class="board_task_title">${element['title']}</div>
 
-        <div>${token[i]}</div>
+        <div>${i}</div>
         <div></div>
 
         <div class="board_task_toDo">${element['description']}</div>
@@ -137,12 +103,14 @@ async function generateToDo(arr, categorie_id) {
 }
 
 
-function addTaskToTasks(category) {
+function addTaskToTasks() {
+
     let task_title = document.getElementById('task_title').value;
     let task_description = document.getElementById('task_description').value;
-    let task_assignet = document.getElementById('task_assignet').value;
+    let task_assignet = 'name';
+    // let task_assignet = document.getElementById('task_assignet').value;
     let task_date = document.getElementById('task_date').value;
-    let task_category = category;
+    let task_category = 'to_do';
     let task_status = document.getElementById('task_category').value;
     let task_subtasks = document.getElementById('task_subtasks').value;
     let id = todos.length;
@@ -160,23 +128,21 @@ function addTaskToTasks(category) {
     };
 
     todos.push(task)
-    saveTaskToLocalStorage();
-    init();
-    initAddTask();
     saveTasksToServer();
+    initAddTask();
 }
 
 
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos); 
-    localStorage.setItem('tasks', todosAsText)
+    localStorage.setItem('boardTasks', todosAsText)
 }
 
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('tasks');
+    let todosAsText = localStorage.getItem('boardTasks');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -186,8 +152,9 @@ function loadTaskFromLocalStorage() {
 
 function deleteTaskFromLocalStorage(i) {
     todos.splice(i, 1);
-    saveTaskToLocalStorage();
-    init();
+    saveTasksToServer();
+    initBoardTasks();
+    initAddTask();
 }
 
 
@@ -206,9 +173,8 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
     todos[currentElement]['category'] = category;
-    init();    
-    saveTaskToLocalStorage();
     saveTasksToServer();
+    initBoardTasks();    
 }
 
 

@@ -56,6 +56,8 @@ function initForCurrentPage(){
     updateGreeting();
   }  else if(window.location.href.includes('add_task.html')){
     initAddTask(); 
+  } else if(window.location.href.includes('board.html')) {
+    initBoardTasks();
   }
 }
 
