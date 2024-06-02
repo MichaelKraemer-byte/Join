@@ -73,7 +73,7 @@ function addContactFormHTML() {
                         <img src="./assets/img/person.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input id="emailAddContactPopUp" type="email" required class="nameEmailTel" placeholder="Email">
+                        <input id="emailAddContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email">
                         <img src="./assets/img/mail.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
@@ -92,7 +92,9 @@ function addContactFormHTML() {
 
 
 async function addContact() {
-    checkValidityForAddContactForm();
+    if(checkValidityForAddContactForm()){
+        return;
+    };
     let newContact = defineNewContact();
     let initials = getInitials(newContact);
     if (checkIfContactAlreadyExistsForAdd(newContact, initials)) {
@@ -108,12 +110,15 @@ async function addContact() {
 
 
 function checkIfContactAlreadyExistsForAdd(contactObject, initials) {
-    if (data.find(obj => obj['name'] === contactObject['name']) !== undefined) {
+    let foundByName = data.find(obj => obj['name'] === contactObject['name']);
+    let foundByPhone = data.find(obj => obj['phone'] === contactObject['phone']);
+
+    if (foundByName !== undefined && foundByName['name'] === contactObject['name']) {
         focusAndScrollToContact(contactObject);
         slideInContact(contactObject['name'], initials);
         slideInAndOutConfirmation('Contact name already exists');
         return true;
-    } else if (data.find(obj => obj['phone'] === contactObject['phone'])) {
+    } else if (foundByPhone !== undefined && foundByPhone['phone'] === contactObject['phone']) {
         focusAndScrollToContactOfPhoneNumber(contactObject, initials);
         slideInAndOutConfirmation('Phone number already exists');
         return true;
@@ -126,8 +131,9 @@ function checkIfContactAlreadyExistsForAdd(contactObject, initials) {
 function checkIfContactAlreadyExistsForEdit(contactObject, initials) {
     let email = document.getElementById('emailEditContactPopUp').value;
     let name = document.getElementById('nameEditContactPopUp').value;
+    let foundByPhone = data.find(obj => obj['phone'] === contactObject['phone']);
 
-    if (data.find(obj => obj['phone'] === contactObject['phone']) !== undefined && selectedContact['email'] === email && selectedContact['name'] === name) {
+    if (foundByPhone !== undefined && selectedContact['email'] === email && selectedContact['name'] === name) {
         focusAndScrollToContactOfPhoneNumber(contactObject, initials);
         slideInAndOutConfirmation('Phone number already exists');
         return true;
@@ -139,7 +145,7 @@ function checkIfContactAlreadyExistsForEdit(contactObject, initials) {
 
 function focusAndScrollToContact(contactObject){
     let underscoredName = contactObject['name'].replace(/\s/g, '_');
-    let toFocusContactContainer = document.getElementById(underscoredName);
+    let toFocusContactContainer = document.getElementById(`${underscoredName}`);
         
     toFocusContactContainer.setAttribute("tabindex", "0");
     toFocusContactContainer.focus(); 
@@ -211,9 +217,10 @@ function capitalizeFirstAndLastName(name) {
 function checkValidityForAddContactForm() {
     let addContactForm = document.getElementById('addContactForm');
     if (addContactForm.checkValidity()) {
-        closeContactPopUp();
+        closeContactPopUp();         
+        return false;
     }  else {
-        return;
+        return true;
     } 
 }
 
@@ -240,7 +247,7 @@ function checkValidityForEditContactForm() {
     } else if(editContactForm.checkValidity()) {
         closeContactPopUp();
     } else {
-        return;  
+        return true;  
     } 
 }
 
@@ -289,7 +296,7 @@ function editContactFormHTML(contactName, initials) {
                         <img src="./assets/img/person.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input id="emailEditContactPopUp" type="email" required class="nameEmailTel" placeholder="Email" value="${contact['email']}">
+                        <input id="emailEditContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email" value="${contact['email']}">
                         <img src="./assets/img/mail.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
@@ -374,7 +381,7 @@ function renderNewContact(newContact) {
     let AZindex = getAZindexOfName(newContact);
     let category = document.getElementById(`category${AZindex}`);
     setCurrentAlphabetNames(AZindex);
-    renderCategoryContacts(AZindex); 
+    renderCategoryContacts(AZindex, newContact); 
     category.classList.remove('d-none'); 
 }
 
@@ -463,14 +470,14 @@ function setCurrentAlphabetNames(AZindex) {
 }
 
 
-function renderCategoryContacts(AZindex) {
+function renderCategoryContacts(AZindex, newContact) {
     currentAlphabetNames.sort();
     let list = document.getElementById(`list${AZindex}`);
 
     for (let i = 0; i < currentAlphabetNames.length; i++) {
 
         let contact = data.find(obj => obj.name === currentAlphabetNames[i]);
-        if (!list.innerHTML.includes(contact['name'])) {
+        if (!list.innerHTML.includes(contact['name']) || contact['name'] === newContact['name']) {
         list.innerHTML += listedContactHTML(contact);
         }
     } 
@@ -594,6 +601,7 @@ async function deleteContact(contactName) {
         closeDeletePopUp();
         slideOutContact();    
         slideInAndOutConfirmation('Contact successfully deleted');
+        await getData();
     }
     let AZindex = getAZindexOfName(contactName);
     hideOrDisplayCategories(AZindex);
