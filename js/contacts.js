@@ -1,10 +1,12 @@
 
 let allGuestNames = [];
 let currentAlphabetNames = [];
+let selectedContact = {};
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let renderContactListFunctionActive = false;
 let deleteContactFunctionActive = false;
 let editContactFunctionActive = false;
+
 
 
 function displayGreyBackground() {
@@ -92,17 +94,64 @@ function addContactFormHTML() {
 async function addContact() {
     checkValidityForAddContactForm();
     let newContact = defineNewContact();
+    let initials = getInitials(newContact);
+    if (checkIfContactAlreadyExistsForAdd(newContact, initials)) {
+        return; 
+    };
     await postContactInFirebase(newContact);
     await getData();
     renderNewContact(newContact);
-    let underscoredName = newContact['name'].replace(/\s/g, '_');
-    let newContactContainer = document.getElementById(`${underscoredName}`);
-    newContactContainer.setAttribute("tabindex", "0");
-    newContactContainer.focus(); 
-    newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
-    let initials = getInitials(newContact);
+    focusAndScrollToContact(newContact);
     slideInContact(newContact['name'], initials);
     slideInAndOutConfirmation('Contact successfully created');
+}
+
+
+function checkIfContactAlreadyExistsForAdd(contactObject, initials) {
+    if (data.find(obj => obj['name'] === contactObject['name']) !== undefined) {
+        focusAndScrollToContact(contactObject);
+        slideInContact(contactObject['name'], initials);
+        slideInAndOutConfirmation('Contact name already exists');
+        return true;
+    } else if (data.find(obj => obj['phone'] === contactObject['phone'])) {
+        focusAndScrollToContactOfPhoneNumber(contactObject, initials);
+        slideInAndOutConfirmation('Phone number already exists');
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function checkIfContactAlreadyExistsForEdit(contactObject, initials) {
+    let email = document.getElementById('emailEditContactPopUp').value;
+    let name = document.getElementById('nameEditContactPopUp').value;
+
+    if (data.find(obj => obj['phone'] === contactObject['phone']) !== undefined && selectedContact['email'] === email && selectedContact['name'] === name) {
+        focusAndScrollToContactOfPhoneNumber(contactObject, initials);
+        slideInAndOutConfirmation('Phone number already exists');
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function focusAndScrollToContact(contactObject){
+    let underscoredName = contactObject['name'].replace(/\s/g, '_');
+    let toFocusContactContainer = document.getElementById(underscoredName);
+        
+    toFocusContactContainer.setAttribute("tabindex", "0");
+    toFocusContactContainer.focus(); 
+    toFocusContactContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+
+function focusAndScrollToContactOfPhoneNumber(contactObject, initials){
+    let contact = data.find(obj => obj['phone'] === contactObject['phone']);
+    
+    focusAndScrollToContact(contact);
+    slideInContact(contact['name'], initials);
 }
 
 
@@ -169,9 +218,26 @@ function checkValidityForAddContactForm() {
 }
 
 
+function setSelectedContact() {
+    selectedContact = {
+        color: document.getElementById('editViewContactCircle').getAttribute('fill'),
+        name: document.getElementById('nameEditContactPopUp').value,
+        email: document.getElementById('emailEditContactPopUp').value,
+        phone: document.getElementById('phoneEditContactPopUp').value
+    };
+}
+
+
 function checkValidityForEditContactForm() {
     let editContactForm = document.getElementById('editContactForm');
-    if(editContactForm.checkValidity()) {
+    let nameEditContactPopUp = document.getElementById('nameEditContactPopUp').value;
+    let emailEditContactPopUp = document.getElementById('emailEditContactPopUp').value;
+    let phoneEditContactPopUp = document.getElementById('phoneEditContactPopUp').value;
+
+    if (nameEditContactPopUp === selectedContact['name'] && emailEditContactPopUp === selectedContact['email'] && phoneEditContactPopUp === selectedContact['phone']) {
+        closeContactPopUp();
+        return true;
+    } else if(editContactForm.checkValidity()) {
         closeContactPopUp();
     } else {
         return;  
@@ -192,6 +258,7 @@ function getNextColor() {
 
 function openEditPopUp(contactName, initials) {
     document.getElementById('contactPopUp').innerHTML = editContactFormHTML(contactName, initials); 
+    setSelectedContact();
     slideIn();
     displayGreyBackground();
 }
@@ -199,6 +266,7 @@ function openEditPopUp(contactName, initials) {
 
 function editContactFormHTML(contactName, initials) {
     let contact = data.find(obj => obj['name'] === contactName);
+  
 
     return /*html*/`
         <div class="addContactPopUpTitleContainer">
@@ -212,7 +280,7 @@ function editContactFormHTML(contactName, initials) {
             <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
                 <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
-                    <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
+                    <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" id="editViewContactCircle" fill="${contact['color']}"/>
                     <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
                 </svg>
                 <form id="editContactForm" class="formContainer" onsubmit="return false">
@@ -235,25 +303,25 @@ function editContactFormHTML(contactName, initials) {
                 </form>
             </div>
         </div>
-    `;
+    `;    
 }
 
 
 async function editContact(contactName) {
     editContactFunctionActive = true;
-    checkValidityForEditContactForm();
     let contactEdit = defineContactEdit();
+    let initials = getInitials(contactEdit);
+    if (checkValidityForEditContactForm(contactName)) {
+        return;        
+    } else if (checkIfContactAlreadyExistsForEdit(contactEdit, initials)) {
+        return; 
+    };
     let token = '/' + await getTokenFrom(contactName);
     await editContactInFirebase(contactEdit, token);
     await getData();
-    renderNewContact(contactEdit);
-    let underscoredName = contactEdit['name'].replace(/\s/g, '_');
-    let newContactContainer = document.getElementById(`${underscoredName}`);
-    newContactContainer.setAttribute("tabindex", "0");
-    newContactContainer.focus(); 
-    newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
-    let initials = getInitials(contactEdit);
     deleteContact(contactName);
+    renderNewContact(contactEdit);
+    focusAndScrollToContact(contactEdit);
     slideInContact(contactEdit['name'], initials);
     slideInAndOutConfirmation('Contact successfully edited');
     editContactFunctionActive = false;
@@ -286,14 +354,13 @@ async function editContactInFirebase(contactEdit, token) {
 
 
 function defineContactEdit() {
-    let color = getNextColor();
     let email = document.getElementById('emailEditContactPopUp').value;
     let phone = document.getElementById('phoneEditContactPopUp').value;
     let name = document.getElementById('nameEditContactPopUp').value;
     name = capitalizeFirstAndLastName(name);
 
     let contactEdit = {
-        'color': color,
+        'color': selectedContact['color'],
         'name': name,
         'email': email,
         'phone': phone
