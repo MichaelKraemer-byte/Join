@@ -5,7 +5,6 @@
     width: 100%;
 }
 
-
 .addContactButton{
     padding: 12px 38px 12px 38px;
     display: flex;
@@ -21,12 +20,19 @@
 }
 
 .contactViewSection {
-    display: flex; /* Use flex to ensure it takes full height */
+    display: flex; 
     flex-direction: column;
     padding: 80px 48px 80px 48px;
     flex: 1;
     gap: 32px;
     overflow: hidden;
+}
+
+.summaryBlueVerticalLine{
+    width: 6px;
+    height: 59px;
+    background-color: #29ABE2;;
+    border-radius: 32px;
 }
 
 .addContactButton:hover {
@@ -498,3 +504,22 @@ body {
     display: flex;
     gap: 32px;
 }
+
+.contactPageConfirmation {
+    margin-top: 40px;
+    border-radius: 20px 20px 20px 20px;
+    opacity: 0px;
+    background: #2A3647;
+    box-shadow: 0px 0px 4px 0px #00000026;
+    padding: 25px 30.5px 25px 30.5px;
+    width: fit-content;
+    right: -120%;
+    position: relative;
+}
+
+.contactPageConfirmationSpan{
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+}
+

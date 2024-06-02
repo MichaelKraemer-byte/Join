@@ -2,8 +2,8 @@
         <p class="headerTitle">Kanban Project Management Tool</p>
 
         <div class="headerProfileContainer">
-            <button class="btn"><img class="helpIcon" src="assets/img/helpIcon.svg"></img></button>
-            <button class="btn" onclick="openHeadNav()">
+            <button onclick="navigateTo('help.html')" class="btn"><img class="helpIcon" src="assets/img/helpIcon.svg"></img></button>
+            <button class="btn" onclick="openHeadNav(event)">
                 <svg id="initialCircle" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                     <circle cx="28" cy="28" r="26.5" stroke="#2A3647" stroke-width="3"/>
                     <circle class="circle-background" cx="28" cy="28" r="26.5" fill="transparent"/>
@@ -12,10 +12,10 @@
             </button>
 
             <div id="headerNav" class="headerNavContainer d-none">
-                <button class="btn headerNavButton d-none">Help</button>
-                <button class="btn headerNavButton">Legal Notice</button>
-                <button class="btn headerNavButton">Privacy Policy</button>
-                <button class="btn headerNavButton">Log out</button>
+                <button class="btn headerNavButton d-none" onclick="navigateTo('help.html')">Help</button>
+                <button class="btn headerNavButton" onclick="navigateTo('legalnotice.html')">Legal Notice</button>
+                <button class="btn headerNavButton" onclick="navigateTo('privacypolicy.html')">Privacy Policy</button>
+                <button class="btn headerNavButton" onclick="navigateTo('index.html')">Log out</button>
             </div>
         </div>
     </header>

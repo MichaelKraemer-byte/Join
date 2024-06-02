@@ -1,25 +1,25 @@
    <nav id="navBar">
         <img class="navBarImg" src="./assets/img/navBarImg.svg">
         <section id="navContainer">
-            <button class="navButton mainNavButtonTransition">
+            <button onclick="navigateTo('summary.html')" class="navButton mainNavButtonTransition">
                 <div class="navImgContainer">
                     <img class="navImg" src="./assets/img/summaryIcon.svg">
                 </div>
                 <span>Summary</span>
             </button>
-            <button class="navButton mainNavButtonTransition">
+            <button onclick="navigateTo('add_task.html')" class="navButton mainNavButtonTransition">
                 <div class="navImgContainer">
                     <img class="navImg" src="./assets/img/addTaskIcon.svg">
                 </div>
                 <span>Add Task</span>
             </button>
-            <button class="navButton mainNavButtonTransition">
+            <button onclick="navigateTo('board.html')" class="navButton mainNavButtonTransition">
                 <div class="navImgContainer">
                     <img class="navImg" src="./assets/img/boardIcon.svg">
                 </div>
                 <span>Board</span>
             </button>
-            <button class="navButton mainNavButtonTransition">
+            <button onclick="navigateTo('contacts.html')" class="navButton mainNavButtonTransition">
                 <div class="navImgContainer">
                     <img class="navImg" src="./assets/img/contactsIcon.svg">
                 </div>
@@ -29,8 +29,8 @@
 
         <footer id="footer">
             <div class="footerContainer">
-                <button class="navButton footerButton">Privacy Policy</button>
-                <button class="navButton footerButton">Legal Notice</button>
+                <button class="navButton footerButton" onclick="navigateTo('privacypolicy.html')">Privacy Policy</button>
+                <button class="navButton footerButton" onclick="navigateTo('legalnotice.html')">Legal Notice</button>
             </div>
         </footer>
     </nav>

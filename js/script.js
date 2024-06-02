@@ -28,25 +28,35 @@ function includeHTML() {
   }
 
 
-
   let baseUrl = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
   let data = [];
-  let user = {
-          name:'Maike Muster',
-          email: 'maikemuster@gmail.com',
-          password: '0123456789',
-          color: '#FC71FF'
-  }
   let path = '/guestContacts';
   let contactColors = [ '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FFBB2B'];
   let colorIndex = 0;
+  let user = {
+    name:'Maike Muster',
+    email: 'maikemuster@gmail.com',
+    password: '0123456789',
+    color: '#FC71FF'
+}
 
   
 async function init() {
   await getData();
-  setAllGuestNames();
-  renderContactList();
-  loadColorIndex();
+  initForCurrentPage();
+}
+
+
+function initForCurrentPage(){
+  if (window.location.href.includes('contacts.html')) {
+    setAllGuestNames();
+    renderContactList();
+    loadColorIndex();
+  } else if (window.location.href.includes('summary.html')) {
+    updateGreeting();
+  }  else if(window.location.href.includes('add_task.html')){
+    initAddTask(); 
+  }
 }
 
 
@@ -57,10 +67,10 @@ async function getData() {
 }
 
 
-function openHeadNav() {
+function openHeadNav(event) {
   let nav = document.getElementById('headerNav');
-  nav.classList.remove('d-none');
-  document.addEventListener('click', closeNavOnOutsideClick);
+  nav.classList.contains('d-none') ? nav.classList.remove('d-none') : nav.classList.add('d-none');
+  event.stopPropagation(); 
 }
 
 
@@ -68,7 +78,23 @@ function closeNavOnOutsideClick(event) {
   let nav = document.getElementById('headerNav');
   let initialCircle = document.getElementById('initialCircle');
 
-  if (!initialCircle.contains(event.target)) {
+  if (event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
     nav.classList.add('d-none');
   }
+}
+
+
+function loadColorIndex() {
+  colorIndex = localStorage.getItem('colorIndex');
+
+  if (colorIndex === null) {
+  colorIndex = 0;
+  } else {
+  colorIndex = parseInt(colorIndex, 10);
+  }
+}
+
+
+function navigateTo(url) {
+  window.location.href = url;
 }

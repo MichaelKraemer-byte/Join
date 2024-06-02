@@ -4,9 +4,7 @@ let currentAlphabetNames = [];
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let renderContactListFunctionActive = false;
 let deleteContactFunctionActive = false;
-
-
-
+let editContactFunctionActive = false;
 
 
 function displayGreyBackground() {
@@ -67,7 +65,7 @@ function addContactFormHTML() {
             <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
                 <img class="contactPopUpProfileImg" src="./assets/img/ProfileImg.svg">
-                <form id="addContactForm" class="formContainer" onsubmit="onsubmit; return false;">
+                <form id="addContactForm" class="formContainer" onsubmit="return false;">
                     <div class="contactsInputContainer">
                         <input id="nameAddContactPopUp" type="text" required class="nameEmailTel" placeholder="Name">
                         <img src="./assets/img/person.svg" class="contactsInputIcon">
@@ -92,7 +90,7 @@ function addContactFormHTML() {
 
 
 async function addContact() {
-    checkValidity();
+    checkValidityForAddContactForm();
     let newContact = defineNewContact();
     await postContactInFirebase(newContact);
     await getData();
@@ -104,6 +102,7 @@ async function addContact() {
     newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
     let initials = getInitials(newContact);
     slideInContact(newContact['name'], initials);
+    slideInAndOutConfirmation('Contact successfully created');
 }
 
 
@@ -160,38 +159,34 @@ function capitalizeFirstAndLastName(name) {
 }
 
 
-function checkValidity() {
+function checkValidityForAddContactForm() {
     let addContactForm = document.getElementById('addContactForm');
-
     if (addContactForm.checkValidity()) {
         closeContactPopUp();
-    } else {
+    }  else {
         return;
-    }    
+    } 
+}
+
+
+function checkValidityForEditContactForm() {
+    let editContactForm = document.getElementById('editContactForm');
+    if(editContactForm.checkValidity()) {
+        closeContactPopUp();
+    } else {
+        return;  
+    } 
 }
 
 
 function getNextColor() {
     let colorValue = contactColors[colorIndex];
-
     colorIndex++;
     if (colorIndex >= contactColors.length) {
       colorIndex = 0;
     }
     localStorage.setItem('colorIndex', colorIndex);
-    
     return colorValue;
-}
-
-
-function loadColorIndex() {
-    colorIndex = localStorage.getItem('colorIndex');
-
-    if (colorIndex === null) {
-    colorIndex = 0;
-    } else {
-    colorIndex = parseInt(colorIndex, 10);
-    }
 }
 
 
@@ -220,27 +215,91 @@ function editContactFormHTML(contactName, initials) {
                     <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
                     <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
                 </svg>
-                <form class="formContainer" action="onsubmit">
+                <form id="editContactForm" class="formContainer" onsubmit="return false">
                     <div class="contactsInputContainer">
-                        <input type="text" required class="nameEmailTel" placeholder="Name" value="${contact['name']}">
+                        <input id="nameEditContactPopUp" type="text" required class="nameEmailTel" placeholder="Name" value="${contact['name']}">
                         <img src="./assets/img/person.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input type="email" required class="nameEmailTel" placeholder="Email" value="${contact['email']}">
+                        <input id="emailEditContactPopUp" type="email" required class="nameEmailTel" placeholder="Email" value="${contact['email']}">
                         <img src="./assets/img/mail.svg" class="contactsInputIcon">
                     </div>
                     <div class="contactsInputContainer">
-                        <input type="tel" required pattern="[0-9]{10}" class="nameEmailTel" placeholder="Phone" value="${contact['phone']}">
+                        <input id="phoneEditContactPopUp" type="tel" required pattern="\\+?[0-9\\s\\-\\(\\)]{10,}" class="nameEmailTel" placeholder="Phone" value="${contact['phone']}">
                         <img src="./assets/img/call.svg" class="contactsInputIcon">
                     </div>
                     <div class="cancelAndCreateContainer">
                         <button onclick="closeContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-                        <button class="contactCreateButton">Save <img src="./assets/img/miniCheckIcon.svg"></button>
+                        <button class="contactCreateButton" onclick="editContact('${contactName}')">Save <img src="./assets/img/miniCheckIcon.svg"></button>
                     </div>                  
                 </form>
             </div>
         </div>
     `;
+}
+
+
+async function editContact(contactName) {
+    editContactFunctionActive = true;
+    checkValidityForEditContactForm();
+    let contactEdit = defineContactEdit();
+    let token = '/' + await getTokenFrom(contactName);
+    await editContactInFirebase(contactEdit, token);
+    await getData();
+    renderNewContact(contactEdit);
+    let underscoredName = contactEdit['name'].replace(/\s/g, '_');
+    let newContactContainer = document.getElementById(`${underscoredName}`);
+    newContactContainer.setAttribute("tabindex", "0");
+    newContactContainer.focus(); 
+    newContactContainer.scrollIntoView({behavior: "smooth", block: "center" });
+    let initials = getInitials(contactEdit);
+    deleteContact(contactName);
+    slideInContact(contactEdit['name'], initials);
+    slideInAndOutConfirmation('Contact successfully edited');
+    editContactFunctionActive = false;
+}
+
+
+async function getTokenFrom(contactName) {
+    let response = await fetch(baseUrl + path + ".json");
+    let responseAsJson = await response.json();
+    let tokens = Object.keys(responseAsJson);
+    let index = data.findIndex(contact => contact['name'] === contactName);
+
+    let tokenString = tokens[index];
+    return tokenString;
+}
+
+
+async function editContactInFirebase(contactEdit, token) {
+    let response = await fetch(baseUrl + path + token + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type":"application/json",
+        },
+        body: JSON.stringify(contactEdit)
+    });
+
+    let responseAsJson = await response.json();
+    return responseAsJson;
+}
+
+
+function defineContactEdit() {
+    let color = getNextColor();
+    let email = document.getElementById('emailEditContactPopUp').value;
+    let phone = document.getElementById('phoneEditContactPopUp').value;
+    let name = document.getElementById('nameEditContactPopUp').value;
+    name = capitalizeFirstAndLastName(name);
+
+    let contactEdit = {
+        'color': color,
+        'name': name,
+        'email': email,
+        'phone': phone
+    };    
+
+    return contactEdit;
 }
 
 
@@ -339,14 +398,14 @@ function setCurrentAlphabetNames(AZindex) {
 
 function renderCategoryContacts(AZindex) {
     currentAlphabetNames.sort();
-
-    for (let i = 0; i < currentAlphabetNames.length; i++) {
     let list = document.getElementById(`list${AZindex}`);
 
+    for (let i = 0; i < currentAlphabetNames.length; i++) {
 
         let contact = data.find(obj => obj.name === currentAlphabetNames[i]);
-        
+        if (!list.innerHTML.includes(contact['name'])) {
         list.innerHTML += listedContactHTML(contact);
+        }
     } 
 }
 
@@ -456,26 +515,36 @@ function deletePopUpHTML(contactName) {
 
 async function deleteContact(contactName) {
     deleteContactFunctionActive = true;
-
-    let response = await fetch(baseUrl + path + ".json");
-    let responseAsJson = await response.json();
-
-    let tokens = Object.keys(responseAsJson);
-    let index = data.findIndex(obj => obj['name'] === contactName);
-
-    const token = '/' + tokens[index];
-
-    response = await fetch(baseUrl + path + token + '.json', { 
-        method: "DELETE",
-    });
-    responseAsJson = await response.json();
-    closeDeletePopUp();
+    
     removeDeletedContact(contactName);
-    slideOutContact();
+    if(editContactFunctionActive === false){
+        let token = '/' + await getTokenFrom(contactName);
+
+        response = await fetch(baseUrl + path + token + '.json', { 
+            method: "DELETE",
+        });
+        responseAsJson = await response.json();
+        closeDeletePopUp();
+        slideOutContact();    
+        slideInAndOutConfirmation('Contact successfully deleted');
+    }
     let AZindex = getAZindexOfName(contactName);
     hideOrDisplayCategories(AZindex);
     deleteContactFunctionActive = false;            
     return responseAsJson;
+}
+
+
+function slideInAndOutConfirmation(span) {
+    let contactPageConfirmation = document.getElementById('contactPageConfirmation');
+    let contactPageConfirmationSpan = document.getElementById('contactPageConfirmationSpan');
+    contactPageConfirmationSpan.innerHTML = `${span}`;
+    contactPageConfirmation.classList.remove('slideOutContactView');
+    contactPageConfirmation.classList.add('slideInContactView');
+    setTimeout(() => {
+        contactPageConfirmation.classList.remove('slideInContactView');
+        contactPageConfirmation.classList.add('slideOutContactView');
+    }, 2000);
 }
 
 
@@ -496,3 +565,4 @@ function getInitials(contact) {
 
     return initials;
 }
+

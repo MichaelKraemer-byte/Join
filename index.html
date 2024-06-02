@@ -1,35 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/fonts/inter.css">
-    <link rel="stylesheet" href="./css/summary.css">
-    <link rel="stylesheet" href="./css/add_task.css">
-    <link rel="stylesheet" href="./css/contacts.css">
-    <link rel="stylesheet" href="./css/templates.css">
-    <link rel="icon" type="image/x-icon" href="./assets/img/joinIconSmall.svg">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="/js/login_register.js" defer></script>
+</head>
 
-    <title>Join</title>
-</head> 
-<body onload="includeHTML()">  <!-- put in init a specific path for the firebase, to get the right data -->
+<body>
+    <div class="content">
 
-    <div id="greyBackground" class="addGreyBackgroundOpacity d-none" onclick="closeContactPopUp(); closeDeletePopUp();"></div>
-        <!-- Templates -->
-        <div w3-include-html="./templates/header.html"></div>
-        <div w3-include-html="./templates/navBar.html"></div>
+        <header class="d-end">
+            <img src="/assets/img/logo.svg" class="logo-fullscreen animation-logo" alt="logo">
+            <div class="signUp fade-in" id="signup-button-area">
+                <p>Not a Join user?</p>
+                <button class="button blue-button" id="signUp" onclick="showSignUpBox()">Sign up</button>
+            </div>
+        </header>
+
+        <section class="d-center fade-in" id="login-section">
+            <div class="box">
+                <div class="title">
+                    <h1>Log in</h1>
+                    <img src="/assets/img/stripe.svg" alt="stripe">
+                </div>
+                <form onsubmit="login(); return false;">
+                    <div class="input-area">
+                        <input type="email" id="login-email" placeholder="Email" required>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <div class="checkbox m-left-48">
+                        <input type="checkbox" name="rememberme" id="login-rememberme">
+                        <label for="rememberme">Remember me</label>
+                    </div>
+                    <div class="buttons d-center">
+                        <button class="button blue-button" id="login-button">Log in</button>
+                        <button class="button white-button" type="button" id="guest-login-button">Guest Log in</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="d-none" id="register-section">
+            <div class="box">
+                <img src="/assets/img/arrow-left-line.svg" alt="back" class="arrow-left-line" onclick="showLoginBox()">
+                <div class="title">
+                    <h1>Sign up</h1>
+                    <img src="/assets/img/stripe.svg" alt="stripe">
+                </div>
+                <form id="registerForm" onsubmit="register(); return false;">
+                    <div class="input-area">
+                        <input type="text" required id="register-name" placeholder="Name">
+                        <input type="email" required id="register-email" placeholder="Email">
+                        <input type="password" required id="register-password" placeholder="Password">
+                        <input type="password" required id="register-password-check" placeholder="Confirm Password">
+                    </div>
+                    <div class="checkbox d-center">
+                        <input type="checkbox" required name="PrivacyPolicy">
+                        <label for="PrivacyPolicy">I accept the <a href="#privacypolicy">Privacy Policy</a></label>
+                    </div>
+                    <div class="buttons d-center">
+                        <button class="button blue-button" id="signup-button">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links fade-in">
+                <a href="#privacypolicy">Privacy Policy</a>
+                <a href="#legalnotice">Legal notice</a>
+            </div>
+        </footer>
     </div>
-
-    <section id="content" class="content">    
-        <!-- Contacts -->
-        <div w3-include-html="contacts.html"  class="contactsHTMLContainer"></div>
-        <div w3-include-html="summary.html" class="d-none"></div>
-    </section>
-
-    <div id="contactPopUp" class="contactPopUp">
-    </div>
-    
-    <script src="./js/script.js"></script>
-    <script src="./js/contacts.js"></script>            
 </body>
+
 </html>
