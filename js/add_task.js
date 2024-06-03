@@ -24,10 +24,8 @@ async function loadGuestFromServer() {
 
 
 async function initAddTask() {
-
     await loadGuestFromServer();
     await loadTasksFromServer();
-
     generateAddTasks();
     generateCheckBox();
 }
@@ -49,6 +47,8 @@ function showCheckboxes() {
     }
 }
 
+
+
 function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
 
@@ -63,6 +63,7 @@ function generateCheckBox() {
         `;
     }
 }
+
 
 
 function generateAddTasks() {
