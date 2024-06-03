@@ -175,6 +175,24 @@ body {
     border-color: #2dabe1;
 }
 
+.password-container, .email-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"],
+.email-container input[type="email"] {
+    width: 100%;
+    padding-right: 30px; /* Platz für das Symbol */
+}
+
+.password-container .toggle-password, .email-container .toggle-password {
+    position: absolute;
+    right: 10px;
+}
+
 footer {
     display: flex;
     justify-content: center;

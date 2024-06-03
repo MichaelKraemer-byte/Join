@@ -125,6 +125,52 @@ async function register() {
     }
 }
 
+function togglePasswordVisibility() {
+    const passwordField = document.getElementById("login-password");
+    const toggleIcon = document.getElementById("password-icon");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleIcon.src = "/assets/img/password-show.png"; // Symbol zum Verbergen
+    } else {
+        passwordField.type = "password";
+        toggleIcon.src = "/assets/img/password-hide.png";
+    }
+}
+
+function togglePasswordIcon() {
+    const passwordField = document.getElementById('login-password')
+    const toggleContainer = document.getElementById('password-icon-container');
+    const toggleIcon = document.getElementById("password-icon");
+
+    if (passwordField.value.length == 0) {
+        setPasswordIconToLock();
+    } else {
+        setPasswordIconToEye();
+    }
+}
+
+function setPasswordIconToLock() {
+    const toggleContainer = document.getElementById('password-icon-container');
+    const toggleIcon = document.getElementById("password-icon");
+    toggleIcon.src = '/assets/img/lock.svg'
+    toggleIcon.style.cursor = 'default';
+    toggleContainer.onclick = null;
+    toggleContainer.removeAttribute('onclick');
+}
+
+function setPasswordIconToEye() {
+    const toggleContainer = document.getElementById('password-icon-container');
+    const toggleIcon = document.getElementById("password-icon");
+    const passwordField = document.getElementById('login-password');
+    toggleIcon.style.cursor = 'pointer'
+    toggleContainer.setAttribute('onclick', 'togglePasswordVisibility()');
+    if (passwordField.type === 'password') {
+        toggleIcon.src = "/assets/img/password-hide.png";
+    } else {
+        toggleIcon.src = "/assets/img/password-show.png";
+    }
+}
+
 async function deleteUser(username) {
     const users = await loadData('/users');
     for (let i = 0; i < users.length; i++) {
