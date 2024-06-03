@@ -139,8 +139,6 @@ function togglePasswordVisibility() {
 
 function togglePasswordIcon() {
     const passwordField = document.getElementById('login-password')
-    const toggleContainer = document.getElementById('password-icon-container');
-    const toggleIcon = document.getElementById("password-icon");
 
     if (passwordField.value.length == 0) {
         setPasswordIconToLock();
