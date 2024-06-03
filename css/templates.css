@@ -54,8 +54,7 @@ body {
 }
 
 .content {
-    padding: 206px 96px 0px 328px;
-    margin-bottom: 96px;
+    padding: 206px 135px 96px 328px;
     box-sizing: border-box;
     position: relative;
 }
@@ -127,11 +126,11 @@ body {
     font-weight: 600;
     width: 48px;
     height: 48px;
-    font-size: 28px;
 }
 
 .headerTitle {
     font-weight: 400;
+    margin: 0px;
 }
 
 .headerProfileContainer{
@@ -244,7 +243,7 @@ body {
 }
 
 .title {
-    font-size: 61px;
+    font-size: clamp(47px, 4vw, 61px);    
     font-weight: 700;
     color: #000000;
     margin: 0px;

@@ -139,3 +139,8 @@ function getInitials(contact) {
 
   return initials;
 }
+
+
+function resetCurrentUser() {
+  localStorage.setItem('currentUser', "");
+}

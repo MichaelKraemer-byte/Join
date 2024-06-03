@@ -7,14 +7,14 @@
 }
 
 #summaryTitle {
-    padding-right: 30px;
     margin-bottom: -16px;
     margin-top: -16px;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .subTitle{
-    padding-left: 30px;
+    font-size: clamp(20px, 2.5vw, 27px);    
     color: #2A3647;
     word-wrap: break-word;
 }
@@ -28,7 +28,7 @@
 .greetName{
     margin: 0px;
     color: #29ABE2;
-    font-size: clamp(28px, 4.5vw, 61px);
+    font-size: clamp(28px, 4vw, 61px);
     font-weight: 700;
     margin: 0px;
     word-wrap: break-word;
@@ -46,11 +46,12 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 300px;
     max-width: 480px;
 }
 
 .summaryCount{
-    font-size: 56px;
+    font-size: clamp(32px, 5vw, 56px);
     font-weight: 600;
     margin-top: 0px;
     color: black;
@@ -93,9 +94,9 @@
     display: flex;
     box-sizing: border-box;
     padding: 28px 38px 28px 38px;
-    gap: 61px;
     align-items: center;
     justify-content: center;
+    justify-content: space-between;
 }
 
 .urgentCountContainer{
@@ -185,4 +186,55 @@
 
 .whiteColor {
     color: white;
+}
+
+@media screen and  (min-width: 850px) and (max-width: 1321px) {
+    .content {
+        padding: 206px 56px 96px 328px;
+    } 
+
+    .title{
+        font-size: clamp(47px, 4vw, 61px);
+    }
+
+    .greetName {
+        font-size: clamp(28px, 3vw, 61px);
+    }
+    
+    #summaryMainSection{
+        gap: 60px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1112px){
+    #greetingContainer {
+        display: none;
+    }
+
+    #summaryMainSection{
+        gap: 30px;
+    }
+}
+
+@media screen and (min-width: 920px) and (max-width: 1112px){
+    
+    .subTitle{
+        font-size: clamp(20px, 2.5vw, 27px);
+    }
+
+}
+
+@media screen and (min-width: 850px) and (max-width: 950px){
+    
+    .summaryNumContainer {
+        max-width: 440px;
+    }
+    
+    .toDoAndDoneContainer {
+        Padding: 32px 32px 32px 32px;
+    }
+
+    #summaryMainSection {
+        gap: 0px;
+    }
 }

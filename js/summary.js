@@ -5,15 +5,15 @@ function updateGreeting() {
 
     let greeting;
     if (hour < 6) {
-        greeting = "Good night";
+        greeting = `Good night${greetName()}`;
     } else if (hour < 12) {
-        greeting = "Good morning";
+        greeting = `Good morning${greetName()}`;
     } else if (hour < 18) {
-        greeting = "Good day";
+        greeting = `Good day${greetName()}`;
     } else if (hour < 21) {
-        greeting = "Good afternoon";
+        greeting = `Good afternoon${greetName()}`;
     } else {
-        greeting = "Good evening";
+        greeting = `Good evening${greetName()}`;
     }
 
     greetElement.innerHTML = greeting;
@@ -22,13 +22,12 @@ function updateGreeting() {
 
 function greetName(){
     let greetName = document.getElementById('greetName');
-    let greetingSign = document.getElementById('greetingSign');
 
     if (user['name'] !== 'Maike Muster') {
-        greetingSign.innerHTML = ',';
         greetName.innerHTML = `${user['name']}`;
+        return ',';
     } else {
         greetName.innerHTML = '';
-        greetingSign.innerHTML = `!`;
+        return `!`;
     };
 }
