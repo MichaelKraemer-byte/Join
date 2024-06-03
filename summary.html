@@ -28,14 +28,14 @@
         <div id="summaryMainSection">
             <div class="summaryNumContainer">
                 <div class="toDoAndDoneSection">
-                    <div class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
+                    <div onclick="navigateTo('board.html')" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
                         <img class="summarySvg" src="assets/img/penIcon.svg">
                         <div class="countContainer">
                             <num id="toDo" class="summaryCount">0</num>
                             <span class="summarySpan">To-do</span>
                         </div>
                     </div>
-                    <div class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
+                    <div onclick="navigateTo('board.html')" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
                         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
                             <circle class="whiteFill" cx="35" cy="35" r="34.5" fill="#2A3647"/>
                             <path class="darkBlueStroke" d="M20.0283 35.0001L31.2571 46.0662L49.9717 23.9341" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,7 +47,7 @@
                     </div>
                 </div>            
 
-                <div class="urgentContainer radius-30 backgroundcolor-white invert">
+                <div onclick="navigateTo('board.html')" class="urgentContainer radius-30 backgroundcolor-white invert">
                     <div class="urgentCountContainerWithImg">
                         <img src="assets/img/urgentIcon.svg">
                         <div class="urgentCountContainer">
@@ -66,17 +66,17 @@
                 </div>
 
                 <div class="boardProgressFeedbackSection">
-                    <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Tasks in<br>Board</span>
                     </div>
                         
-                    <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Tasks in<br>Progress</span>
                     </div>
 
-                    <div class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Awaiting<br>Feedback</span>
                     </div>
@@ -88,7 +88,7 @@
                     <h2 id="greetAtTime" class="greetingIntro"></h2>
                     <h2 class="greetingIntro" id="greetingSign"></h2>
                 </div>    
-                <h1 id="greetName" class="title"></h1>
+                <h1 id="greetName" class="greetName"></h1>
             </div>
         </div>
     </section>

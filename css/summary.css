@@ -1,7 +1,5 @@
 #summary {
     position: relative;
-    top: 110px;
-    left: 96px;
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -18,6 +16,7 @@
 .subTitle{
     padding-left: 30px;
     color: #2A3647;
+    word-wrap: break-word;
 }
 
 #summaryMainSection {
@@ -26,13 +25,17 @@
     gap: 80px;
 }
 
-#greetName{
+.greetName{
     margin: 0px;
     color: #29ABE2;
+    font-size: clamp(28px, 4.5vw, 61px);
+    font-weight: 700;
+    margin: 0px;
+    word-wrap: break-word;
 }
 
 .greetingIntro{
-    font-size: 47px;
+    font-size: clamp(20px, 2.5vw, 47px);
     font-weight: 500;
     margin-bottom: 3px;
     margin-top: 0px;

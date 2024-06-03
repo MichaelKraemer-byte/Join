@@ -32,6 +32,14 @@
     margin-bottom: 16px;
 }
 
+.font-size-20px{
+    font-size: 20px;
+}
+
+.font-size-28px{
+    font-size: 28px;
+}
+
 /* CSS TOOLS */
 /* CSS TOOLS */
 /* CSS TOOLS */
@@ -46,10 +54,17 @@ body {
 }
 
 .content {
-    padding-top: 96px;
-    padding-left: 232px;
-    height: 100%;
+    padding: 206px 96px 0px 328px;
+    margin-bottom: 96px;
     box-sizing: border-box;
+    position: relative;
+}
+
+.contactsContent {
+    padding: 96px 96px 0px 232px;
+    margin-bottom: 96px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .titleContainer {

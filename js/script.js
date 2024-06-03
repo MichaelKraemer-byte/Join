@@ -36,7 +36,7 @@ function includeHTML() {
   let user = {
     name:'Maike Muster',
     email: 'maikemuster@gmail.com',
-    password: '0123456789',
+    initials: 'G',
     color: '#FC71FF'
   }
   getCurrentUserFromLocalStorage();
@@ -44,13 +44,31 @@ function includeHTML() {
   
 async function init() {
   await getData();
+  setInitialsInHeader();
   initForCurrentPage();
 }
 
 
 function getCurrentUserFromLocalStorage() {
-  let data = localStorage.getItem('currentUser');
-  user = JSON.parse(data);
+  let currentUserString = localStorage.getItem('currentUser');
+  user = JSON.parse(currentUserString);
+}
+
+
+function setInitialsInHeader(){
+    headInnitials = document.getElementById('headInnitials');
+  if (user['name'] !== 'Maike Muster') {
+    headInnitials.innerHTML = `${user['initials']}`;
+  } else {
+    headInnitials.innerHTML = 'G';
+  }
+  if (user['initials'].length === 2) {
+    headInnitials.classList.remove('font-size-28px');
+    headInnitials.classList.add('font-size-20px');    
+  } else if (user['initials'].length === 1) {
+    headInnitials.classList.remove('font-size-20px');
+    headInnitials.classList.add('font-size-28px');
+  }
 }
 
 
