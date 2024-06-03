@@ -39,20 +39,22 @@ async function login() {
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
         alert('Login succesfull');
-        setCurrentUser(data);
-        window.location.href = 'board.html';
+        setCurrentUserInLocalstorage(data);
+        window.location.href = './summary.html';
         if (rememberMe) {
             setEmailToLocalstorage(email);
         } else { removeEmailFromLocalstorage() }
     } else { alert('Login failed!') }
 }
 
-function setCurrentUser(data){
-    user = {
+function setCurrentUserInLocalstorage(data){
+    let user = {
         name: data[indexOfEmail].name,
         email: data[indexOfEmail].email,
         color: data[indexOfEmail].color,
+        initials: getInitials(data[indexOfEmail]),
     }
+    localStorage.setItem('currentUser', JSON.stringify(user));
 }
 
 function checkEmailInDB(data, email) {
@@ -169,4 +171,16 @@ function postTestData() {
     ];
 
     postData('/users', users);
+}
+
+function getInitials(contact) {
+    let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+    let initials = [...contact['name'].matchAll(rgx)] || [];
+
+    initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+    ).toUpperCase();
+
+    return initials;
 }
