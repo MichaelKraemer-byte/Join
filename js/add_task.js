@@ -128,13 +128,14 @@ function generateAddTasks() {
                             </button>
                         </div>
                     </div>
+                    
                     <div class="add_task_category add_task_form_row">
                         <label for="">Categoriy<b>*</b></label>
                         <!--required  -->
                         <select id="task_category" class="add_task_input">
                             <option value="" hidden>Select task categoriy</option>
-                            <option value="">Technical Task</option>
-                            <option value="">User Story</option>
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
                         </select>
                     </div>
                     <div class="add_task_subtask add_task_form_row">

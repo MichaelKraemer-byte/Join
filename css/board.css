@@ -152,9 +152,7 @@
 }
 
 .board_task_category {
-    display: inline-block;
-    border: 1px solid #0038FF;
-    background-color: #0038FF;
+    display: inline-block;    
     color: white;
     font-size: 16px;
     line-height: 19.2px;
@@ -206,7 +204,7 @@
     padding: 30px;    
 }
 
-#close_pop_add_task {
+.close_pop_add_task {
     position: absolute;
     top: 40px;
     right: 40px;
