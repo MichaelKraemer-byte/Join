@@ -100,3 +100,16 @@ function loadColorIndex() {
 function navigateTo(url) {
   window.location.href = url;
 }
+
+
+function getInitials(contact) {
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+  let initials = [...contact['name'].matchAll(rgx)] || [];
+
+  initials = (
+  (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+  ).toUpperCase();
+
+  return initials;
+}

@@ -8,7 +8,6 @@ let deleteContactFunctionActive = false;
 let editContactFunctionActive = false;
 
 
-
 function displayGreyBackground() {
     document.getElementById('greyBackground').classList.remove('d-none');
     greyBackground.classList.remove('removeGreyBackgroundOpacity');
@@ -626,18 +625,5 @@ function slideInAndOutConfirmation(span) {
 function removeDeletedContact(contactName) {
     let underscoredName = contactName.replace(/\s/g, '_');
     document.getElementById(`${underscoredName}`).remove();
-}
-
-
-function getInitials(contact) {
-    let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
-
-    let initials = [...contact['name'].matchAll(rgx)] || [];
-
-    initials = (
-    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
-    ).toUpperCase();
-
-    return initials;
 }
 
