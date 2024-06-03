@@ -27,7 +27,7 @@ function includeHTML() {
     init();
   }
 
-
+  
   let baseUrl = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
   let data = [];
   let path = '/guestContacts';
@@ -38,12 +38,19 @@ function includeHTML() {
     email: 'maikemuster@gmail.com',
     password: '0123456789',
     color: '#FC71FF'
-}
-
+  }
+  getCurrentUserFromLocalStorage();
+  
   
 async function init() {
   await getData();
   initForCurrentPage();
+}
+
+
+function getCurrentUserFromLocalStorage() {
+  let data = localStorage.getItem('currentUser');
+  user = JSON.parse(data);
 }
 
 
@@ -67,6 +74,7 @@ async function getData() {
   responseAsJson = await response.json();
   data = Object.values(responseAsJson);
 }
+
 
 
 function openHeadNav(event) {
