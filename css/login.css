@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     box-sizing: border-box;
     min-height: 100vh;
+    gap: 48px;
 }
 
 .logo {

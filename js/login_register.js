@@ -39,10 +39,20 @@ async function login() {
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
         alert('Login succesfull');
+        setCurrentUser(data);
+        window.location.href = 'board.html';
         if (rememberMe) {
             setEmailToLocalstorage(email);
         } else { removeEmailFromLocalstorage() }
     } else { alert('Login failed!') }
+}
+
+function setCurrentUser(data){
+    user = {
+        name: data[indexOfEmail].name,
+        email: data[indexOfEmail].email,
+        color: data[indexOfEmail].color,
+    }
 }
 
 function checkEmailInDB(data, email) {
@@ -52,7 +62,7 @@ function checkEmailInDB(data, email) {
 
 function checkPasswortInDB(data, checkPassword) {
     if (indexOfEmail >= 0) {
-        if (data[indexOfEmail]['passwort'] == checkPassword) {
+        if (data[indexOfEmail]['password'] == checkPassword) {
             return true;
         }
     }
