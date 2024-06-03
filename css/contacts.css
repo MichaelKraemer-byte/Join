@@ -3,6 +3,10 @@
     height: 100%;
     position: relative;
     width: 100%;
+    padding: 96px 96px 0px 232px;
+    margin-bottom: 96px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .addContactButton{

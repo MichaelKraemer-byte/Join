@@ -38,7 +38,6 @@ async function login() {
     let indexOfEmail;
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
-        alert('Login succesfull');
         setCurrentUserInLocalstorage(data);
         window.location.href = './summary.html';
         if (rememberMe) {
@@ -47,7 +46,19 @@ async function login() {
     } else { alert('Login failed!') }
 }
 
-function setCurrentUserInLocalstorage(data){
+function guestLogin() {
+    let defaultUser = {
+        name: 'Maike Muster',
+        email: 'maikemuster@gmail.com',
+        password: '0123456789',
+        color: '#FC71FF',
+        initials: 'MM'
+    }
+    localStorage.setItem('currentUser', JSON.stringify(defaultUser));
+    window.location.href = './summary.html';
+}
+
+function setCurrentUserInLocalstorage(data) {
     let user = {
         name: data[indexOfEmail].name,
         email: data[indexOfEmail].email,
@@ -83,7 +94,7 @@ async function SetRememberData() {
     if (email !== null) {
         const data = await loadData('/users');
         const indexOfEmail = data.findIndex(element => element['email'] == email);
-        const password = data[indexOfEmail]['passwort'];
+        const password = data[indexOfEmail]['password'];
 
         document.getElementById('login-email').value = email;
         document.getElementById('login-password').value = password;
@@ -96,9 +107,10 @@ async function register() {
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const passwordCheck = document.getElementById('register-password-check').value;
+    const listOfUser = await loadData('/users');
 
     if (password == passwordCheck) {
-        postData('/users',
+        listOfUser.push(
             {
                 'name': name,
                 'email': email,
@@ -106,6 +118,7 @@ async function register() {
                 'color': randomContactColor(),
             }
         );
+        postData('/users', listOfUser);
         showLoginBox();
     } else {
         alert('Passwort stimmt nicht überein!');
@@ -179,7 +192,7 @@ function getInitials(contact) {
     let initials = [...contact['name'].matchAll(rgx)] || [];
 
     initials = (
-    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+        (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
     ).toUpperCase();
 
     return initials;
