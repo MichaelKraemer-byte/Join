@@ -16,7 +16,7 @@
     <script src="./js/add_task.js"></script>
 </head>
 
-<body onload="includeHTML()" onclick="closeNavOnOutsideClick(event)">
+<body onload="includeHTML() , initBoardTasks()">
 
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/navBar.html"></div>
@@ -24,10 +24,14 @@
         <div class="board_container" id="board_container">
 
             <div class="pop_add_task" id="pop_add_task">
-                <div class="show_add_task">
+                <div class="show_add_task" id="show_add_task">
                     <div id="add_task_form"></div>
                     <button id="close_pop_add_task" onclick="closeWindow()">X</button>
                 </div>
+            </div>
+
+            <div class="pop_add_task" id="pop_show_task">
+                <div class="show_task" id="show_task"></div>
             </div>
 
             <div class="board_header">
@@ -35,7 +39,7 @@
                     <h1>Board</h1>
                     <div class="task_navigation">
                         <input type="text">
-                        <button>Add task +</button>
+                        <button onclick="addTask()">Add task +</button>
                     </div>
                 </div>
 

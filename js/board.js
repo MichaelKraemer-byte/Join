@@ -1,18 +1,11 @@
 const BASE_URL = "https://tasks-6f30e-default-rtdb.europe-west1.firebasedatabase.app/";
+const usedIds = new Set();
+loadTasksFromServer();
 
 let todos = [];
 let currentElement;
 let token = [];
 
-
-async function deleteTaskFromDb(arr, i) {
-    console.log(arr);
-    console.log(i);
-   let response = await fetch(BASE_URL + path + ".json", {
-       method: "DELETE",        
-   });
-   return responseAsJson = await response.json(); 
-}
            
 
 async function saveTasksToServer() {
@@ -32,22 +25,23 @@ async function saveTasksToServer() {
         console.error('Failed to save tasks to server:', error);
     }
 }
+
     
 
 async function loadTasksFromServer() {
     try {
         const response = await fetch(`${BASE_URL}/tasks.json`);
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Netzwerkantwort war nicht ok.');
         }
-        const data = await response.json();        
-        if (data) {
-            todos = data;
-            saveTaskToLocalStorage();
-        }
-        console.log('Tasks loaded from server');
+        const data = await response.json();
+        todos = Object.keys(data).map(id => ({
+            id,
+            ...data[id]
+        }));
+
     } catch (error) {
-        console.error('Failed to load tasks from server:', error);
+        console.error('Fehler beim Abrufen der Daten:', error);
     }
 }
 
@@ -55,7 +49,6 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    console.log(todos)
   
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');    
@@ -70,7 +63,8 @@ async function initBoardTasks() {
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
-    generateToDo(done, doneId); 
+    generateToDo(done, doneId);   
+
 }
 
 
@@ -82,16 +76,16 @@ async function generateToDo(arr, categorie_id) {
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
         categorie_id.innerHTML += /*html*/`
-        <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})">
+        <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})" onclick="showTask()">
         <div class="board_task_category">${element['category']}</div>
         <div class="board_task_title">${element['title']}</div>
 
-        <div>${i}</div>
+        <div>${element['id']}</div>
         <div></div>
 
         <div class="board_task_toDo">${element['description']}</div>
         <div class="board_task_footer">
-            <button onclick="deleteTaskFromLocalStorage(${i})">delete</button>
+            <button onclick="deleteTaskFromLocalStorage(${element['id']})">delete</button>
         </div>
         <div class="board_task_footer_status">
                 <img src="${element['priority']}">
@@ -101,6 +95,18 @@ async function generateToDo(arr, categorie_id) {
         
     } 
 }
+
+
+
+function generateUniqueId() {
+    let id;
+    do {
+        id = Math.floor(Math.random() * 1000000).toString();
+    } while (usedIds.has(id));
+    usedIds.add(id);
+    return id;
+}
+
 
 
 function addTaskToTasks() {
@@ -113,7 +119,7 @@ function addTaskToTasks() {
     let task_category = 'to_do';
     let task_status = document.getElementById('task_category').value;
     let task_subtasks = document.getElementById('task_subtasks').value;
-    let id = todos.length;
+    let id = generateUniqueId();
     
     let task = {
         'category': task_category,
@@ -129,7 +135,7 @@ function addTaskToTasks() {
 
     todos.push(task)
     saveTasksToServer();
-    initAddTask();
+    initAddTask();    
 }
 
 
@@ -150,8 +156,9 @@ function loadTaskFromLocalStorage() {
 
 
 
-function deleteTaskFromLocalStorage(i) {
-    todos.splice(i, 1);
+function deleteTaskFromLocalStorage(id) {
+    let contact = todos.find(obj => obj['id'] == id);
+    todos.splice(contact, 1);
     saveTasksToServer();
     initBoardTasks();
     initAddTask();
@@ -159,8 +166,8 @@ function deleteTaskFromLocalStorage(i) {
 
 
 
-function startDragging(i) {
-    currentElement = i;
+function startDragging(id) {
+    currentElement = id;
 }
 
 
@@ -172,9 +179,10 @@ function allowDrop(ev) {
 
 
 async function moveTo(category) {
-    todos[currentElement]['category'] = category;
+    let contact = todos.find(obj => obj['id'] == currentElement);
+    contact['category'] = category;
     saveTasksToServer();
-    initBoardTasks();    
+    initBoardTasks();   
 }
 
 
@@ -187,15 +195,46 @@ function highlight(id) {
 
 function addTask() {
     let idAddTask = document.getElementById('pop_add_task');
-    idAddTask.style.visibility = 'initial';  
+    idAddTask.style.visibility = 'initial'; 
+    slideIn(); 
     initAddTask();
 }
 
 
-
-function closeWindow() {
-    let idAddTask = document.getElementById('pop_add_task');
-    idAddTask.style.visibility = 'hidden';
+function slideOut() {
+    let idAddTask = document.getElementById('show_add_task');    
+    idAddTask.classList.add('slideOut');
+    idAddTask.classList.remove('slideIn'); 
 }
 
+
+
+function slideIn() {
+    let idAddTask = document.getElementById('show_add_task');
+    idAddTask.classList.add('slideIn');
+    idAddTask.classList.remove('slideOut');
+}
+
+
+
+function closeWindow() {    
+    slideOut();
+    setTimeout(() => {
+        hiddenPopWindow()
+    }, 300);    
+}
+
+
+function hiddenPopWindow() {
+    let idPopTask = document.getElementById('pop_add_task');    
+    idPopTask.style.visibility = 'hidden';
+}
+
+
+
+function showTask() {
+    let idAddTask = document.getElementById('pop_show_task');
+    idAddTask.style.visibility = 'initial'; 
+    
+}
 

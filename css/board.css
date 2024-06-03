@@ -194,17 +194,16 @@
     transform: translate(-50%, -50%);
     background-color: rgba(23, 31, 52, 0.3);
     visibility: hidden;
+    z-index: 999;    
 }
 
 .show_add_task {
     background-color: white;
-    height: 80%;
-    width: 80%;
+    height: 85%;
+    width: 80%;    
     position: fixed;
     border-radius: 20px;
-    padding: 30px;
-    margin-left: 200px;
-    margin-top: 100px;
+    padding: 30px;    
 }
 
 #close_pop_add_task {
@@ -218,4 +217,39 @@
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.show_task {
+    background-color: white;
+    height: 85%;
+    width: 30%;    
+    position: fixed;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.slideIn {
+    animation: slideIn 0.4s ease-in-out forwards;
+}
+
+.slideOut {
+    animation: slideOut 0.4s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 8%;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        right: 8%;
+    }
+    to {
+        right: -100%;
+    }
 }
