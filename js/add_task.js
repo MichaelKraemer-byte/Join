@@ -78,8 +78,7 @@ function generateAddTasks() {
                 <div class="add_task_width50">
                     <div class="add_task_title add_task_form_row">
                         <label for="">Title<b>*</b></label>
-                        <!-- required -->
-                        <input id="task_title" class="add_task_input" type="text" placeholder="Enter a title">
+                        <input id="task_title" class="add_task_input" required type="text" placeholder="Enter a title">
                     </div>
                     <div class="add_task_descripion add_task_form_row">
                         <label for="">Description</label>
@@ -106,8 +105,7 @@ function generateAddTasks() {
                 <div class="add_task_width50">
                     <div class="add_task_date add_task_form_row">
                         <label for="">Due date<b>*</b></label>
-                        <!--  required-->
-                        <input id="task_date" class="add_task_input" type="date">
+                        <input id="task_date" class="add_task_input" type="date" required>
                     </div>
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
@@ -132,8 +130,7 @@ function generateAddTasks() {
                     
                     <div class="add_task_category add_task_form_row">
                         <label for="">Categoriy<b>*</b></label>
-                        <!--required  -->
-                        <select id="task_category" class="add_task_input">
+                        <select id="task_category" class="add_task_input" required>
                             <option value="" hidden>Select task categoriy</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
@@ -158,7 +155,6 @@ function generateAddTasks() {
             </div>
     `;
 
-
 }
 
 
@@ -181,7 +177,6 @@ function searchNameFromGuestList() {
         }
     }
 }
-
 
 
 function werteAbrufen() {

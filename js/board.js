@@ -82,14 +82,10 @@ async function generateToDo(arr, categorie_id) {
         categorie_id.innerHTML += /*html*/`
         <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})" onclick="showTask(${element['id']})">
             <div class="board_task_category" id="board_task_category${element['id']}">${element['status']}</div>
-            <div class="board_task_title">${element['title']}</div>
-            
-            <div>${element['id']}</div>
-            <div></div>
-            
-            <div class="board_task_toDo">${element['description']}</div>
-            
+            <div class="board_task_title">${element['title']}</div>            
+            <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">
+                <div>name</div>
                 <img src="${element['priority']}">
             </div>
         </div>
@@ -175,7 +171,6 @@ function deleteTaskFromLocalStorage(id) {
     saveTaskToLocalStorage();
     saveTasksToServer();
     initBoardTasks();
-    // initAddTask();
 }
 
 
