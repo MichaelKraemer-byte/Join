@@ -1,9 +1,9 @@
 const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 let show = true;
-let guestArray = [];
-let guesteArr = [];
+let guesteArray = [];
+  
 
-
+// loadTaskFromLocalStorage();
 
 async function loadGuestFromServer() {
     try {
@@ -12,7 +12,7 @@ async function loadGuestFromServer() {
             throw new Error('Netzwerkantwort war nicht ok.');
         }
         const data = await response.json();
-        guesteArr = Object.keys(data).map(id => ({
+        guesteArray = Object.keys(data).map(id => ({
             id,
             ...data[id]
         }));
@@ -28,21 +28,23 @@ async function initAddTask() {
     await loadTasksFromServer();
     generateAddTasks();
     generateCheckBox();
+
+    document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            werteAbrufen();
+        });
+    });
 }
 
 
 function showCheckboxes() {
     let checkboxes = document.getElementById("checkBoxes");
-    let add_task_footer = document.getElementById("add_task_footer");
-
     if (show) {
         checkboxes.style.display = "block";
-        add_task_footer.style.visibility = "hidden";
 
         show = false;
     } else {
         checkboxes.style.display = "none";
-        add_task_footer.style.visibility = "initial";
         show = true;
     }
 }
@@ -53,15 +55,15 @@ function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
 
     id.innerHTML = '';
-    for (let i = 0; i < guesteArr.length; i++) {
-        const element = guesteArr[i];
+    for (let i = 0; i < guesteArray.length; i++) {
+        const element = guesteArray[i];
         id.innerHTML += /*html*/`        
-             <label for="first">
-                 <option value="${element.name}">${element.name}</option>
-                <input type="checkbox" id="first" />
-             </label>
+            <label>
+            <p>${element.name}<p>
+            <input type="checkbox" name="optionen" value="${element.name}"/>
+            </label>
         `;
-    }
+    }    
 }
 
 
@@ -76,8 +78,7 @@ function generateAddTasks() {
                 <div class="add_task_width50">
                     <div class="add_task_title add_task_form_row">
                         <label for="">Title<b>*</b></label>
-                        <!-- required -->
-                        <input id="task_title" class="add_task_input" type="text" placeholder="Enter a title">
+                        <input id="task_title" class="add_task_input" required type="text" placeholder="Enter a title">
                     </div>
                     <div class="add_task_descripion add_task_form_row">
                         <label for="">Description</label>
@@ -86,18 +87,16 @@ function generateAddTasks() {
                     </div>
 
                     <div class="add_task_assignet add_task_form_row">
-                        <label for="" id="assignet_to">Assignet to</label>
+                        <label id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
-
-                        <!-- select in Script -->
-                            <select class="add_task_input" id="task_assignet">
-                                <option value="" hidden>Select options</option>
-                            </select>
-                            <div class="overSelect"></div>
+                            <img src="./assets/img/arrow_drop_down.svg" alt="">
+                            <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
+                        <form action="">
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
-                        </div>                       
+                        </div>                                               
+                        </form>                      
                     </div>
                 </div>
 
@@ -106,23 +105,22 @@ function generateAddTasks() {
                 <div class="add_task_width50">
                     <div class="add_task_date add_task_form_row">
                         <label for="">Due date<b>*</b></label>
-                        <!--  required-->
-                        <input id="task_date" class="add_task_input" type="date">
+                        <input id="task_date" class="add_task_input" type="date" required>
                     </div>
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
-                            <button class="add_task_button_urgent add_task_hover_button">Urgent
+                            <button class="add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
                                 </div>
                             </button>
-                            <button class="add_task_button_medium add_task_button_urgent add_task_hover_button">Medium
+                            <button class="add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
                                 </div>
                             </button>
-                            <button class="add_task_button_low add_task_button_urgent add_task_hover_button">Low
+                            <button class="add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
@@ -132,16 +130,16 @@ function generateAddTasks() {
                     
                     <div class="add_task_category add_task_form_row">
                         <label for="">Categoriy<b>*</b></label>
-                        <!--required  -->
-                        <select id="task_category" class="add_task_input">
+                        <select id="task_category" class="add_task_input" required>
                             <option value="" hidden>Select task categoriy</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
                         </select>
                     </div>
                     <div class="add_task_subtask add_task_form_row">
-                        <label for="">Subtasks</label>
-                        <select id="task_subtasks" class="add_task_input"></select>
+                        <label>Subtasks</label>
+                        <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                        <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
                     </div>
                 </div>
 
@@ -157,5 +155,59 @@ function generateAddTasks() {
             </div>
     `;
 
+}
 
+
+function searchNameFromGuestList() {
+    let idInput = document.getElementById('task_assignet_input').value;
+    idInput = idInput.toLowerCase();
+
+    let id = document.getElementById('check_box_user_name');
+
+    id.innerHTML = '';
+    for (let i = 0; i < guesteArray.length; i++) {
+        const element = guesteArray[i];
+        if (element.name.toLowerCase().includes(idInput)){
+            id.innerHTML += /*html*/`        
+                <label>
+                <p>${element.name}<p>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
+                </label>
+            `;
+        }
+    }
+}
+
+
+function werteAbrufen() {
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
+    let checkedValues = [];  
+    checkboxes.forEach((checkbox) => {
+        checkedValues.push(checkbox.value);
+    });
+}
+
+
+function addNewSubTask() {
+    
+}
+
+
+function getPriority(prio) {
+    let imgSrc;
+    let name;
+    switch (prio) {
+        case 'Urgent':
+            imgSrc = './assets/img/vector_red.svg';
+            name = prio;
+            break;
+        case 'Medium':
+            imgSrc = './assets/img/vector_strich.svg';
+            name = prio;
+            break;
+        case 'Low':
+            imgSrc = './assets/img/vector_strich.svg"';
+            name = prio;
+            break;
+    }
 }

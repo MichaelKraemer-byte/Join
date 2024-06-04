@@ -5,6 +5,7 @@ let todos = [];
 let currentElement;
 let token = [];
 
+loadTaskFromLocalStorage();
 
 async function saveTasksToServer() {
     try {
@@ -43,9 +44,17 @@ async function loadTasksFromServer() {
 }
 
 
+async function deleteTasksFromServer(path="") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
+
 async function initBoardTasks() {
     await loadTasksFromServer();
-
+    loadTaskFromLocalStorage();
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -73,14 +82,10 @@ async function generateToDo(arr, categorie_id) {
         categorie_id.innerHTML += /*html*/`
         <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})" onclick="showTask(${element['id']})">
             <div class="board_task_category" id="board_task_category${element['id']}">${element['status']}</div>
-            <div class="board_task_title">${element['title']}</div>
-            
-            <div>${element['id']}</div>
-            <div></div>
-            
-            <div class="board_task_toDo">${element['description']}</div>
-            
+            <div class="board_task_title">${element['title']}</div>            
+            <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">
+                <div>name</div>
                 <img src="${element['priority']}">
             </div>
         </div>
@@ -108,12 +113,16 @@ function generateUniqueId() {
 }
 
 
-function addTaskToTasks() {
-
-    let task_title = document.getElementById('task_title').value;
+function addTaskToTasks() {    
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    
+    let task_assignet = [];  
+    checkboxes.forEach((checkbox) => {
+        task_assignet.push(checkbox.value);
+    });
+    
     let task_description = document.getElementById('task_description').value;
-    let task_assignet = 'name';//[]
-    // let task_assignet = document.getElementById('task_assignet').value;
+    let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
     let task_status = document.getElementById('task_category').value;
@@ -126,7 +135,7 @@ function addTaskToTasks() {
         'description': task_description,
         'id': id,
         'name': task_assignet,
-        'priority': './assets/img/vector_check.svg',
+        'priority': './assets/img/vector_red.svg',
         'status': task_status,
         'subtask': task_subtasks,
         'title': task_title,
@@ -134,19 +143,21 @@ function addTaskToTasks() {
     };
 
     todos.push(task)
+    saveTaskToLocalStorage();
     saveTasksToServer();
     initAddTask();
+    initBoardTasks();
 }
 
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('boardTasks', todosAsText)
+    localStorage.setItem('tasksFromLocal', todosAsText)
 }
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('boardTasks');
+    let todosAsText = localStorage.getItem('tasksFromLocal');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -154,11 +165,12 @@ function loadTaskFromLocalStorage() {
 
 
 function deleteTaskFromLocalStorage(id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let contact = todos.find(obj => obj['id'] == id); 
+    
     todos.splice(contact, 1);
+    saveTaskToLocalStorage();
     saveTasksToServer();
     initBoardTasks();
-    initAddTask();
 }
 
 
@@ -175,9 +187,10 @@ function allowDrop(ev) {
 async function moveTo(category) {
     let contact = todos.find(obj => obj['id'] == currentElement);
     contact['category'] = category;
+    saveTaskToLocalStorage();
     saveTasksToServer();
     initBoardTasks();
-    
+
 }
 
 
@@ -237,26 +250,39 @@ function closeShowTask() {
 function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-
+    
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
-        <button class="close_pop_add_task" onclick="closeShowTask()">X</button>   
-        <div>${contact.status}</div> 
-        <div>${contact.description}</div>    
-        <div>${contact.priority}</div>    
+        <div class="show_task_header">
+            <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
+            <button class="show_task_close_button" onclick="closeShowTask()"><img src="./assets/img/close.svg" alt=""></button>
+        </div>   
+        <div class="show_task_title">${contact.title}</div>    
+        <div class="show_task_description">${contact.description}</div> 
+        <div class="show_task_date">
+            <span>Due date:</span>
+            <div>${contact.date}</div>    
+        </div>
+        <div class="show_task_priory show_task_date">
+            <span>Priority:</span>
+            <div class="show_task_priority_image">
+                <div></div>    
+                <img src= "${contact.priority}">
+            </div>
+        </div>   
         <div>${contact.name}</div>    
         <div>${contact.subtask}</div>    
         <div class="board_task_footer">
-            <button onclick="deleteTaskFromLocalStorage(${contact.id})">delete</button>
+            <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
         </div>    
     `;
 
-    // let borderCategory = document.getElementById(`board_task_category${element['id']}`);
-    // if (arr[i]['status'] == 'Technical Task') {
-    //     borderCategory.style.backgroundColor = '#1FD7C1';
-    // } else {
-    //     borderCategory.style.backgroundColor = '#0038FF';
-    // }
+    let borderCategory = document.getElementById(`show_task_category${id}`);
+    if (contact['status'] == 'Technical Task') {
+        borderCategory.style.backgroundColor = '#1FD7C1';
+    } else {
+        borderCategory.style.backgroundColor = '#0038FF';
+    }
 
 
 }
