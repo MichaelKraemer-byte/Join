@@ -2,6 +2,8 @@ const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedat
 let show = true;
 let guestArray = [];
 let guesteArr = [];
+  
+
 
 
 
@@ -28,6 +30,12 @@ async function initAddTask() {
     await loadTasksFromServer();
     generateAddTasks();
     generateCheckBox();
+
+    document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            werteAbrufen();
+        });
+    });
 }
 
 
@@ -52,13 +60,12 @@ function generateCheckBox() {
     for (let i = 0; i < guesteArr.length; i++) {
         const element = guesteArr[i];
         id.innerHTML += /*html*/`        
-             <label for="first">
-                <option value="${element.name}">${element.name}</option>
-                <input type="checkbox" id="first" />
-             </label>
+            <label>
+            <p>${element.name}<p>
+            <input type="checkbox" name="optionen" value="${element.name}"/>
+            </label>
         `;
     }
-
 }
 
 
@@ -83,24 +90,16 @@ function generateAddTasks() {
                     </div>
 
                     <div class="add_task_assignet add_task_form_row">
-                        <label for="" id="assignet_to">Assignet to</label>
+                        <label id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
-
-                        <!-- select in Script -->
-                            <select class="add_task_input" id="task_assignet">
-                                <option value="" hidden>Select options</option>
-                            </select>
-                            <div class="overSelect"></div>
+                            <img src="./assets/img/arrow_drop_down.svg" alt="">
+                            <input class="add_task_input" id="task_assignet" placeholder="Select options"/>
                         </div>
+                        <form action="">
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
-                        </div>                       
-                        <!-- <label for="name-select">Wähle einen Namen:</label>
-                        <select id="name-select">
-                        <option value="" hidden>Select options</option>
-
-                        </select>
-                        <div id="checkbox-list"></div> -->
+                        </div>                                               
+                        </form>                      
                     </div>
                 </div>
 
@@ -163,6 +162,17 @@ function generateAddTasks() {
 
 }
 
+
+function werteAbrufen() {
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    
+    let checkedValues = [];  
+    checkboxes.forEach((checkbox) => {
+        checkedValues.push(checkbox.value);
+    });
+}
+
+
 function getPriority(prio) {
     let imgSrc;
     let name;
@@ -179,5 +189,5 @@ function getPriority(prio) {
             imgSrc = './assets/img/vector_strich.svg"';
             name = prio;
             break;
-    }   
+    }
 }

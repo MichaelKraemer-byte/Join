@@ -45,7 +45,7 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    console.log(todos);
+    // console.log(todos);
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -108,12 +108,16 @@ function generateUniqueId() {
 }
 
 
-function addTaskToTasks() {
-    let task_title = document.getElementById('task_title').value;
+function addTaskToTasks() {    
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    
+    let task_assignet = [];  
+    checkboxes.forEach((checkbox) => {
+        task_assignet.push(checkbox.value);
+    });
+    
     let task_description = document.getElementById('task_description').value;
-    let task_assignet = 'name';//[]
-    // let task_assignet = document.getElementById('option_').value;
-    // console.log(task_assignet);
+    let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
     let task_status = document.getElementById('task_category').value;
@@ -240,7 +244,7 @@ function closeShowTask() {
 function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-    console.log(contact.priority);
+    
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
         <div class="show_task_header">

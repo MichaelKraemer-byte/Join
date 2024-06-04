@@ -41,6 +41,7 @@ b {
 .add_task_input {
     font-size: 20px;
     height: 48px;
+    width: 100%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 6px;
@@ -209,6 +210,12 @@ b {
 
 .selectBox {
     position: relative;
+}
+
+.selectBox img {
+    position: absolute;
+    top: 25px;
+    right: 5px;
 }
 
 .selectBox select {
