@@ -188,3 +188,6 @@
     color: white;
 }
 
+.greetingLoginContainer{
+    display: none;
+}

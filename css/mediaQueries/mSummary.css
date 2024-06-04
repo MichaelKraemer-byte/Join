@@ -54,6 +54,10 @@
     .greetingLoginContainer .greetName {
         font-size: clamp(36px, 8vw, 61px);
     }
+
+    .greetingLoginContainer {
+        display: flex;
+    }
 }
 
 @media screen and (min-width: 920px) and (max-width: 1112px){
@@ -91,6 +95,7 @@
     }
 }
 
+
 @keyframes greeting {
     from {
         z-index: 1;
@@ -99,5 +104,14 @@
     to {
         z-index: -1;
         opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

@@ -191,6 +191,7 @@ function loginGreeting() {
       setTimeout( () => {
         loginGrettingScreen.style.animation = 'greeting 0.8s ease-in-out forwards'}, 1200);
       setTimeout( () => {
+        summary.style.animation = 'fadeIn 0.8s ease-in-out forwards';
         summary.classList.remove('d-none')}, 1600);
   } else if (!document.referrer.includes('index.html')) {
     summary.classList.remove('d-none');
