@@ -35,10 +35,10 @@
                             <span class="toggle-password"><img src="./assets/img/mail.svg" alt="lock"></span>
                         </div>
                         <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon()" id="login-password"
+                            <input type="password" oninput="togglePasswordIcon('login')" id="login-password"
                                 placeholder="Password" required>
-                            <span class="toggle-password" id="password-icon-container"><img src="./assets/img/lock.svg"
-                                    alt="lock" id="password-icon"></span>
+                            <span class="toggle-password" id="login-password-icon-container"><img src="./assets/img/lock.svg"
+                                    alt="lock" id="login-password-icon"></span>
                         </div>
                     </div>
                     <div class="checkbox m-left-48">
@@ -65,8 +65,16 @@
                     <div class="input-area">
                         <input type="text" required id="register-name" placeholder="Name">
                         <input type="email" required id="register-email" placeholder="Email">
-                        <input type="password" required id="register-password" placeholder="Password">
-                        <input type="password" required id="register-password-check" placeholder="Confirm Password">
+                        <div class="password-container">
+                            <input type="password" oninput="togglePasswordIcon('register1')" required id="register1-password" placeholder="Password">
+                            <span class="toggle-password" id="register1-password-icon-container"><img src="./assets/img/lock.svg"
+                                    alt="lock" id="register1-password-icon"></span>
+                        </div>
+                        <div class="password-container">
+                            <input type="password" oninput="togglePasswordIcon('register2')" required id="register2-password" placeholder="Confirm Password">
+                            <span class="toggle-password" id="register2-password-icon-container"><img src="./assets/img/lock.svg"
+                                    alt="lock" id="register2-password-icon"></span>
+                        </div>
                     </div>
                     <div class="checkbox d-center">
                         <input type="checkbox" required name="PrivacyPolicy">

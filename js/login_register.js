@@ -11,6 +11,9 @@ function showLoginBox() {
     document.getElementById('login-section').classList.replace('d-none', 'd-center');
     document.getElementById('register-section').classList.replace('d-center', 'd-none');
     document.getElementById('signup-button-area').classList.replace('d-none', 'signUp');
+    document.getElementById('login-section').classList.remove('fade-in');
+    document.getElementById('register-section').classList.remove('fade-in');
+    document.getElementById('signup-button-area').classList.remove('fade-in');
 }
 
 async function loadData(path = '') {
@@ -105,8 +108,8 @@ async function SetRememberData() {
 async function register() {
     const name = document.getElementById('register-name').value
     const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-    const passwordCheck = document.getElementById('register-password-check').value;
+    const password = document.getElementById('register1-password').value;
+    const passwordCheck = document.getElementById('register2-password').value;
     const listOfUser = await loadData('/users');
 
     if (password == passwordCheck) {
@@ -125,9 +128,9 @@ async function register() {
     }
 }
 
-function togglePasswordVisibility() {
-    const passwordField = document.getElementById("login-password");
-    const toggleIcon = document.getElementById("password-icon");
+function togglePasswordVisibility(id) {
+    const passwordField = document.getElementById(id+'-password');
+    const toggleIcon = document.getElementById(id+'-password-icon');
     if (passwordField.type === "password") {
         passwordField.type = "text";
         toggleIcon.src = "/assets/img/password-show.png"; // Symbol zum Verbergen
@@ -137,31 +140,30 @@ function togglePasswordVisibility() {
     }
 }
 
-function togglePasswordIcon() {
-    const passwordField = document.getElementById('login-password')
-
+function togglePasswordIcon(id) {
+    const passwordField = document.getElementById(id+'-password')
     if (passwordField.value.length == 0) {
-        setPasswordIconToLock();
+        setPasswordIconToLock(id);
     } else {
-        setPasswordIconToEye();
+        setPasswordIconToEye(id);
     }
 }
 
-function setPasswordIconToLock() {
-    const toggleContainer = document.getElementById('password-icon-container');
-    const toggleIcon = document.getElementById("password-icon");
+function setPasswordIconToLock(id) {
+    const toggleContainer = document.getElementById(id+'-password-icon-container');
+    const toggleIcon = document.getElementById(id+'-password-icon');
     toggleIcon.src = '/assets/img/lock.svg'
     toggleIcon.style.cursor = 'default';
     toggleContainer.onclick = null;
     toggleContainer.removeAttribute('onclick');
 }
 
-function setPasswordIconToEye() {
-    const toggleContainer = document.getElementById('password-icon-container');
-    const toggleIcon = document.getElementById("password-icon");
-    const passwordField = document.getElementById('login-password');
+function setPasswordIconToEye(id) {
+    const toggleContainer = document.getElementById(id+'-password-icon-container');
+    const toggleIcon = document.getElementById(id+'-password-icon');
+    const passwordField = document.getElementById(id+'-password');
     toggleIcon.style.cursor = 'pointer'
-    toggleContainer.setAttribute('onclick', 'togglePasswordVisibility()');
+    toggleContainer.setAttribute('onclick', 'togglePasswordVisibility("'+id+'")');
     if (passwordField.type === 'password') {
         toggleIcon.src = "/assets/img/password-hide.png";
     } else {
