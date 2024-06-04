@@ -205,6 +205,48 @@ body {
     background-image: url('/assets/img/mail.svg');
 }
 
+.signup-succesfully-infobutton-container{
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-color: #0000003d;
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    animation: opacity 0.5s;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.signup-succesfully-infobutton {
+    background-color: #2a3648;
+    color: white;
+    border-radius: 20px;
+    padding: 0 25px;
+    width: max-content;
+    position: absolute;
+    bottom: -50px;
+    animation: moveUp 0.3s forwards;
+}
+
+@keyframes moveUp {
+    from {
+        bottom: -50px;
+    }
+    to {
+        bottom: 50%;
+    }
+}
+
 footer {
     display: flex;
     justify-content: center;
