@@ -47,7 +47,7 @@ async function login() {
         if (rememberMe) {
             setEmailToLocalstorage(email);
         } else { removeEmailFromLocalstorage() }
-    } else { alert('Login failed!') }
+    } else { wrongPassword('show') }
 }
 
 function guestLogin() {
@@ -114,9 +114,8 @@ async function register() {
     const password = document.getElementById('register1-password').value;
     const passwordCheck = document.getElementById('register2-password').value;
     const listOfUser = await loadData('/users');
-    const checkedEmail = checkEmailInDB(listOfUser, email);
 
-    if (password == passwordCheck && !checkedEmail) {
+    if (password == passwordCheck && !checkEmailInDB(listOfUser, email)) {
         listOfUser.push(
             {
                 'name': name,
@@ -130,7 +129,7 @@ async function register() {
         setTimeout(() => { showLoginBox() }, 2000);
         setTimeout(() => { signUpSuccesfullyInfoBox('hide') }, 2000);
     } else {
-        alert('Passwort stimmt nicht überein!');
+        noMatchingPassword('show');
     }
 }
 
@@ -186,6 +185,30 @@ async function deleteUser(username) {
         };
     }
     postData('/users', users);
+}
+
+function wrongPassword(val) {
+    const wrongPassword = document.getElementById('wrong-password');
+    const inputField = document.getElementById('login-password');
+    if (val == 'show') {
+        wrongPassword.style.display = 'block';
+        inputField.style.borderColor = 'red';
+    } else {
+        wrongPassword.style.display = 'none';
+        inputField.style.borderColor = 'black';
+    }
+}
+
+function noMatchingPassword(val) {
+    const wrongPassword = document.getElementById('match-password');
+    const inputField = document.getElementById('register2-password');
+    if (val == 'show') {
+        wrongPassword.style.display = 'block';
+        inputField.style.borderColor = 'red';
+    } else {
+        wrongPassword.style.display = 'none';
+        inputField.style.borderColor = 'black';
+    }
 }
 
 function signUpSuccesfullyInfoBox(val) {

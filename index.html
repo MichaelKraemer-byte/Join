@@ -39,11 +39,14 @@
                             <input type="email" id="login-email" placeholder="Email" required>
                             <span class="toggle-password"><img src="./assets/img/mail.svg" alt="lock"></span>
                         </div>
-                        <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon('login')" id="login-password"
-                                placeholder="Password" required>
-                            <span class="toggle-password" id="login-password-icon-container"><img
-                                    src="./assets/img/lock.svg" alt="lock" id="login-password-icon"></span>
+                        <div class="password-box">
+                            <div class="password-container">
+                                <input type="password" oninput="togglePasswordIcon('login')" id="login-password"
+                                    placeholder="Password" required>
+                                <span class="toggle-password" id="login-password-icon-container"><img
+                                        src="./assets/img/lock.svg" alt="lock" id="login-password-icon"></span>
+                            </div>
+                            <p class="wrong-password" id="wrong-password">Wrong password Ups! Try again.</p>
                         </div>
                     </div>
                     <div class="checkbox m-left-48">
@@ -76,11 +79,14 @@
                             <span class="toggle-password" id="register1-password-icon-container"><img
                                     src="./assets/img/lock.svg" alt="lock" id="register1-password-icon"></span>
                         </div>
-                        <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon('register2')" required
-                                id="register2-password" placeholder="Confirm Password">
-                            <span class="toggle-password" id="register2-password-icon-container"><img
-                                    src="./assets/img/lock.svg" alt="lock" id="register2-password-icon"></span>
+                        <div class="password-box">
+                            <div class="password-container">
+                                <input type="password" oninput="togglePasswordIcon('register2')" required
+                                    id="register2-password" placeholder="Confirm Password">
+                                <span class="toggle-password" id="register2-password-icon-container"><img
+                                        src="./assets/img/lock.svg" alt="lock" id="register2-password-icon"></span>
+                            </div>
+                            <p class="wrong-password" id="match-password">Ups! your password don't match</p>
                         </div>
                     </div>
                     <div class="checkbox d-center">

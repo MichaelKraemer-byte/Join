@@ -247,6 +247,12 @@ body {
     }
 }
 
+.wrong-password {
+    display: none;
+    color: red;
+    font-size: 12px;
+}
+
 footer {
     display: flex;
     justify-content: center;
