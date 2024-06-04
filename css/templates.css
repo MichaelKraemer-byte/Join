@@ -3,7 +3,7 @@
 /* CSS TOOLS */
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .d-flex {
@@ -170,7 +170,7 @@ body {
     justify-content: end;
 }
 
-.navLink {
+.navBarLink {
     background-color: transparent;
     border: none;
     color: rgb(168,168,168);    
@@ -182,7 +182,7 @@ body {
     text-decoration: none;
 }
 
-.navLink:hover {
+.navBarLink:hover {
     cursor: pointer;
 }
 
@@ -404,4 +404,21 @@ body {
 .headerNavLink:hover {
     cursor: pointer;
     background-color: #2A3D59;
+}
+
+.navBarFocusAnker{
+    background-color: transparent;
+    border: none;
+    color: white;    
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 16px;
+    padding: 8px 0px 8px 0px;
+    text-decoration: none;
+    background-color: #091931;
+}
+
+.navBarImgFocus{
+    filter: brightness(200%);
 }

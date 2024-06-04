@@ -75,13 +75,17 @@ function setInitialsInHeader(){
 function initForCurrentPage(){
   if (window.location.href.includes('contacts.html')) {
     setAllContactNames();
+    focusNavAnker();
     renderContactList();
     loadColorIndex();
   } else if (window.location.href.includes('summary.html')) {
+    focusNavAnker();
     updateGreeting();
   }  else if(window.location.href.includes('add_task.html')){
+    focusNavAnker();
     initAddTask(); 
   } else if(window.location.href.includes('board.html')) {
+    focusNavAnker();
     initBoardTasks();
   }
 }
@@ -143,4 +147,25 @@ function getInitials(contact) {
 
 function resetCurrentUser() {
   localStorage.setItem('currentUser', "");
+}
+
+
+function focusNavAnker(){
+  if (window.location.href.includes('summary.html')){
+    document.getElementById('summaryNav').classList.add('navBarFocusAnker');
+    document.getElementById('navBarSummaryImg').classList.add('navBarImgFocus');
+    document.getElementById('summaryNav').classList.remove('mainNavLinkTransition');
+  } else if (window.location.href.includes('contacts.html')) {
+    document.getElementById('contactsNav').classList.add('navBarFocusAnker');
+    document.getElementById('navBarContactsImg').classList.add('navBarImgFocus');    
+    document.getElementById('contactsNav').classList.remove('mainNavLinkTransition');
+  } else if (window.location.href.includes('board.html')) {
+    document.getElementById('boardNav').classList.add('navBarFocusAnker');
+    document.getElementById('navBarBoardImg').classList.add('navBarImgFocus');   
+    document.getElementById('boardNav').classList.remove('mainNavLinkTransition');    
+  } else if (window.location.href.includes('add_task.html')) {
+    document.getElementById('addTaskNav').classList.add('navBarFocusAnker');
+    document.getElementById('navBarAddTaskImg').classList.add('navBarImgFocus');
+    document.getElementById('addTaskNav').classList.remove('mainNavLinkTransition');
+  } 
 }
