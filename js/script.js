@@ -50,8 +50,8 @@ async function init() {
 }
 
 function isUserOrNot() {
-  let localstorage = localStorage.getItem('currentUser');
-  if (localstorage == null) {
+  let sessionstorage = sessionStorage.getItem('currentUser');
+  if (sessionstorage == null) {
       document.getElementById('navContainer').style.display = 'none';
       document.getElementById('userCircle').style.display = 'none';
       document.getElementById('navBarImg').setAttribute('onclick','navigateTo("index.html")')
