@@ -74,7 +74,9 @@ function setCurrentUserInLocalstorage(data) {
 
 function checkEmailInDB(data, email) {
     indexOfEmail = data.findIndex(element => element['email'] == email);
-    return true
+    if (indexOfEmail >= 0) {
+        return true
+    }
 }
 
 function checkPasswortInDB(data, checkPassword) {
@@ -112,8 +114,9 @@ async function register() {
     const password = document.getElementById('register1-password').value;
     const passwordCheck = document.getElementById('register2-password').value;
     const listOfUser = await loadData('/users');
+    const checkedEmail = checkEmailInDB(listOfUser, email);
 
-    if (password == passwordCheck) {
+    if (password == passwordCheck && !checkedEmail) {
         listOfUser.push(
             {
                 'name': name,
@@ -122,10 +125,10 @@ async function register() {
                 'color': randomContactColor(),
             }
         );
-    postData('/users', listOfUser);
-    signUpSuccesfullyInfoBox('show');
-    setTimeout(() => {showLoginBox()},2000);
-    setTimeout(() => {signUpSuccesfullyInfoBox('hide')},2000);
+        postData('/users', listOfUser);
+        signUpSuccesfullyInfoBox('show');
+        setTimeout(() => { showLoginBox() }, 2000);
+        setTimeout(() => { signUpSuccesfullyInfoBox('hide') }, 2000);
     } else {
         alert('Passwort stimmt nicht überein!');
     }
