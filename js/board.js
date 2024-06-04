@@ -45,7 +45,7 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-
+    console.log(todos);
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -109,11 +109,11 @@ function generateUniqueId() {
 
 
 function addTaskToTasks() {
-
     let task_title = document.getElementById('task_title').value;
     let task_description = document.getElementById('task_description').value;
     let task_assignet = 'name';//[]
-    // let task_assignet = document.getElementById('task_assignet').value;
+    // let task_assignet = document.getElementById('option_').value;
+    // console.log(task_assignet);
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
     let task_status = document.getElementById('task_category').value;
@@ -126,7 +126,7 @@ function addTaskToTasks() {
         'description': task_description,
         'id': id,
         'name': task_assignet,
-        'priority': './assets/img/vector_check.svg',
+        'priority': './assets/img/vector_red.svg',
         'status': task_status,
         'subtask': task_subtasks,
         'title': task_title,
@@ -155,10 +155,13 @@ function loadTaskFromLocalStorage() {
 
 function deleteTaskFromLocalStorage(id) {
     let contact = todos.find(obj => obj['id'] == id);
-    todos.splice(contact, 1);
-    saveTasksToServer();
-    initBoardTasks();
-    initAddTask();
+    console.log(id);
+    console.log(contact);
+    
+    // todos.splice(contact, 1);
+    // saveTasksToServer();
+    // initBoardTasks();
+    // // initAddTask();
 }
 
 
@@ -177,7 +180,7 @@ async function moveTo(category) {
     contact['category'] = category;
     saveTasksToServer();
     initBoardTasks();
-    
+
 }
 
 
@@ -237,26 +240,39 @@ function closeShowTask() {
 function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-
+    console.log(contact.priority);
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
-        <button class="close_pop_add_task" onclick="closeShowTask()">X</button>   
-        <div>${contact.status}</div> 
-        <div>${contact.description}</div>    
-        <div>${contact.priority}</div>    
+        <div class="show_task_header">
+            <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
+            <button class="show_task_close_button" onclick="closeShowTask()"><img src="./assets/img/close.svg" alt=""></button>
+        </div>   
+        <div class="show_task_title">${contact.title}</div>    
+        <div class="show_task_description">${contact.description}</div> 
+        <div class="show_task_date">
+            <span>Due date:</span>
+            <div>${contact.date}</div>    
+        </div>
+        <div class="show_task_priory show_task_date">
+            <span>Priority:</span>
+            <div class="show_task_priority_image">
+                <div></div>    
+                <img src= "${contact.priority}">
+            </div>
+        </div>   
         <div>${contact.name}</div>    
         <div>${contact.subtask}</div>    
         <div class="board_task_footer">
-            <button onclick="deleteTaskFromLocalStorage(${contact.id})">delete</button>
+            <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
         </div>    
     `;
 
-    // let borderCategory = document.getElementById(`board_task_category${element['id']}`);
-    // if (arr[i]['status'] == 'Technical Task') {
-    //     borderCategory.style.backgroundColor = '#1FD7C1';
-    // } else {
-    //     borderCategory.style.backgroundColor = '#0038FF';
-    // }
+    let borderCategory = document.getElementById(`show_task_category${id}`);
+    if (contact['status'] == 'Technical Task') {
+        borderCategory.style.backgroundColor = '#1FD7C1';
+    } else {
+        borderCategory.style.backgroundColor = '#0038FF';
+    }
 
 
 }

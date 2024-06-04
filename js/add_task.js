@@ -33,16 +33,12 @@ async function initAddTask() {
 
 function showCheckboxes() {
     let checkboxes = document.getElementById("checkBoxes");
-    let add_task_footer = document.getElementById("add_task_footer");
-
     if (show) {
         checkboxes.style.display = "block";
-        add_task_footer.style.visibility = "hidden";
 
         show = false;
     } else {
         checkboxes.style.display = "none";
-        add_task_footer.style.visibility = "initial";
         show = true;
     }
 }
@@ -57,11 +53,12 @@ function generateCheckBox() {
         const element = guesteArr[i];
         id.innerHTML += /*html*/`        
              <label for="first">
-                 <option value="${element.name}">${element.name}</option>
+                <option value="${element.name}">${element.name}</option>
                 <input type="checkbox" id="first" />
              </label>
         `;
     }
+
 }
 
 
@@ -98,6 +95,12 @@ function generateAddTasks() {
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
                         </div>                       
+                        <!-- <label for="name-select">Wähle einen Namen:</label>
+                        <select id="name-select">
+                        <option value="" hidden>Select options</option>
+
+                        </select>
+                        <div id="checkbox-list"></div> -->
                     </div>
                 </div>
 
@@ -112,17 +115,17 @@ function generateAddTasks() {
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
-                            <button class="add_task_button_urgent add_task_hover_button">Urgent
+                            <button class="add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
                                 </div>
                             </button>
-                            <button class="add_task_button_medium add_task_button_urgent add_task_hover_button">Medium
+                            <button class="add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
                                 </div>
                             </button>
-                            <button class="add_task_button_low add_task_button_urgent add_task_hover_button">Low
+                            <button class="add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
@@ -158,4 +161,23 @@ function generateAddTasks() {
     `;
 
 
+}
+
+function getPriority(prio) {
+    let imgSrc;
+    let name;
+    switch (prio) {
+        case 'Urgent':
+            imgSrc = './assets/img/vector_red.svg';
+            name = prio;
+            break;
+        case 'Medium':
+            imgSrc = './assets/img/vector_strich.svg';
+            name = prio;
+            break;
+        case 'Low':
+            imgSrc = './assets/img/vector_strich.svg"';
+            name = prio;
+            break;
+    }   
 }
