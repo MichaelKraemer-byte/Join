@@ -5,6 +5,7 @@ let todos = [];
 let currentElement;
 let token = [];
 
+loadTaskFromLocalStorage();
 
 async function saveTasksToServer() {
     try {
@@ -43,9 +44,17 @@ async function loadTasksFromServer() {
 }
 
 
+async function deleteTasksFromServer(path="") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
+
 async function initBoardTasks() {
     await loadTasksFromServer();
-    // console.log(todos);
+    loadTaskFromLocalStorage();
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -138,19 +147,21 @@ function addTaskToTasks() {
     };
 
     todos.push(task)
+    saveTaskToLocalStorage();
     saveTasksToServer();
     initAddTask();
+    initBoardTasks();
 }
 
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('boardTasks', todosAsText)
+    localStorage.setItem('tasksFromLocal', todosAsText)
 }
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('boardTasks');
+    let todosAsText = localStorage.getItem('tasksFromLocal');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -158,14 +169,13 @@ function loadTaskFromLocalStorage() {
 
 
 function deleteTaskFromLocalStorage(id) {
-    let contact = todos.find(obj => obj['id'] == id);
-    console.log(id);
-    console.log(contact);
+    let contact = todos.find(obj => obj['id'] == id); 
     
-    // todos.splice(contact, 1);
-    // saveTasksToServer();
-    // initBoardTasks();
-    // // initAddTask();
+    todos.splice(contact, 1);
+    saveTaskToLocalStorage();
+    saveTasksToServer();
+    initBoardTasks();
+    // initAddTask();
 }
 
 
@@ -182,6 +192,7 @@ function allowDrop(ev) {
 async function moveTo(category) {
     let contact = todos.find(obj => obj['id'] == currentElement);
     contact['category'] = category;
+    saveTaskToLocalStorage();
     saveTasksToServer();
     initBoardTasks();
 

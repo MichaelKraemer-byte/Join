@@ -1,11 +1,9 @@
 const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 let show = true;
-let guestArray = [];
-let guesteArr = [];
+let guesteArray = [];
   
 
-
-
+// loadTaskFromLocalStorage();
 
 async function loadGuestFromServer() {
     try {
@@ -14,7 +12,7 @@ async function loadGuestFromServer() {
             throw new Error('Netzwerkantwort war nicht ok.');
         }
         const data = await response.json();
-        guesteArr = Object.keys(data).map(id => ({
+        guesteArray = Object.keys(data).map(id => ({
             id,
             ...data[id]
         }));
@@ -57,15 +55,15 @@ function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
 
     id.innerHTML = '';
-    for (let i = 0; i < guesteArr.length; i++) {
-        const element = guesteArr[i];
+    for (let i = 0; i < guesteArray.length; i++) {
+        const element = guesteArray[i];
         id.innerHTML += /*html*/`        
             <label>
             <p>${element.name}<p>
             <input type="checkbox" name="optionen" value="${element.name}"/>
             </label>
         `;
-    }
+    }    
 }
 
 
@@ -93,7 +91,7 @@ function generateAddTasks() {
                         <label id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
                             <img src="./assets/img/arrow_drop_down.svg" alt="">
-                            <input class="add_task_input" id="task_assignet" placeholder="Select options"/>
+                            <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
                         <form action="">
                         <div class="checkbox_name" id="checkBoxes">
@@ -142,8 +140,9 @@ function generateAddTasks() {
                         </select>
                     </div>
                     <div class="add_task_subtask add_task_form_row">
-                        <label for="">Subtasks</label>
-                        <select id="task_subtasks" class="add_task_input"></select>
+                        <label>Subtasks</label>
+                        <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                        <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
                     </div>
                 </div>
 
@@ -163,13 +162,39 @@ function generateAddTasks() {
 }
 
 
+function searchNameFromGuestList() {
+    let idInput = document.getElementById('task_assignet_input').value;
+    idInput = idInput.toLowerCase();
+
+    let id = document.getElementById('check_box_user_name');
+
+    id.innerHTML = '';
+    for (let i = 0; i < guesteArray.length; i++) {
+        const element = guesteArray[i];
+        if (element.name.toLowerCase().includes(idInput)){
+            id.innerHTML += /*html*/`        
+                <label>
+                <p>${element.name}<p>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
+                </label>
+            `;
+        }
+    }
+}
+
+
+
 function werteAbrufen() {
-    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
-    
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
     let checkedValues = [];  
     checkboxes.forEach((checkbox) => {
         checkedValues.push(checkbox.value);
     });
+}
+
+
+function addNewSubTask() {
+    
 }
 
 
