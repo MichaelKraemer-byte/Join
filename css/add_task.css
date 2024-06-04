@@ -41,6 +41,7 @@ b {
 .add_task_input {
     font-size: 20px;
     height: 48px;
+    width: 100%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 6px;
@@ -199,7 +200,14 @@ b {
 }
 
 .add_task_subtask {
-    gap: 8px
+    gap: 8px;position: relative;
+}
+
+.add_task_button_add_subtask {
+    width: 14px;
+    position: absolute;
+    right: 5px;
+    bottom: 18px;
 }
 
 .multipleSelection {
@@ -209,6 +217,12 @@ b {
 
 .selectBox {
     position: relative;
+}
+
+.selectBox img {
+    position: absolute;
+    top: 25px;
+    right: 5px;
 }
 
 .selectBox select {
@@ -234,6 +248,7 @@ b {
 #checkBoxes label {
     display: flex;
     justify-content: space-between;
+    word-wrap: break-word;
     padding: 8px;
     border-radius: 10px;
     font-size: 20px;    
@@ -257,7 +272,11 @@ b {
 
 .dropdown_users_name {
     background-color: white;
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: hidden;    
     border-radius: 10px;
+    word-wrap: break-word;
     -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);

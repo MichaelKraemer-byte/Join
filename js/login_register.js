@@ -14,6 +14,7 @@ function showLoginBox() {
     document.getElementById('login-section').classList.remove('fade-in');
     document.getElementById('register-section').classList.remove('fade-in');
     document.getElementById('signup-button-area').classList.remove('fade-in');
+
 }
 
 async function loadData(path = '') {
@@ -41,15 +42,20 @@ async function login() {
     let indexOfEmail;
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
-        setCurrentUserInLocalstorage(data);
+        setCurrentUserInSessionstorage(data);
         window.location.href = './summary.html';
         if (rememberMe) {
             setEmailToLocalstorage(email);
         } else { removeEmailFromLocalstorage() }
-    } else { alert('Login failed!') }
+    } else { wrongPassword('show') }
 }
 
 function guestLogin() {
+    setDefaultUser();
+    window.location.href = './summary.html';
+}
+
+function setDefaultUser() {
     let defaultUser = {
         name: 'Maike Muster',
         email: 'maikemuster@gmail.com',
@@ -57,23 +63,24 @@ function guestLogin() {
         color: '#FC71FF',
         initials: 'MM'
     }
-    localStorage.setItem('currentUser', JSON.stringify(defaultUser));
-    window.location.href = './summary.html';
+    sessionStorage.setItem('currentUser', JSON.stringify(defaultUser));
 }
 
-function setCurrentUserInLocalstorage(data) {
+function setCurrentUserInSessionstorage(data) {
     let user = {
         name: data[indexOfEmail].name,
         email: data[indexOfEmail].email,
         color: data[indexOfEmail].color,
         initials: getInitials(data[indexOfEmail]),
     }
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
 }
 
 function checkEmailInDB(data, email) {
     indexOfEmail = data.findIndex(element => element['email'] == email);
-    return true
+    if (indexOfEmail >= 0) {
+        return true
+    }
 }
 
 function checkPasswortInDB(data, checkPassword) {
@@ -112,7 +119,7 @@ async function register() {
     const passwordCheck = document.getElementById('register2-password').value;
     const listOfUser = await loadData('/users');
 
-    if (password == passwordCheck) {
+    if (password == passwordCheck && !checkEmailInDB(listOfUser, email)) {
         listOfUser.push(
             {
                 'name': name,
@@ -122,15 +129,17 @@ async function register() {
             }
         );
         postData('/users', listOfUser);
-        showLoginBox();
+        signUpSuccesfullyInfoBox('show');
+        setTimeout(() => { showLoginBox() }, 2000);
+        setTimeout(() => { signUpSuccesfullyInfoBox('hide') }, 2000);
     } else {
-        alert('Passwort stimmt nicht überein!');
+        noMatchingPassword('show');
     }
 }
 
 function togglePasswordVisibility(id) {
-    const passwordField = document.getElementById(id+'-password');
-    const toggleIcon = document.getElementById(id+'-password-icon');
+    const passwordField = document.getElementById(id + '-password');
+    const toggleIcon = document.getElementById(id + '-password-icon');
     if (passwordField.type === "password") {
         passwordField.type = "text";
         toggleIcon.src = "/assets/img/password-show.png"; // Symbol zum Verbergen
@@ -141,7 +150,7 @@ function togglePasswordVisibility(id) {
 }
 
 function togglePasswordIcon(id) {
-    const passwordField = document.getElementById(id+'-password')
+    const passwordField = document.getElementById(id + '-password')
     if (passwordField.value.length == 0) {
         setPasswordIconToLock(id);
     } else {
@@ -150,8 +159,8 @@ function togglePasswordIcon(id) {
 }
 
 function setPasswordIconToLock(id) {
-    const toggleContainer = document.getElementById(id+'-password-icon-container');
-    const toggleIcon = document.getElementById(id+'-password-icon');
+    const toggleContainer = document.getElementById(id + '-password-icon-container');
+    const toggleIcon = document.getElementById(id + '-password-icon');
     toggleIcon.src = '/assets/img/lock.svg'
     toggleIcon.style.cursor = 'default';
     toggleContainer.onclick = null;
@@ -159,11 +168,11 @@ function setPasswordIconToLock(id) {
 }
 
 function setPasswordIconToEye(id) {
-    const toggleContainer = document.getElementById(id+'-password-icon-container');
-    const toggleIcon = document.getElementById(id+'-password-icon');
-    const passwordField = document.getElementById(id+'-password');
+    const toggleContainer = document.getElementById(id + '-password-icon-container');
+    const toggleIcon = document.getElementById(id + '-password-icon');
+    const passwordField = document.getElementById(id + '-password');
     toggleIcon.style.cursor = 'pointer'
-    toggleContainer.setAttribute('onclick', 'togglePasswordVisibility("'+id+'")');
+    toggleContainer.setAttribute('onclick', 'togglePasswordVisibility("' + id + '")');
     if (passwordField.type === 'password') {
         toggleIcon.src = "/assets/img/password-hide.png";
     } else {
@@ -180,6 +189,38 @@ async function deleteUser(username) {
         };
     }
     postData('/users', users);
+}
+
+function wrongPassword(val) {
+    const wrongPassword = document.getElementById('wrong-password');
+    const inputField = document.getElementById('login-password');
+    if (val == 'show') {
+        wrongPassword.style.display = 'block';
+        inputField.style.borderColor = 'red';
+    } else {
+        wrongPassword.style.display = 'none';
+        inputField.style.borderColor = '#d1d1d1';
+    }
+}
+
+function noMatchingPassword(val) {
+    const wrongPassword = document.getElementById('match-password');
+    const inputField = document.getElementById('register2-password');
+    if (val == 'show') {
+        wrongPassword.style.display = 'block';
+        inputField.style.borderColor = 'red';
+    } else {
+        wrongPassword.style.display = 'none';
+        inputField.style.borderColor = '#d1d1d1';
+    }
+}
+
+function signUpSuccesfullyInfoBox(val) {
+    if (val == 'show') {
+        document.getElementById('signup-succesfully-infobutton').style.display = 'flex'
+    } else {
+        document.getElementById('signup-succesfully-infobutton').style.display = 'none'
+    }
 }
 
 function randomContactColor() {

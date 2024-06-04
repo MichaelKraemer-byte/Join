@@ -7,11 +7,16 @@
     <title>Login</title>
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
-    <script src="/js/script.js" defer></script>
+    <!--<script src="/js/script.js" defer></script>-->
     <script src="/js/login_register.js" defer></script>
 </head>
 
 <body>
+    <div class="signup-succesfully-infobutton-container d-none" id="signup-succesfully-infobutton">
+        <div class="signup-succesfully-infobutton d-center">
+            <p>You Signed Up successfully</p>
+        </div>
+    </div>
     <div class="content">
 
         <header class="d-end">
@@ -34,11 +39,14 @@
                             <input type="email" id="login-email" placeholder="Email" required>
                             <span class="toggle-password"><img src="./assets/img/mail.svg" alt="lock"></span>
                         </div>
-                        <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon('login')" id="login-password"
-                                placeholder="Password" required>
-                            <span class="toggle-password" id="login-password-icon-container"><img src="./assets/img/lock.svg"
-                                    alt="lock" id="login-password-icon"></span>
+                        <div class="password-box">
+                            <div class="password-container">
+                                <input type="password" oninput="togglePasswordIcon('login')" id="login-password"
+                                    placeholder="Password" required>
+                                <span class="toggle-password" id="login-password-icon-container"><img
+                                        src="./assets/img/lock.svg" alt="lock" id="login-password-icon"></span>
+                            </div>
+                            <p class="wrong-password" id="wrong-password">Wrong password Ups! Try again.</p>
                         </div>
                     </div>
                     <div class="checkbox m-left-48">
@@ -66,14 +74,19 @@
                         <input type="text" required id="register-name" placeholder="Name">
                         <input type="email" required id="register-email" placeholder="Email">
                         <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon('register1')" required id="register1-password" placeholder="Password">
-                            <span class="toggle-password" id="register1-password-icon-container"><img src="./assets/img/lock.svg"
-                                    alt="lock" id="register1-password-icon"></span>
+                            <input type="password" oninput="togglePasswordIcon('register1')" required
+                                id="register1-password" placeholder="Password">
+                            <span class="toggle-password" id="register1-password-icon-container"><img
+                                    src="./assets/img/lock.svg" alt="lock" id="register1-password-icon"></span>
                         </div>
-                        <div class="password-container">
-                            <input type="password" oninput="togglePasswordIcon('register2')" required id="register2-password" placeholder="Confirm Password">
-                            <span class="toggle-password" id="register2-password-icon-container"><img src="./assets/img/lock.svg"
-                                    alt="lock" id="register2-password-icon"></span>
+                        <div class="password-box">
+                            <div class="password-container">
+                                <input type="password" oninput="togglePasswordIcon('register2')" required
+                                    id="register2-password" placeholder="Confirm Password">
+                                <span class="toggle-password" id="register2-password-icon-container"><img
+                                        src="./assets/img/lock.svg" alt="lock" id="register2-password-icon"></span>
+                            </div>
+                            <p class="wrong-password" id="match-password">Ups! your password don't match</p>
                         </div>
                     </div>
                     <div class="checkbox d-center">
