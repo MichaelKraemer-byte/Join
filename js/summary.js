@@ -1,5 +1,5 @@
 function updateGreeting() {
-    let greetElement = document.getElementById("greetAtTime");
+    let greetElement = document.querySelectorAll('.greetAtTime');
     const now = new Date();
     const hour = now.getHours();
 
@@ -16,18 +16,18 @@ function updateGreeting() {
         greeting = `Good evening${greetName()}`;
     }
 
-    greetElement.innerHTML = greeting;
+    greetElement.forEach((element) => { element.innerHTML = greeting } );
     greetName();
 }
 
 function greetName(){
-    let greetName = document.getElementById('greetName');
+    let greetName = document.querySelectorAll('.greetName');
 
     if (user['name'] !== 'Maike Muster') {
-        greetName.innerHTML = `${user['name']}`;
+        greetName.forEach((element) => { element.innerHTML = `${user['name']}`});
         return ',';
     } else {
-        greetName.innerHTML = '';
+        greetName.forEach((element) => { element.innerHTML = ''} );
         return `!`;
     };
 }

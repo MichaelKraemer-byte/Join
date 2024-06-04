@@ -2,6 +2,10 @@
 /* CSS TOOLS */
 /* CSS TOOLS */
 
+.v-none{
+    visibility: none;
+}
+
 .d-none {
     display: none !important;
 }
@@ -70,7 +74,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    gap: 30px;
+    gap: 32px;
 }
 
 .mainTitleContainer{
@@ -131,6 +135,8 @@ body {
 .headerTitle {
     font-weight: 400;
     margin: 0px;
+    word-break: break-word;
+    width: fit-content;
 }
 
 .headerProfileContainer{
@@ -366,4 +372,16 @@ body {
 
 .navBarImgFocus{
     filter: brightness(200%);
+}
+
+.headerLogo {
+    display: none;
+    padding-right: 40px;
+    min-width: 32px;
+}
+
+.headerLogoAndTitleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

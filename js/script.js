@@ -62,6 +62,7 @@ function setInitialsInHeader(){
   } else {
     headInnitials.innerHTML = 'G';
   }
+
   if (user['initials'].length === 2) {
     headInnitials.classList.remove('font-size-28px');
     headInnitials.classList.add('font-size-20px');    
@@ -79,8 +80,9 @@ function initForCurrentPage(){
     renderContactList();
     loadColorIndex();
   } else if (window.location.href.includes('summary.html')) {
+    updateGreeting();    
+    loginGreeting();
     focusNavAnker();
-    updateGreeting();
   }  else if(window.location.href.includes('add_task.html')){
     focusNavAnker();
     initAddTask(); 
@@ -168,4 +170,20 @@ function focusNavAnker(){
     document.getElementById('navBarAddTaskImg').classList.add('navBarImgFocus');
     document.getElementById('addTaskNav').classList.remove('mainNavLinkTransition');
   } 
+}
+
+
+function loginGreeting() {
+  let loginGrettingScreen = document.getElementById('loginGrettingScreen');
+  let summary = document.getElementById('summary');
+
+  if (document.referrer.includes('index.html')) {
+      loginGrettingScreen.classList.remove('d-none');
+      setTimeout( () => {
+        loginGrettingScreen.style.animation = 'greeting 0.8s ease-in-out forwards'}, 1200);
+      setTimeout( () => {
+        summary.classList.remove('d-none')}, 1600);
+  } else if (!document.referrer.includes('index.html')) {
+    summary.classList.remove('d-none');
+  }
 }

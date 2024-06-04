@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="./css/fonts/inter.css">
     <link rel="stylesheet" href="./css/templates.css">
     <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/mediaQueries/mTemplates.css">
+    <link rel="stylesheet" href="./css/mediaQueries/mSummary.css">
     <link rel="icon" type="image/x-icon" href="./assets/img/joinIconSmall.svg">
     <title>Dashboard</title>
 </head> 
@@ -17,12 +19,24 @@
         <div w3-include-html="./templates/navBar.html"></div>
     </div>
 
-    <section id="summary" class="content">
+    <div id="loginGrettingScreen" class="d-none greetingLoginContainer">
+        <div class="d-flex">
+            <h2 class="greetingIntro greetAtTime"></h2>
+        </div>    
+        <h1 class="greetName"></h1>
+    </div>    
+
+    <section id="summary" class="content d-none">
+
+
+
         <div class="titleContainer">
             <h1 id="summaryTitle" class="title">Join 360</h1>
             <div class="blueVerticalLine">
             </div>
             <h2 class="subTitle">Key Metrics at a Glance</h2>
+            <div class="mobileBlueHorizontalLine">
+            </div>
         </div>
 
         <div id="summaryMainSection">
@@ -83,11 +97,11 @@
                 </div>
             </div>
 
-            <div id="greetingContainer">
+            <div id="webGreetingContainer">
                 <div class="d-flex">
-                    <h2 id="greetAtTime" class="greetingIntro"></h2>
+                    <h2 class="greetingIntro greetAtTime"></h2>
                 </div>    
-                <h1 id="greetName" class="greetName"></h1>
+                <h1 class="greetName"></h1>
             </div>
         </div>
     </section>

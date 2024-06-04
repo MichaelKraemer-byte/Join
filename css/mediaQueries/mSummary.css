@@ -1,0 +1,103 @@
+@media screen and  (min-width: 850px) and (max-width: 1321px) {
+    .content {
+        padding: 206px 56px 96px 328px;
+    } 
+
+    .title{
+        font-size: clamp(47px, 4vw, 61px);
+    }
+
+    .greetName {
+        font-size: clamp(28px, 3vw, 61px);
+    }
+    
+    #summaryMainSection{
+        gap: 60px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1131px){
+    #summaryMainSection{
+        gap: 30px;
+    }
+
+    #webGreetingContainer{
+        display: none;
+    }
+}
+
+@media (max-width: 850px){
+    .greetingLoginContainer {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-color: #F6F7F8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        opacity: 1;        
+    }
+
+    #webGreetingContainer{
+        display: none;
+    }
+
+    .greetingLoginContainer .greetingIntro {
+        font-size: clamp(28px, 6vw, 47px);
+
+    }
+
+    .greetingLoginContainer .greetName {
+        font-size: clamp(36px, 8vw, 61px);
+    }
+}
+
+@media screen and (min-width: 920px) and (max-width: 1112px){
+    
+    .subTitle{
+        font-size: clamp(20px, 2.5vw, 27px);
+    }
+
+}
+
+@media screen and (min-width: 850px) and (max-width: 950px){
+    
+    .summaryNumContainer {
+        max-width: 440px;
+    }
+    
+    .toDoAndDoneContainer {
+        Padding: 32px 32px 32px 32px;
+    }
+
+    #summaryMainSection {
+        gap: 0px;
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 850px){
+    #summary{
+        width: auto;
+    }
+    
+    #summaryMainSection{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes greeting {
+    from {
+        z-index: 1;
+        opacity: 1;
+    }
+    to {
+        z-index: -1;
+        opacity: 0;
+    }
+}
