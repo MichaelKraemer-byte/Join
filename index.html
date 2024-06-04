@@ -30,8 +30,16 @@
                 </div>
                 <form onsubmit="login(); return false;">
                     <div class="input-area">
-                        <input type="email" id="login-email" placeholder="Email" required>
-                        <input type="password" id="login-password" placeholder="Password" required>
+                        <div class="email-container">
+                            <input type="email" id="login-email" placeholder="Email" required>
+                            <span class="toggle-password"><img src="./assets/img/mail.svg" alt="lock"></span>
+                        </div>
+                        <div class="password-container">
+                            <input type="password" oninput="togglePasswordIcon()" id="login-password"
+                                placeholder="Password" required>
+                            <span class="toggle-password" id="password-icon-container"><img src="./assets/img/lock.svg"
+                                    alt="lock" id="password-icon"></span>
+                        </div>
                     </div>
                     <div class="checkbox m-left-48">
                         <input type="checkbox" name="rememberme" id="login-rememberme">
@@ -39,7 +47,8 @@
                     </div>
                     <div class="buttons d-center">
                         <button class="button blue-button" id="login-button">Log in</button>
-                        <button class="button white-button" type="button" id="guest-login-button" onclick="guestLogin()">Guest Log in</button>
+                        <button class="button white-button" type="button" id="guest-login-button"
+                            onclick="guestLogin()">Guest Log in</button>
                     </div>
                 </form>
             </div>
