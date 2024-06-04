@@ -57,7 +57,7 @@ function generateCheckBox() {
         const element = guesteArr[i];
         id.innerHTML += /*html*/`        
              <label for="first">
-                 <p>${element.name}</p>
+                 <option value="${element.name}">${element.name}</option>
                 <input type="checkbox" id="first" />
              </label>
         `;
@@ -85,12 +85,13 @@ function generateAddTasks() {
                             placeholder="Enter a Description"></textarea>
                     </div>
 
-                    <div class="add_task_form_row"></div>
                     <div class="add_task_assignet add_task_form_row">
                         <label for="" id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
-                            <select class="add_task_input">
-                                <option>Select options</option>
+
+                        <!-- select in Script -->
+                            <select class="add_task_input" id="task_assignet">
+                                <option value="" hidden>Select options</option>
                             </select>
                             <div class="overSelect"></div>
                         </div>

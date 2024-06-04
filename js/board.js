@@ -177,6 +177,7 @@ async function moveTo(category) {
     contact['category'] = category;
     saveTasksToServer();
     initBoardTasks();
+    
 }
 
 
