@@ -44,10 +44,19 @@ function includeHTML() {
   
 async function init() {
   await getData();
+  isUserOrNot();
   setInitialsInHeader();
   initForCurrentPage();
 }
 
+function isUserOrNot() {
+  let localstorage = localStorage.getItem('currentUser');
+  if (localstorage == null) {
+      document.getElementById('navContainer').style.display = 'none';
+      document.getElementById('userCircle').style.display = 'none';
+      document.getElementById('navBarImg').setAttribute('onclick','navigateTo("index.html")')
+  }
+}
 
 function getCurrentUserFromLocalStorage() {
   let currentUserString = localStorage.getItem('currentUser');

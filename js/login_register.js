@@ -51,6 +51,11 @@ async function login() {
 }
 
 function guestLogin() {
+    setDefaultUser();
+    window.location.href = './summary.html';
+}
+
+function setDefaultUser() {
     let defaultUser = {
         name: 'Maike Muster',
         email: 'maikemuster@gmail.com',
@@ -59,7 +64,6 @@ function guestLogin() {
         initials: 'MM'
     }
     localStorage.setItem('currentUser', JSON.stringify(defaultUser));
-    window.location.href = './summary.html';
 }
 
 function setCurrentUserInLocalstorage(data) {
@@ -195,7 +199,7 @@ function wrongPassword(val) {
         inputField.style.borderColor = 'red';
     } else {
         wrongPassword.style.display = 'none';
-        inputField.style.borderColor = 'black';
+        inputField.style.borderColor = '#d1d1d1';
     }
 }
 
@@ -207,7 +211,7 @@ function noMatchingPassword(val) {
         inputField.style.borderColor = 'red';
     } else {
         wrongPassword.style.display = 'none';
-        inputField.style.borderColor = 'black';
+        inputField.style.borderColor = '#d1d1d1';
     }
 }
 
