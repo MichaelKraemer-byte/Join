@@ -170,7 +170,7 @@ body {
     justify-content: end;
 }
 
-.navButton {
+.navLink {
     background-color: transparent;
     border: none;
     color: rgb(168,168,168);    
@@ -179,17 +179,18 @@ body {
     justify-content: start;
     font-size: 16px;
     padding: 8px 0px 8px 0px;
+    text-decoration: none;
 }
 
-.navButton:hover {
+.navLink:hover {
     cursor: pointer;
 }
 
-.mainNavButtonTransition{
+.mainNavLinkTransition{
     transition: background-color 0.08s ease-in-out;
 }
 
-.mainNavButtonTransition:hover {
+.mainNavLinkTransition:hover {
     background-color: #2A3D59;
 }
 
@@ -376,7 +377,7 @@ body {
 }
 
 .headerNavContainer{
-    width: 128px;
+    width: 134px;
     height: auto;
     padding: 10px 10px 10px 10px;
     border-radius: 20px 0px 20px 20px;
@@ -387,17 +388,20 @@ body {
     z-index: 1;
     top: 96px;
     right: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
-.headerNavButton {
+.headerNavLink {
     padding: 13.5px;
     color: #CDCDCD;
     font-size: 16px;
     background-color: #2A3647;
     border-radius: 8px;
+    text-decoration: none;
 }
 
-.headerNavButton:hover {
+.headerNavLink:hover {
     cursor: pointer;
     background-color: #2A3D59;
 }

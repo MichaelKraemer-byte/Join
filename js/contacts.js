@@ -450,7 +450,7 @@ function hideOrDisplayCategories(AZindex) {
 }
 
 
-function setAllGuestNames(){
+function setAllContactNames(){
     allGuestNames = data.map(obj => obj['name']);
     setCurrentAlphabetNamesWithA();
 }

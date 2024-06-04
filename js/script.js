@@ -74,7 +74,7 @@ function setInitialsInHeader(){
 
 function initForCurrentPage(){
   if (window.location.href.includes('contacts.html')) {
-    setAllGuestNames();
+    setAllContactNames();
     renderContactList();
     loadColorIndex();
   } else if (window.location.href.includes('summary.html')) {
