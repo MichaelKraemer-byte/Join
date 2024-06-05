@@ -74,7 +74,7 @@ function generateAddTasks() {
 
     add_task_form.innerHTML = /*html*/`
     <h1>Add Task</h1>
-    <form>
+    <form id="meinFormular">
         <div>
             <div class="add_task_form">
                 <div class="add_task_width50">
@@ -110,21 +110,21 @@ function generateAddTasks() {
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
-                            <div class="add_button_group add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
+                            <button type="button" class="add_button_group add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
                                 </div>
-                            </div>
-                            <div class="add_button_group add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
+                            </button>
+                            <button type="button" class="add_button_group add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
                                 </div>
-                            </div>
-                            <div class="add_button_group add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
+                            </button>
+                            <button type="button" class="add_button_group add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </div>                    
                     <div class="add_task_category add_task_form_row">
@@ -146,16 +146,44 @@ function generateAddTasks() {
                 <p id="add_task_footer"><b>*</b>This field is required</p>
                 <div class="add_task_button_group_footer">
                     <button class="add_task_button_clear add_task_hover_button">Clear X</button>
-                    <button class="add_task_button_create add_task_hover_button" onclick="addTaskToTasks()">Create Task
+                    <button id="createTaskButton" class="add_task_button_create add_task_hover_button" onclick="addTaskToTasks()">Create Task
                         <img src="./assets/img/vector_check.svg">
                     </button>
                 </div>
+                <p id="errorMessage" style="color:red; display:none;">Die Felder sollen ausgefüllt werden</p>
             </div>
         </div>
     </form>
     `;
-
 }
+
+
+function checkFormValidity() {
+    const form = document.getElementById('meinFormular');
+    const createTaskButton = document.getElementById('createTaskButton');
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (form.checkValidity()) {
+        createTaskButton.disabled = false;
+        errorMessage.style.display = 'none';
+    } else {
+        createTaskButton.disabled = true;
+    }
+}
+
+function addTaskToTasks() {
+    const form = document.getElementById('meinFormular');
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (!form.checkValidity()) {
+        errorMessage.style.display = 'block';
+        return;
+    }
+
+    // Add your task to the tasks here
+    // ...
+}
+
 
 
 function searchNameFromGuestList() {
@@ -179,6 +207,9 @@ function searchNameFromGuestList() {
 }
 
 
+
+
+
 function werteAbrufen() {
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     let checkedValues = [];
@@ -193,23 +224,23 @@ function addNewSubTask() {
 }
 
 
-function getPriority(prio) {
-    let imgSrc;
-    let name;
-    // console.log(prio);
+// function getPriority(prio) {
+//     let imgSrc;
+//     let name;
+//     // console.log(prio);
     
-    switch (prio) {
-        case 'Urgent':
-            imgSrc = './assets/img/vector_red.svg';
-            name = prio;
-            break;
-        case 'Medium':
-            imgSrc = './assets/img/vector_strich.svg';
-            name = prio;
-            break;
-        case 'Low':
-            imgSrc = './assets/img/vector_strich.svg"';
-            name = prio;
-            break;
-    }
-}
+//     switch (prio) {
+//         case 'Urgent':
+//             imgSrc = './assets/img/vector_red.svg';
+//             name = prio;
+//             break;
+//         case 'Medium':
+//             imgSrc = './assets/img/vector_strich.svg';
+//             name = prio;
+//             break;
+//         case 'Low':
+//             imgSrc = './assets/img/vector_strich.svg"';
+//             name = prio;
+//             break;
+//     }
+// }

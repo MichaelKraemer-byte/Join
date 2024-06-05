@@ -53,17 +53,18 @@ async function initBoardTasks() {
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
     let doneId = document.getElementById('board_done');
-
+    
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
-
+    
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
     generateToDo(done, doneId);
 }
+
 
 
 async function generateToDo(arr, categorie_id) {
@@ -107,12 +108,17 @@ function generateUniqueId() {
 
 
 function addTaskToTasks() {   
-    
+
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
     let task_assignet = [];  
     checkboxes.forEach((checkbox) => {
         task_assignet.push(checkbox.value);
     });
+
+    
+    
+
+
     
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;

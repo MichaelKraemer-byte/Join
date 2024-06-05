@@ -39,7 +39,7 @@ b {
 }
 
 .add_task_input {
-    font-size: 20px;
+    font-size: clamp(17px, 1.3vw, 30px);
     height: 48px;
     width: 100%;
     border: 1px solid #D1D1D1;
@@ -49,7 +49,7 @@ b {
 }
 
 .add_task_textarea {
-    font-size: 20px;
+    font-size: clamp(17px, 1.3vw, 30px);
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     height: 120px;
@@ -76,10 +76,8 @@ b {
     height: 56px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    /* padding: 16px 10px; */
-    /* font-size: 20px; */
-    font-size: clamp(16px, 1.7vw, 20px);
     cursor: pointer;
+    font-size: clamp(16px, 1.3vw, 30px);
 }
 
 .add_task_button_urgent {
@@ -98,11 +96,13 @@ b {
 .add_task_button_vector {
     max-width: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+
 .add_task_button_vector img {
-   width: 35px;
+   width: clamp(12px, 3vw, 35px);;
 }
 
 .add_task_footer {
