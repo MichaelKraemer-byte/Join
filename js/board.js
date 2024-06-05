@@ -44,17 +44,11 @@ async function loadTasksFromServer() {
 }
 
 
-async function deleteTasksFromServer(path="") {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "DELETE",
-    });
-    return responseToJson = await response.json();
-}
-
 
 async function initBoardTasks() {
     await loadTasksFromServer();
     loadTaskFromLocalStorage();
+
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -69,7 +63,6 @@ async function initBoardTasks() {
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
     generateToDo(done, doneId);
-
 }
 
 
@@ -113,9 +106,9 @@ function generateUniqueId() {
 }
 
 
-function addTaskToTasks() {    
-    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+function addTaskToTasks() {   
     
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
     let task_assignet = [];  
     checkboxes.forEach((checkbox) => {
         task_assignet.push(checkbox.value);
@@ -145,6 +138,7 @@ function addTaskToTasks() {
     todos.push(task)
     saveTaskToLocalStorage();
     saveTasksToServer();
+    closeWindow();
     initAddTask();
     initBoardTasks();
 }
@@ -164,13 +158,17 @@ function loadTaskFromLocalStorage() {
 }
 
 
+
 function deleteTaskFromLocalStorage(id) {
-    let contact = todos.find(obj => obj['id'] == id); 
-    
-    todos.splice(contact, 1);
+    let arr = [];
+    for (let i = 0; i < todos.length; i++) {
+        arr = (todos.filter(todo => todo.id != id));
+    }
+    todos = arr;
     saveTaskToLocalStorage();
     saveTasksToServer();
     initBoardTasks();
+    closeShowTask();
 }
 
 

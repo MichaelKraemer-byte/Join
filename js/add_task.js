@@ -1,7 +1,7 @@
 const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 let show = true;
 let guesteArray = [];
-  
+
 
 // loadTaskFromLocalStorage();
 
@@ -63,7 +63,7 @@ function generateCheckBox() {
             <input type="checkbox" name="optionen" value="${element.name}"/>
             </label>
         `;
-    }    
+    }
 }
 
 
@@ -74,6 +74,8 @@ function generateAddTasks() {
 
     add_task_form.innerHTML = /*html*/`
     <h1>Add Task</h1>
+    <form>
+        <div>
             <div class="add_task_form">
                 <div class="add_task_width50">
                     <div class="add_task_title add_task_form_row">
@@ -99,9 +101,7 @@ function generateAddTasks() {
                         </form>                      
                     </div>
                 </div>
-
-                <div class="add_task_line"></div>
-
+            <div class="add_task_line"></div>
                 <div class="add_task_width50">
                     <div class="add_task_date add_task_form_row">
                         <label for="">Due date<b>*</b></label>
@@ -110,24 +110,23 @@ function generateAddTasks() {
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
-                            <button class="add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
+                            <div class="add_button_group add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
                                 </div>
-                            </button>
-                            <button class="add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
+                            </div>
+                            <div class="add_button_group add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
                                 </div>
-                            </button>
-                            <button class="add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
+                            </div>
+                            <div class="add_button_group add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
-                            </button>
+                            </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="add_task_category add_task_form_row">
                         <label for="">Categoriy<b>*</b></label>
                         <select id="task_category" class="add_task_input" required>
@@ -142,7 +141,6 @@ function generateAddTasks() {
                         <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
                     </div>
                 </div>
-
             </div>
             <div class="add_task_footer">
                 <p id="add_task_footer"><b>*</b>This field is required</p>
@@ -153,6 +151,8 @@ function generateAddTasks() {
                     </button>
                 </div>
             </div>
+        </div>
+    </form>
     `;
 
 }
@@ -167,7 +167,7 @@ function searchNameFromGuestList() {
     id.innerHTML = '';
     for (let i = 0; i < guesteArray.length; i++) {
         const element = guesteArray[i];
-        if (element.name.toLowerCase().includes(idInput)){
+        if (element.name.toLowerCase().includes(idInput)) {
             id.innerHTML += /*html*/`        
                 <label>
                 <p>${element.name}<p>
@@ -180,8 +180,8 @@ function searchNameFromGuestList() {
 
 
 function werteAbrufen() {
-    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
-    let checkedValues = [];  
+    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    let checkedValues = [];
     checkboxes.forEach((checkbox) => {
         checkedValues.push(checkbox.value);
     });
@@ -189,13 +189,15 @@ function werteAbrufen() {
 
 
 function addNewSubTask() {
-    
+
 }
 
 
 function getPriority(prio) {
     let imgSrc;
     let name;
+    // console.log(prio);
+    
     switch (prio) {
         case 'Urgent':
             imgSrc = './assets/img/vector_red.svg';

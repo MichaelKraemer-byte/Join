@@ -70,13 +70,15 @@ b {
 }
 
 
-.add_task_button_group button {
+.add_button_group {
     width: 136px;
+    width: 40%;
     height: 56px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    padding: 16px 10px;
-    font-size: 20px;
+    /* padding: 16px 10px; */
+    /* font-size: 20px; */
+    font-size: clamp(16px, 1.7vw, 20px);
     cursor: pointer;
 }
 
@@ -94,13 +96,13 @@ b {
 } */
 
 .add_task_button_vector {
-    width: 20px;
+    max-width: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .add_task_button_vector img {
-    width: 35px;
+   width: 35px;
 }
 
 .add_task_footer {
