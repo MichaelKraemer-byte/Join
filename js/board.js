@@ -3,7 +3,9 @@ const usedIds = new Set();
 
 let todos = [];
 let currentElement;
-let token = [];
+let namelist = [];
+let colorList = [];
+let initials = [];
 
 loadTaskFromLocalStorage();
 
@@ -44,10 +46,9 @@ async function loadTasksFromServer() {
 }
 
 
-
 async function initBoardTasks() {
     await loadTasksFromServer();
-    loadTaskFromLocalStorage();
+    loadTaskFromLocalStorage();    
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
@@ -69,23 +70,39 @@ async function initBoardTasks() {
 
 async function generateToDo(arr, categorie_id) {
 
-    categorie_id.innerHTML = '';
-
+    categorie_id.innerHTML = '';   
+    
     for (let i = 0; i < arr.length; i++) {
-        const element = arr[i];
+        const element = arr[i];          
+        let initialsArray = element.initial; 
+        let colorsArray = element.color;
+
         categorie_id.innerHTML += /*html*/`
-        <div class="task" draggable="true" ondragstart=" startDragging(${element['id']})" onclick="showTask(${element['id']})">
-            <div class="board_task_category" id="board_task_category${element['id']}">${element['status']}</div>
-            <div class="board_task_title">${element['title']}</div>            
+        <div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
+            <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
+            <div class="board_task_title">${element.title}</div>            
             <div class="board_task_descripton board_task_toDo">${element.description}</div>          
-            <div class="board_task_footer_status">
-                <div>name</div>
-                <img src="${element['priority']}">
+            <div class="board_task_footer_status">  
+                <div class="board_task_initial" id="board_task_initial${element.id}"></div>
+                <img src="${element.priority}">
             </div>
         </div>
-        `;
+        `;       
+        let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
 
-        let borderCategory = document.getElementById(`board_task_category${element['id']}`);
+        board_task_initial.innerHTML = '';
+
+        for (let j = 0; j < initialsArray.length; j++) {
+            let initial = initialsArray[j];
+            let color = colorsArray[j];
+
+            board_task_initial.innerHTML += /*html*/`
+                <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
+            `;
+        }
+
+
+        let borderCategory = document.getElementById(`board_task_category${element.id}`);
         if (arr[i]['status'] == 'Technical Task') {
             borderCategory.style.backgroundColor = '#1FD7C1';
         } else {
@@ -95,6 +112,13 @@ async function generateToDo(arr, categorie_id) {
     }
 }
 
+function getInitials(fullName) {
+    const ignoredWords = ['von', 'van', 'de','la','der', 'die', 'das', 'zu', 'zum', 'zur'];
+    const nameArray = fullName.split(' ');
+    const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
+    const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
+    return initials;
+}
 
 
 function generateUniqueId() {
@@ -109,17 +133,27 @@ function generateUniqueId() {
 
 function addTaskToTasks() {   
 
-    const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');    
-    let task_assignet = [];  
-    checkboxes.forEach((checkbox) => {
-        task_assignet.push(checkbox.value);
-    });
+    const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    const selectedGuests = [];
+    selectedCheckboxes.forEach(checkbox => {
+        const guestName = checkbox.value;
+        const guest = guesteArray.find(g => g.name === guestName);
+        if (guest) {
+            selectedGuests.push({
+                name: guest.name,
+                color: guest.color                
+            });
+        }
+    });    
 
-    
-    
+    for (let index = 0; index < selectedGuests.length; index++) {
+        const element = selectedGuests[index];
+        let name = element.name
+        namelist.push(name);
+        colorList.push(element.color);
+        initials.push(getInitials(name));      
+    }
 
-
-    
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
@@ -127,13 +161,15 @@ function addTaskToTasks() {
     let task_status = document.getElementById('task_category').value;
     let task_subtasks = document.getElementById('task_subtasks').value;
     let id = generateUniqueId();
-
+   
     let task = {
         'category': task_category,
         'date': task_date,
         'description': task_description,
         'id': id,
-        'name': task_assignet,
+        'name': namelist,
+        'initial': initials,
+        'color': colorList,
         'priority': './assets/img/vector_red.svg',
         'status': task_status,
         'subtask': task_subtasks,
@@ -152,12 +188,12 @@ function addTaskToTasks() {
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('tasksFromLocal', todosAsText)
+    localStorage.setItem('tasksLocalStorage', todosAsText)
 }
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('tasksFromLocal');
+    let todosAsText = localStorage.getItem('tasksLocalStorage');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -274,7 +310,7 @@ function generateShowTask(id) {
                 <img src= "${contact.priority}">
             </div>
         </div>   
-        <div>${contact.name}</div>    
+        <div>${contact.name.join(" ")}</div>    
         <div>${contact.subtask}</div>    
         <div class="board_task_footer">
             <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>

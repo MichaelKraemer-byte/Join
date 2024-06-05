@@ -28,12 +28,13 @@ async function initAddTask() {
     await loadTasksFromServer();
     generateAddTasks();
     generateCheckBox();
-
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
             werteAbrufen();
         });
     });
+
+    console.log(guesteArray);
 }
 
 
