@@ -60,11 +60,12 @@ function generateCheckBox() {
         const element = guesteArray[i];
         id.innerHTML += /*html*/`        
             <label>
-            <p>${element.name}<p>
-            <input type="checkbox" name="optionen" value="${element.name}"/>
+                <p id="${i}">${element.name}<p>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
             </label>
         `;
     }
+
 }
 
 
@@ -95,11 +96,11 @@ function generateAddTasks() {
                             <img src="./assets/img/arrow_drop_down.svg" alt="">
                             <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
-                        <form action="">
+                        <!-- <form action=""> -->
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
                         </div>                                               
-                        </form>                      
+                        <!-- </form>                       -->
                     </div>
                 </div>
             <div class="add_task_line"></div>
@@ -111,17 +112,17 @@ function generateAddTasks() {
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
                         <div class="add_task_button_group">
-                            <button type="button" class="add_button_group add_task_button_urgent add_task_hover_button" onclick="getPriority('Urgent')">Urgent
+                            <button id="urgent" type="button" class="add_button_group add_task_hover_button" value="1" onclick="getTaskPriority('urgent')">Urgent
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_red.svg">
                                 </div>
                             </button>
-                            <button type="button" class="add_button_group add_task_button_medium add_task_button_urgent add_task_hover_button" onclick="getPriority('Medium')">Medium
+                            <button id="medium" type="button" class="add_button_group add_task_button_medium add_task_hover_button" value="1" onclick="getTaskPriority('medium')">Medium
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_strich.svg">
                                 </div>
                             </button>
-                            <button type="button" class="add_button_group add_task_button_low add_task_button_urgent add_task_hover_button" onclick="getPriority('Low')">Low
+                            <button id="low" type="button" class="add_button_group add_task_button_low  add_task_hover_button" value="1" onclick="getTaskPriority('low')">Low
                                 <div class="add_task_button_vector">
                                     <img src="./assets/img/vector_green.svg">
                                 </div>
@@ -159,6 +160,35 @@ function generateAddTasks() {
 }
 
 
+function getTaskPriority(id) {
+    const button = document.getElementById(id);    
+    if (button.classList.contains('active')) {
+        button.classList.remove('active');
+        document.querySelectorAll('.add_button_group').forEach(btn => {
+            btn.disabled = false;
+        });
+    } else {
+        document.querySelectorAll('.add_button_group').forEach(btn => {
+            btn.classList.remove('active');
+            btn.disabled = false;
+        });
+        button.classList.add('active');
+        document.querySelectorAll('.add_button_group').forEach(btn => {
+            if (btn.id !== id) {
+                btn.disabled = true;
+            }
+        });
+
+        const buttonText = button.innerText.trim();
+        // forwardButtonText(buttonText);
+        console.log(buttonText);
+    }
+}
+
+// function forwardButtonText(text) {
+//     console.log("Forwarding button text:", text);
+// }
+
 function checkFormValidity() {
     const form = document.getElementById('meinFormular');
     const createTaskButton = document.getElementById('createTaskButton');
@@ -172,18 +202,18 @@ function checkFormValidity() {
     }
 }
 
-function addTaskToTasks() {
-    const form = document.getElementById('meinFormular');
-    const errorMessage = document.getElementById('errorMessage');
+// function addTaskToTasks() {
+//     const form = document.getElementById('meinFormular');
+//     const errorMessage = document.getElementById('errorMessage');
 
-    if (!form.checkValidity()) {
-        errorMessage.style.display = 'block';
-        return;
-    }
+//     if (!form.checkValidity()) {
+//         errorMessage.style.display = 'block';
+//         return;
+//     }
 
-    // Add your task to the tasks here
-    // ...
-}
+//     // Add your task to the tasks here
+//     // ...
+// }
 
 
 
