@@ -280,12 +280,13 @@
 
 .show_task {
     background-color: white;
-    height: 85%;
+    height: 75%;
     width: 30%;
     position: fixed;
     border-radius: 20px;
     padding: 30px;
     word-wrap: break-word;
+    position: relative;
 }
 
 .show_task_title {
@@ -336,12 +337,53 @@
     margin-bottom: 24px;
 }
 
-.show_task_priority_image img {
+.show_task_priority img {
     width: 40px;
     height: 40px;
 }
 
-.show_task_priory {}
+.show_task_priority {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    gap: 10px;
+}
+
+.show_task_user_name {
+    margin: 50px 0 20px;
+}
+
+.show_task_user_daten span {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.show_task_assing_to_users {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    font-size: 19px;
+    line-height: 22.8px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.show_task_user_initial {
+    width: 42px;
+    height: 42px;
+}
+
+.show_task_footer button {
+    border: 0;
+    background-color: white;
+    width: 16px;
+    height: 18px;
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
 
 .slideIn {
     animation: slideIn 0.4s ease-in-out forwards;

@@ -48,18 +48,18 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    loadTaskFromLocalStorage();    
+    loadTaskFromLocalStorage();
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
     let doneId = document.getElementById('board_done');
-    
+
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
-    
+
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
@@ -70,11 +70,11 @@ async function initBoardTasks() {
 
 async function generateToDo(arr, categorie_id) {
 
-    categorie_id.innerHTML = '';   
-    
+    categorie_id.innerHTML = '';
+
     for (let i = 0; i < arr.length; i++) {
-        const element = arr[i];          
-        let initialsArray = element.initial; 
+        const element = arr[i];
+        let initialsArray = element.initial;
         let colorsArray = element.color;
 
         categorie_id.innerHTML += /*html*/`
@@ -84,10 +84,11 @@ async function generateToDo(arr, categorie_id) {
             <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">  
                 <div class="board_task_initial" id="board_task_initial${element.id}"></div>
-                <img src="${element.priority}">
+                <img src="${element.priorityImg}">
+               
             </div>
         </div>
-        `;       
+        `;
         let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
 
         board_task_initial.innerHTML = '';
@@ -113,7 +114,7 @@ async function generateToDo(arr, categorie_id) {
 }
 
 function getInitials(fullName) {
-    const ignoredWords = ['von', 'van', 'de','la','der', 'die', 'das', 'zu', 'zum', 'zur'];
+    const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
     const nameArray = fullName.split(' ');
     const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
     const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
@@ -131,7 +132,7 @@ function generateUniqueId() {
 }
 
 
-function addTaskToTasks() {   
+function addTaskToTasks() {
 
     const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
     const selectedGuests = [];
@@ -141,27 +142,42 @@ function addTaskToTasks() {
         if (guest) {
             selectedGuests.push({
                 name: guest.name,
-                color: guest.color                
+                color: guest.color
             });
         }
-    });    
+    });
 
     for (let index = 0; index < selectedGuests.length; index++) {
         const element = selectedGuests[index];
         let name = element.name
         namelist.push(name);
         colorList.push(element.color);
-        initials.push(getInitials(name));      
+        initials.push(getInitials(name));
     }
+
 
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
+    let priorityImg;
+    switch (userPriotity) {
+        case 'Urgent':
+            priorityImg = './assets/img/vector_red.svg';
+            break;
+        case 'Medium':
+            priorityImg = './assets/img/vector_strich.svg';
+            break;
+        case 'Low':
+            priorityImg = './assets/img/vector_green.svg';
+            break;
+    }
+    let priority = userPriotity;
+
     let task_status = document.getElementById('task_category').value;
     let task_subtasks = document.getElementById('task_subtasks').value;
     let id = generateUniqueId();
-   
+
     let task = {
         'category': task_category,
         'date': task_date,
@@ -170,7 +186,8 @@ function addTaskToTasks() {
         'name': namelist,
         'initial': initials,
         'color': colorList,
-        'priority': './assets/img/vector_red.svg',
+        'priorityImg': priorityImg,
+        'priority': priority,
         'status': task_status,
         'subtask': task_subtasks,
         'title': task_title,
@@ -188,12 +205,12 @@ function addTaskToTasks() {
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('tasksLocalStorage', todosAsText)
+    localStorage.setItem('todosTasks', todosAsText)
 }
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('tasksLocalStorage');
+    let todosAsText = localStorage.getItem('todosTasks');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
@@ -290,7 +307,7 @@ function closeShowTask() {
 function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-    
+
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
         <div class="show_task_header">
@@ -305,17 +322,38 @@ function generateShowTask(id) {
         </div>
         <div class="show_task_priory show_task_date">
             <span>Priority:</span>
-            <div class="show_task_priority_image">
-                <div></div>    
-                <img src= "${contact.priority}">
+            <div class="show_task_priority">
+                <span>${contact.priority}</span>
+                <img src="${contact.priorityImg}">
             </div>
         </div>   
-        <div>${contact.name.join(" ")}</div>    
+        <div class="show_task_user_daten">
+            <span>Assing to:</span>
+            <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
+            <div class="show_task_user_name " id="show_task_user_name"></div>
+        </div>
         <div>${contact.subtask}</div>    
-        <div class="board_task_footer">
+        <div class="show_task_footer">
             <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
         </div>    
     `;
+
+        let showTaskUserName = document.getElementById('show_task_user_name');
+        showTaskUserName.innerHTML = ""; 
+        
+        for (let i = 0; i < contact['name'].length; i++) {
+            const element = contact['name'][i];
+            console.log(element);
+            showTaskUserName.innerHTML += /*html*/`
+                <div class="show_task_assing_to_users">                
+                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                    <div>${element}</div>
+                </div>
+            `;         
+        }
+
+
+
 
     let borderCategory = document.getElementById(`show_task_category${id}`);
     if (contact['status'] == 'Technical Task') {

@@ -1,7 +1,8 @@
 const BASE_URL_GUEST = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app';
 let show = true;
 let guesteArray = [];
-
+let userPriotity;
+let imgPriority;
 
 // loadTaskFromLocalStorage();
 
@@ -179,15 +180,10 @@ function getTaskPriority(id) {
             }
         });
 
-        const buttonText = button.innerText.trim();
-        // forwardButtonText(buttonText);
-        console.log(buttonText);
+        userPriotity = button.innerText.trim();       
     }
 }
 
-// function forwardButtonText(text) {
-//     console.log("Forwarding button text:", text);
-// }
 
 function checkFormValidity() {
     const form = document.getElementById('meinFormular');
@@ -238,9 +234,6 @@ function searchNameFromGuestList() {
 }
 
 
-
-
-
 function werteAbrufen() {
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     let checkedValues = [];
@@ -248,30 +241,3 @@ function werteAbrufen() {
         checkedValues.push(checkbox.value);
     });
 }
-
-
-function addNewSubTask() {
-
-}
-
-
-// function getPriority(prio) {
-//     let imgSrc;
-//     let name;
-//     // console.log(prio);
-    
-//     switch (prio) {
-//         case 'Urgent':
-//             imgSrc = './assets/img/vector_red.svg';
-//             name = prio;
-//             break;
-//         case 'Medium':
-//             imgSrc = './assets/img/vector_strich.svg';
-//             name = prio;
-//             break;
-//         case 'Low':
-//             imgSrc = './assets/img/vector_strich.svg"';
-//             name = prio;
-//             break;
-//     }
-// }
