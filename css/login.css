@@ -33,7 +33,8 @@ body {
     width: 100px;
 }
 
-#login-section, #register-section {
+#login-section,
+#register-section {
     flex: 1;
 }
 
@@ -179,7 +180,8 @@ body {
     border-color: #2dabe1;
 }
 
-.password-container, .email-container {
+.password-container,
+.email-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -189,10 +191,12 @@ body {
 .password-container input[type="text"],
 .email-container input[type="email"] {
     width: 100%;
-    padding-right: 35px; /* Platz für das Symbol */
+    padding-right: 35px;
+    /* Platz für das Symbol */
 }
 
-.password-container .toggle-password, .email-container .toggle-password {
+.password-container .toggle-password,
+.email-container .toggle-password {
     position: absolute;
     right: 10px;
 }
@@ -205,7 +209,7 @@ body {
     background-image: url('/assets/img/mail.svg');
 }
 
-.signup-succesfully-infobutton-container{
+.signup-succesfully-infobutton-container {
     z-index: 10;
     height: 100%;
     width: 100%;
@@ -222,6 +226,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -242,6 +247,7 @@ body {
     from {
         bottom: -50px;
     }
+
     to {
         bottom: 50%;
     }
@@ -264,7 +270,6 @@ footer {
 .footer-links {
     display: flex;
     width: 246px;
-    height: 35px;
     gap: 24px;
 }
 
@@ -354,4 +359,55 @@ footer {
     top: 67px;
     left: 75px;
     background-color: blue;
+}
+
+.signUp-mobile {
+    display: none;
+}
+
+@media (max-width: 1080px) {
+    .logo-fullscreen {
+        transform: translate(-110%, -50%);
+    }
+}
+
+@media (max-width:900px) {
+    .signUp-mobile {
+        display: flex;
+        justify-content: center;
+    }
+
+    .signUp-section {
+        display: none;
+    }
+
+    .logo-fullscreen {
+        transform: translate(-30%, -50%);
+    }
+
+    .content {
+        padding-top: 200px;
+    }
+
+    .logo-fullscreen {
+        width: 32px;
+    }
+
+    .box {
+        padding: 48px 0;
+        width: 100%;
+    }
+
+}
+
+@media (max-width:520px) {
+    .box form {
+        width: 90%;
+    }
+}
+
+@media (max-width:520px) {
+    .button {
+        font-size: 16px;
+    }
 }
