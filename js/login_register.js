@@ -1,5 +1,6 @@
 const BASE_URL = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app/';
 SetRememberData();
+checkIsUserLogIn();
 
 function showSignUpBox() {
     document.getElementById('login-section').classList.replace('d-center', 'd-none');
@@ -15,6 +16,13 @@ function showLoginBox() {
     document.getElementById('register-section').classList.remove('fade-in');
     document.getElementById('signup-button-area').classList.remove('fade-in');
 
+}
+
+function checkIsUserLogIn(){
+    let localstorage = localStorage.getItem('currentUser');
+    if (localstorage != null) {
+        window.location.href = './summary.html';
+    }
 }
 
 async function loadData(path = '') {
