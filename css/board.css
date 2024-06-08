@@ -157,23 +157,16 @@
     width: 25%;
     margin-right: 13px;
     margin-left: 13px;
-    display: inline-block;
-    flex-wrap: wrap-reverse;
 }
 
 .bord_content_colum_left {
     width: 25%;
     margin-right: 13px;
-    display: inline-block;
-    flex-wrap: wrap-reverse;
-
 }
 
 .bord_content_colum_right {
     width: 25%;
     margin-left: 13px;
-    display: inline-block;
-    flex-wrap: wrap-reverse;
 }
 
 .board_task_category {
@@ -239,6 +232,24 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+.board_task_progressbar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 25px;
+    background-color: #76c7c0;
+    width: 0;
+    text-align: center;
+    line-height: 25px;
+    color: white;
+    border-radius: 5px;
 }
 
 .pop_add_task {

@@ -34,8 +34,6 @@ async function initAddTask() {
             werteAbrufen();
         });
     });
-
-    console.log(guesteArray);
 }
 
 
