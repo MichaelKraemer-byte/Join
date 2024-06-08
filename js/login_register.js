@@ -42,7 +42,7 @@ async function login() {
     let indexOfEmail;
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
-        setCurrentUserInSessionstorage(data);
+        setCurrentUserInLocalStorage(data);
         window.location.href = './summary.html';
         if (rememberMe) {
             setEmailToLocalstorage(email);
@@ -63,17 +63,17 @@ function setDefaultUser() {
         color: '#FC71FF',
         initials: 'MM'
     }
-    sessionStorage.setItem('currentUser', JSON.stringify(defaultUser));
+    localStorage.setItem('currentUser', JSON.stringify(defaultUser));
 }
 
-function setCurrentUserInSessionstorage(data) {
+function setCurrentUserInLocalStorage(data) {
     let user = {
         name: data[indexOfEmail].name,
         email: data[indexOfEmail].email,
         color: data[indexOfEmail].color,
         initials: getInitials(data[indexOfEmail]),
     }
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('currentUser', JSON.stringify(user));
 }
 
 function checkEmailInDB(data, email) {
