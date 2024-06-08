@@ -30,7 +30,42 @@ body {
 }
 
 .logo {
-    width: 100px;
+    position: absolute;
+    /* Startposition in der Mitte */
+    transform: translate(-50%, -50%) scale(1);
+    /* Zentriert das Logo und behält die ursprüngliche Größe bei */
+    transition: all 500ms ease-in-out 300ms;
+    /* Glatter Übergang von 2 Sekunden */
+    z-index: 10;
+    animation: logoMoveIn 2s;
+    width: 100.03px;
+    height: 121.97px;
+    top: 15%;
+    left: 15%;
+}
+
+@keyframes logoMoveIn {
+    0% {
+        top: 50%;
+        /* Startposition in der Mitte */
+        left: 50%;
+        transform: translate(-50%, -50%) scale(3);
+    }
+
+    50% {
+        top: 50%;
+        /* Startposition in der Mitte */
+        left: 50%;
+        transform: translate(-50%, -50%) scale(3);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        width: 100.03px;
+        height: 121.97px;
+        top: 15%;
+        left: 15%;
+    }
 }
 
 #login-section,
@@ -353,6 +388,8 @@ footer {
     }
 }
 
+
+
 .logo-placeholder {
     width: 177px;
     height: 208px;
@@ -404,10 +441,48 @@ footer {
     .box form {
         width: 90%;
     }
-}
 
-@media (max-width:520px) {
     .button {
         font-size: 16px;
     }
+
+    .logo {
+        position: absolute;
+        /* Startposition in der Mitte */
+        transform: translate(-50%, -50%) scale(1);
+        /* Zentriert das Logo und behält die ursprüngliche Größe bei */
+        transition: all 500ms ease-in-out 300ms;
+        /* Glatter Übergang von 2 Sekunden */
+        z-index: 10;
+        animation: logoMoveIn 2s;
+        width: 100.03px;
+        height: 121.97px;
+        top: 15%;
+        left: 25%;
+    }
+
+    @keyframes logoMoveIn {
+        0% {
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        50% {
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            width: 100.03px;
+            height: 121.97px;
+            top: 15%;
+            left: 25%;
+        }
+    }
+
 }

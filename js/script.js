@@ -39,7 +39,7 @@ function includeHTML() {
     initials: 'G',
     color: '#FC71FF'
   }
-  getCurrentUserFromLocalStorage();
+  getCurrentUserFromSessionStorage();
   
   
 async function init() {
@@ -58,13 +58,14 @@ function isUserOrNot() {
   }
 }
 
-function getCurrentUserFromLocalStorage() {
-  let currentUserString = localStorage.getItem('currentUser');
+function getCurrentUserFromSessionStorage() {
+  let currentUserString = sessionStorage.getItem('currentUser');
   user = JSON.parse(currentUserString);
 }
 
 
 function setInitialsInHeader(){
+  debugger
     headInnitials = document.getElementById('headInnitials');
   if (user['name'] !== 'Maike Muster') {
     headInnitials.innerHTML = `${user['initials']}`;

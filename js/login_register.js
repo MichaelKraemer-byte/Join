@@ -52,7 +52,7 @@ async function login() {
 
 function guestLogin() {
     setDefaultUser();
-    window.location.href = './summary.html';
+    window.location.href = '/summary.html';
 }
 
 function setDefaultUser() {
