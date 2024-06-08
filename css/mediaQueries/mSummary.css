@@ -95,6 +95,12 @@
     }
 }
 
+@media (max-width: 850px){
+    #summary{
+        display: none;
+    }
+}
+
 
 @keyframes greeting {
     from {
@@ -106,6 +112,7 @@
         opacity: 0;
     }
 }
+
 
 @keyframes fadeIn {
     from {

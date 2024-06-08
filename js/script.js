@@ -186,14 +186,14 @@ function loginGreeting() {
   let loginGrettingScreen = document.getElementById('loginGrettingScreen');
   let summary = document.getElementById('summary');
 
-  if (document.referrer.includes('index.html')) {
+  if (document.referrer.includes('index.html') && window.innerWidth < 850) {
       loginGrettingScreen.classList.remove('d-none');
       setTimeout( () => {
         loginGrettingScreen.style.animation = 'greeting 0.8s ease-in-out forwards'}, 1200);
       setTimeout( () => {
         summary.style.animation = 'fadeIn 0.8s ease-in-out forwards';
-        summary.classList.remove('d-none')}, 1600);
+        summary.style.display = 'flex'}, 1600);
   } else if (!document.referrer.includes('index.html')) {
-    summary.classList.remove('d-none');
+    summary.style.display = 'flex';
   }
 }
