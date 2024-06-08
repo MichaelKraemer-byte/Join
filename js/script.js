@@ -65,7 +65,6 @@ function getCurrentUserFromSessionStorage() {
 
 
 function setInitialsInHeader(){
-  debugger
     headInnitials = document.getElementById('headInnitials');
   if (user['name'] !== 'Maike Muster') {
     headInnitials.innerHTML = `${user['initials']}`;

@@ -22,7 +22,7 @@
 #summaryMainSection {
     display: flex;
     align-items: center;
-    gap: 80px;
+    gap: 8%;
 }
 
 .greetName{

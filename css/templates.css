@@ -58,7 +58,8 @@ body {
 }
 
 .content {
-    padding: 206px 135px 96px 328px;
+    top: 23vh;
+    left: 23vw;    
     box-sizing: border-box;
     position: relative;
 }
@@ -75,6 +76,7 @@ body {
     align-items: center;
     position: relative;
     gap: 32px;
+    width: 100%;
 }
 
 .mainTitleContainer{
@@ -101,7 +103,7 @@ body {
     position: fixed;
     align-items: center;
     padding: 24px;
-    Height: auto;
+    Height: 8vh;    
     padding: 20px 40px 20px 348px;
     box-shadow: 0px 4px 4px 0px #0000001A;
     background-color: #FFFFFF;
@@ -160,7 +162,8 @@ body {
     justify-content: space-between;
     background-color: #2A3647;
     height: 100%;
-    width: 232px;
+    width: 16vw; 
+    min-width: 232px;   
     Padding: 64px 0px 64px 0px;
     box-sizing: border-box;
     z-index: 2;

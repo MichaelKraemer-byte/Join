@@ -1,7 +1,6 @@
 @media screen and  (min-width: 850px) and (max-width: 1321px) {
-    .content {
-        padding: 206px 56px 96px 328px;
-    } 
+    
+
 
     .title{
         font-size: clamp(47px, 4vw, 61px);
@@ -10,16 +9,10 @@
     .greetName {
         font-size: clamp(28px, 3vw, 61px);
     }
-    
-    #summaryMainSection{
-        gap: 60px;
-    }
+
 }
 
 @media screen and (min-width: 850px) and (max-width: 1131px){
-    #summaryMainSection{
-        gap: 30px;
-    }
 
     #webGreetingContainer{
         display: none;
@@ -83,9 +76,11 @@
     }
 }
 
-@media screen and (min-width: 450px) and (max-width: 850px){
+
+@media (max-width: 850px){
     #summary{
-        width: auto;
+        display: none;
+        width: 100%;
     }
     
     #summaryMainSection{
@@ -93,13 +88,57 @@
         display: flex;
         justify-content: center;
     }
-}
 
-@media (max-width: 850px){
-    #summary{
-        display: none;
+    .toDoAndDoneContainer {
+        padding: 3.6vw 3vw;
+    }
+
+    .urgentContainer{
+        padding: 3.6vw 3vw;
+    }
+
+    .summaryBottomContainer{
+        padding: 3.6vw 3vw;
+    }
+
+    .summaryCount{
+        font-size: clamp(32px, 10vw, 56px);
+    }
+
+    .urgentContainer{
+        gap: 8%;
+    }
+
+    .summaryNumContainer {
+        gap: 24px;
     }
 }
+
+
+@media (max-width: 450px){
+    .headerTitle {
+        display: none;
+    }
+    
+    #summary {
+        padding: 0px 16px 0px 16px;
+        gap: clamp(8px, 4vw, 47px); 
+    }
+
+    .summarySvgSize {
+        width: 11vw
+    }
+
+    .bottomContainerText,
+    .deadLinePhrase,
+    .urgentSpan,
+    .summarySpan {
+        font-size: clamp(14px, 3vw, 16px);
+    }
+
+}
+
+
 
 
 @keyframes greeting {

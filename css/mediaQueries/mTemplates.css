@@ -1,5 +1,29 @@
 
-@media screen and (min-width: 450px) and (max-width: 850px){
+@media screen and  (min-width: 1100px) and (max-width: 1321px) {
+    .content{
+        left: 26vw;  
+    }
+}
+
+@media screen and  (min-width: 850px) and (max-width: 1100px) {
+    .content{
+        left: 30vw;  
+    }
+}
+
+@media screen and  (min-width: 890px) and (max-width: 1000px) {
+    .content{
+        left: 34vw;  
+    }
+}
+
+@media screen and  (min-width: 850px) and (max-width: 890px) {
+    .content{
+        left: 35vw;  
+    }
+}
+
+@media (max-width: 850px){
 
     .helpIcon,
     .navBarImg,
@@ -56,12 +80,8 @@
 
     .headerLogo {
         display: block;
-    }
-
-    .content {
-        padding: 148px 56px 96px 56px;
-        width: 100vw;
-        height: 100%;
+        width:32px;
+        height: 39px;
     }
 
     .mobileBlueHorizontalLine {
@@ -75,11 +95,49 @@
     .titleContainer {
         flex-direction: column;
         text-align: start;
-        width: fit-content;
         align-items: start;
     }
 
     .blueVerticalLine{
         display: none !important;
     }
+}
+
+@media (max-width: 850px) {
+    .content {
+        padding-top: 2vh;
+        transform: translate(-50%);
+        left: 50%;
+        top: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: start;
+        padding: 44px 32px 0px 32px;
+    }
+}
+
+@media (max-width: 450px){
+    .header {
+        padding: 20px 16px 20px 16px;
+        Height: 5vh;    
+    }
+
+    .headerProfileContainer {
+        width: auto;
+    }
+
+    .headerLogo {
+        padding: 0px;
+    }
+
+    .title{
+        font-size: clamp(32px, 4vw, 47px);
+    }
+
+    .subTitle{
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
 }
