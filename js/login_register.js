@@ -1,6 +1,6 @@
 const BASE_URL = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app/';
 SetRememberData();
-checkIsUserLogIn();
+checkIsUserLoginFromLastSession();
 
 function showSignUpBox() {
     document.getElementById('login-section').classList.replace('d-center', 'd-none');
@@ -18,7 +18,7 @@ function showLoginBox() {
 
 }
 
-function checkIsUserLogIn(){
+function checkIsUserLoginFromLastSession(){
     let localstorage = localStorage.getItem('currentUser');
     if (localstorage != null) {
         window.location.href = './summary.html';

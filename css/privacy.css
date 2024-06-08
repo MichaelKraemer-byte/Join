@@ -31,3 +31,7 @@ h3 {
     display: flex;
     gap: 35px;
 }
+
+.content {
+    width: 70%;
+}
