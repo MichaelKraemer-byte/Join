@@ -10,6 +10,14 @@ b {
     color: red;
 }
 
+.add_task_content {
+    width: 60%;
+    top: 19vh;
+    left: 23vw;
+    box-sizing: border-box;
+    position: relative;
+}
+
 .add_task_form_row {
     display: flex;
     flex-direction: column;
