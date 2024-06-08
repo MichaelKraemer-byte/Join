@@ -91,7 +91,7 @@ async function generateToDo(arr, categorie_id) {
             <div class="board_task_title">${element.title}</div>  
             <div class="board_task_progressbar">
                 <div id="progressBar" class="progress-bar">0%</div>
-                <div>${schowSubtask(element)}</div>
+                <!-- <div>${schowSubtask(element)}</div> -->
             </div>          
             <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">  
@@ -113,7 +113,6 @@ async function generateToDo(arr, categorie_id) {
                 <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
             `;
         }
-
 
         let borderCategory = document.getElementById(`board_task_category${element.id}`);
         if (arr[i]['status'] == 'Technical Task') {
@@ -173,7 +172,7 @@ function addTaskToTasks() {
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
-    let priorityImg;    
+    let priorityImg;
     switch (userPriotity) {
         case 'Urgent':
             priorityImg = './assets/img/vector_red.svg';
@@ -188,7 +187,7 @@ function addTaskToTasks() {
     let priority = userPriotity;
 
     let task_status = document.getElementById('task_category').value;
-    
+
     let id = generateUniqueId();
 
     let task = {
@@ -212,7 +211,7 @@ function addTaskToTasks() {
     saveTasksToServer();
     closeWindow();
     initAddTask();
-    initBoardTasks();    
+    initBoardTasks();
 }
 
 
@@ -314,6 +313,7 @@ function showTask(id) {
 function closeShowTask() {
     let idAddTask = document.getElementById('pop_show_task');
     idAddTask.style.visibility = 'hidden';
+    location.reload()
 }
 
 
@@ -339,31 +339,57 @@ function generateShowTask(id) {
                 <span>${contact.priority}</span>
                 <img src="${contact.priorityImg}">
             </div>
-        </div>   
-        <div class="show_task_user_daten">
-            <span>Assing to:</span>
-            <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
-            <div class="show_task_user_name " id="show_task_user_name"></div>
-        </div>
-        <div>${schowSubtask(contact)}</div>    
+        </div> 
+            <div class="show_task_user_daten">
+                <span>Assing to:</span>
+                    <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
+                    <div class="show_task_user_name " id="show_task_user_name"></div>
+            </div>
+            <div class="show_task_show_subtasks">
+                <span>Subtasks</span>
+                <div class="show_task_subtask" id="show_task_subtask"></div>
+            </div>   
         <div class="show_task_footer">
-            <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
+            <div class="show_task_footer_delete">
+                <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
+                <span>Delete</span>    
+            </div>
+            <div class="show_task_footer_delete">
+                <button onclick="editTask(${contact.id})"><img src="./assets/img/edit.svg" alt=""></button>
+                <span>Edit</span>    
+            </div>
         </div>    
     `;
 
-        let showTaskUserName = document.getElementById('show_task_user_name');
-        showTaskUserName.innerHTML = ""; 
-        
-        for (let i = 0; i < contact['name'].length; i++) {
-            const element = contact['name'][i];
-            console.log(element);
-            showTaskUserName.innerHTML += /*html*/`
+    let show_task_subtask = document.getElementById('show_task_subtask');
+    show_task_subtask.innerHTML = '';
+
+    if (contact.subtasks) {
+        for (let k = 0; k < contact.subtasks.length; k++) {
+            const element = contact.subtasks[k];
+            show_task_subtask.innerHTML += `
+                <div class="show_task_subtask_content">
+                    <input type="checkbox"/>
+                    <div>${element}</div>                
+                </div>
+                `;
+        }
+    }
+
+
+
+    let showTaskUserName = document.getElementById('show_task_user_name');
+    showTaskUserName.innerHTML = "";
+
+    for (let i = 0; i < contact['name'].length; i++) {
+        const element = contact['name'][i];
+        showTaskUserName.innerHTML += /*html*/`
                 <div class="show_task_assing_to_users">                
                     <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
                     <div>${element}</div>
                 </div>
-            `;         
-        }
+            `;
+    }
 
     let borderCategory = document.getElementById(`show_task_category${id}`);
     if (contact['status'] == 'Technical Task') {
@@ -375,19 +401,96 @@ function generateShowTask(id) {
 
 }
 
-function addNewSubTask() {        
+
+function editTask(id) {
+    console.log(id);
+    let idAddTask = document.getElementById('show_task');
+    let showTaskEdit = document.getElementById('show_task_edit');
+    idAddTask.style.display = 'none';
+    showTaskEdit.style.display = 'inline';
+
+    showTaskEdit.innerHTML = '';
+    showTaskEdit.innerHTML = /*html*/` 
+        <form>
+            <div class="show_task__edit_header">
+                <button class="show_task_close_button" onclick="closeShowTask()"><img src="./assets/img/close.svg" alt=""></button>
+            </div>
+            <div class="show_task__edit_content">
+
+                <div class="add_task_title add_task_form_row">
+                    <label for="">Title</label>
+                    <input id="" class="add_task_input"  type="text" placeholder="Enter a title">
+                </div>
+
+                <div class="add_task_descripion add_task_form_row">
+                        <label for="">Description</label>
+                        <textarea id="task_description" class="add_task_textarea" name=""
+                            placeholder="Enter a Description"></textarea>
+                </div>
+
+                <div class="add_task_date add_task_form_row">
+                        <label for="">Due date</label>
+                        <input id="task_date" class="add_task_input" type="date">
+                </div>
+                <div class="add_task_button_group">
+                    <button id="urgent" type="button" class="add_button_group add_task_hover_button" value="1" onclick="getTaskPriority('urgent')">Urgent
+                        <div class="add_task_button_vector">
+                            <img src="./assets/img/vector_red.svg">
+                        </div>
+                    </button>
+                    <button id="medium" type="button" class="add_button_group add_task_button_medium add_task_hover_button" value="1" onclick="getTaskPriority('medium')">Medium
+                        <div class="add_task_button_vector">
+                            <img src="./assets/img/vector_strich.svg">
+                        </div>
+                    </button>
+                    <button id="low" type="button" class="add_button_group add_task_button_low  add_task_hover_button" value="1" onclick="getTaskPriority('low')">Low
+                        <div class="add_task_button_vector">
+                            <img src="./assets/img/vector_green.svg">
+                        </div>
+                    </button>
+                </div>
+                    <div class="add_task_assignet add_task_form_row">
+                        <label id="assignet_to">Assignet to</label>
+                        <div class="selectBox" onclick="showCheckboxes()">
+                            <img src="./assets/img/arrow_drop_down.svg" alt="">
+                            <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
+                        </div>
+                        <!-- <form action=""> -->
+                        <div class="checkbox_name" id="checkBoxes">
+                            <div class="dropdown_users_name" id='check_box_user_name'></div>
+                        </div>                                               
+                            <!-- </form>                       -->
+                    </div>
+                <div class="add_task_subtask add_task_form_row">
+                    <label>Subtasks</label>
+                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                    <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+                </div>
+            </div>
+            <div>
+                <button>ok</button>
+            </div>
+        </form>
+    `;
+
+
+
+
+}
+
+function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
-    if(subtasks) {
-        subtasks.push(task_subtask.value);    
-    }    
-    task_subtask.value = "";  
+    if (subtasks) {
+        subtasks.push(task_subtask.value);
+    }
+    task_subtask.value = "";
 }
 
 
 function schowSubtask(element) {
     if (element.subtasks) {
         return element.subtasks
-    }else {
+    } else {
         return " "
     }
 }

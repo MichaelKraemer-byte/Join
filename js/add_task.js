@@ -57,9 +57,14 @@ function generateCheckBox() {
     id.innerHTML = '';
     for (let i = 0; i < guesteArray.length; i++) {
         const element = guesteArray[i];
+        let initial = element.name;
+        console.log(getInitials(initial));
         id.innerHTML += /*html*/`        
             <label>
-                <p id="${i}">${element.name}<p>
+                <div class="board_task_check_box_name">
+                    <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
+                    <p id="${i}">${element.name}<p>
+                </div>
                 <input type="checkbox" name="optionen" value="${element.name}"/>
             </label>
         `;

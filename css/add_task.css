@@ -271,19 +271,35 @@ b {
 
 #checkBoxes label {
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    align-items: center;
     word-wrap: break-word;
     padding: 8px;
     border-radius: 10px;
     font-size: 20px;    
     background-color: white;
+    position: relative;
 }
 
 #checkBoxes label p {
    margin-block-start: 0;
    margin-block-end: 0;
+   margin-left: 20px;
 }
 
+.check_box_initial {
+    margin-left: 5px;
+}
+
+#checkBoxes label input {
+    margin-right: 25px;
+}
+
+.board_task_check_box_name {
+    display: flex;
+    align-items: center;
+}
 
 #checkBoxes label:hover {
     background-color: #D1D1D1;
@@ -305,4 +321,21 @@ b {
     -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+}
+
+.dropdown_users_name::-webkit-scrollbar {
+    width: 5px;
+}
+
+.dropdown_users_name::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dropdown_users_name::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.dropdown_users_name::-webkit-scrollbar-thumb:hover {
+    background: lightgray;
 }

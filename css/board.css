@@ -291,7 +291,7 @@
 
 .show_task {
     background-color: white;
-    height: 75%;
+    height: 80%;
     width: 30%;
     position: fixed;
     border-radius: 20px;
@@ -300,12 +300,14 @@
     position: relative;
 }
 
+
 .show_task_title {
     font-size: 61px;
     line-height: 73.2px;
     font-weight: 700;
     margin-bottom: 24px;
 }
+
 
 .show_task_header {
     height: 36px;
@@ -362,7 +364,33 @@
 }
 
 .show_task_user_name {
-    margin: 50px 0 20px;
+    margin: 25px 0 20px;
+    height: 260px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.show_task_user_name:hover {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.show_task_user_name::-webkit-scrollbar {
+    width: 5px;
+}
+
+.show_task_user_name::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.show_task_user_name::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+
+.show_task_user_name::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .show_task_user_daten span {
@@ -378,7 +406,7 @@
     font-size: 19px;
     line-height: 22.8px;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .show_task_user_initial {
@@ -386,14 +414,81 @@
     height: 42px;
 }
 
+.show_task_footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 30px;
+    right: 50px;
+    gap: 8px;
+}
+
 .show_task_footer button {
     border: 0;
     background-color: white;
     width: 16px;
-    height: 18px;
-    position: absolute;
-    bottom: 20px;
-    right: 50px;
+    height: 18px;   
+}
+
+.show_task_footer_delete  {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+}
+
+.show_task_footer_delete img {
+    cursor: pointer;
+}
+
+.show_task_show_subtasks {
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.show_task_subtask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.show_task_subtask_content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.show_task_show_subtasks span {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.show_task_edit {
+    background-color: white;
+    height: 80%;
+    width: 30%;
+    position: fixed;
+    border-radius: 20px;
+    padding: 30px;
+    word-wrap: break-word;
+    position: relative;
+    display: none;
+}
+
+.show_task__edit_header {
+    display: flex;
+    justify-content: end;
+}
+
+.show_task__edit_header button {
+    margin-top: 12px;
+}
+
+.show_task__edit_content {
+    display: flex;
+    flex-direction: column;
 }
 
 .slideIn {
