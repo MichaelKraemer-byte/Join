@@ -522,8 +522,6 @@ function slideInContact(contactName, initials) {
                     <button onclick="openEditPopUp('${contactName}', '${initials}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit</button>
                     <button onclick="openDeletePopUp('${contactName}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete</button>
                 </div>
-                <div id="deletePopUp" class="deletePopUp d-none">
-                </div>
             </div>
         </div>
             

@@ -162,8 +162,7 @@ body {
     justify-content: space-between;
     background-color: #2A3647;
     height: 100%;
-    width: 16vw; 
-    min-width: 232px;   
+    width: 232px; 
     Padding: 64px 0px 64px 0px;
     box-sizing: border-box;
     z-index: 2;
@@ -171,7 +170,7 @@ body {
 
 #footer {
     Width: Fill (232px);
-    Height: 317px;
+    Height: 20vh;    
     Padding: 243px, 0px, 0px, 52px;
     Gap: 4px;
     display: flex;
