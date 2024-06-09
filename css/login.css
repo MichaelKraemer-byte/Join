@@ -44,6 +44,10 @@ body {
     left: 15%;
 }
 
+#logo-mobile {
+    display: none;
+}
+
 @keyframes logoMoveIn {
     0% {
         top: 50%;
@@ -435,6 +439,64 @@ footer {
         width: 100%;
     }
 
+    #logo-mobile {
+        display: flex;
+        animation: logo-mobile 2s;
+        opacity: 0;
+    }
+
+    @keyframes logo-mobile {
+        0% {
+            opacity: 1;
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        50% {
+            opacity: 1;
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            width: 100.03px;
+            height: 121.97px;
+            top: 15%;
+            left: 15%;
+        }
+    }
+
+    .blue-bg {
+        animation: fadeOut 1.2s;
+        background-color: #2A3647;
+        width: 100%;
+        height: 100vh;
+        z-index: 5;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
 }
 
 @media (max-width:520px) {
@@ -459,6 +521,33 @@ footer {
         height: 121.97px;
         top: 15%;
         left: 25%;
+    }
+
+    @keyframes logo-mobile {
+        0% {
+            opacity: 1;
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        50% {
+            opacity: 1;
+            top: 50%;
+            /* Startposition in der Mitte */
+            left: 50%;
+            transform: translate(-50%, -50%) scale(3);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1);
+            width: 100.03px;
+            height: 121.97px;
+            top: 15%;
+            left: 25%;
+        }
     }
 
     @keyframes logoMoveIn {
