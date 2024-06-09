@@ -4,8 +4,8 @@
     width: 100%;
     margin-bottom: 96px;
     box-sizing: border-box;
-    position: absolute;
-    padding: 12.3vh 0 0 232px;
+    position: fixed;
+    padding: 135px 0 0 232px;
 }
 
 .addContactButton{
@@ -32,7 +32,7 @@
 }
 
 .summaryBlueVerticalLine{
-    width: 6px;
+    min-width: 3px;
     height: 59px;
     background-color: #29ABE2;;
     border-radius: 32px;
@@ -285,6 +285,7 @@
 }
 
 .viewContactSVG {
+    max-width: 120px;
     border-radius: 100px;
     border: 3px solid white;
     outline: 1.6px solid rgb(239, 239, 239);
@@ -450,7 +451,7 @@
     position: fixed;
     padding: 48px 24px 24px 16px;
     z-index: 1;
-    top: 12.3vh;
+    top: 135px;
 }
 
 .contactList {
@@ -468,6 +469,7 @@
     overflow: auto;
     align-items: center;
     position: relative;
+    height: 95%;
 }
 
 .innerListContainer{

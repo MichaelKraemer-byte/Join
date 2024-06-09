@@ -57,7 +57,7 @@ function addContactFormHTML() {
         <div class="addContactPopUpTitleContainer">
             <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
             <h2 class="popUpTitle">Add contact</h2>
-            <p class="subTitle whiteColor padding-left-0px">Tasks are better with a team!</p>
+            <p class="subTitle mobileSubTitle whiteColor padding-left-0px">Tasks are better with a team!</p>
             <div class="blueHorizontalLine">
             </div>
         </div>
@@ -285,9 +285,9 @@ function editContactFormHTML(contactName, initials) {
         <div class="addContactFormContainer">
             <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
-                <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <svg class="viewContactSVG mobileEditContactProfileSVG" xmlns="http://www.w3.org/2000/svg" fill="none">
                     <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" id="editViewContactCircle" fill="${contact['color']}"/>
-                    <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
+                    <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="inter" fill="white">${initials}</text>
                 </svg>
                 <form id="editContactForm" class="formContainer" onsubmit="return false">
                     <div class="contactsInputContainer">
@@ -511,7 +511,7 @@ function slideInContact(contactName, initials) {
 
     contactView.innerHTML = /*html*/`
         <div class="viewContactHeadContainer">
-            <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+            <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
                 <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
                 <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
             </svg>

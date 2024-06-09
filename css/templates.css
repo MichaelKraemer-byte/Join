@@ -44,6 +44,10 @@
     font-size: 28px;
 }
 
+.whiteColor {
+    color: white;
+}
+
 /* CSS TOOLS */
 /* CSS TOOLS */
 /* CSS TOOLS */
@@ -84,7 +88,7 @@ body {
 }
 
 .blueVerticalLine{
-    width: 3px;
+    min-width: 3px;
     height: 59px;
     background-color: #29ABE2;;
     border-radius: 32px;
@@ -103,13 +107,14 @@ body {
     position: fixed;
     align-items: center;
     padding: 24px;
-    Height: 8vh;    
+    Height: 135px;    
     padding: 20px 40px 20px 348px;
     box-shadow: 0px 4px 4px 0px #0000001A;
     background-color: #FFFFFF;
     right: 0;
     left: 0;
     z-index: 2;
+    box-sizing: border-box;
 }
 
 #initialCircle{
@@ -263,6 +268,7 @@ body {
     font-size: 27px;
     font-weight: 400;
     margin: 0px;
+    min-width: 120px;
 }
 
 .radius-30 {

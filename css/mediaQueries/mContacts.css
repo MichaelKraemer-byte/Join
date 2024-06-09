@@ -1,0 +1,480 @@
+@media screen and (min-width: 1137px) and (max-width: 1381px) {
+    .viewContactName{
+        font-size: clamp(20px, 2.8vw, 47px);
+    }
+
+    .viewContactHeadContainer{
+        gap: 10%;
+    }
+
+    .titleContainer {
+        gap: 7%;
+    }
+
+    .subTitle {
+        font-size: clamp(18px, 1.6vw, 27px);
+    }
+
+    .viewContactSVG{
+        max-width: 80px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1137px) {
+    .viewContactName{
+        font-size: clamp(20px, 2.8vw, 47px);
+    }
+
+    .viewContactHeadContainer{
+        gap: 5%;
+    }
+
+    .titleContainer {
+        gap: 5%;
+    }
+
+    #listSection{
+        min-width: 280px;
+        padding: 3vh 2vw;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1165px) {
+    .title {
+        font-size: clamp(36px, 2vw, 61px);
+    }
+    
+    .subTitle {
+        font-size: clamp(18px, 1.6vw, 27px);
+    }
+
+    .contactViewSection{
+        padding: 6vh 2.8vw;
+    }
+
+    .viewContactSVG{
+        max-width: 80px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1093px) {
+    .contactViewSection{
+        padding: 6vh 2.8vw;
+    }
+
+    #listSection{
+        min-width: 280px;
+        padding: 3vh 2vw;
+    }
+
+    .viewContactSVG{
+        max-width: 56px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 1035px) {
+    .listedContactContainer {
+        gap: 3%;
+    }
+
+    .listButtonContainer {
+        padding: 32px 0px 24px 0px;
+    }
+
+    #listSection{
+        min-width: 280px;
+        padding: 3vh 1.6vw;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 961px) {
+    .listedContactContainer {
+        gap: 3%;
+    }
+
+    .listButtonContainer {
+        padding: 32px 0px 24px 0px;
+    }
+
+    #listSection{
+        min-width: 280px;
+        padding: 3vh 1.6vw;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 953px) {
+    .titleContainer{
+        flex-direction: column;
+        align-items: start;
+        gap: 12px !important;
+    }
+
+    .subTitleContainer{
+        flex-direction: column;
+        display: flex;
+        gap: 12px;
+
+    }
+
+    .blueVerticalLine{
+        display: none !important;
+    }
+
+    .mobileBlueHorizontalLine{
+        display: block !important;
+        width: 30%;
+        height: 3px;
+        background-color: #29ABE2;;
+        border-radius: 32px;
+        margin-top: 0px;
+    }
+}
+
+@media screen and (min-width: 850px) and (max-width: 953px) {
+    #listSection{
+        min-width: 280px;
+        padding: 3vh 1vw 3vh 1.6vw;
+    }
+
+    .listedContactContainer {
+        padding: 15px 1.6vw 15px 1.6vw;
+    }
+
+    .addContactButton {
+        padding: 12px 24px 12px 24px;
+    }
+
+    .viewContactName{
+        font-size: clamp(22px, 2.5vw, 32px);
+    }
+}
+
+@media (max-width: 1446px) {
+    .mobileEditContactProfileSVG{
+        max-width: 120px;
+        height: 120px;
+        margin-bottom: 32px;
+    }
+
+    .contactPopUp{
+        flex-direction: column;
+        height: 80vh;
+        width: 60vw;
+    }
+
+    .addContactPopUpTitleContainer{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 66px 48px 66px 48px;
+        height: 35vh;
+    }
+
+    .addContactJoinLogo{
+        display: none;
+    }
+
+    .addContactFormContainer {
+        box-sizing: border-box;
+        border-radius: 0px 0px 30px 30px;
+        padding: 0px 48px 66px 48px;
+        height: 45vh;
+    }
+
+    .contactFormAndImgContainer{
+        display: flex;
+        flex-direction: column;
+        top: 50%;
+        box-sizing: border-box;
+        padding: 0px 0px 0px 0px;
+        gap: 0px;
+        background: transparent;
+        position: relative;
+        top: -5%;
+    }
+
+    .contactPopUpProfileImg{
+        padding-bottom: 24px;
+    }
+
+    .formContainer {
+        gap: 16px;
+    }
+
+    .nameEmailTel {
+        width: 80%;
+    }
+
+    .contactsInputIcon {
+        margin-right: 48px;    
+    }
+    
+    .mobileSubTitle{
+        font-size: 27px;
+        font-weight: 400;
+        margin: 0px;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .popUpTitle{
+        font-size: clamp(32px, 7vw, 47px);
+    }
+
+    .mobileSubTitle{
+        font-size: clamp(22px, 2.5vw, 32px) !important;
+    }
+
+    .contactPopUp {
+        right: unset;
+        top: unset;
+        bottom: -50%;
+        transform: translate(22%, 53%);
+        overflow: hidden;
+        width: 70vw;
+    }
+
+    .slideIn {
+        animation: slideIn 0.4s ease-in-out forwards;
+    }
+    
+    .slideOut {
+        animation: slideOut 0.4s ease-in-out forwards;
+    }
+    
+    @keyframes slideIn {
+        from {
+            bottom: -50%;
+        }
+        to {
+            bottom: 50%;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            bottom: 50%;
+        }
+        to {
+            bottom: -50%;
+        }
+    }
+
+    .popUpRightCornerCloseButton {
+        filter: brightness(1000%);
+        top: 4%;
+        right: 6%;
+    }
+
+    .popUpRightCornerCloseButton:hover {
+        background-color: transparent;
+    }
+}
+
+@media (max-width: 525px) {
+    .contactPopUp {
+        transform: translate(3.8%, 50%);
+        width: 90vw;
+    }
+
+    .popUpTitle{
+        font-size: clamp(32px, 9vw, 47px);
+    }
+}
+
+@media (max-width: 850px) {
+
+    .contactFormAndImgContainer{
+        height: 50vh;
+    }
+
+    #listSection {
+        padding: 0px 16px 0px 16px;
+        height: 100%;
+    }
+
+    .listButtonContainer {
+        top: 135px;
+        padding: 32px 0px 24px 10px;
+        margin-right: 16px;
+        margin-left: -2px;
+    }
+
+    .viewContactHeadContainer {
+        gap: 5%;
+    }
+    
+    .viewContactName{
+        font-size: clamp(32px, 3.5vw, 47px);
+    }
+
+    .listedContactContainer {
+        gap: 7%;
+    }
+
+    .contactViewSection{
+        padding: 6vh 3vw 8vh 3vw;
+    }
+
+    .viewContactSubTitle{
+        margin: 0px;
+    }
+
+    .contactList {
+        padding: 100px 0px 40px 0px;
+    }
+
+    .contactPageConfirmation {
+        margin: 0px;
+        margin-top: -16px;
+        padding: 16px 24px 16px 24px;
+        font-size: 16px;
+    }
+
+    .viewContactSVG{
+        width: 80px;
+    }
+
+    .titleContainer {
+        gap: 24px;
+    }
+
+    .formContainer {
+        gap: 12px;
+    }
+
+    .nameEmailTel {
+        Padding: 8px 24px 8px 21px;
+        font-size: 16px;
+    }
+
+    .contactCancelButton{
+        display: none;
+    }
+
+    .cancelAndCreateContainer {
+        display: flex;
+        gap: 0px;
+        padding-top: 0px;
+        justify-content: center;
+    }
+
+    .contactCreateButton {
+        font-size: 16px;
+        padding: 12px 16px 12px 16px;
+        margin-top: 12px;
+    }
+
+    .addContactFormContainer {
+        padding: 0px 48px 80px 48px;
+    }
+
+    .mobileEditContactProfileSVG{
+        width: 120px;
+        height: 120px;
+        margin-bottom: 32px;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 850px) {
+    .contactsHTMLContainer {
+        padding: 135px 0 74px 0px;
+    }
+}
+
+
+
+@media (max-width: 710px) {
+    .contactViewSection{
+        padding: 8vh 3vw 8vh 3vw;
+    }
+
+    .subTitle {
+        font-size: clamp(22px, 4vw, 27px);
+        margin-bottom: 8px;
+    }
+
+    .title {
+        font-size: clamp(32px, 6vw, 61px);
+    }
+
+}
+
+@media screen and (min-width: 660px) and (max-width: 771px) {
+    .viewContactName{
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 660px) {
+    .headertitle{
+        display: none;
+    }
+
+    .contactViewSection{
+        display: none;
+    }
+
+    .listButtonContainer{
+        display: none;
+    }
+
+    .contactList {
+        padding: 0px 28px 40px 28px;
+    }
+
+    #listSection {
+        width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+    .contactsHTMLContainer {
+        padding: 80px 0px 74px 0px;
+    }
+
+    .listButtonContainer{
+        display: none;
+    }
+
+    #listSection{
+        padding: 0px 8px 80px 16px;
+        box-sizing: border-box;
+    }
+
+    .listedContactSVG{
+        width: 34px;
+    }
+
+    .listedContactContainer{
+        gap: 1%;
+    }
+
+    .headerNavContainer{
+        top: 80px;
+    }
+
+    .contactPopUpProfileImg{
+        padding-bottom: 24px;
+        width: 120px;
+    }
+
+    .mobileEditContactProfileSVG{
+        width: 120px;
+        height: 120px;
+        margin-bottom: 32px;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 660px) {
+    .listedContactContainer{
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 400px) {
+    .contactList {
+        padding: 0px 16px 40px 16px;
+    }
+}
