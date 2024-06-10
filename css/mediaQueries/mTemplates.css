@@ -1,29 +1,28 @@
-
-@media screen and  (min-width: 1100px) and (max-width: 1321px) {
-    .content{
-        left: 26vw;  
+@media screen and (min-width: 1100px) and (max-width: 1321px) {
+    .content {
+        left: 26vw;
     }
 }
 
-@media screen and  (min-width: 850px) and (max-width: 1100px) {
-    .content{
-        left: 30vw;  
+@media screen and (min-width: 850px) and (max-width: 1100px) {
+    .content {
+        left: 30vw;
     }
 }
 
-@media screen and  (min-width: 890px) and (max-width: 1000px) {
-    .content{
-        left: 34vw;  
+@media screen and (min-width: 890px) and (max-width: 1000px) {
+    .content {
+        left: 34vw;
     }
 }
 
-@media screen and  (min-width: 850px) and (max-width: 890px) {
-    .content{
-        left: 35vw;  
+@media screen and (min-width: 850px) and (max-width: 890px) {
+    .content {
+        left: 35vw;
     }
 }
 
-@media (max-width: 850px){
+@media (max-width: 850px) {
 
     .helpIcon,
     .navBarImg,
@@ -31,7 +30,7 @@
         display: none !important;
     }
 
-    #navBar{
+    #navBar {
         display: flex;
         flex-direction: row;
         position: fixed;
@@ -49,9 +48,10 @@
         flex-direction: row;
         justify-content: space-around;
         width: 100%;
+        gap: 0;
     }
 
-    .navBarLink{
+    .navBarLink {
         flex-direction: column;
         width: fit-content;
         display: flex;
@@ -71,7 +71,7 @@
 
     .navBarSpan {
         min-width: 60px;
-        text-align: center;   
+        text-align: center;
     }
 
     .header {
@@ -80,25 +80,26 @@
 
     .headerLogo {
         display: block;
-        width:32px;
+        width: 32px;
         height: 39px;
     }
 
     .mobileBlueHorizontalLine {
         width: 90px;
         height: 3px;
-        background-color: #29ABE2;;
+        background-color: #29ABE2;
+        ;
         border-radius: 32px;
         margin-top: -16px;
     }
-        
+
     .titleContainer {
         flex-direction: column;
         text-align: start;
         align-items: start;
     }
 
-    .blueVerticalLine{
+    .blueVerticalLine {
         display: none !important;
     }
 }
@@ -117,15 +118,15 @@
         padding: 44px 32px 0px 32px;
     }
 
-    .headerProfileContainer{
+    .headerProfileContainer {
         height: 40px;
     }
 }
 
-@media (max-width: 450px){
+@media (max-width: 450px) {
     .header {
         padding: 20px 16px 20px 16px;
-        Height: auto;    
+        Height: auto;
     }
 
     .headerProfileContainer {
@@ -136,19 +137,19 @@
         padding: 0px;
     }
 
-    .title{
+    .title {
         font-size: clamp(32px, 4vw, 47px);
     }
 
-    .subTitle{
+    .subTitle {
         font-size: clamp(16px, 4vw, 20px);
     }
-    
-    .headerTitle{
+
+    .headerTitle {
         display: none;
     }
 
-    #initialCircle{
+    #initialCircle {
         width: 40px;
         height: 40px;
     }
