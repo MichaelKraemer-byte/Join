@@ -282,7 +282,7 @@ function editContactFormHTML(contactName, initials) {
         <div class="addContactFormContainer">
             <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
             <div class="contactFormAndImgContainer">
-                <svg class="viewContactSVG mobileEditContactProfileSVG" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <svg class="editContactSVG mobileEditContactProfileSVG" xmlns="http://www.w3.org/2000/svg" fill="none">
                     <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" id="editViewContactCircle" fill="${contact['color']}"/>
                     <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="inter" fill="white">${initials}</text>
                 </svg>

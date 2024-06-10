@@ -208,7 +208,7 @@
     }
 
     .contactsInputIcon {
-        margin-right: 48px;    
+        margin-right: 13%;    
     }
     
     .mobileSubTitle{
@@ -235,6 +235,10 @@
 
     .viewContactName{
         max-width: 570px;
+    }
+
+    .formContainer{
+        margin-left: -16px;
     }
 }
 
@@ -296,6 +300,9 @@
 }
 
 @media (max-width: 850px) {
+    .contactsInputIcon {
+        margin-right: 24px;    
+    }
 
     .contactFormAndImgContainer{
         height: 50vh;
@@ -358,7 +365,6 @@
     }
 
     .nameEmailTel {
-        Padding: 8px 24px 8px 21px;
         font-size: 16px;
     }
 
@@ -380,7 +386,7 @@
     }
 
     .addContactFormContainer {
-        padding: 0px 48px 80px 48px;
+        padding: 0px 32px 80px 32px;
     }
 
     .mobileEditContactProfileSVG{
@@ -416,6 +422,9 @@
         font-size: clamp(32px, 6vw, 61px);
     }
 
+    .formContainer {
+        margin-left: -24px;
+    }
 }
 
 @media screen and (min-width: 660px) and (max-width: 771px) {
@@ -500,7 +509,7 @@
     .mobileContactOptions{
         display: none;
         position: fixed;
-        bottom: 176px;
+        bottom: 231px;
         right: 16px;
         flex-direction: column;
         background-color: #2A3647;
@@ -530,9 +539,33 @@
     .mobileEditAndDeleteButton:active{
         filter: sepia(93%) saturate(2141%) hue-rotate(165deg) brightness(180%) contrast(89%);
     }
+
+    .formContainer {
+        margin-left: -30px;
+    }
+
+    .contactsInputIcon {
+        margin-right: 16px;
+    }
+}
+
+
+@media (max-width: 560px) {
+    .contactsInputIcon {
+        margin-right: 8px;
+    }
+
+    .formContainer {
+        margin-left: -44px;
+    }
+
+    .nameEmailTel {
+        width: 85%;
+    }
 }
 
 @media (max-width: 450px) {
+
     .contactsHTMLContainer {
         padding: 80px 0px 74px 0px;
     }
@@ -576,6 +609,23 @@
 
     .mobileViewContactButton{
         bottom: 176px;
+    }
+
+    .mobileContactOptions{
+        bottom: 176px;
+    }
+    
+    .contactsInputIcon {
+        margin-right: -56px;
+    }
+
+    .nameEmailTel {
+        padding: 10px 48px 10px 16px;
+        width: 120%;
+    }
+
+    .formContainer {
+        margin-left: -96px;
     }
 }
 

@@ -168,6 +168,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    width: 60%;
 }
 
 .nameEmailTel {
@@ -287,6 +288,14 @@
 
 .viewContactSVG {
     max-width: 120px;
+    border-radius: 100px;
+    border: 3px solid white;
+    outline: 1.6px solid rgb(239, 239, 239);
+}
+
+.editContactSVG{
+    width: 120px;
+    height: 120px;
     border-radius: 100px;
     border: 3px solid white;
     outline: 1.6px solid rgb(239, 239, 239);
@@ -637,5 +646,9 @@ body {
 }
 
 #helpLink{
+    display: none;
+}
+
+.mobileContactOptions{
     display: none;
 }
