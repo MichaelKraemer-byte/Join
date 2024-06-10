@@ -185,10 +185,10 @@ async function SetRememberData() {
         const data = await loadData('/users');
         const indexOfEmail = data.findIndex(element => element['email'] == email);
         const password = data[indexOfEmail]['password'];
-
         document.getElementById('login-email').value = email;
         document.getElementById('login-password').value = password;
         document.getElementById('login-rememberme').checked = true;
+        setPasswordIconToEye('login');
     }
 }
 
@@ -273,7 +273,7 @@ function setPasswordIconToLock(id) {
 /**
  * this function is used to set the icon from password inputfield to eye icon
  * 
- * @param {*} id document id from the password field
+ * @param {*} id document id from the password field - 'login' or 'register'
  */
 
 function setPasswordIconToEye(id) {
