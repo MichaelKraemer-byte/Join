@@ -305,6 +305,7 @@ footer {
     box-sizing: border-box;
     padding: 8px;
     flex: 1;
+    max-height: 100px;
 }
 
 .footer-links {
