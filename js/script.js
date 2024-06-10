@@ -44,18 +44,18 @@ getCurrentUserFromLocalStorage();
 
 async function init() {
   await getData();
-  isUserOrNot();
+  isUserOnlineHideNavBar();
   setInitialsInHeader();
   initForCurrentPage();
 }
 
 
-function isUserOrNot() {
+function isUserOnlineHideNavBar() {
   let localstorage = localStorage.getItem('currentUser');
   if (localstorage == null) {
     document.getElementById('navContainer').style.display = 'none';
     document.getElementById('userCircle').style.display = 'none';
-    document.getElementById('navBarImg').setAttribute('onclick', 'navigateTo("index.html")')
+    document.getElementById('navBarImg').href = 'index.html';
   }
 }
 

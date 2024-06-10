@@ -1,12 +1,14 @@
 const BASE_URL = "https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.app";
 const usedIds = new Set();
 
+let showEdit = true;
 let todos = [];
 let currentElement;
 let namelist = [];
 let colorList = [];
 let initials = [];
 let subtasks = [];
+
 
 loadTaskFromLocalStorage();
 
@@ -49,9 +51,9 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
+    await loadGuestFromServer();
     loadTaskFromLocalStorage();
-
-
+    
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
@@ -59,13 +61,9 @@ async function initBoardTasks() {
     let doneId = document.getElementById('board_done');
 
     let toDo = todos.filter(t => t['category'] == 'to_do');
-    // console.log(toDo.length);
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
-    // console.log(inProgress.length);
     let feedback = todos.filter(t => t['category'] == 'await');
-    // console.log(feedback.length);
     let done = todos.filter(t => t['category'] == 'done');
-    // console.log(done.length);
 
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
@@ -81,7 +79,6 @@ async function generateToDo(arr, categorie_id) {
 
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        // console.log(element);
         let initialsArray = element.initial;
         let colorsArray = element.color;
 
@@ -91,7 +88,6 @@ async function generateToDo(arr, categorie_id) {
             <div class="board_task_title">${element.title}</div>  
             <div class="board_task_progressbar">
                 <div id="progressBar" class="progress-bar">0%</div>
-                <!-- <div>${schowSubtask(element)}</div> -->
             </div>          
             <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">  
@@ -257,7 +253,7 @@ async function moveTo(category) {
     let contact = todos.find(obj => obj['id'] == currentElement);
     contact['category'] = category;
     saveTaskToLocalStorage();
-    saveTasksToServer();
+    await saveTasksToServer();
     initBoardTasks();
 
 }
@@ -271,26 +267,26 @@ function highlight(id) {
 function addTask() {
     let idAddTask = document.getElementById('pop_add_task');
     idAddTask.style.visibility = 'initial';
-    slideIn();
+    slideInTask();
     initAddTask();
 }
 
 
-function slideOut() {
+function slideOutTask() {
     let idAddTask = document.getElementById('show_add_task');
     idAddTask.classList.add('slideOut');
     idAddTask.classList.remove('slideIn');
 }
 
 
-function slideIn() {
+function slideInTask() {
     let idAddTask = document.getElementById('show_add_task');
     idAddTask.classList.add('slideIn');
     idAddTask.classList.remove('slideOut');
 }
 
 function closeWindow() {
-    slideOut();
+    slideOutTask();
     setTimeout(() => {
         hiddenPopWindow()
     }, 300);
@@ -325,7 +321,7 @@ function generateShowTask(id) {
     showTask.innerHTML += /*html*/`
         <div class="show_task_header">
             <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
-            <button class="show_task_close_button" onclick="closeShowTask()"><img src="./assets/img/close.svg" alt=""></button>
+            <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
         </div>   
         <div class="show_task_title">${contact.title}</div>    
         <div class="show_task_description">${contact.description}</div> 
@@ -403,7 +399,8 @@ function generateShowTask(id) {
 
 
 function editTask(id) {
-    console.log(id);
+    let contact = todos.find(obj => obj['id'] == id);
+
     let idAddTask = document.getElementById('show_task');
     let showTaskEdit = document.getElementById('show_task_edit');
     idAddTask.style.display = 'none';
@@ -411,72 +408,178 @@ function editTask(id) {
 
     showTaskEdit.innerHTML = '';
     showTaskEdit.innerHTML = /*html*/` 
-        <form>
+        <form class="show_task_edit_form">
             <div class="show_task__edit_header">
-                <button class="show_task_close_button" onclick="closeShowTask()"><img src="./assets/img/close.svg" alt=""></button>
+                <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
             </div>
             <div class="show_task__edit_content">
 
-                <div class="add_task_title add_task_form_row">
-                    <label for="">Title</label>
-                    <input id="" class="add_task_input"  type="text" placeholder="Enter a title">
+                <div class="task_title_edit add_task_form_row">
+                    <span>Title</span>
+                    <input id="task_title_edit" class="show_task_edit_input"  type="text" placeholder="Enter a title">
                 </div>
 
-                <div class="add_task_descripion add_task_form_row">
-                        <label for="">Description</label>
-                        <textarea id="task_description" class="add_task_textarea" name=""
+                <div class="task_descripion_edit add_task_form_row">
+                        <span>Description</span>
+                        <textarea id="task_description_edit" class="add_task_textarea" name=""
                             placeholder="Enter a Description"></textarea>
                 </div>
 
-                <div class="add_task_date add_task_form_row">
-                        <label for="">Due date</label>
-                        <input id="task_date" class="add_task_input" type="date">
+                <div class="task_date_edit add_task_form_row">
+                        <span>Due date</span>
+                        <input id="task_date_edit" class="show_task_edit_input" type="date">
                 </div>
+
                 <div class="add_task_button_group">
-                    <button id="urgent" type="button" class="add_button_group add_task_hover_button" value="1" onclick="getTaskPriority('urgent')">Urgent
+                    <button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
                         <div class="add_task_button_vector">
                             <img src="./assets/img/vector_red.svg">
                         </div>
                     </button>
-                    <button id="medium" type="button" class="add_button_group add_task_button_medium add_task_hover_button" value="1" onclick="getTaskPriority('medium')">Medium
+                    <button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
                         <div class="add_task_button_vector">
                             <img src="./assets/img/vector_strich.svg">
                         </div>
                     </button>
-                    <button id="low" type="button" class="add_button_group add_task_button_low  add_task_hover_button" value="1" onclick="getTaskPriority('low')">Low
+                    <button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
                         <div class="add_task_button_vector">
                             <img src="./assets/img/vector_green.svg">
                         </div>
                     </button>
                 </div>
-                    <div class="add_task_assignet add_task_form_row">
-                        <label id="assignet_to">Assignet to</label>
-                        <div class="selectBox" onclick="showCheckboxes()">
-                            <img src="./assets/img/arrow_drop_down.svg" alt="">
-                            <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
-                        </div>
-                        <!-- <form action=""> -->
-                        <div class="checkbox_name" id="checkBoxes">
-                            <div class="dropdown_users_name" id='check_box_user_name'></div>
-                        </div>                                               
-                            <!-- </form>                       -->
+
+
+                <div class="task_assignet_edit add_task_form_row">
+
+                    <span id="assignet_to">Assignet to</span>
+                    <div class="selectBox" onclick="showCheckboxesEdit()">
+                        <img src="./assets/img/arrow_drop_down.svg" alt="">
+                        <input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 
                     </div>
-                <div class="add_task_subtask add_task_form_row">
-                    <label>Subtasks</label>
-                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
-                    <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+
+                    <div class="checkBoxesEdit" id="checkBoxesEdit">
+                        
+                    </div>  
+
+                    <div class="task_edit_initial" id="task_edit_initial"></div>
                 </div>
+
+                <div class="task_subtask_edit add_task_form_row">
+                    <span>Subtasks</span>
+                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                    <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
+                </div>   
+                <div id="show_task_subtask_edit"></div>            
+                
             </div>
-            <div>
+            <div class="show_task_edit_footer">
                 <button>ok</button>
             </div>
         </form>
     `;
 
+    ///////////////////////
+
+    let checkBoxesEdit = document.getElementById('checkBoxesEdit');
+    checkBoxesEdit.innerHTML = '';
+
+    for (let k = 0; k < guesteArray.length; k++) {
+        const element = guesteArray[k];
+        let initial = element.name;
+        checkBoxesEdit.innerHTML += `
+            <label class="check_boxes_edit_label">
+                <div class="board_task_check_box_name">
+                        <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
+                        <p id="${k}">${element.name}<p>
+                </div>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
+            <label>
+        `;
+    }   
+///////////////////////
+    let urgent_edit = document.getElementById('urgent_edit');
+    let medium_edit = document.getElementById('medium_edit');
+    let low_edit = document.getElementById('low_edit');
+
+    urgent_edit.disabled = false;
+    medium_edit.disabled = false;
+    low_edit.disabled = false;
+
+    switch (contact.priority) {
+        case 'Urgent':
+            urgent_edit.classList.add('active');
+            medium_edit.disabled = true;
+            low_edit.disabled = true;
+            break;
+        case 'Medium':
+            medium_edit.classList.add('active');
+            urgent_edit.disabled = true;
+            low_edit.disabled = true;
+            break
+        case 'Low':
+            low_edit.classList.add('active');
+            urgent_edit.disabled = true;
+            medium_edit.disabled = true;
+            break
+    }
+
+//////////////////////
+
+    let task_title_edit = document.getElementById('task_title_edit');
+    let task_description_edit = document.getElementById('task_description_edit');
+    let task_date_edit = document.getElementById('task_date_edit');   
+    
+    task_title_edit.value = contact.title;
+    task_description_edit.value = contact.description;
+    task_date_edit.value = contact.date;
+    
+    
+    let task_edit_initial = document.getElementById('task_edit_initial');
+    task_edit_initial.innerHTML = ''; 
+    
+    if (contact.initial) {
+        for (let j = 0; j < contact.initial.length; j++) {
+            task_edit_initial.innerHTML += `
+            <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[j]};">${contact.initial[j]}</div>
+            `;
+        }        
+    }else {
+        task_edit_initial.innerHTML = '';
+    }                
+    
 
 
+////////////////////////////
+    
+    let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
+    task_subtasks_edit.innerHTML = '';
+                
+    if (contact.subtasks) {
+        for (let i = 0; i < contact.subtasks.length; i++) {
+            const element = contact.subtasks[i];
+            task_subtasks_edit.innerHTML += `
+                <div>${element}<div>
+            `;
+        }        
+    }else {
+        task_subtasks_edit.innerHTML = '';
+    } 
 
 }
+
+
+function showCheckboxesEdit() {
+    let checkboxes = document.getElementById("checkBoxesEdit");
+    if (showEdit) {
+        checkboxes.style.display = "block";
+        showEdit = false;
+    } else {
+        checkboxes.style.display = "none";
+        showEdit = true;
+    }
+}
+
+
 
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
@@ -494,3 +597,5 @@ function schowSubtask(element) {
         return " "
     }
 }
+
+

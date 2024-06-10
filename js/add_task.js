@@ -58,7 +58,6 @@ function generateCheckBox() {
     for (let i = 0; i < guesteArray.length; i++) {
         const element = guesteArray[i];
         let initial = element.name;
-        console.log(getInitials(initial));
         id.innerHTML += /*html*/`        
             <label>
                 <div class="board_task_check_box_name">
@@ -95,16 +94,19 @@ function generateAddTasks() {
                     </div>
 
                     <div class="add_task_assignet add_task_form_row">
+
+
                         <label id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
                             <img src="./assets/img/arrow_drop_down.svg" alt="">
                             <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
-                        <!-- <form action=""> -->
+
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
-                        </div>                                               
-                        <!-- </form>                       -->
+                        </div>    
+                        
+                        
                     </div>
                 </div>
             <div class="add_task_line"></div>
@@ -188,30 +190,17 @@ function getTaskPriority(id) {
 }
 
 
-function checkFormValidity() {
-    const form = document.getElementById('meinFormular');
-    const createTaskButton = document.getElementById('createTaskButton');
-    const errorMessage = document.getElementById('errorMessage');
-
-    if (form.checkValidity()) {
-        createTaskButton.disabled = false;
-        errorMessage.style.display = 'none';
-    } else {
-        createTaskButton.disabled = true;
-    }
-}
-
-// function addTaskToTasks() {
+// function checkFormValidity() {
 //     const form = document.getElementById('meinFormular');
+//     const createTaskButton = document.getElementById('createTaskButton');
 //     const errorMessage = document.getElementById('errorMessage');
 
-//     if (!form.checkValidity()) {
-//         errorMessage.style.display = 'block';
-//         return;
+//     if (form.checkValidity()) {
+//         createTaskButton.disabled = false;
+//         errorMessage.style.display = 'none';
+//     } else {
+//         createTaskButton.disabled = true;
 //     }
-
-//     // Add your task to the tasks here
-//     // ...
 // }
 
 

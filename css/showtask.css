@@ -1,0 +1,382 @@
+.pop_add_task {
+    min-width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(23, 31, 52, 0.3);
+    visibility: hidden;
+    z-index: 999;
+}
+
+.show_add_task {
+    background-color: white;
+    height: 85%;
+    width: 80%;
+    position: fixed;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.close_pop_add_task {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 16px;    
+    cursor: pointer;
+}
+
+.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.show_task {
+    background-color: white;
+    height: 80%;
+    width: 30%;
+    position: fixed;
+    border-radius: 20px;
+    padding: 30px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+
+.show_task_title {
+    font-size: 61px;
+    line-height: 73.2px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+
+.show_task_header {
+    height: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.show_task_category {
+    display: inline-block;
+    color: white;
+    font-size: 23px;
+    line-height: 27.6px;
+    border-radius: 8px;
+    padding: 4px 24px;
+}
+
+.show_task_close_button {
+    width: 13.15px;    
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.show_task_description {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+
+.show_task_date {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 25px;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+
+.show_task_priority img {
+    width: 40px;
+    height: 40px;
+}
+
+.show_task_priority {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    gap: 10px;
+}
+
+.show_task_user_name {
+    margin: 25px 0 20px;
+    height: 260px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.show_task_user_name:hover {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.show_task_user_name::-webkit-scrollbar {
+    width: 5px;
+}
+
+.show_task_user_name::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.show_task_user_name::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+
+.show_task_user_name::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.show_task_user_daten span {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.show_task_assing_to_users {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    font-size: 19px;
+    line-height: 22.8px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.show_task_user_initial {
+    width: 42px;
+    height: 42px;
+}
+
+.show_task_footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 30px;
+    right: 50px;
+    gap: 8px;
+}
+
+.show_task_footer button {
+    border: 0;
+    background-color: white;
+    width: 16px;
+    height: 18px;   
+}
+
+.show_task_footer_delete  {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+}
+
+.show_task_footer_delete img {
+    cursor: pointer;
+}
+
+.show_task_show_subtasks {
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.show_task_subtask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.show_task_subtask_content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.show_task_show_subtasks span {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.show_task_edit {
+    background-color: white;
+    height: 80%;
+    width: 30%;
+    position: fixed;
+    border-radius: 20px;
+    padding: 30px;
+    word-wrap: break-word;
+    position: relative;
+    display: none;
+}
+
+.show_task__edit_header {
+    display: flex;
+    justify-content: end;
+}
+
+.show_task__edit_header img {
+    margin-top: 12px;
+}
+
+.show_task__edit_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.show_task_edit_form {
+    height: 100%;
+}
+
+.show_task__edit_content span{
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.show_task__edit_content {
+    max-height: 85%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 20px;
+}
+
+.show_task__edit_content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.show_task__edit_content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.show_task__edit_content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.show_task__edit_content::-webkit-scrollbar-thumb:hover {
+    background: lightgray;
+}
+
+
+.show_task_edit_footer  button{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
+.show_task_edit_input {
+    font-size: clamp(17px, 1.3vw, 30px);
+    height: 48px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding-left: 6px;
+    cursor: pointer;
+}
+.task_assignet_edit {
+    width: 98%;
+}
+
+.task_edit_initial {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#checkBoxesEdit {
+    display: none;
+}
+
+.check_boxes_edit_label {
+    display: flex;
+    position: relative;
+    padding: 6px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.check_boxes_edit_label input {
+    position: absolute;
+    right: 20px;
+    top: 12px
+}
+
+.check_boxes_edit_label:hover {
+    background-color: #D1D1D1;
+}
+
+#checkBoxesEdit p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-left: 20px;
+}
+
+#checkBoxesEdit {
+    background-color: white;
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: hidden;    
+    border-radius: 10px;
+    word-wrap: break-word;
+    -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+}
+
+.checkBoxesEdit::-webkit-scrollbar {
+    width: 5px;
+}
+
+.checkBoxesEdit::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.checkBoxesEdit::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.checkBoxesEdit::-webkit-scrollbar-thumb:hover {
+    background: lightgray;
+}
+
+.add_button_group#urgent_edit.active .add_task_button_vector img {
+    filter: brightness(0) invert(1);
+}
+
+.add_button_group#medium_edit.active .add_task_button_vector img {
+    filter: brightness(0) invert(1);
+}
+
+.add_button_group#low_edit.active .add_task_button_vector img {
+    filter: brightness(0) invert(1);
+}
+
+.add_button_group#urgent_edit.active {
+    background-color: red;
+    border: red;
+    color: white;
+}
+
+.add_button_group#medium_edit.active {
+    background-color: #FFA800;
+    border: #FFA800;
+    color: white;
+}
+
+.add_button_group#low_edit.active {
+    background-color: green;
+    border: green;
+    color: white;
+}

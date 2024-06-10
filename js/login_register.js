@@ -2,11 +2,18 @@ const BASE_URL = 'https://join-b0cbf-default-rtdb.europe-west1.firebasedatabase.
 SetRememberData();
 checkIsUserLoginFromLastSession();
 
+/**
+ * this function is used to show the signUp and to hide the login
+ */
 function showSignUpBox() {
     document.getElementById('login-section').classList.replace('d-center', 'd-none');
     document.getElementById('register-section').classList.replace('d-none', 'd-center');
     document.getElementById('signup-button-area').classList.replace('signUp', 'd-none');
 }
+
+/**
+ * this function is used to show the login and to hide the signup
+ */
 
 function showLoginBox() {
     document.getElementById('login-section').classList.replace('d-none', 'd-center');
@@ -15,21 +22,39 @@ function showLoginBox() {
     document.getElementById('login-section').classList.remove('fade-in');
     document.getElementById('register-section').classList.remove('fade-in');
     document.getElementById('signup-button-area').classList.remove('fade-in');
-
 }
 
-function checkIsUserLoginFromLastSession(){
+/**
+ * This function is used to check if the user has logged out in the last session and then redirect him to the login page or to the summery
+ */
+
+function checkIsUserLoginFromLastSession() {
     let localstorage = localStorage.getItem('currentUser');
     if (localstorage != null) {
         window.location.href = './summary.html';
     }
 }
 
+/**
+ * this function is used to load data from the databank
+ * 
+ * @param {string} path this is the path from the BASE_URL
+ * @returns the JSON from download
+ */
+
 async function loadData(path = '') {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
     return responseToJson;
 }
+
+/**
+ * this function is used to upload data to the databank
+ * 
+ * @param {string} path this is the path from the BASE_URL
+ * @param {*} data the data that you want to upload
+ * @returns 
+ */
 
 async function postData(path = '', data = {}) {
     let response = await fetch(BASE_URL + path + '.json', {
@@ -41,6 +66,10 @@ async function postData(path = '', data = {}) {
     });
     return responseToJson = await response.json();
 }
+
+/**
+ * this function is used for the login
+ */
 
 async function login() {
     const email = document.getElementById('login-email').value;
@@ -58,11 +87,18 @@ async function login() {
     } else { wrongPassword('show') }
 }
 
+/**
+ * this function is used to login with the guest user
+ */
+
 function guestLogin() {
     setDefaultUser();
     window.location.href = '/summary.html';
 }
 
+/**
+ * this function is used to set a default user for the guestlogin
+ */
 function setDefaultUser() {
     let defaultUser = {
         name: 'Maike Muster',
@@ -74,6 +110,12 @@ function setDefaultUser() {
     localStorage.setItem('currentUser', JSON.stringify(defaultUser));
 }
 
+/**
+ * this function is used to set the current user in localstorage
+ * 
+ * @param {*} data 
+ */
+
 function setCurrentUserInLocalStorage(data) {
     let user = {
         name: data[indexOfEmail].name,
@@ -84,12 +126,28 @@ function setCurrentUserInLocalStorage(data) {
     localStorage.setItem('currentUser', JSON.stringify(user));
 }
 
+/**
+ * this function is used to check if the email already appears in the string
+ * 
+ * @param {*} data
+ * @param {*} email
+ * @returns 
+ */
+
 function checkEmailInDB(data, email) {
     indexOfEmail = data.findIndex(element => element['email'] == email);
     if (indexOfEmail >= 0) {
         return true
     }
 }
+
+/**
+ * this function is used to check if the password right
+ * 
+ * @param {*} data 
+ * @param {*} checkPassword 
+ * @returns 
+ */
 
 function checkPasswortInDB(data, checkPassword) {
     if (indexOfEmail >= 0) {
@@ -99,13 +157,27 @@ function checkPasswortInDB(data, checkPassword) {
     }
 }
 
-function setEmailToLocalstorage(email, password) {
+/**
+ * this function is used to set the email to localstorage
+ * 
+ * @param {*} email 
+ */
+
+function setEmailToLocalstorage(email) {
     localStorage.setItem('login-name', email);
 }
+
+/**
+ * this function is used to delete the email from localstorage
+ */
 
 function removeEmailFromLocalstorage() {
     localStorage.removeItem('login-name');
 }
+
+/**
+ * this functios is used to get and set data from databank in the inputs from login if has the client check the remember box at last session
+ */
 
 async function SetRememberData() {
     const email = localStorage.getItem('login-name');
@@ -113,12 +185,16 @@ async function SetRememberData() {
         const data = await loadData('/users');
         const indexOfEmail = data.findIndex(element => element['email'] == email);
         const password = data[indexOfEmail]['password'];
-
         document.getElementById('login-email').value = email;
         document.getElementById('login-password').value = password;
         document.getElementById('login-rememberme').checked = true;
+        setPasswordIconToEye('login');
     }
 }
+
+/**
+ * this function is used to upload the data from registration formular to the databank
+ */
 
 async function register() {
     const name = document.getElementById('register-name').value
@@ -145,6 +221,12 @@ async function register() {
     }
 }
 
+/**
+ * this function is used to show or hide the password from input field
+ * 
+ * @param {string} id document id from the password field
+ */
+
 function togglePasswordVisibility(id) {
     const passwordField = document.getElementById(id + '-password');
     const toggleIcon = document.getElementById(id + '-password-icon');
@@ -157,6 +239,12 @@ function togglePasswordVisibility(id) {
     }
 }
 
+/**
+ * this function is used to toggle icon in password inputfield between hide oder show icon
+ * 
+ * @param {*} id document id from the password field
+ */
+
 function togglePasswordIcon(id) {
     const passwordField = document.getElementById(id + '-password')
     if (passwordField.value.length == 0) {
@@ -166,6 +254,13 @@ function togglePasswordIcon(id) {
     }
 }
 
+
+/**
+ * this function is used to set the icon from password inputfield to lock icon
+ * 
+ * @param {*} id document id from the password field
+ */
+
 function setPasswordIconToLock(id) {
     const toggleContainer = document.getElementById(id + '-password-icon-container');
     const toggleIcon = document.getElementById(id + '-password-icon');
@@ -174,6 +269,12 @@ function setPasswordIconToLock(id) {
     toggleContainer.onclick = null;
     toggleContainer.removeAttribute('onclick');
 }
+
+/**
+ * this function is used to set the icon from password inputfield to eye icon
+ * 
+ * @param {*} id document id from the password field - 'login' or 'register'
+ */
 
 function setPasswordIconToEye(id) {
     const toggleContainer = document.getElementById(id + '-password-icon-container');
@@ -188,6 +289,12 @@ function setPasswordIconToEye(id) {
     }
 }
 
+/**
+ * this function is used to delete a user from databank
+ * 
+ * @param {string} username 
+ */
+
 async function deleteUser(username) {
     const users = await loadData('/users');
     for (let i = 0; i < users.length; i++) {
@@ -198,6 +305,12 @@ async function deleteUser(username) {
     }
     postData('/users', users);
 }
+
+/**
+ * this function is used to show the password is wrong
+ * 
+ * @param {string} val 'show' or 'hide' infotext
+ */
 
 function wrongPassword(val) {
     const wrongPassword = document.getElementById('wrong-password');
@@ -211,6 +324,12 @@ function wrongPassword(val) {
     }
 }
 
+/**
+ * this function is used to show the password no matching with the first password from inputfiel
+ * 
+ * @param {*} val 'show' or 'hide' infotext
+ */
+
 function noMatchingPassword(val) {
     const wrongPassword = document.getElementById('match-password');
     const inputField = document.getElementById('register2-password');
@@ -223,6 +342,12 @@ function noMatchingPassword(val) {
     }
 }
 
+/**
+ * this function is used to show a box that has the info the client registration is successfull
+ * 
+ * @param {string} val 'show' or 'hide' the infobox
+ */
+
 function signUpSuccesfullyInfoBox(val) {
     if (val == 'show') {
         document.getElementById('signup-succesfully-infobutton').style.display = 'flex'
@@ -231,10 +356,30 @@ function signUpSuccesfullyInfoBox(val) {
     }
 }
 
+/**
+ * this function is used to generate a random color for the new user
+ * 
+ * @returns the contact color
+ */
+
 function randomContactColor() {
     return contactColor[randomNumber(1, 14)];
 }
 
+/**
+ * this function is used to generate a random number for the randomContactColor function
+ * 
+ * @param {integer} min the min value
+ * @param {integer} max the max value
+ * @returns a random number between min and max value
+ */
+
+/**
+ * this function is used to generate random number
+ * @param {integer} min min value 
+ * @param {integer} max max value
+ * @returns a random value between the min value and max value
+ */
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
@@ -280,6 +425,13 @@ function postTestData() {
 
     postData('/users', users);
 }
+
+/**
+ * this function is used to generate the initials from name.
+ * 
+ * @param {*} contact 
+ * @returns the first letter from first name and first letter from last name
+ */
 
 function getInitials(contact) {
     let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
