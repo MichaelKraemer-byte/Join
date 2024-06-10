@@ -1,5 +1,5 @@
 h1 {
-    font-size: 61px;
+    font-size: clamp(20px, 7vw, 61px);
     line-height: 73.2px;
     font-weight: 700;
     margin-block-start: 0;
@@ -12,11 +12,9 @@ b {
 }
 
 .add_task_content {
-    /* height: 100vh; */
     width: 70%;
-    position: absolute;
     padding-top: 245px;
-    padding-left: 328px;
+    padding-left: clamp(50px, 28vw, 328px)
 }
 
 .add_task_form_row {
@@ -122,7 +120,7 @@ b {
 }
 
 .add_task_button_vector img {
-   width: clamp(12px, 3vw, 35px);;
+   width: clamp(16px, 7vw, 35px);;
 }
 
 .add_button_group#urgent.active .add_task_button_vector img {

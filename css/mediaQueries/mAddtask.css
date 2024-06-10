@@ -1,0 +1,68 @@
+@media (max-width: 850px) {
+    .add_task_content {
+        padding: 200px 20px 0 20px;
+        width: 94%;
+    }
+
+    .selectBox img {
+        position: absolute;
+        top: 25px;
+        right: 19px;
+    }
+}
+
+@media (max-width: 666px) {
+    .add_task_content {
+        padding: 120px 20px 0 20px;
+        width: 93%;
+    }
+
+    .add_task_button_create {
+        font-size: 16px;
+        width: 130px;
+        height: 50px;
+    }
+
+    .add_task_button_group_footer button {
+        border-radius: 10px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .add_task_form {
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .add_task_line {
+        display: none;
+    }
+    .add_task_width50 {
+        width: 100%;
+    }
+
+    .add_task_input {
+        width: 98%;        
+    }  
+
+    .add_task_button_clear {
+        display: none;
+    }
+    
+    .add_task_footer p {
+        font-size: clamp(15px, 2vw, 30px);        
+    }
+    .add_task_footer {
+        padding: 50px 0  90px;
+        justify-content: space-around;
+    }   
+
+    .add_task_date {
+        margin-top: 38px;        
+    }
+
+    .dropdown_users_name {        
+        max-height: 120px;        
+    }
+
+}

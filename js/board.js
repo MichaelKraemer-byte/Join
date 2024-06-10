@@ -54,7 +54,6 @@ async function initBoardTasks() {
     await loadGuestFromServer();
     loadTaskFromLocalStorage();
     
-
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -317,6 +316,8 @@ function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
 
+    let upgrateTask = [];
+
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
         <div class="show_task_header">
@@ -473,7 +474,7 @@ function editTask(id) {
                 
             </div>
             <div class="show_task_edit_footer">
-                <button>ok</button>
+                <button onclick="upgradeTodos(${contact.id})">ok</button>
             </div>
         </form>
     `;
@@ -563,10 +564,13 @@ function editTask(id) {
         }        
     }else {
         task_subtasks_edit.innerHTML = '';
-    } 
+    }
 
 }
 
+function upgradeTodos(id) {
+    console.log(id);
+}
 
 function showCheckboxesEdit() {
     let checkboxes = document.getElementById("checkBoxesEdit");
