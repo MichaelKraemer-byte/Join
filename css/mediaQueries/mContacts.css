@@ -496,6 +496,40 @@
         display: block;
         bottom: 231px;
     }
+
+    .mobileContactOptions{
+        display: none;
+        position: fixed;
+        bottom: 176px;
+        right: 16px;
+        flex-direction: column;
+        background-color: #2A3647;
+        border-radius: 20px 20px 0px 20px;
+        padding: 10px;
+    }
+
+    .mobileEditAndDeleteButton{
+        padding: 13.5px;
+        font-size: 20px;
+        color: white;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        border-radius: 10px;
+    }
+
+    .mobileEditAndDeleteImg{
+        filter: brightness(1000%);
+    }
+
+    .mobileEditAndDeleteButton:hover{
+        cursor: pointer;
+        background-color: #2A3D59;
+    }
+
+    .mobileEditAndDeleteButton:active{
+        filter: sepia(93%) saturate(2141%) hue-rotate(165deg) brightness(180%) contrast(89%);
+    }
 }
 
 @media (max-width: 450px) {

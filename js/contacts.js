@@ -535,9 +535,14 @@ function slideInContact(contactName, initials) {
             </div>
         </div>
 
-        <button onclick="openEditPopUp('${contactName}', '${initials}')" class="btn mobileViewContactButton">
+        <button id="mobileViewContactButton" onclick="openMobileContactOptions(event)" class="btn mobileViewContactButton">
             <img src="./assets/img/menuDotsButton.svg">
         </button>
+
+        <div id="mobileContactOptions" class="mobileContactOptions">
+            <button onclick="openEditPopUp('${contactName}', '${initials}')" class="btn mobileEditAndDeleteButton"><img class="mobileEditAndDeleteImg" src="./assets/img/editGreyIcon.svg">Edit</button>
+            <button onclick="openDeletePopUp('${contactName}')" class="btn mobileEditAndDeleteButton"><img class="mobileEditAndDeleteImg" src="./assets/img/deleteGreyIcon.svg">Delete</button>
+        </div>
     `;
     if (window.innerWidth <= 660) {
         slideInContactViewScreenForMobile(contactView);
@@ -545,6 +550,13 @@ function slideInContact(contactName, initials) {
         contactView.classList.remove('slideOutContactView');
         contactView.classList.add('slideInContactView');
     }
+}
+
+
+function openMobileContactOptions(){
+    let mobileContactOptions = document.getElementById('mobileContactOptions');
+
+    mobileContactOptions.style.display = 'flex';
 }
 
 

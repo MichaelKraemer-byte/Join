@@ -113,7 +113,6 @@ async function getData() {
 }
 
 
-
 function openHeadNav(event) {
   let nav = document.getElementById('headerNav');
   nav.classList.contains('d-none') ? nav.classList.remove('d-none') : nav.classList.add('d-none');
@@ -124,9 +123,21 @@ function openHeadNav(event) {
 function closeNavOnOutsideClick(event) {
   let nav = document.getElementById('headerNav');
   let initialCircle = document.getElementById('initialCircle');
+  let mobileContactOptions = document.getElementById('mobileContactOptions');
+  let mobileViewContactButton = document.getElementById('mobileViewContactButton');
 
-  if (event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
-    nav.classList.add('d-none');
+  // Überprüfen, ob der Klick außerhalb des Nav-Menüs erfolgt
+  if (nav && event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
+      nav.classList.add('d-none');
+  }
+
+  // Überprüfen, ob der Klick außerhalb der mobilen Kontaktoptionen erfolgt
+  if (mobileContactOptions && 
+      mobileContactOptions.style.display === 'flex' && 
+      !mobileContactOptions.contains(event.target) && 
+      !mobileViewContactButton.contains(event.target)) 
+      {
+        mobileContactOptions.style.display = 'none';
   }
 }
 
