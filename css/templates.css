@@ -48,6 +48,12 @@
     color: white;
 }
 
+.d-space-b {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* CSS TOOLS */
 /* CSS TOOLS */
 /* CSS TOOLS */

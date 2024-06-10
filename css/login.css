@@ -301,9 +301,10 @@ body {
 footer {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     box-sizing: border-box;
     padding: 8px;
+    flex: 1;
 }
 
 .footer-links {
@@ -316,6 +317,11 @@ footer {
     font-weight: 400;
     color: #CDCDCD;
     text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #19b9fd;
+    font-weight: bold;
 }
 
 .d-space-b {

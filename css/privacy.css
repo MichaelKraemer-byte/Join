@@ -35,3 +35,7 @@ h3 {
 .content {
     width: 70%;
 }
+
+.arrowLeft {
+    cursor: pointer;
+}
