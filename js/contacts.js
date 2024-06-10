@@ -534,9 +534,36 @@ function slideInContact(contactName, initials) {
                 <a id="phone" class="phone" type="tel" href="tel:+491234567890">${contact['phone']}</a>
             </div>
         </div>
+
+        <button onclick="openEditPopUp('${contactName}', '${initials}')" class="btn mobileViewContactButton">
+            <img src="./assets/img/menuDotsButton.svg">
+        </button>
     `;
+    if (window.innerWidth <= 660) {
+        slideInContactViewScreenForMobile(contactView);
+    } else { 
+        contactView.classList.remove('slideOutContactView');
+        contactView.classList.add('slideInContactView');
+    }
+}
+
+
+function slideInContactViewScreenForMobile(contactView){
+    contactViewSection = document.getElementById('contactViewSection');
+    contactViewSection.style.animation = 'rightSlideInScreen 0.3s ease-in-out forwards';
+
     contactView.classList.remove('slideOutContactView');
     contactView.classList.add('slideInContactView');
+}
+
+
+function slideOutContactViewScreenForMobile(){
+    contactViewSection = document.getElementById('contactViewSection');
+    contactViewSection.style.animation = 'rightSlideOutScreen 0.3s ease-in-out forwards';
+
+    let contactView = document.getElementById('contactView');
+    contactView.classList.remove('slideInContact');
+    contactView.classList.add('slideOutContactView');
 }
 
 

@@ -38,6 +38,10 @@
         min-width: 280px;
         padding: 3vh 2vw;
     }
+
+    .viewContactButtonsContainer {
+        gap: 0px;
+    }
 }
 
 @media screen and (min-width: 850px) and (max-width: 1165px) {
@@ -60,10 +64,6 @@
 }
 
 @media screen and (min-width: 850px) and (max-width: 1093px) {
-    .contactViewSection{
-        padding: 6vh 2.8vw;
-    }
-
     #listSection{
         min-width: 280px;
         padding: 3vh 2vw;
@@ -236,7 +236,6 @@
     .viewContactName{
         max-width: 570px;
     }
-    
 }
 
 @media (max-width: 800px) {
@@ -426,13 +425,6 @@
 }
 
 @media (max-width: 660px) {
-    .contactViewSection{
-        display: none;
-    }
-}
-
-
-@media (max-width: 660px) {
     .headertitle{
         display: none;
     }
@@ -447,6 +439,62 @@
 
     #listSection {
         width: 100%;
+    }
+
+    .title {
+        font-size: clamp(47px, 4vw, 61px);
+    }
+
+    .viewContactName {
+        font-size: clamp(36px, 6vw, 47px);
+        font-weight: 700;
+        color: black;
+    }
+
+    .contactViewSection{
+        position: fixed;
+        height: 100%;
+        width: 100vw;
+        transform: translateX(100%);
+        overflow: hidden;
+        background-color: #F6F7F8;
+        padding: 6vh 3vw 8vh 3vw;
+    }
+
+    .mobileContactButton {
+        display: block;
+    }
+
+    @keyframes rightSlideInScreen {
+        from {
+            right: -100%;
+        }
+        to {
+            right: 100%;
+        }
+    }
+
+    @keyframes rightSlideOutScreen {
+        from {
+            right: 100%;
+        }
+        to {
+            right: -100%;
+        }
+    }
+
+    .viewContactSVG{
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .viewContactButtonsContainer{
+        display: none;
+    }
+
+    .mobileViewContactButton{
+        display: block;
+        bottom: 231px;
     }
 }
 
@@ -486,6 +534,15 @@
         height: 120px;
         margin-bottom: 32px;
     }
+
+    .viewContactSVG{
+        width: 80px;
+        min-width: 80px;
+    }
+
+    .mobileViewContactButton{
+        bottom: 176px;
+    }
 }
 
 @media screen and (min-width: 361px) and (max-width: 660px) {
@@ -494,8 +551,17 @@
     }
 }
 
-@media screen and (min-width: 320px) and (max-width: 400px) {
+@media (max-width: 400px) {
     .contactList {
         padding: 0px 16px 40px 16px;
+    }
+
+    .viewContactName{
+        font-size: 32px;
+    }
+
+    .viewContactSVG{
+        width: 72px;
+        min-width: 72px;
     }
 }

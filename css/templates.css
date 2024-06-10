@@ -394,3 +394,16 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.blueArrowToLeft {
+    width: 25px;
+    height: 23px;
+    display: none;
+    position: fixed;
+    top: 48px;
+    right: 16px;
+}
+
+.blueArrowToLeft:hover {
+    cursor: pointer;
+}

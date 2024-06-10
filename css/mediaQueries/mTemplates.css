@@ -24,6 +24,9 @@
 }
 
 @media (max-width: 850px){
+    #helpLink{
+        display: block;
+    }
 
     .helpIcon,
     .navBarImg,
@@ -151,5 +154,11 @@
     #initialCircle{
         width: 40px;
         height: 40px;
+    }
+}
+
+@media (max-width: 660px){
+    .blueArrowToLeft{
+        display: block;
     }
 }

@@ -29,6 +29,7 @@
     flex: 1;
     gap: 32px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .summaryBlueVerticalLine{
@@ -609,4 +610,32 @@ body {
 
 .contactsHTMLBase{
     box-sizing: border-box;
+}
+
+.mobileContactButton {
+    display: none;
+    position: fixed;
+    bottom: 96px;
+    right: 16px;
+    padding: 0px;
+}
+
+.mobileContactButton:active {
+    filter: sepia(93%) saturate(2141%) hue-rotate(165deg) brightness(180%) contrast(89%);
+}
+
+.mobileViewContactButton{
+    display: none;
+    position: fixed;
+    bottom: 176px;
+    right: 16px;
+    padding: 0px;
+}
+
+.mobileViewContactButton:active {
+    filter: sepia(93%) saturate(2141%) hue-rotate(165deg) brightness(180%) contrast(89%);
+}
+
+#helpLink{
+    display: none;
 }
