@@ -4,6 +4,7 @@ h1 {
     font-weight: 700;
     margin-block-start: 0;
     margin-block-end: 0;
+    color: black;
 }
 
 b {
@@ -11,11 +12,11 @@ b {
 }
 
 .add_task_content {
-    width: 60%;
-    top: 19vh;
-    left: 23vw;
-    box-sizing: border-box;
-    position: relative;
+    /* height: 100vh; */
+    width: 70%;
+    position: absolute;
+    padding-top: 245px;
+    padding-left: 328px;
 }
 
 .add_task_form_row {
@@ -57,7 +58,8 @@ b {
 }
 
 .add_task_textarea {
-    font-size: clamp(17px, 1.3vw, 30px);
+    font-size: clamp(17px, 1.3vw, 25px);
+    font-family: 'Inter';
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     height: 120px;
