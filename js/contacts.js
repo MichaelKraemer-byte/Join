@@ -203,10 +203,7 @@ function capitalizeFirstAndLastName(name) {
         let lastPartIndex = parts.length - 1;
         parts[lastPartIndex] = parts[lastPartIndex].charAt(0).toUpperCase() + parts[lastPartIndex].slice(1).toLowerCase();
     }
-    // Alle anderen Teile klein lassen
-    for (let i = 1; i < parts.length - 1; i++) {
-        parts[i] = parts[i].toLowerCase();
-    }
+
     // Den String wieder zusammenfügen
     let result = parts.join(' ');
     return result;

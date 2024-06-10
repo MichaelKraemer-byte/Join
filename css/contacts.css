@@ -34,7 +34,7 @@
 .summaryBlueVerticalLine{
     min-width: 3px;
     height: 59px;
-    background-color: #29ABE2;;
+    background-color: #29ABE2;
     border-radius: 32px;
 }
 
@@ -322,14 +322,19 @@
     gap: 16px;
 }
 
-.viewContactName{
+.viewContactName {
     margin: 0px;
     font-size: 47px;
     font-weight: 500;
-    max-width: 670px;
-    white-space: nowrap;
+    max-width: 570px;
+    white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.5em;
+    max-height: 4.5em;
 }
 
 .viewContactNameContainer {
@@ -449,7 +454,7 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    padding: 48px 24px 24px 16px;
+    padding: 48px 44px 24px 44px;
     z-index: 1;
     top: 135px;
 }

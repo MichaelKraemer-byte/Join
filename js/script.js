@@ -49,6 +49,7 @@ async function init() {
   initForCurrentPage();
 }
 
+
 function isUserOrNot() {
   let localstorage = localStorage.getItem('currentUser');
   if (localstorage == null) {
@@ -57,6 +58,7 @@ function isUserOrNot() {
     document.getElementById('navBarImg').setAttribute('onclick', 'navigateTo("index.html")')
   }
 }
+
 
 function getCurrentUserFromLocalStorage() {
   let currentUserString = localStorage.getItem('currentUser');

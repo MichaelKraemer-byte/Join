@@ -16,7 +16,8 @@
     }
 
     .viewContactSVG{
-        max-width: 80px;
+        width: 80px;
+        min-width: 80px;
     }
 }
 
@@ -53,7 +54,8 @@
     }
 
     .viewContactSVG{
-        max-width: 80px;
+        width: 80px;
+        min-width: 80px;
     }
 }
 
@@ -68,7 +70,8 @@
     }
 
     .viewContactSVG{
-        max-width: 56px;
+        width: 56px;
+        min-width: 56px;
     }
 }
 
@@ -78,7 +81,7 @@
     }
 
     .listButtonContainer {
-        padding: 32px 0px 24px 0px;
+        padding: 32px 48px 24px 24px;
     }
 
     #listSection{
@@ -93,7 +96,7 @@
     }
 
     .listButtonContainer {
-        padding: 32px 0px 24px 0px;
+        padding: 32px 32px 24px 16px;
     }
 
     #listSection{
@@ -151,7 +154,7 @@
 
 @media (max-width: 1446px) {
     .mobileEditContactProfileSVG{
-        max-width: 120px;
+        width: 120px;
         height: 120px;
         margin-bottom: 32px;
     }
@@ -214,6 +217,26 @@
         margin: 0px;
         min-width: 120px;
     }
+
+    .popUpRightCornerCloseButton {
+        filter: brightness(1000%);
+        top: 4%;
+        right: 6%;
+    }
+
+    .popUpRightCornerCloseButton:hover {
+        background-color: transparent;
+    }
+
+    .popUpRightCornerCloseButton:active {
+        background-color: #29ABE2;
+        filter: brightness(250%);
+    }
+
+    .viewContactName{
+        max-width: 570px;
+    }
+    
 }
 
 @media (max-width: 800px) {
@@ -260,16 +283,6 @@
             bottom: -50%;
         }
     }
-
-    .popUpRightCornerCloseButton {
-        filter: brightness(1000%);
-        top: 4%;
-        right: 6%;
-    }
-
-    .popUpRightCornerCloseButton:hover {
-        background-color: transparent;
-    }
 }
 
 @media (max-width: 525px) {
@@ -296,7 +309,7 @@
 
     .listButtonContainer {
         top: 135px;
-        padding: 32px 0px 24px 10px;
+        padding: 32px 48px 24px 12px;
         margin-right: 16px;
         margin-left: -2px;
     }
@@ -333,7 +346,8 @@
     }
 
     .viewContactSVG{
-        width: 80px;
+        width: 64px;
+        min-width: 64px;
     }
 
     .titleContainer {
@@ -383,7 +397,11 @@
     }
 }
 
-
+@media (max-width: 796px) {
+    .viewContactButtonsContainer {
+        gap: 0px;
+    }
+}
 
 @media (max-width: 710px) {
     .contactViewSection{
@@ -408,11 +426,14 @@
 }
 
 @media (max-width: 660px) {
-    .headertitle{
+    .contactViewSection{
         display: none;
     }
+}
 
-    .contactViewSection{
+
+@media (max-width: 660px) {
+    .headertitle{
         display: none;
     }
 
