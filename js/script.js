@@ -59,8 +59,8 @@ function isUserOfflineHideNavBar() {
   if (localstorage != null) {
     document.getElementById('navContainer').style.display = 'flex';
     document.getElementById('headerProfileContainer').style.display = 'flex';
-    document.getElementById('navBarImg').href = 'index.html';
-    document.getElementById('a-logo-mobile').href = 'index.html';
+    document.getElementById('navBarImg').href = 'summary.html';
+    document.getElementById('a-logo-mobile').href = 'summary.html';
   }
 }
 
