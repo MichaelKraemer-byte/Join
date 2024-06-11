@@ -56,7 +56,6 @@ async function getBoardData() {
     response = await fetch(baseUrl + path + ".json");
     responseAsJson = await response.json();
     data = Object.values(responseAsJson);
-    console.log(data);
   }
 
 
@@ -78,11 +77,37 @@ function numberOfToDoTasks() {
 
 function numberOfUrgentTasks() {
     let urgent = data.filter(item => item['priority'] === 'Urgent');
-
     console.log(urgent);
+    setUpComingDeadline(urgent);
+
     return /*html*/`
         ${urgent.length}
     `;    
+}
+
+
+function setUpComingDeadline(urgent){
+    let upcomingDeadline = document.getElementById('upcomingDeadline');    
+
+    let deadLine = getNextUrgentDate(urgent);
+    upcomingDeadline.innerHTML = /*html*/`
+        ${deadLine}
+    `;    
+}
+
+
+function getNextUrgentDate(urgent) {
+    // Aktuelles Datum und Zeit
+    let now = new Date();
+
+    // Filtern der Daten, die in der Zukunft liegen
+    let futureDates = urgent.filter(item => new Date(item.date) > now);
+
+    // Sortieren der zukünftigen Daten nach dem Datum
+    futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // Rückgabe des nächsten Datums
+    return futureDates.length > 0 ? futureDates[0].date : console.log('No urgent dates in board.');
 }
 
 

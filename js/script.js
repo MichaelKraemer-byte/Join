@@ -51,7 +51,7 @@ async function init() {
 }
 
 window.addEventListener('resize', () => {
-  isUserOnlineHideMobileNavBar();
+  isUserOfflineHideMobileNavBar();
 })
 
 function isUserOfflineHideNavBar() {
