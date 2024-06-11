@@ -44,8 +44,8 @@ getCurrentUserFromLocalStorage();
 
 async function init() {
   await getData();
-  isUserOnlineHideNavBar();
-  isUserOnlineHideMobileNavBar();
+  isUserOfflineHideNavBar();
+  isUserOfflineHideMobileNavBar();
   setInitialsInHeader();
   initForCurrentPage();
 }
@@ -54,17 +54,17 @@ window.addEventListener('resize', () => {
   isUserOnlineHideMobileNavBar();
 })
 
-function isUserOnlineHideNavBar() {
+function isUserOfflineHideNavBar() {
   let localstorage = localStorage.getItem('currentUser');
-  if (localstorage == null) {
-    document.getElementById('navContainer').style.display = 'none';
-    document.getElementById('userCircle').style.display = 'none';
+  if (localstorage != null) {
+    document.getElementById('navContainer').style.display = 'flex';
+    document.getElementById('headerProfileContainer').style.display = 'flex';
     document.getElementById('navBarImg').href = 'index.html';
     document.getElementById('a-logo-mobile').href = 'index.html';
   }
 }
 
-function isUserOnlineHideMobileNavBar() {
+function isUserOfflineHideMobileNavBar() {
   let localstorage = localStorage.getItem('currentUser');
   if (localstorage == null) {
     if (window.innerWidth <= 850) {
