@@ -13,7 +13,7 @@
 
 @media (max-width: 666px) {
     .add_task_content {
-        padding: 120px 20px 0 20px;
+        padding: 160px 20px 0 20px;
         width: 93%;
     }
 
@@ -25,7 +25,7 @@
 
     .add_task_button_group_footer button {
         border-radius: 10px;
-        font-size: 14px;
+        font-size: 12px;
         cursor: pointer;
     }
 
@@ -45,6 +45,10 @@
         width: 98%;        
     }  
 
+    .add_task_title {
+        margin-top: 28px;        
+    }
+
     .add_task_button_clear {
         display: none;
     }
@@ -53,8 +57,8 @@
         font-size: clamp(15px, 2vw, 30px);        
     }
     .add_task_footer {
-        padding: 50px 0  90px;
-        justify-content: space-around;
+        padding: 50px 20px 90px;
+        justify-content: space-between;
     }   
 
     .add_task_date {
@@ -64,5 +68,14 @@
     .dropdown_users_name {        
         max-height: 120px;        
     }
+}
 
+@media (max-width: 450px) {
+    .add_task_content {
+        padding: 100px 0 0 8px;
+        width: 93%;
+    }
+    .add_task_title {
+        margin-top: 18px;        
+    }
 }

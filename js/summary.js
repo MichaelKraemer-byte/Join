@@ -20,6 +20,7 @@ function updateGreeting() {
     greetName();
 }
 
+
 function greetName(){
     let greetName = document.querySelectorAll('.greetName');
 
@@ -31,3 +32,79 @@ function greetName(){
         return `!`;
     };
 }
+
+
+async function getBoardNumbersInSummary(){
+    let done = document.getElementById('done');
+    let toDo = document.getElementById('toDo');
+    let urgent = document.getElementById('urgent');
+    let inBoard = document.getElementById('inBoard');
+    let inProgress = document.getElementById('inProgress');
+    let awaitFeedback = document.getElementById('awaitFeedback');
+    await getBoardData();
+    done.innerHTML = numberOfDoneTasks();
+    toDo.innerHTML = numberOfToDoTasks();
+    urgent.innerHTML = numberOfUrgentTasks();
+    inBoard.innerHTML = numberOfTasksInBoard();
+    inProgress.innerHTML = numberOfTasksInProgress();
+    awaitFeedback.innerHTML = numberOfAwaitFeedbackTasks();
+}
+
+
+async function getBoardData() {
+    path = '/tasks';
+    response = await fetch(baseUrl + path + ".json");
+    responseAsJson = await response.json();
+    data = Object.values(responseAsJson);
+    console.log(data);
+  }
+
+
+function numberOfDoneTasks(){
+    let done = data.filter(item => item['category'] === 'done');
+    return /*html*/`
+        ${done.length}
+    `;
+}
+
+
+function numberOfToDoTasks() {
+    let toDoTasks = data.filter(item => item['category'] === 'to_do');
+    return /*html*/`
+        ${toDoTasks.length}
+    `;    
+}
+
+
+function numberOfUrgentTasks() {
+    let urgent = data.filter(item => item['priority'] === 'Urgent');
+
+    console.log(urgent);
+    return /*html*/`
+        ${urgent.length}
+    `;    
+}
+
+
+function numberOfTasksInBoard(){
+    return /*html*/`
+        ${data.length}
+    `;
+}
+
+
+function numberOfTasksInProgress(){
+    let inProgress = data.filter(item => item['category'] === 'in_progress');
+    return /*html*/`
+    ${inProgress.length}
+`;
+}
+
+
+function numberOfAwaitFeedbackTasks() {
+    let awaitFeedback = data.filter(item => item['category'] === 'await');
+    return /*html*/`
+    ${awaitFeedback.length}
+`;
+}
+
