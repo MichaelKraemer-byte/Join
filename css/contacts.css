@@ -645,8 +645,8 @@ body {
     filter: sepia(93%) saturate(2141%) hue-rotate(165deg) brightness(180%) contrast(89%);
 }
 
-#helpLink{
-    display: none;
+#helpLink {
+    display: none !important;
 }
 
 .mobileContactOptions{

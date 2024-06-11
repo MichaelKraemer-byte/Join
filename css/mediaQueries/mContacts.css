@@ -394,6 +394,10 @@
         height: 120px;
         margin-bottom: 32px;
     }
+
+    #helpLink{
+        display: block !important;
+    }
 }
 
 @media screen and (min-width: 451px) and (max-width: 850px) {
