@@ -37,18 +37,17 @@ async function initAddTask() {
 }
 
 
-function showCheckboxes() {
+function toggleCheckboxes(event) {
+    event.stopPropagation();
     let checkboxes = document.getElementById("checkBoxes");
     if (show) {
         checkboxes.style.display = "block";
-
         show = false;
     } else {
         checkboxes.style.display = "none";
         show = true;
     }
 }
-
 
 
 function generateCheckBox() {
@@ -70,18 +69,6 @@ function generateCheckBox() {
     }
 
 }
-
-// document.addEventListener('click', function(event) {
-//     let checkboxes = document.getElementById("checkBoxes");
-//     let selectBox = document.querySelector('.selectBox');
-//     if (!selectBox.contains(event.target)) {
-//         checkboxes.style.display = "none";
-//         show = true;
-//     }
-// });
-
-
-
 
 
 function generateAddTasks() {
@@ -106,11 +93,11 @@ function generateAddTasks() {
 
                     <div class="add_task_assignet add_task_form_row">
                         <label id="assignet_to">Assignet to</label>
-                        <div class="selectBox" onclick="showCheckboxes()">
+                        <div class="selectBox" onclick="toggleCheckboxes(event)">
                             <img src="./assets/img/arrow_drop_down.svg" alt="">
                             <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
-                        <div class="checkbox_name" id="checkBoxes">
+                        <div class="checkbox_name" id="checkBoxes" onclick="event.stopPropagation()">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
                         </div>    
                     </div>
@@ -187,19 +174,14 @@ function getTaskPriority(id) {
 }
 
 
-// function checkFormValidity() {
-//     const form = document.getElementById('meinFormular');
-//     const createTaskButton = document.getElementById('createTaskButton');
-//     // const errorMessage = document.getElementById('errorMessage');
-
-//     if (form.checkValidity()) {
-//         createTaskButton.disabled = false;
-//         // errorMessage.style.display = 'none';
-//     } else {
-//         createTaskButton.disabled = true;
-//     }
-// }
-
+document.addEventListener('click', function(event) {
+    let checkboxes = document.getElementById("checkBoxes");
+    let selectBox = document.querySelector('.selectBox');
+    if (!selectBox.contains(event.target)) {
+        checkboxes.style.display = "none";
+        show = true;
+    }
+});
 
 
 function searchNameFromGuestList() {
