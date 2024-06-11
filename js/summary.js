@@ -120,23 +120,25 @@ function numberOfUrgentTasks() {
 
 /**
  * The function setUpComingDeadline sets the upcoming deadline on a webpage based on the urgency level
- * provided.
+ * provided or displays that there are no urgent tasks at the moment.
  * @param {Object[]} urgent - The `urgent` parameter in the `setUpComingDeadline` function is used to determine
  * whether the upcoming deadline being set is urgent or not. This parameter likely influences the logic
  * within the `getNextUrgentDate` function to calculate the next urgent date.
  */
 function setUpComingDeadline(urgent){
-    let upcomingDeadline = document.getElementById('upcomingDeadline');    
+    let upcomingDeadline = document.getElementById('upcomingDeadline');   
+    let deadlinePhrase = document.getElementById('deadlinePhrase'); 
     let deadLine = getNextUrgentDate(urgent);
     upcomingDeadline.innerHTML = /*html*/`
         ${deadLine}
-    `;    
+    `;
+    deadLine === '' ? deadlinePhrase.innerHTML = 'Nothing urgent right now.' : null;
 }
 
 
 /**
  * The function `getNextUrgentDate` filters and sorts a list of urgent dates to return the next
- * upcoming date, or logs a message if there are no urgent dates.
+ * upcoming date, or returns an empty string, if there are no urgent dates.
  * 
  * @param {Object[]} urgent - An array of objects, where each object represents an urgent task with a `date` 
  * property indicating the due date of the task.
@@ -146,7 +148,7 @@ function getNextUrgentDate(urgent) {
     let now = new Date();
     let futureDates = urgent.filter(item => new Date(item.date) > now);
     futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
-    return futureDates.length > 0 ? futureDates[0].date : console.log('No urgent dates in board.');
+    return futureDates.length > 0 ? futureDates[0].date : '';
 }
 
 
