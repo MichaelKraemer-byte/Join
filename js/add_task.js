@@ -37,40 +37,6 @@ async function initAddTask() {
 }
 
 
-function toggleCheckboxes(event) {
-    event.stopPropagation();
-    let checkboxes = document.getElementById("checkBoxes");
-    if (show) {
-        checkboxes.style.display = "block";
-        show = false;
-    } else {
-        checkboxes.style.display = "none";
-        show = true;
-    }
-}
-
-
-function generateCheckBox() {
-    let id = document.getElementById('check_box_user_name');
-
-    id.innerHTML = '';
-    for (let i = 0; i < guesteArray.length; i++) {
-        const element = guesteArray[i];
-        let initial = element.name;
-        id.innerHTML += /*html*/`        
-            <label>
-                <div class="board_task_check_box_name">
-                    <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
-                    <p id="${i}">${element.name}<p>
-                </div>
-                <input type="checkbox" name="optionen" value="${element.name}"/>
-            </label>
-        `;
-    }
-
-}
-
-
 function generateAddTasks() {
 
     let add_task_form = document.getElementById('add_task_form');
@@ -99,7 +65,9 @@ function generateAddTasks() {
                         </div>
                         <div class="checkbox_name" id="checkBoxes" onclick="event.stopPropagation()">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
-                        </div>    
+                        </div> 
+                        <!--  -->
+                        <div class="add_task_show_check" id="add_task_show_check"></div>   
                     </div>
                 </div>
             <div class="add_task_line"></div>
@@ -174,11 +142,43 @@ function getTaskPriority(id) {
 }
 
 
+function toggleCheckboxes(event) {
+    event.stopPropagation();
+    let checkboxes = document.getElementById("checkBoxes");
+    if (show) {
+        checkboxes.style.visibility = "initial";
+        show = false;
+    } else {
+        checkboxes.style.visibility = "hidden";
+        show = true;
+    }
+}
+
+
+function generateCheckBox() {
+    let id = document.getElementById('check_box_user_name');
+    id.innerHTML = '';
+    for (let i = 0; i < guesteArray.length; i++) {
+        const element = guesteArray[i];
+        let initial = element.name;
+        id.innerHTML += /*html*/`        
+            <label>
+                <div class="board_task_check_box_name">
+                    <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
+                    <p id="${i}">${element.name}<p>
+                </div>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
+            </label>
+        `;
+    }
+}
+
+
 document.addEventListener('click', function(event) {
     let checkboxes = document.getElementById("checkBoxes");
     let selectBox = document.querySelector('.selectBox');
     if (!selectBox.contains(event.target)) {
-        checkboxes.style.display = "none";
+        checkboxes.style.visibility = "hidden";
         show = true;
     }
 });
@@ -206,11 +206,38 @@ function searchNameFromGuestList() {
 
 
 function werteAbrufen() {
+    let add_task_show_check = document.getElementById('add_task_show_check');
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    add_task_show_check.innerHTML = '';
     let checkedValues = [];
     checkboxes.forEach((checkbox) => {
-        checkedValues.push(checkbox.value);
+        checkedValues.push(checkbox.value);        
     });
+    // console.log(checkedValues);
+    const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
+    const selectedGuests = [];
+    selectedCheckboxes.forEach(checkbox => {
+        const guestName = checkbox.value;
+        const guest = guesteArray.find(g => g.name === guestName);
+        
+        if (guest) {
+            selectedGuests.push({
+                name: guest.name,
+                color: guest.color
+            });
+        }
+    });
+    for (let index = 0; index < selectedGuests.length; index++) {
+        const element = selectedGuests[index];
+        let name = element.name
+        namelist.push(name);
+        colorList.push(element.color);
+        initials.push(getInitials(name));
+            add_task_show_check.innerHTML += `
+                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${colorList[index]};">${initials[index]}</div>
+            `;
+    }
+
 }
 
 

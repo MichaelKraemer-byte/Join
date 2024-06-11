@@ -286,7 +286,8 @@ b {
 }
 
 #checkBoxes {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
 }
 
 .checkbox_name {
