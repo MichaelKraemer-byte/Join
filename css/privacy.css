@@ -40,8 +40,25 @@ h3 {
     cursor: pointer;
 }
 
-@media screen and (min-width: 890px) and (max-width: 1000px) {
-.content {
-        left: 0;
+.privacy-container {
+    top: 23vh;
+    left: 23vw;    
+    box-sizing: border-box;
+    position: relative;
+    width: 70%;
+}
+
+@media(max-width: 1100px){
+    .privacy-container {
+        left: 30vw;
+    }
+}
+
+@media(max-width: 850px) {
+    .privacy-container {
+        left: 0px;
+        width: 100%;
+        padding-inline: 50px;
+        padding-bottom: 100px;
     }
 }
