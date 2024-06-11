@@ -1,8 +1,11 @@
+/**
+ * The function `updateGreeting` dynamically updates a greeting message based on the current time and
+ * also includes a personalized name.
+ */
 function updateGreeting() {
     let greetElement = document.querySelectorAll('.greetAtTime');
     const now = new Date();
     const hour = now.getHours();
-
     let greeting;
     if (hour < 6) {
         greeting = `Good night${greetName()}`;
@@ -15,16 +18,22 @@ function updateGreeting() {
     } else {
         greeting = `Good evening${greetName()}`;
     }
-
     greetElement.forEach((element) => { element.innerHTML = greeting } );
     greetName();
 }
 
 
+/**
+ * The `greetName` function updates the inner HTML of elements with the class 'greetName' based on the
+ * value of the user's name, returning a comma if the name is not 'Gast' and an exclamation
+ * mark if it is.
+ * @returns The function `greetName` will return a comma (`,`) if the user's name is not 'Gast',
+ * and an exclamation mark (`!`) if the user's name is 'Gast'.
+ */
 function greetName(){
     let greetName = document.querySelectorAll('.greetName');
 
-    if (user['name'] !== 'Maike Muster') {
+    if (user['name'] !== 'Gast') {
         greetName.forEach((element) => { element.innerHTML = `${user['name']}`});
         return ',';
     } else {
@@ -34,6 +43,10 @@ function greetName(){
 }
 
 
+/**
+ * The function `getBoardNumbersInSummary` retrieves board data and updates the HTML elements with the
+ * number of tasks in different categories of the summary.html (dashboard).
+ */
 async function getBoardNumbersInSummary(){
     let done = document.getElementById('done');
     let toDo = document.getElementById('toDo');
@@ -51,6 +64,10 @@ async function getBoardNumbersInSummary(){
 }
 
 
+/**
+ * The function `getBoardData` asynchronously fetches task data from the tasks path and stores it as
+ * an array of values - globally as data.
+ */
 async function getBoardData() {
     path = '/tasks';
     response = await fetch(baseUrl + path + ".json");
@@ -59,6 +76,10 @@ async function getBoardData() {
   }
 
 
+/**
+ * The function `numberOfDoneTasks` returns the number of tasks that are marked as 'done' in the globally defined data.
+ * @returns the number of tasks that have the category 'done' in the data array.
+ */
 function numberOfDoneTasks(){
     let done = data.filter(item => item['category'] === 'done');
     return /*html*/`
@@ -67,6 +88,11 @@ function numberOfDoneTasks(){
 }
 
 
+/**
+ * The function `numberOfToDoTasks` filters data items by category 'to_do' and returns the number of
+ * to-do tasks.
+ * @returns the number of tasks in the `data` array that have a category of 'to_do'.
+ */
 function numberOfToDoTasks() {
     let toDoTasks = data.filter(item => item['category'] === 'to_do');
     return /*html*/`
@@ -75,20 +101,32 @@ function numberOfToDoTasks() {
 }
 
 
+/**
+ * The function `numberOfUrgentTasks` filters tasks with 'Urgent' priority from the data, sets up
+ * upcoming deadlines for these tasks, and returns the number of urgent tasks.
+ * @returns The function `numberOfUrgentTasks()` is returning the number of tasks that have a priority
+ * of 'Urgent'. The number of urgent tasks is being displayed as a string within an HTML template
+ * literal.
+ */
 function numberOfUrgentTasks() {
     let urgent = data.filter(item => item['priority'] === 'Urgent');
     console.log(urgent);
     setUpComingDeadline(urgent);
-
     return /*html*/`
         ${urgent.length}
     `;    
 }
 
 
+/**
+ * The function setUpComingDeadline sets the upcoming deadline on a webpage based on the urgency level
+ * provided.
+ * @param {Object[]} urgent - The `urgent` parameter in the `setUpComingDeadline` function is used to determine
+ * whether the upcoming deadline being set is urgent or not. This parameter likely influences the logic
+ * within the `getNextUrgentDate` function to calculate the next urgent date.
+ */
 function setUpComingDeadline(urgent){
     let upcomingDeadline = document.getElementById('upcomingDeadline');    
-
     let deadLine = getNextUrgentDate(urgent);
     upcomingDeadline.innerHTML = /*html*/`
         ${deadLine}
@@ -96,21 +134,27 @@ function setUpComingDeadline(urgent){
 }
 
 
+/**
+ * The function `getNextUrgentDate` filters and sorts a list of urgent dates to return the next
+ * upcoming date, or logs a message if there are no urgent dates.
+ * 
+ * @param {Object[]} urgent - An array of objects, where each object represents an urgent task with a `date` 
+ * property indicating the due date of the task.
+ * @param {string} urgent[].date - The date property of each object, represented as a string.
+ */
 function getNextUrgentDate(urgent) {
-    // Aktuelles Datum und Zeit
     let now = new Date();
-
-    // Filtern der Daten, die in der Zukunft liegen
     let futureDates = urgent.filter(item => new Date(item.date) > now);
-
-    // Sortieren der zukünftigen Daten nach dem Datum
     futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    // Rückgabe des nächsten Datums
     return futureDates.length > 0 ? futureDates[0].date : console.log('No urgent dates in board.');
 }
 
 
+/**
+ * The function `numberOfTasksInBoard` returns the number of tasks in a board by accessing the `data`
+ * array length.
+ * @returns the number of tasks in the `data` array.
+ */
 function numberOfTasksInBoard(){
     return /*html*/`
         ${data.length}
@@ -118,6 +162,12 @@ function numberOfTasksInBoard(){
 }
 
 
+/**
+ * The function `numberOfTasksInProgress` returns the number of tasks that are in progress based on the
+ * data provided.
+ * @returns The function `numberOfTasksInProgress` is returning the number of tasks that are currently
+ * in progress.
+ */
 function numberOfTasksInProgress(){
     let inProgress = data.filter(item => item['category'] === 'in_progress');
     return /*html*/`
@@ -126,6 +176,12 @@ function numberOfTasksInProgress(){
 }
 
 
+/**
+ * The function `numberOfAwaitFeedbackTasks` filters data items with the category 'await' and returns
+ * the number of such items.
+ * @returns The function `numberOfAwaitFeedbackTasks()` is returning the number of items in the `data`
+ * array where the `category` property is equal to 'await'.
+ */
 function numberOfAwaitFeedbackTasks() {
     let awaitFeedback = data.filter(item => item['category'] === 'await');
     return /*html*/`

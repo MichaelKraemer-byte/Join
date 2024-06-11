@@ -101,11 +101,11 @@ function guestLogin() {
  */
 function setDefaultUser() {
     let defaultUser = {
-        name: 'Maike Muster',
-        email: 'maikemuster@gmail.com',
+        name: 'Gast',
+        email: 'gast@join.com',
         password: '0123456789',
         color: '#FC71FF',
-        initials: 'MM'
+        initials: 'G'
     }
     localStorage.setItem('currentUser', JSON.stringify(defaultUser));
 }
