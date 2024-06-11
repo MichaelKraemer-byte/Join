@@ -376,7 +376,7 @@
 }
 
 .add_button_group#low_edit.active {
-    background-color: green;
-    border: green;
+    background-color: #7AE229;
+    border: #7AE229;
     color: white;
 }

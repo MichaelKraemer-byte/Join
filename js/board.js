@@ -51,7 +51,7 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    await loadGuestFromServer();    
+    await loadGuestFromServer();  
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
@@ -71,6 +71,7 @@ async function initBoardTasks() {
 
 
 async function generateToDo(arr, categorie_id) {
+    
     categorie_id.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
@@ -161,7 +162,7 @@ function addTaskToTasks() {
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
-    let priorityImg;
+    let priorityImg;    
     switch (userPriotity) {
         case 'Urgent':
             priorityImg = './assets/img/vector_red.svg';
@@ -171,6 +172,9 @@ function addTaskToTasks() {
             break;
         case 'Low':
             priorityImg = './assets/img/vector_green.svg';
+            break;
+        default:
+            priorityImg = './assets/img/vector_strich.svg';
             break;
     }
     let priority = userPriotity;
@@ -333,7 +337,7 @@ function generateShowTask(id) {
                     <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
                     <div class="show_task_user_name " id="show_task_user_name"></div>
             </div>
-            <div class="show_task_show_subtasks">
+                <div class="show_task_show_subtasks">
                 <span>Subtasks</span>
                 <div class="show_task_subtask" id="show_task_subtask"></div>
             </div>   
@@ -393,6 +397,7 @@ function editTask(id) {
     let showTaskEdit = document.getElementById('show_task_edit');
     idAddTask.style.display = 'none';
     showTaskEdit.style.display = 'inline';
+    
 
     showTaskEdit.innerHTML = '';
     showTaskEdit.innerHTML = /*html*/` 
@@ -490,26 +495,16 @@ function editTask(id) {
     let urgent_edit = document.getElementById('urgent_edit');
     let medium_edit = document.getElementById('medium_edit');
     let low_edit = document.getElementById('low_edit');
-
-    urgent_edit.disabled = false;
-    medium_edit.disabled = false;
-    low_edit.disabled = false;
-
+    
     switch (contact.priority) {
         case 'Urgent':
             urgent_edit.classList.add('active');
-            medium_edit.disabled = true;
-            low_edit.disabled = true;
             break;
         case 'Medium':
             medium_edit.classList.add('active');
-            urgent_edit.disabled = true;
-            low_edit.disabled = true;
             break
         case 'Low':
             low_edit.classList.add('active');
-            urgent_edit.disabled = true;
-            medium_edit.disabled = true;
             break
     }
 
@@ -537,7 +532,7 @@ function editTask(id) {
         task_edit_initial.innerHTML = '';
     }             
 
-    ////////////////////////////
+    //////////////////////////
     
     let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
     task_subtasks_edit.innerHTML = '';
@@ -558,18 +553,33 @@ function editTask(id) {
 
 function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
-
+    
     contact.title = document.getElementById('task_title_edit').value;
     contact.description = document.getElementById('task_description_edit').value;
     contact.dueDate = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
-    // contact.priority = getSelectedPriority(); 
+    
+    let priorityImgEdit;
+    switch (userPriotity) {
+        case 'Urgent':
+            console.log(userPriotity);
+            priorityImgEdit = './assets/img/vector_red.svg';
+            break;
+        case 'Medium':
+            priorityImgEdit = './assets/img/vector_strich.svg';
+            break;
+        case 'Low':
+            priorityImgEdit = './assets/img/vector_green.svg';
+            break;
+    }
+    contact.priority = userPriotity;
+    contact.priorityImg = priorityImgEdit;
 
     saveTaskToLocalStorage();
     saveTasksToServer();
     initAddTask();
     initBoardTasks();
-    closeWindow();    
+    // closeShowTask();    
 }
 
 

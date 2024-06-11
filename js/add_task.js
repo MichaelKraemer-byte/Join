@@ -71,6 +71,17 @@ function generateCheckBox() {
 
 }
 
+// document.addEventListener('click', function(event) {
+//     let checkboxes = document.getElementById("checkBoxes");
+//     let selectBox = document.querySelector('.selectBox');
+//     if (!selectBox.contains(event.target)) {
+//         checkboxes.style.display = "none";
+//         show = true;
+//     }
+// });
+
+
+
 
 
 function generateAddTasks() {
@@ -79,7 +90,7 @@ function generateAddTasks() {
 
     add_task_form.innerHTML = /*html*/`
     <h1>Add Task</h1>
-    <form id="meinFormular">
+    <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();" >
         <div>
             <div class="add_task_form">
                 <div class="add_task_width50">
@@ -94,26 +105,21 @@ function generateAddTasks() {
                     </div>
 
                     <div class="add_task_assignet add_task_form_row">
-
-
                         <label id="assignet_to">Assignet to</label>
                         <div class="selectBox" onclick="showCheckboxes()">
                             <img src="./assets/img/arrow_drop_down.svg" alt="">
                             <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
                         </div>
-
                         <div class="checkbox_name" id="checkBoxes">
                             <div class="dropdown_users_name" id='check_box_user_name'></div>
                         </div>    
-                        
-                        
                     </div>
                 </div>
             <div class="add_task_line"></div>
                 <div class="add_task_width50">
                     <div class="add_task_date add_task_form_row">
                         <label for="">Due date<b>*</b></label>
-                        <input id="task_date" class="add_task_input" type="date" required>
+                        <input id="task_date" class="add_task_input add_date" type="date" required>
                     </div>
                     <div class="add_task_prio add_task_form_row">
                         <p>Prio</p>
@@ -154,7 +160,7 @@ function generateAddTasks() {
                 <p id="add_task_footer"><b>*</b>This field is required</p>
                 <div class="add_task_button_group_footer">
                     <button class="add_task_button_clear add_task_hover_button">Clear X</button>
-                    <button id="createTaskButton" class="add_task_button_create add_task_hover_button" onclick="addTaskToTasks()">Create Task
+                    <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
                         <img src="./assets/img/vector_check.svg">
                     </button>
                 </div>
@@ -170,22 +176,13 @@ function getTaskPriority(id) {
     const button = document.getElementById(id);    
     if (button.classList.contains('active')) {
         button.classList.remove('active');
-        document.querySelectorAll('.add_button_group').forEach(btn => {
-            btn.disabled = false;
-        });
     } else {
         document.querySelectorAll('.add_button_group').forEach(btn => {
             btn.classList.remove('active');
-            btn.disabled = false;
         });
-        button.classList.add('active');
-        document.querySelectorAll('.add_button_group').forEach(btn => {
-            if (btn.id !== id) {
-                btn.disabled = true;
-            }
-        });
+        button.classList.add('active');     
 
-        userPriotity = button.innerText.trim();       
+        userPriotity = button.innerText.trim();  
     }
 }
 
@@ -193,11 +190,11 @@ function getTaskPriority(id) {
 // function checkFormValidity() {
 //     const form = document.getElementById('meinFormular');
 //     const createTaskButton = document.getElementById('createTaskButton');
-//     const errorMessage = document.getElementById('errorMessage');
+//     // const errorMessage = document.getElementById('errorMessage');
 
 //     if (form.checkValidity()) {
 //         createTaskButton.disabled = false;
-//         errorMessage.style.display = 'none';
+//         // errorMessage.style.display = 'none';
 //     } else {
 //         createTaskButton.disabled = true;
 //     }
@@ -233,3 +230,5 @@ function werteAbrufen() {
         checkedValues.push(checkbox.value);
     });
 }
+
+

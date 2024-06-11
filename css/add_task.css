@@ -55,6 +55,11 @@ b {
     cursor: pointer;
 }
 
+.add_task_input:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+  }
+
 .add_task_textarea {
     font-size: clamp(17px, 1.3vw, 25px);
     font-family: 'Inter';
@@ -62,6 +67,11 @@ b {
     border-radius: 10px;
     height: 120px;
     cursor: pointer;
+}
+
+.add_task_textarea:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
 }
 
 .add_task_button_group {
@@ -76,7 +86,6 @@ b {
     -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
 }
-
 
 .add_button_group {
     width: 136px;
@@ -100,6 +109,7 @@ b {
     color: white;
 }
 
+
 .add_button_group#medium.active {
     background-color: #FFA800;
     border: #FFA800;
@@ -107,8 +117,8 @@ b {
 }
 
 .add_button_group#low.active {
-    background-color: green;
-    border: green;
+    background-color: #7AE229;
+    border: #7AE229;
     color: white;
 }
 
@@ -187,6 +197,11 @@ b {
     gap: 4px;
 }
 
+.add_task_button_create:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .add_task_button_create:hover {
     border: 2px solid #29ABE2;
     background-color: #29ABE2;
@@ -210,6 +225,7 @@ b {
 }
 
 .add_task_date {
+    font-family: inter;
     margin-top: 48px;
     height: 96px;
     gap: 8px;
