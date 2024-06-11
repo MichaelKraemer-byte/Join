@@ -413,3 +413,7 @@ body {
 .blueArrowToLeft:hover {
     cursor: pointer;
 }
+
+#helpLink{
+    display: none;
+}

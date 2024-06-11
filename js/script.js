@@ -87,20 +87,19 @@ function setInitialsInHeader() {
 
 
 function initForCurrentPage() {
+  focusNavAnker();
   if (window.location.href.includes('contacts.html')) {
     setAllContactNames();
-    focusNavAnker();
     renderContactList();
     loadColorIndex();
   } else if (window.location.href.includes('summary.html')) {
     updateGreeting();
     loginGreeting();
-    focusNavAnker();
+    getBoardNumbersInSummary();
   } else if (window.location.href.includes('add_task.html')) {
     focusNavAnker();
     initAddTask();
   } else if (window.location.href.includes('board.html')) {
-    focusNavAnker();
     initBoardTasks();
   }
 }
