@@ -9,8 +9,8 @@ let colorList = [];
 let initials = [];
 let subtasks = [];
 
-
 loadTaskFromLocalStorage();
+
 
 async function saveTasksToServer() {
     try {
@@ -51,9 +51,8 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    await loadGuestFromServer();
-    loadTaskFromLocalStorage();
-    
+    await loadGuestFromServer();    
+
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
     let awaitFeedback = document.getElementById('board_await_feedback');
@@ -71,9 +70,7 @@ async function initBoardTasks() {
 }
 
 
-
 async function generateToDo(arr, categorie_id) {
-
     categorie_id.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
@@ -115,7 +112,6 @@ async function generateToDo(arr, categorie_id) {
         } else {
             borderCategory.style.backgroundColor = '#0038FF';
         }
-
     }
 }
 
@@ -140,7 +136,6 @@ function generateUniqueId() {
 
 
 function addTaskToTasks() {
-
     const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
     const selectedGuests = [];
     selectedCheckboxes.forEach(checkbox => {
@@ -161,7 +156,6 @@ function addTaskToTasks() {
         colorList.push(element.color);
         initials.push(getInitials(name));
     }
-
 
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
@@ -200,7 +194,6 @@ function addTaskToTasks() {
         'subtasks': subtasks
     };
 
-
     todos.push(task)
     saveTaskToLocalStorage();
     saveTasksToServer();
@@ -212,17 +205,16 @@ function addTaskToTasks() {
 
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('todosTasks', todosAsText)
+    localStorage.setItem('todosToServer', todosAsText)
 }
 
 
 function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('todosTasks');
+    let todosAsText = localStorage.getItem('todosToServer');
     if (todosAsText) {
         todos = JSON.parse(todosAsText);
     }
 }
-
 
 
 function deleteTaskFromLocalStorage(id) {
@@ -284,6 +276,7 @@ function slideInTask() {
     idAddTask.classList.remove('slideOut');
 }
 
+
 function closeWindow() {
     slideOutTask();
     setTimeout(() => {
@@ -315,8 +308,6 @@ function closeShowTask() {
 function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-
-    let upgrateTask = [];
 
     showTask.innerHTML = '';
     showTask.innerHTML += /*html*/`
@@ -373,8 +364,6 @@ function generateShowTask(id) {
         }
     }
 
-
-
     let showTaskUserName = document.getElementById('show_task_user_name');
     showTaskUserName.innerHTML = "";
 
@@ -394,8 +383,6 @@ function generateShowTask(id) {
     } else {
         borderCategory.style.backgroundColor = '#0038FF';
     }
-
-
 }
 
 
@@ -409,7 +396,7 @@ function editTask(id) {
 
     showTaskEdit.innerHTML = '';
     showTaskEdit.innerHTML = /*html*/` 
-        <form class="show_task_edit_form">
+        <form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
             <div class="show_task__edit_header">
                 <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
             </div>
@@ -474,11 +461,11 @@ function editTask(id) {
                 
             </div>
             <div class="show_task_edit_footer">
-                <button onclick="upgradeTodos(${contact.id})">ok</button>
+            <button type="submit">ok</button>
             </div>
         </form>
     `;
-
+  
     ///////////////////////
 
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
@@ -496,8 +483,10 @@ function editTask(id) {
                 <input type="checkbox" name="optionen" value="${element.name}"/>
             <label>
         `;
-    }   
-///////////////////////
+    }
+      
+    ///////////////////////
+
     let urgent_edit = document.getElementById('urgent_edit');
     let medium_edit = document.getElementById('medium_edit');
     let low_edit = document.getElementById('low_edit');
@@ -524,7 +513,7 @@ function editTask(id) {
             break
     }
 
-//////////////////////
+    //////////////////////
 
     let task_title_edit = document.getElementById('task_title_edit');
     let task_description_edit = document.getElementById('task_description_edit');
@@ -546,11 +535,9 @@ function editTask(id) {
         }        
     }else {
         task_edit_initial.innerHTML = '';
-    }                
-    
+    }             
 
-
-////////////////////////////
+    ////////////////////////////
     
     let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
     task_subtasks_edit.innerHTML = '';
@@ -568,9 +555,23 @@ function editTask(id) {
 
 }
 
+
 function upgradeTodos(id) {
-    console.log(id);
+    let contact = todos.find(obj => obj['id'] == id);
+
+    contact.title = document.getElementById('task_title_edit').value;
+    contact.description = document.getElementById('task_description_edit').value;
+    contact.dueDate = document.getElementById('task_date_edit').value;
+    contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
+    // contact.priority = getSelectedPriority(); 
+
+    saveTaskToLocalStorage();
+    saveTasksToServer();
+    initAddTask();
+    initBoardTasks();
+    closeWindow();    
 }
+
 
 function showCheckboxesEdit() {
     let checkboxes = document.getElementById("checkBoxesEdit");
@@ -582,7 +583,6 @@ function showCheckboxesEdit() {
         showEdit = true;
     }
 }
-
 
 
 function addNewSubTask() {
@@ -601,5 +601,3 @@ function schowSubtask(element) {
         return " "
     }
 }
-
-
