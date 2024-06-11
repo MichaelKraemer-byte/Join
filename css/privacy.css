@@ -39,3 +39,9 @@ h3 {
 .arrowLeft {
     cursor: pointer;
 }
+
+@media screen and (min-width: 890px) and (max-width: 1000px) {
+.content {
+        left: 0;
+    }
+}

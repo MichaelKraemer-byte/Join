@@ -45,10 +45,14 @@ getCurrentUserFromLocalStorage();
 async function init() {
   await getData();
   isUserOnlineHideNavBar();
+  isUserOnlineHideMobileNavBar();
   setInitialsInHeader();
   initForCurrentPage();
 }
 
+window.addEventListener('resize', () => {
+  isUserOnlineHideMobileNavBar();
+})
 
 function isUserOnlineHideNavBar() {
   let localstorage = localStorage.getItem('currentUser');
@@ -56,7 +60,20 @@ function isUserOnlineHideNavBar() {
     document.getElementById('navContainer').style.display = 'none';
     document.getElementById('userCircle').style.display = 'none';
     document.getElementById('navBarImg').href = 'index.html';
+    document.getElementById('a-logo-mobile').href = 'index.html';
   }
+}
+
+function isUserOnlineHideMobileNavBar() {
+  let localstorage = localStorage.getItem('currentUser');
+  if (localstorage == null) {
+    if (window.innerWidth <= 850) {
+      document.getElementById('navBar').style.display = 'none';
+    } else {
+      document.getElementById('navBar').style.display = 'flex';
+    }
+  }
+
 }
 
 
@@ -125,7 +142,7 @@ function closeNavOnOutsideClick(event) {
   let initialCircle = document.getElementById('initialCircle');
   // Überprüfen, ob der Klick außerhalb des Nav-Menüs erfolgt
   if (nav && event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
-      nav.classList.add('d-none');
+    nav.classList.add('d-none');
   }
 }
 
@@ -133,13 +150,12 @@ function closeNavOnOutsideClick(event) {
 function closeMobileContactOptionsOnOutsideClick(event) {
   let mobileContactOptions = document.getElementById('mobileContactOptions');
   let mobileViewContactButton = document.getElementById('mobileViewContactButton');
-    // Überprüfen, ob der Klick außerhalb der mobilen Kontaktoptionen erfolgt
-    if (mobileContactOptions && 
-      mobileContactOptions.style.display === 'flex' && 
-      !mobileContactOptions.contains(event.target) && 
-      !mobileViewContactButton.contains(event.target)) 
-      {
-        mobileContactOptions.style.display = 'none';
+  // Überprüfen, ob der Klick außerhalb der mobilen Kontaktoptionen erfolgt
+  if (mobileContactOptions &&
+    mobileContactOptions.style.display === 'flex' &&
+    !mobileContactOptions.contains(event.target) &&
+    !mobileViewContactButton.contains(event.target)) {
+    mobileContactOptions.style.display = 'none';
   }
 }
 
