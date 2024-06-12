@@ -4,7 +4,6 @@ let guesteArray = [];
 let userPriotity;
 let imgPriority;
 
-// loadTaskFromLocalStorage();
 
 async function loadGuestFromServer() {
     try {
@@ -43,7 +42,8 @@ function generateAddTasks() {
 
     add_task_form.innerHTML = /*html*/`
     <h1>Add Task</h1>
-    <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();" >
+    <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">
+    <!-- onsubmit="event.preventDefault(); addTaskToTasks();"  -->
         <div>
             <div class="add_task_form">
                 <div class="add_task_width50">
@@ -128,16 +128,16 @@ function generateAddTasks() {
 
 
 function getTaskPriority(id) {
-    const button = document.getElementById(id);    
+    const button = document.getElementById(id);
     if (button.classList.contains('active')) {
         button.classList.remove('active');
     } else {
         document.querySelectorAll('.add_button_group').forEach(btn => {
             btn.classList.remove('active');
         });
-        button.classList.add('active');     
+        button.classList.add('active');
 
-        userPriotity = button.innerText.trim();  
+        userPriotity = button.innerText.trim();
     }
 }
 
@@ -171,17 +171,17 @@ function generateCheckBox() {
             </label>
         `;
     }
+    document.addEventListener('click', function(event) {
+        let checkboxes = document.getElementById("checkBoxes");
+        let selectBox = document.querySelector('.selectBox');
+        if (!selectBox.contains(event.target)) {
+            checkboxes.style.visibility = "hidden";
+            show = true;
+        }
+    });
 }
 
 
-document.addEventListener('click', function(event) {
-    let checkboxes = document.getElementById("checkBoxes");
-    let selectBox = document.querySelector('.selectBox');
-    if (!selectBox.contains(event.target)) {
-        checkboxes.style.visibility = "hidden";
-        show = true;
-    }
-});
 
 
 function searchNameFromGuestList() {
@@ -209,34 +209,36 @@ function werteAbrufen() {
     let add_task_show_check = document.getElementById('add_task_show_check');
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     add_task_show_check.innerHTML = '';
+
     let checkedValues = [];
     checkboxes.forEach((checkbox) => {
-        checkedValues.push(checkbox.value);        
+        checkedValues.push(checkbox.value);
     });
-    // console.log(checkedValues);
-    const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
-    const selectedGuests = [];
-    selectedCheckboxes.forEach(checkbox => {
-        const guestName = checkbox.value;
-        const guest = guesteArray.find(g => g.name === guestName);
-        
-        if (guest) {
-            selectedGuests.push({
-                name: guest.name,
-                color: guest.color
-            });
-        }
-    });
-    for (let index = 0; index < selectedGuests.length; index++) {
-        const element = selectedGuests[index];
-        let name = element.name
-        namelist.push(name);
-        colorList.push(element.color);
-        initials.push(getInitials(name));
+
+    if (checkedValues) {
+        const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
+        const selectedGuests = [];
+        selectedCheckboxes.forEach(checkbox => {
+            const guestName = checkbox.value;
+            const guest = guesteArray.find(g => g.name === guestName);
+            if (guest) {
+                selectedGuests.push({
+                    name: guest.name,
+                    color: guest.color
+                });
+            }
+        });
+    
+        add_task_show_check.innerHTML = '';
+        for (let index = 0; index < selectedGuests.length; index++) {
+            const element = selectedGuests[index];
+            let initial = getInitials(element.name);
             add_task_show_check.innerHTML += `
-                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${colorList[index]};">${initials[index]}</div>
-            `;
+                    <div class="add_task_checkbox_name board_task_user_initial show_task_user_initial" style="background-color: ${element.color};">${initial}</div>
+                `;
+        }
     }
+
 
 }
 

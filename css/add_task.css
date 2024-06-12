@@ -220,6 +220,7 @@ b {
 }
 
 .add_task_assignet {
+    position: relative;
     height: 80px;
     margin-top: 8px;
 }
@@ -288,6 +289,7 @@ b {
 #checkBoxes {
     /* display: none; */
     visibility: hidden;
+    z-index: 99;
 }
 
 .checkbox_name {
@@ -330,6 +332,13 @@ b {
     background-color: #D1D1D1;
     /* color: white; */
     /* Added text color for better visibility */
+}
+
+.add_task_show_check {
+    position: absolute;
+    top: 100px;
+    display: flex;
+    gap: 20px;
 }
 
 #assignet_to {

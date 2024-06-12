@@ -76,6 +76,7 @@ async function generateToDo(arr, categorie_id) {
 
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
+        
         let initialsArray = element.initial;
         let colorsArray = element.color;
 
@@ -83,9 +84,11 @@ async function generateToDo(arr, categorie_id) {
         <div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
             <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
             <div class="board_task_title">${element.title}</div>  
+
             <div class="board_task_progressbar">
-                <div id="progressBar" class="progress-bar">0%</div>
-            </div>          
+                <div id="progressBar${element.id}" class="progress-bar"></div>
+            </div>        
+
             <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">  
                 <div class="board_task_initial" id="board_task_initial${element.id}"></div>
@@ -94,6 +97,16 @@ async function generateToDo(arr, categorie_id) {
             </div>
         </div>
         `;
+
+        if(element.subtasks) {
+            let progressBar = document.getElementById(`progressBar${element.id}`);
+            let procent = element.subtasks.length;
+            progressBar.style.width = '30%';
+                    
+            console.log(procent);
+        }
+
+
         let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
 
         board_task_initial.innerHTML = '';
@@ -159,6 +172,13 @@ function addTaskToTasks() {
     }
 
     let task_description = document.getElementById('task_description').value;
+    if (task_description) {
+        task_description
+    }else {
+        task_description = ' '
+    }
+
+
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
@@ -174,6 +194,7 @@ function addTaskToTasks() {
             priorityImg = './assets/img/vector_green.svg';
             break;
         default:
+            userPriotity = 'Medium'
             priorityImg = './assets/img/vector_strich.svg';
             break;
     }
@@ -182,6 +203,14 @@ function addTaskToTasks() {
     let task_status = document.getElementById('task_category').value;
 
     let id = generateUniqueId();
+
+    let subtask = [];
+    
+    if (subtasks) {
+        subtask = subtasks
+    }else {
+        subtask = ['hallo'];
+    }
 
     let task = {
         'category': task_category,
@@ -195,8 +224,21 @@ function addTaskToTasks() {
         'priority': priority,
         'status': task_status,
         'title': task_title,
-        'subtasks': subtasks
+        'subtasks': subtask
     };
+
+    // console.log('categotie ..........' + task_category);
+    // console.log('date........... ' + task_date);
+    // console.log('description ............' + task_description);
+    // console.log('id ...........' + id);
+    // console.log('nameList ..........' + namelist);
+    // console.log('initial........... ' + initials);
+    // console.log('color ..............' + colorList);
+    // console.log('Img ............' + priorityImg);
+    // console.log('prio ............' + priority);
+    // console.log('status...............' + task_status);
+    // console.log('title ...............' + task_title);
+    // console.log('suntask ............' + subtask);
 
     todos.push(task)
     saveTaskToLocalStorage();
@@ -336,11 +378,16 @@ function generateShowTask(id) {
                 <span>Assing to:</span>
                     <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
                     <div class="show_task_user_name " id="show_task_user_name"></div>
-            </div>
+            <!-- </div>
                 <div class="show_task_show_subtasks">
                 <span>Subtasks</span>
                 <div class="show_task_subtask" id="show_task_subtask"></div>
-            </div>   
+            </div>    -->
+            <div class="show_task_show_subtasks">
+        <span>Subtasks</span>
+        <div class="show_task_subtask" id="show_task_subtask"></div>
+    </div>
+
         <div class="show_task_footer">
             <div class="show_task_footer_delete">
                 <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
@@ -353,20 +400,52 @@ function generateShowTask(id) {
         </div>    
     `;
 
-    let show_task_subtask = document.getElementById('show_task_subtask');
-    show_task_subtask.innerHTML = '';
 
-    if (contact.subtasks) {
-        for (let k = 0; k < contact.subtasks.length; k++) {
-            const element = contact.subtasks[k];
+    // let show_task_subtask = document.getElementById('show_task_subtask');
+    // show_task_subtask.innerHTML = '';
+
+    // if (contact.subtasks) {
+    //     for (let k = 0; k < contact.subtasks.length; k++) {
+    //         const element = contact.subtasks[k];
+    //         show_task_subtask.innerHTML += `
+    //             <div class="show_task_subtask_content">
+    //             <input type="checkbox"/>
+    //                 <div>${element}</div>                
+    //             </div>
+    //         `;
+    //     }
+    // }
+
+    let show_task_subtask = document.getElementById('show_task_subtask');
+        show_task_subtask.innerHTML = '';
+
+        // Füge die subtasks als Checkboxen hinzu
+        contact.subtasks.forEach((subtask, index) => {
             show_task_subtask.innerHTML += `
                 <div class="show_task_subtask_content">
-                    <input type="checkbox"/>
-                    <div>${element}</div>                
+                    <input type="checkbox" class="subtask-checkbox" id="subtask-${index}"/>
+                    <label for="subtask-${index}">${subtask}</label>                
                 </div>
-                `;
-        }
-    }
+            `;
+        });
+
+
+        const checkedSubtasks = [];
+            const checkboxes = document.querySelectorAll('.subtask-checkbox');
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    checkedSubtasks.push(subtasks[index]);
+                }
+            });
+
+            
+
+    
+
+   
+
+
+
 
     let showTaskUserName = document.getElementById('show_task_user_name');
     showTaskUserName.innerHTML = "";
@@ -449,10 +528,7 @@ function editTask(id) {
                         <img src="./assets/img/arrow_drop_down.svg" alt="">
                         <input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 
                     </div>
-
-                    <div class="checkBoxesEdit" id="checkBoxesEdit">
-                        
-                    </div>  
+                    <div class="checkBoxesEdit" id="checkBoxesEdit"></div>  
 
                     <div class="task_edit_initial" id="task_edit_initial"></div>
                 </div>

@@ -241,8 +241,8 @@
     margin-top: 20px;
 }
 
-/* .board_task_progressbar {
-    width: 100%;
+.board_task_progressbar {
+    width: 70%;
     background-color: #e0e0e0;
     border-radius: 5px;
     overflow: hidden;
@@ -250,31 +250,21 @@
 }
 
 .progress-bar {
-    height: 25px;
-    background-color: #76c7c0;
+    height: 9px;
+    background-color: #4589FF;
     width: 0;
     text-align: center;
     line-height: 25px;
     color: white;
     border-radius: 5px;
-} */
-
-.board_task_progressbar {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 20px;
 }
 
-.progress-bar {
-    width: 0;
-    height: 20px;
-    background-color: #76c7c0;
-    text-align: center;
-    line-height: 20px;
-    color: white;
-    border-radius: 5px 0 0 5px;
+.show_task_subtask_content {
+    display: flex;
+    align-items: center;
+}
+.show_task_subtask_content div {
+    margin-left: 10px;
 }
 
 .show_task_subtask {

@@ -15,11 +15,11 @@
 
 .show_add_task {
     background-color: white;
-    height: 85%;
-    width: 80%;
+    height: 76%;
+    width: 75%;
     position: fixed;
     border-radius: 20px;
-    padding: 30px;
+    padding: 70px;
 }
 
 .close_pop_add_task {
