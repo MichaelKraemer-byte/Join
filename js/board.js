@@ -135,117 +135,6 @@ function getInitials(fullName) {
 }
 
 
-function generateUniqueId() {
-    let id;
-    do {
-        id = Math.floor(Math.random() * 1000000).toString();
-    } while (usedIds.has(id));
-    usedIds.add(id);
-    return id;
-}
-
-
-async function addTaskToTasks() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
-    const selectedGuests = [];
-    selectedCheckboxes.forEach(checkbox => {
-        const guestName = checkbox.value;
-        const guest = guesteArray.find(g => g.name === guestName);
-        if (guest) {
-            selectedGuests.push({
-                name: guest.name,
-                color: guest.color
-            });
-        }
-    });
-
-    for (let index = 0; index < selectedGuests.length; index++) {
-        const element = selectedGuests[index];
-        let name = element.name
-        namelist.push(name);
-        colorList.push(element.color);
-        initials.push(getInitials(name));
-    }
-
-    let task_description = document.getElementById('task_description').value;
-    if (task_description) {
-        task_description
-    } else {
-        task_description = ' '
-    }
-
-
-    let task_title = document.getElementById('task_title').value;
-    let task_date = document.getElementById('task_date').value;
-    let task_category = 'to_do';
-    let priorityImg;
-    switch (userPriotity) {
-        case 'Urgent':
-            priorityImg = './assets/img/vector_red.svg';
-            break;
-        case 'Medium':
-            priorityImg = './assets/img/vector_strich.svg';
-            break;
-        case 'Low':
-            priorityImg = './assets/img/vector_green.svg';
-            break;
-        default:
-            userPriotity = 'Medium'
-            priorityImg = './assets/img/vector_strich.svg';
-            break;
-    }
-
-    let priority = userPriotity;
-
-    let task_status = document.getElementById('task_category').value;
-
-    let id = generateUniqueId();
-
-    let subtask = [];
-
-    if (subtasks) {
-        subtask = subtasks
-    } else {
-        subtask = ['hallo'];
-    }
-
-    let task = {
-        'category': task_category,
-        'date': task_date,
-        'description': task_description,
-        'id': id,
-        'name': namelist,
-        'initial': initials,
-        'color': colorList,
-        'priorityImg': priorityImg,
-        'priority': priority,
-        'status': task_status,
-        'title': task_title,
-        'subtasks': subtask
-    };
-
-    // console.log('categotie ..........' + task_category);
-    // console.log('date........... ' + task_date);
-    // console.log('description ............' + task_description);
-    // console.log('id ...........' + id);
-    // console.log('nameList ..........' + namelist);
-    // console.log('initial........... ' + initials);
-    // console.log('color ..............' + colorList);
-    // console.log('Img ............' + priorityImg);
-    // console.log('prio ............' + priority);
-    // console.log('status...............' + task_status);
-    // console.log('title ...............' + task_title);
-    // console.log('suntask ............' + subtask);
-
-    todos.push(task)
-    saveTaskToLocalStorage();
-    await saveTasksToServer();
-    closeWindow();
-    initAddTask();
-    initBoardTasks();
-}
-
-
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
     localStorage.setItem('todosToServer', todosAsText)
@@ -266,8 +155,8 @@ async function deleteTaskFromLocalStorage(id) {
         arr = (todos.filter(todo => todo.id != id));
     }
     todos = arr;
-    saveTaskToLocalStorage();
     await saveTasksToServer();
+    saveTaskToLocalStorage();
     initBoardTasks();
     closeShowTask();
 }
@@ -286,8 +175,8 @@ function allowDrop(ev) {
 async function moveTo(category) {
     let contact = todos.find(obj => obj['id'] == currentElement);
     contact['category'] = category;
-    saveTaskToLocalStorage();
     await saveTasksToServer();
+    saveTaskToLocalStorage();
     initBoardTasks();
 
 }
