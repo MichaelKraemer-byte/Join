@@ -15,6 +15,7 @@
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/add_task.js"></script>
+    <script src="./js/boardHtml.js"></script>
 </head>
 
 <body onload="includeHTML()" onclick="closeNavOnOutsideClick(event)">
@@ -41,7 +42,7 @@
                     <h1>Board</h1>
                     <div class="task_navigation">
                         <div class="input_task_navigation">
-                            <input class="input_find_task" id="input_find_task" type="text" placeholder="Find Task">
+                            <input class="input_find_task" id="input_find_task" type="text" placeholder="Find Task" onkeydown="searchTaskFromBoard()">
                             <div class="task_navi_line"></div>
                             <img src="./assets/img/search.svg" alt="">
                         </div>

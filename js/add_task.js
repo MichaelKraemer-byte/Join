@@ -156,7 +156,6 @@ async function addTaskToTasks() {
         task_description = ' '
     }
 
-
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
@@ -178,18 +177,9 @@ async function addTaskToTasks() {
     }
 
     let priority = userPriotity;
-
     let task_status = document.getElementById('task_category').value;
-
     let id = generateUniqueId();
-
-    let subtask = [];
-
-    if (subtasks) {
-        subtask = subtasks
-    } else {
-        subtask = ['hallo'];
-    }
+    let subtask = [];    
 
     let task = {
         'category': task_category,

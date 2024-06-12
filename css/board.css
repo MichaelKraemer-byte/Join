@@ -47,6 +47,10 @@
     padding-left: 16px;
 }
 
+.task_navigation input:focus {
+    color: black;
+}
+
 .task_navi_line {
     position: absolute;
     width: 1px;

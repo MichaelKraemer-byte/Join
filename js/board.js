@@ -73,57 +73,21 @@ async function initBoardTasks() {
 
 
 async function generateToDo(arr, categorie_id) {
+    // let ras = localStorage.getItem('width');
 
     categorie_id.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
+        categorie_id.innerHTML += renderHtmlToDo(element);
 
-        let initialsArray = element.initial;
-        let colorsArray = element.color;
+        getInitialsArray(element);
+        getCategorieBackGroundColor(element);
 
-        categorie_id.innerHTML += /*html*/`
-        <div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
-            <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
-            <div class="board_task_title">${element.title}</div>  
-
-            <div class="board_task_descripton board_task_toDo">${element.description}</div>          
-            <div class="board_task_progressbar">
-                <div id="progressBar${element.id}" class="progress-bar"></div>
-            </div>        
-
-            <div class="board_task_footer_status">  
-                <div class="board_task_initial" id="board_task_initial${element.id}"></div>
-                <img src="${element.priorityImg}">
-               
-            </div>
-        </div>
-        `;
-
-        if (initialsArray) {
-            let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
-
-            board_task_initial.innerHTML = '';
-
-            for (let j = 0; j < initialsArray.length; j++) {
-                let initial = initialsArray[j];
-                let color = colorsArray[j];
-
-                board_task_initial.innerHTML += /*html*/`
-                        <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
-                    `;
-            }
-        }
-
-
-        let borderCategory = document.getElementById(`board_task_category${element.id}`);
-        if (arr[i]['status'] == 'Technical Task') {
-            borderCategory.style.backgroundColor = '#1FD7C1';
-        } else {
-            borderCategory.style.backgroundColor = '#0038FF';
-        }
     }
 }
+
+
 
 
 function getInitials(fullName) {
@@ -178,7 +142,6 @@ async function moveTo(category) {
     await saveTasksToServer();
     saveTaskToLocalStorage();
     initBoardTasks();
-
 }
 
 
@@ -197,7 +160,7 @@ function addTask() {
 
 function slideOutTask() {
     let idAddTask = document.getElementById('show_add_task');
-    if(idAddTask) {
+    if (idAddTask) {
         idAddTask.classList.add('slideOut');
         idAddTask.classList.remove('slideIn');
     }
@@ -206,7 +169,7 @@ function slideOutTask() {
 
 function slideInTask() {
     let idAddTask = document.getElementById('show_add_task');
-    if(idAddTask) {
+    if (idAddTask) {
         idAddTask.classList.add('slideIn');
         idAddTask.classList.remove('slideOut');
     }
@@ -237,7 +200,7 @@ function showTask(id) {
 function closeShowTask() {
     let idAddTask = document.getElementById('pop_show_task');
     idAddTask.style.visibility = 'hidden';
-    location.reload()
+    initBoardTasks();
 }
 
 
@@ -288,23 +251,27 @@ function generateShowTask(id) {
         </div>    
     `;
     ///////////////////////check-box
+    // Assuming contact.subtasks is an array of subtasks
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
 
-
+    let selectedSubtasks = JSON.parse(localStorage.getItem('selectedSubtasks')) || [];
 
     if (contact.subtasks) {
         for (let k = 0; k < contact.subtasks.length; k++) {
             const element = contact.subtasks[k];
             const subtaskId = `subtask-${k}`;
+            const isChecked = selectedSubtasks.includes(element) ? 'checked' : '';
 
             show_task_subtask.innerHTML += `
-                <div class="show_task_subtask_content">
-                    <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}"/>
-                    <label for="${subtaskId}">${element}</label>                
-                </div>
+            <div class="show_task_subtask_content">
+                <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}" ${isChecked}/>
+                <label for="${subtaskId}">${element}</label>                
+            </div>
             `;
+            // console.log(contact.id , subtaskId);
         }
+
 
         const checkboxes = document.querySelectorAll('input[name="subtask"]');
         checkboxes.forEach(checkbox => {
@@ -312,6 +279,7 @@ function generateShowTask(id) {
                 const value = event.target.getAttribute('data-value');
                 if (event.target.checked) {
                     if (!selectedSubtasks.includes(value)) {
+                        console.log(value);
                         selectedSubtasks.push(value);
                     }
                 } else {
@@ -325,11 +293,62 @@ function generateShowTask(id) {
                 let procent100 = contact.subtasks.length;
                 let currentProcent = selectedSubtasks.length;
                 let width = (currentProcent / procent100 * 100).toFixed(0);
+                let ras = width + '%'
+                // console.log(ras);
                 progressBar.style.width = width + '%';
 
+                // localStorage.setItem('width', JSON.stringify(ras));
+                localStorage.setItem('selectedSubtasks', JSON.stringify(selectedSubtasks));
             });
         });
     }
+
+    // let show_task_subtask = document.getElementById('show_task_subtask');
+    // show_task_subtask.innerHTML = '';
+
+    // if (contact.subtasks) {
+    //     for (let k = 0; k < contact.subtasks.length; k++) {
+    //         const element = contact.subtasks[k];
+    //         const subtaskId = `subtask-${k}`;
+
+    //         show_task_subtask.innerHTML += `
+    //             <div class="show_task_subtask_content">
+    //                 <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}"/>
+    //                 <label for="${subtaskId}">${element}</label>                
+    //             </div>
+    //         `;
+    //     }
+
+    //     const checkboxes = document.querySelectorAll('input[name="subtask"]');
+    //     checkboxes.forEach(checkbox => {
+    //         checkbox.addEventListener('change', (event) => {
+    //             const value = event.target.getAttribute('data-value');
+    //             if (event.target.checked) {
+    //                 if (!selectedSubtasks.includes(value)) {
+    //                     selectedSubtasks.push(value);
+    //                 }
+    //             } else {
+    //                 const index = selectedSubtasks.indexOf(value);
+    //                 if (index > -1) {
+    //                     selectedSubtasks.splice(index, 1);
+    //                 }
+    //             }
+
+    //             console.log(selectedSubtasks);
+
+    //             let progressBar = document.getElementById(`progressBar${contact.id}`);
+    //             let procent100 = contact.subtasks.length;
+    //             let currentProcent = selectedSubtasks.length;
+    //             let width = (currentProcent / procent100 * 100).toFixed(0);
+    //             progressBar.style.width = width + '%';
+
+    //         });
+    //     });
+    // }
+
+
+
+
 
 
     ///////////////////////////////  
@@ -574,5 +593,79 @@ function schowSubtask(element) {
         return element.subtasks
     } else {
         return " "
+    }
+}
+
+function searchTaskFromBoard() {
+    let input_find_task = document.getElementById('input_find_task');
+    input_find_task = input_find_task.value.toLowerCase();
+
+    for (let i = 0; i < todos.length; i++) {
+        const element = todos[i];
+        if (element.title.toLowerCase().includes(input_find_task)) {
+            let category = element.category;
+            
+            let task = document.getElementById('board_to_do');
+            let progress = document.getElementById('board_in_progress');
+            let awaitFeedback = document.getElementById('board_await_feedback');
+            let doneId = document.getElementById('board_done');
+
+            task.innerHTML = '';
+            progress.innerHTML = '';
+            awaitFeedback.innerHTML = '';
+            doneId.innerHTML = '';
+
+            switch (category) {
+                case 'to_do':
+                    searchId = 'board_to_do';
+                    break;
+                case 'in_progress':
+                    searchId = 'board_in_progress';
+                    break;
+                case 'await':
+                    searchId = 'board_await_feedback';
+                    break;
+                case 'done':
+                    searchId = 'board_done';
+                    break;
+            }
+
+            let searchResult = document.getElementById(searchId);
+            searchResult.innerHTML = '';
+
+            searchResult.innerHTML = renderHtmlToDo(element)
+            getInitialsArray(element);
+            getCategorieBackGroundColor(element);          
+        }
+    }
+
+}
+
+function getInitialsArray(element) {
+
+    let initialsArray = element.initial;
+    let colorsArray = element.color;
+
+    if (initialsArray) {
+        let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
+        board_task_initial.innerHTML = '';
+        for (let j = 0; j < initialsArray.length; j++) {
+            let initial = initialsArray[j];
+            let color = colorsArray[j];
+
+            board_task_initial.innerHTML += /*html*/`
+                <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
+            `;
+        }
+    }
+}
+
+
+function getCategorieBackGroundColor(element) {
+    let borderCategory = document.getElementById(`board_task_category${element.id}`);
+    if (element.status == 'Technical Task') {
+        borderCategory.style.backgroundColor = '#1FD7C1';
+    } else {
+        borderCategory.style.backgroundColor = '#0038FF';
     }
 }
