@@ -8,6 +8,7 @@ let namelist = [];
 let colorList = [];
 let initials = [];
 let subtasks = [];
+let selectedSubtasks = [];
 
 loadTaskFromLocalStorage();
 
@@ -51,7 +52,7 @@ async function loadTasksFromServer() {
 
 async function initBoardTasks() {
     await loadTasksFromServer();
-    await loadGuestFromServer();  
+    await loadGuestFromServer();
 
     let task = document.getElementById('board_to_do');
     let progress = document.getElementById('board_in_progress');
@@ -71,12 +72,12 @@ async function initBoardTasks() {
 
 
 async function generateToDo(arr, categorie_id) {
-    
+
     categorie_id.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        
+
         let initialsArray = element.initial;
         let colorsArray = element.color;
 
@@ -85,11 +86,11 @@ async function generateToDo(arr, categorie_id) {
             <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
             <div class="board_task_title">${element.title}</div>  
 
+            <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_progressbar">
                 <div id="progressBar${element.id}" class="progress-bar"></div>
             </div>        
 
-            <div class="board_task_descripton board_task_toDo">${element.description}</div>          
             <div class="board_task_footer_status">  
                 <div class="board_task_initial" id="board_task_initial${element.id}"></div>
                 <img src="${element.priorityImg}">
@@ -98,13 +99,17 @@ async function generateToDo(arr, categorie_id) {
         </div>
         `;
 
-        if(element.subtasks) {
-            let progressBar = document.getElementById(`progressBar${element.id}`);
-            let procent = element.subtasks.length;
-            progressBar.style.width = '30%';
-                    
-            console.log(procent);
-        }
+        // if (element.subtasks) {
+        //     let progressBar = document.getElementById(`progressBar${element.id}`);
+        //     let procent100 = element.subtasks.length;
+        //     let currentProcent = selectedSubtasks.length;
+
+
+        //     progressBar.style.width = '30%';
+
+        //     // console.log(procent100);
+        //     // console.log(currentProcent);
+        // }
 
 
         let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
@@ -174,7 +179,7 @@ function addTaskToTasks() {
     let task_description = document.getElementById('task_description').value;
     if (task_description) {
         task_description
-    }else {
+    } else {
         task_description = ' '
     }
 
@@ -182,7 +187,7 @@ function addTaskToTasks() {
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_category = 'to_do';
-    let priorityImg;    
+    let priorityImg;
     switch (userPriotity) {
         case 'Urgent':
             priorityImg = './assets/img/vector_red.svg';
@@ -198,6 +203,7 @@ function addTaskToTasks() {
             priorityImg = './assets/img/vector_strich.svg';
             break;
     }
+
     let priority = userPriotity;
 
     let task_status = document.getElementById('task_category').value;
@@ -205,10 +211,10 @@ function addTaskToTasks() {
     let id = generateUniqueId();
 
     let subtask = [];
-    
+
     if (subtasks) {
         subtask = subtasks
-    }else {
+    } else {
         subtask = ['hallo'];
     }
 
@@ -376,17 +382,15 @@ function generateShowTask(id) {
         </div> 
             <div class="show_task_user_daten">
                 <span>Assing to:</span>
-                    <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
-                    <div class="show_task_user_name " id="show_task_user_name"></div>
-            <!-- </div>
+                <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
+                <div class="show_task_user_name " id="show_task_user_name"></div>            
                 <div class="show_task_show_subtasks">
-                <span>Subtasks</span>
+                    <span>Subtasks</span>
                 <div class="show_task_subtask" id="show_task_subtask"></div>
-            </div>    -->
-            <div class="show_task_show_subtasks">
-        <span>Subtasks</span>
-        <div class="show_task_subtask" id="show_task_subtask"></div>
-    </div>
+            </div>
+        </div>
+            
+        </div>
 
         <div class="show_task_footer">
             <div class="show_task_footer_delete">
@@ -399,52 +403,53 @@ function generateShowTask(id) {
             </div>
         </div>    
     `;
-
-
-    // let show_task_subtask = document.getElementById('show_task_subtask');
-    // show_task_subtask.innerHTML = '';
-
-    // if (contact.subtasks) {
-    //     for (let k = 0; k < contact.subtasks.length; k++) {
-    //         const element = contact.subtasks[k];
-    //         show_task_subtask.innerHTML += `
-    //             <div class="show_task_subtask_content">
-    //             <input type="checkbox"/>
-    //                 <div>${element}</div>                
-    //             </div>
-    //         `;
-    //     }
-    // }
-
+///////////////////////check-box
     let show_task_subtask = document.getElementById('show_task_subtask');
-        show_task_subtask.innerHTML = '';
-
-        // Füge die subtasks als Checkboxen hinzu
-        contact.subtasks.forEach((subtask, index) => {
-            show_task_subtask.innerHTML += `
-                <div class="show_task_subtask_content">
-                    <input type="checkbox" class="subtask-checkbox" id="subtask-${index}"/>
-                    <label for="subtask-${index}">${subtask}</label>                
-                </div>
-            `;
-        });
-
-
-        const checkedSubtasks = [];
-            const checkboxes = document.querySelectorAll('.subtask-checkbox');
-            checkboxes.forEach((checkbox, index) => {
-                if (checkbox.checked) {
-                    checkedSubtasks.push(subtasks[index]);
-                }
-            });
-
-            
+    show_task_subtask.innerHTML = '';
 
     
 
-   
+    if (contact.subtasks) {
+        for (let k = 0; k < contact.subtasks.length; k++) {
+            const element = contact.subtasks[k];
+            const subtaskId = `subtask-${k}`;
+            
+            show_task_subtask.innerHTML += `
+                <div class="show_task_subtask_content">
+                    <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}"/>
+                    <label for="${subtaskId}">${element}</label>                
+                </div>
+            `;
+        }
+
+        const checkboxes = document.querySelectorAll('input[name="subtask"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (event) => {
+                const value = event.target.getAttribute('data-value');
+                if (event.target.checked) {
+                    if (!selectedSubtasks.includes(value)) {
+                        selectedSubtasks.push(value);
+                    }
+                } else {
+                    const index = selectedSubtasks.indexOf(value);
+                    if (index > -1) {
+                        selectedSubtasks.splice(index, 1);
+                    }
+                }
+
+                let progressBar = document.getElementById(`progressBar${contact.id}`);
+                let procent100 = contact.subtasks.length;
+                let currentProcent = selectedSubtasks.length;
+                let width = (currentProcent / procent100 * 100).toFixed(0);
+                progressBar.style.width = width + '%';
+                
+            });
+        });
+    }
 
 
+  ///////////////////////////////  
+  
 
 
     let showTaskUserName = document.getElementById('show_task_user_name');
@@ -469,6 +474,7 @@ function generateShowTask(id) {
 }
 
 
+
 function editTask(id) {
     let contact = todos.find(obj => obj['id'] == id);
 
@@ -476,7 +482,7 @@ function editTask(id) {
     let showTaskEdit = document.getElementById('show_task_edit');
     idAddTask.style.display = 'none';
     showTaskEdit.style.display = 'inline';
-    
+
 
     showTaskEdit.innerHTML = '';
     showTaskEdit.innerHTML = /*html*/` 
@@ -546,7 +552,7 @@ function editTask(id) {
             </div>
         </form>
     `;
-  
+
     ///////////////////////
 
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
@@ -565,13 +571,13 @@ function editTask(id) {
             <label>
         `;
     }
-      
+
     ///////////////////////
 
     let urgent_edit = document.getElementById('urgent_edit');
     let medium_edit = document.getElementById('medium_edit');
     let low_edit = document.getElementById('low_edit');
-    
+
     switch (contact.priority) {
         case 'Urgent':
             urgent_edit.classList.add('active');
@@ -588,39 +594,38 @@ function editTask(id) {
 
     let task_title_edit = document.getElementById('task_title_edit');
     let task_description_edit = document.getElementById('task_description_edit');
-    let task_date_edit = document.getElementById('task_date_edit');   
-    
+    let task_date_edit = document.getElementById('task_date_edit');
+
     task_title_edit.value = contact.title;
     task_description_edit.value = contact.description;
     task_date_edit.value = contact.date;
-    
-    
+
     let task_edit_initial = document.getElementById('task_edit_initial');
-    task_edit_initial.innerHTML = ''; 
-    
+    task_edit_initial.innerHTML = '';
+
     if (contact.initial) {
         for (let j = 0; j < contact.initial.length; j++) {
             task_edit_initial.innerHTML += `
             <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[j]};">${contact.initial[j]}</div>
             `;
-        }        
-    }else {
+        }
+    } else {
         task_edit_initial.innerHTML = '';
-    }             
+    }
 
     //////////////////////////
-    
+
     let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
     task_subtasks_edit.innerHTML = '';
-                
+
     if (contact.subtasks) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
             task_subtasks_edit.innerHTML += `
                 <div>${element}<div>
             `;
-        }        
-    }else {
+        }
+    } else {
         task_subtasks_edit.innerHTML = '';
     }
 
@@ -629,12 +634,12 @@ function editTask(id) {
 
 function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
-    
+
     contact.title = document.getElementById('task_title_edit').value;
     contact.description = document.getElementById('task_description_edit').value;
     contact.dueDate = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
-    
+
     let priorityImgEdit;
     switch (userPriotity) {
         case 'Urgent':
