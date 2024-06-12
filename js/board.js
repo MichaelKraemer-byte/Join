@@ -145,7 +145,7 @@ function generateUniqueId() {
 }
 
 
-function addTaskToTasks() {
+async function addTaskToTasks() {
     const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
     const selectedGuests = [];
     selectedCheckboxes.forEach(checkbox => {
@@ -239,7 +239,7 @@ function addTaskToTasks() {
 
     todos.push(task)
     saveTaskToLocalStorage();
-    saveTasksToServer();
+    await saveTasksToServer();
     closeWindow();
     initAddTask();
     initBoardTasks();
@@ -260,14 +260,14 @@ function loadTaskFromLocalStorage() {
 }
 
 
-function deleteTaskFromLocalStorage(id) {
+async function deleteTaskFromLocalStorage(id) {
     let arr = [];
     for (let i = 0; i < todos.length; i++) {
         arr = (todos.filter(todo => todo.id != id));
     }
     todos = arr;
     saveTaskToLocalStorage();
-    saveTasksToServer();
+    await saveTasksToServer();
     initBoardTasks();
     closeShowTask();
 }
@@ -308,15 +308,19 @@ function addTask() {
 
 function slideOutTask() {
     let idAddTask = document.getElementById('show_add_task');
-    idAddTask.classList.add('slideOut');
-    idAddTask.classList.remove('slideIn');
+    if(idAddTask) {
+        idAddTask.classList.add('slideOut');
+        idAddTask.classList.remove('slideIn');
+    }
 }
 
 
 function slideInTask() {
     let idAddTask = document.getElementById('show_add_task');
-    idAddTask.classList.add('slideIn');
-    idAddTask.classList.remove('slideOut');
+    if(idAddTask) {
+        idAddTask.classList.add('slideIn');
+        idAddTask.classList.remove('slideOut');
+    }
 }
 
 
