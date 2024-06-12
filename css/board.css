@@ -1,5 +1,5 @@
-.board_container {   
-    width: 70%;    
+.board_container {
+    width: 70%;
     padding-top: 256px;
     padding-left: 298px;
     padding-right: 64px;
@@ -194,11 +194,11 @@
     margin-bottom: 8px;
 }
 
-.board_task_descripton {    
+.board_task_descripton {
     overflow: hidden;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     word-wrap: break-word;
 }
 
@@ -263,6 +263,7 @@
     display: flex;
     align-items: center;
 }
+
 .show_task_subtask_content div {
     margin-left: 10px;
 }
@@ -297,5 +298,103 @@
 
     to {
         right: -100%;
+    }
+}
+
+.title-mobile {
+    display: none;
+}
+
+h2 {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    body {
+        height: auto;
+    }
+
+    h2 {
+        display: block;
+        font-size: 27px;
+        font-weight: 700;
+    }
+
+    .board_header {
+        height: auto;
+    }
+
+    .board_container {
+        padding: 200px 20px 36px 20px;
+        width: 94%;
+    }
+
+    .title-mobile {
+        display: block;
+        gap: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title {
+        display: none;
+    }
+
+    .task {
+        width: 252px;
+        word-break: normal;
+    }
+
+    .task_navigation {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .task_navigation button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input_task_navigation {
+        width: 100%;
+    }
+
+    .input_task_navigation input {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .input_task_navigation img {
+        right: 20px;
+    }
+
+    .task_navi_line {
+        right: 50px;
+    }
+
+    .board_header {
+        gap: 40px;
+    }
+
+    .column_section {
+        display: none;
+    }
+
+    .board_content {
+        justify-content: baseline;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .bord_content_colum_left, .bord_content_colum, .bord_content_colum_right {
+        display: flex;
+        gap: 16px;
+        width: 100%;
+        margin-left: 0;
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 }

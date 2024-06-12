@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/add_task.css">
     <link rel="stylesheet" href="./css/mediaQueries/mTemplates.css">
     <link rel="stylesheet" href="css/showtask.css">
+    <link rel="stylesheet" href="css\mediaQueries\mTemplates.css">
     <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
@@ -48,6 +49,20 @@
                     </div>
                 </div>
 
+                <div class="title-mobile ">
+                    <div class="task_navigation">
+                        <h1>Board</h1>
+                        <button onclick="addTask()">+</button>
+                    </div>
+                    <div class="task_navigation">
+                        <div class="input_task_navigation">
+                            <input class="input_find_task" id="input_find_task" type="text" placeholder="Find Task">
+                            <div class="task_navi_line"></div>
+                            <img src="./assets/img/search.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="column_section">
                     <div class="columm_section_add columm_section_add_todo">
                         <span>To do</span>
@@ -70,19 +85,24 @@
             <div id="board_content"></div>
 
             <div class="board_content">
-                <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')" ondragover="allowDrop(event)" >
+                <h2>To Do</h2>
+                <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')"
+                    ondragover="allowDrop(event)">
                     <div></div>
                 </div>
-
-                <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')" ondragover="allowDrop(event)">
+                <h2>In Progress</h2>
+                <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')"
+                    ondragover="allowDrop(event)">
                     <div></div>
                 </div>
-
-                <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')" ondragover="allowDrop(event)">
+                <h2>Await Feedback</h2>
+                <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')"
+                    ondragover="allowDrop(event)">
                     <div></div>
                 </div>
-
-                <div class="bord_content_colum_right" id="board_done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+                <h2>Done</h2>
+                <div class="bord_content_colum_right" id="board_done" ondrop="moveTo('done')"
+                    ondragover="allowDrop(event)">
                     <div></div>
                 </div>
             </div>
