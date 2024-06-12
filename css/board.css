@@ -146,6 +146,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .columm_section_add_todo {
@@ -173,12 +174,33 @@
 .bord_content_colum_left {
     width: 25%;
     margin-right: 13px;
+    z-index: 99;
 }
 
 .bord_content_colum_right {
     width: 25%;
     margin-left: 13px;
 }
+
+
+.no_task {
+    position: absolute;
+    top: 10px;
+    border: 1px dashed #969090;
+    border-radius: 10px;
+    height: 50px;
+    width: 23%;
+    display: flex;
+    color: #A8A8A8;
+    font-size: 18px;
+    line-height: 19.2px;
+    justify-content: center;
+    align-items: center;    
+    background-color: #E7E7E7;
+    z-index: 0;  
+}
+
+
 
 .board_task_category {
     display: inline-block;

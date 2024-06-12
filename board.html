@@ -16,6 +16,7 @@
     <script src="./js/board.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/boardHtml.js"></script>
+    <script src="./js/addTaskHtml.js"></script>
 </head>
 
 <body onload="includeHTML()" onclick="closeNavOnOutsideClick(event)">
@@ -84,27 +85,24 @@
             </div>
 
             <div id="board_content"></div>
-
+            
             <div class="board_content">
+                <div class="no_task" id="no_task_todo">No task To do</div>
                 <h2>To Do</h2>
                 <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')"
                     ondragover="allowDrop(event)">
-                    <div></div>
                 </div>
                 <h2>In Progress</h2>
                 <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')"
                     ondragover="allowDrop(event)">
-                    <div></div>
                 </div>
                 <h2>Await Feedback</h2>
                 <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')"
                     ondragover="allowDrop(event)">
-                    <div></div>
                 </div>
                 <h2>Done</h2>
                 <div class="bord_content_colum_right" id="board_done" ondrop="moveTo('done')"
                     ondragover="allowDrop(event)">
-                    <div></div>
                 </div>
             </div>
 
