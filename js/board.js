@@ -68,6 +68,7 @@ async function initBoardTasks() {
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
     generateToDo(done, doneId);
+
 }
 
 
@@ -99,31 +100,21 @@ async function generateToDo(arr, categorie_id) {
         </div>
         `;
 
-        // if (element.subtasks) {
-        //     let progressBar = document.getElementById(`progressBar${element.id}`);
-        //     let procent100 = element.subtasks.length;
-        //     let currentProcent = selectedSubtasks.length;
+        if (initialsArray) {
+            let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
 
+            board_task_initial.innerHTML = '';
 
-        //     progressBar.style.width = '30%';
+            for (let j = 0; j < initialsArray.length; j++) {
+                let initial = initialsArray[j];
+                let color = colorsArray[j];
 
-        //     // console.log(procent100);
-        //     // console.log(currentProcent);
-        // }
-
-
-        let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
-
-        board_task_initial.innerHTML = '';
-
-        for (let j = 0; j < initialsArray.length; j++) {
-            let initial = initialsArray[j];
-            let color = colorsArray[j];
-
-            board_task_initial.innerHTML += /*html*/`
-                <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
-            `;
+                board_task_initial.innerHTML += /*html*/`
+                        <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
+                    `;
+            }
         }
+
 
         let borderCategory = document.getElementById(`board_task_category${element.id}`);
         if (arr[i]['status'] == 'Technical Task') {
@@ -403,17 +394,17 @@ function generateShowTask(id) {
             </div>
         </div>    
     `;
-///////////////////////check-box
+    ///////////////////////check-box
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
 
-    
+
 
     if (contact.subtasks) {
         for (let k = 0; k < contact.subtasks.length; k++) {
             const element = contact.subtasks[k];
             const subtaskId = `subtask-${k}`;
-            
+
             show_task_subtask.innerHTML += `
                 <div class="show_task_subtask_content">
                     <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}"/>
@@ -442,14 +433,14 @@ function generateShowTask(id) {
                 let currentProcent = selectedSubtasks.length;
                 let width = (currentProcent / procent100 * 100).toFixed(0);
                 progressBar.style.width = width + '%';
-                
+
             });
         });
     }
 
 
-  ///////////////////////////////  
-  
+    ///////////////////////////////  
+
 
 
     let showTaskUserName = document.getElementById('show_task_user_name');
