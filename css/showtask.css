@@ -26,7 +26,7 @@
     position: absolute;
     top: 40px;
     right: 40px;
-    width: 16px;    
+    width: 16px;
     cursor: pointer;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .show_task_close_button {
-    width: 13.15px;    
+    width: 13.15px;
     border: 0;
     background-color: white;
     cursor: pointer;
@@ -171,10 +171,10 @@
     border: 0;
     background-color: white;
     width: 16px;
-    height: 18px;   
+    height: 18px;
 }
 
-.show_task_footer_delete  {
+.show_task_footer_delete {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -239,7 +239,7 @@
     height: 100%;
 }
 
-.show_task__edit_content span{
+.show_task__edit_content span {
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 10px;
@@ -270,7 +270,7 @@
 }
 
 
-.show_task_edit_footer  button{
+.show_task_edit_footer button {
     position: absolute;
     bottom: 50px;
     right: 50px;
@@ -284,6 +284,7 @@
     padding-left: 6px;
     cursor: pointer;
 }
+
 .task_assignet_edit {
     width: 96%;
 }
@@ -326,7 +327,7 @@
     background-color: white;
     max-height: 190px;
     overflow-y: auto;
-    overflow-x: hidden;    
+    overflow-x: hidden;
     border-radius: 10px;
     word-wrap: break-word;
     -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
@@ -379,4 +380,11 @@
     background-color: #7AE229;
     border: #7AE229;
     color: white;
+}
+
+@media(max-width: 850px) {
+    .show_task {
+        width: 80%;
+    }
+
 }
