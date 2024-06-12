@@ -329,8 +329,9 @@ h2 {
     }
 
     .board_container {
-        padding: 200px 20px 36px 20px;
-        width: 94%;
+        padding: 200px 20px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .title-mobile {
@@ -393,12 +394,18 @@ h2 {
         height: auto;
     }
 
-    .bord_content_colum_left, .bord_content_colum, .bord_content_colum_right {
+    .bord_content_colum_left,
+    .bord_content_colum,
+    .bord_content_colum_right {
         display: flex;
         gap: 16px;
         width: 100%;
         margin-left: 0;
         overflow-x: scroll;
         overflow-y: hidden;
+    }
+
+    .bord_content_colum::-webkit-scrollbar, .bord_content_colum_left::-webkit-scrollbar, .bord_content_colum_right::-webkit-scrollbar{
+        display: none;
     }
 }
