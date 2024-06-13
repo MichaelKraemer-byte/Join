@@ -39,7 +39,7 @@ async function initAddTask() {
 function generateAddTasks() {
     let add_task_form = document.getElementById('add_task_form');
     add_task_form.innerHTML = renderHtmlAddtask();
-}
+   }
 
 
 async function addTaskToTasks() {
@@ -87,7 +87,6 @@ async function addTaskToTasks() {
         'title': task_title,
         'subtasks': userSubtask,
         'selectedTask': selectedTask,
-        // 'width': width
     };
 
     todos.push(task)

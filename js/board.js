@@ -63,15 +63,12 @@ async function initBoardTasks() {
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
-    console.log(todos);
 
-
-    generateNoTask(toDo)   
+    generateNoTask(toDo)
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
-    generateToDo(done, doneId);   
-
+    generateToDo(done, doneId);
 }
 
 
@@ -80,7 +77,13 @@ async function generateToDo(arr, categorie_id) {
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
         categorie_id.innerHTML += renderHtmlToDo(element);
-        
+
+        if (element.selectedTask) {
+            let idSUb = document.getElementById(`idSUb${element.id}`);
+            idSUb.innerHTML = '';
+            idSUb.innerHTML += renderHtmlProgressBar(element);
+        }
+
         getInitialsArray(element);
         getCategorieBackGroundColor(element);
     }
@@ -91,11 +94,10 @@ function generateNoTask(toDo) {
     let no_task_todo = document.getElementById('no_task_todo');
     if (toDo.length) {
         no_task_todo.style.visibility = 'hidden';
-    }else{
+    } else {
         no_task_todo.style.visibility = 'initial';
-    } 
+    }
 }
-
 
 
 function getInitials(fullName) {
@@ -279,26 +281,18 @@ async function generateShowTask(id) {
         }
 
         document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`).forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
+            checkbox.addEventListener('change', function () {
                 updateSubtaskStatus(contact, this.dataset.value, this.checked);
             });
         });
     }
 
-    //             // let progressBar = document.getElementById(`progressBar${contact.id}`);
-    //             // let procent100 = contact.subtasks.length;
-    //             // let currentProcent = selectedSubtasks.length;
-    //             // let width = (currentProcent / procent100 * 100).toFixed(0);
-    //             // let ras = width + '%'
-    //             // // console.log(ras);
-    //             // progressBar.style.width = width + '%';
-        
     getshowTaskUserName(contact);
     getCategorieBackGroundColorShowTask(contact, id);
 }
 
 
- async function updateSubtaskStatus(contact, subtask, isChecked) {
+async function updateSubtaskStatus(contact, subtask, isChecked) {
     if (contact) {
         if (!contact.selectedTask) {
             contact.selectedTask = [];
@@ -416,11 +410,11 @@ function editTask(id) {
     `;
 
 
-    
+
     getcheckBoxesEdit();
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
-    getSubtaskEdit(contact);  
+    getSubtaskEdit(contact);
 
 }
 
@@ -583,7 +577,7 @@ function searchTaskFromBoard() {
             progress.innerHTML = '';
             awaitFeedback.innerHTML = '';
             doneId.innerHTML = '';
-            searchSwithId(category);     
+            searchSwithId(category);
 
             let searchResult = document.getElementById(searchId);
 
