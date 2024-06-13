@@ -63,7 +63,8 @@ async function initBoardTasks() {
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
-    // console.log(todos);
+    console.log(todos);
+
 
     generateNoTask(toDo)   
     generateToDo(toDo, task);
@@ -208,19 +209,13 @@ function closeShowTask() {
     let idAddTask = document.getElementById('pop_show_task');
     idAddTask.style.visibility = 'hidden';
     initBoardTasks();
+    location.reload()
 }
 
 
 async function generateShowTask(id) {
     let showTask = document.getElementById('show_task');
     let contact = todos.find(obj => obj['id'] == id);
-
-
-    // document.querySelectorAll('input[name="subtask"]').forEach((checkbox) => {
-    //     checkbox.addEventListener('change', () => {
-    //         werteAbrufen();
-    //     });
-    // });
 
 
     showTask.innerHTML = '';
@@ -270,18 +265,15 @@ async function generateShowTask(id) {
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
 
-    let selectedSubtasks = [];
-
     if (contact.subtasks) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
-            console.log(element);
             show_task_subtask.innerHTML += `
-                    <div class="show_task_subtask_content">
-                         <input type="checkbox" id="${i}" name="subtask" data-value="${element}"/>
-                         <label">${element}</label>                
-                     </div>
-                     `;
+                <div class="show_task_subtask_content">
+                        <input type="checkbox" id="${i}" name="subtask" data-value="${element}"/>
+                        <label">${element}</label>                
+                    </div>
+                    `;
         }
     }
 
@@ -395,27 +387,16 @@ function editTask(id) {
         </form>
     `;
 
-    ///////////////////////
 
-    let checkBoxesEdit = document.getElementById('checkBoxesEdit');
-    checkBoxesEdit.innerHTML = '';
+    
+    getcheckBoxesEdit();
+    getContactPriorityEdit(contact);
+    getContactInitialEdit(contact);
+    getSubtaskEdit(contact);  
 
-    for (let k = 0; k < guesteArray.length; k++) {
-        const element = guesteArray[k];
-        let initial = element.name;
-        checkBoxesEdit.innerHTML += `
-            <label class="check_boxes_edit_label">
-                <div class="board_task_check_box_name">
-                        <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
-                        <p id="${k}">${element.name}<p>
-                </div>
-                <input type="checkbox" name="optionen" value="${element.name}"/>
-            <label>
-        `;
-    }
+}
 
-    ///////////////////////
-
+function getContactPriorityEdit(contact) {
     let urgent_edit = document.getElementById('urgent_edit');
     let medium_edit = document.getElementById('medium_edit');
     let low_edit = document.getElementById('low_edit');
@@ -431,9 +412,9 @@ function editTask(id) {
             low_edit.classList.add('active');
             break
     }
+}
 
-    //////////////////////
-
+function getContactInitialEdit(contact) {
     let task_title_edit = document.getElementById('task_title_edit');
     let task_description_edit = document.getElementById('task_description_edit');
     let task_date_edit = document.getElementById('task_date_edit');
@@ -454,9 +435,10 @@ function editTask(id) {
     } else {
         task_edit_initial.innerHTML = '';
     }
+}
 
-    //////////////////////////
 
+function getSubtaskEdit(contact) {
     let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
     task_subtasks_edit.innerHTML = '';
 
@@ -470,7 +452,26 @@ function editTask(id) {
     } else {
         task_subtasks_edit.innerHTML = '';
     }
+}
 
+
+function getcheckBoxesEdit() {
+    let checkBoxesEdit = document.getElementById('checkBoxesEdit');
+    checkBoxesEdit.innerHTML = '';
+
+    for (let k = 0; k < guesteArray.length; k++) {
+        const element = guesteArray[k];
+        let initial = element.name;
+        checkBoxesEdit.innerHTML += `
+            <label class="check_boxes_edit_label">
+                <div class="board_task_check_box_name">
+                        <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
+                        <p id="${k}">${element.name}<p>
+                </div>
+                <input type="checkbox" name="optionen" value="${element.name}"/>
+            <label>
+        `;
+    }
 }
 
 
@@ -485,7 +486,6 @@ async function upgradeTodos(id) {
     let priorityImgEdit;
     switch (userPriotity) {
         case 'Urgent':
-            console.log(userPriotity);
             priorityImgEdit = './assets/img/vector_red.svg';
             break;
         case 'Medium':
@@ -503,6 +503,10 @@ async function upgradeTodos(id) {
     initAddTask();
     initBoardTasks();
     // closeShowTask();    
+}
+
+function getPriorityUpdateTodos() {
+
 }
 
 
