@@ -174,7 +174,7 @@
 .bord_content_colum_left {
     width: 25%;
     margin-right: 13px;
-    z-index: 99;
+    z-index: 1;
 }
 
 .bord_content_colum_right {
@@ -185,7 +185,6 @@
 
 .no_task {
     position: absolute;
-    top: 10px;
     border: 1px dashed #969090;
     border-radius: 10px;
     height: 50px;
