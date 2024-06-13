@@ -262,19 +262,27 @@ async function generateShowTask(id) {
     `;
     ///////////////////////check-box
 
+
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
 
-    if (contact.subtasks) {
+    if (contact && contact.subtasks) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
+            const isChecked = contact.selectedTask ? contact.selectedTask.includes(element) : false;
             show_task_subtask.innerHTML += `
                 <div class="show_task_subtask_content">
-                        <input type="checkbox" id="${i}" name="subtask" data-value="${element}"/>
-                        <label">${element}</label>                
-                    </div>
-                    `;
+                    <input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}/>
+                    <label for="${id}_${i}">${element}</label>
+                </div>
+            `;
         }
+
+        document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`).forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateSubtaskStatus(contact, this.dataset.value, this.checked);
+            });
+        });
     }
 
     //             // let progressBar = document.getElementById(`progressBar${contact.id}`);
@@ -287,6 +295,26 @@ async function generateShowTask(id) {
         
     getshowTaskUserName(contact);
     getCategorieBackGroundColorShowTask(contact, id);
+}
+
+
+ async function updateSubtaskStatus(contact, subtask, isChecked) {
+    if (contact) {
+        if (!contact.selectedTask) {
+            contact.selectedTask = [];
+        }
+
+        if (isChecked) {
+            if (!contact.selectedTask.includes(subtask)) {
+                contact.selectedTask.push(subtask);
+            }
+        } else {
+            contact.selectedTask = contact.selectedTask.filter(task => task !== subtask);
+        }
+        saveTaskToLocalStorage();
+        await saveTasksToServer();
+        initBoardTasks();
+    }
 }
 
 
