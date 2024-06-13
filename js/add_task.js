@@ -51,9 +51,9 @@ async function addTaskToTasks() {
     let id = generateUniqueId();
     let task_category = 'to_do';
     let priorityImg;
-    let subtask = [];
     let selectedTask = [];
-    let width = '';
+    // let width = '';
+    let userSubtask = subtasks;
 
     switch (userPriotity) {
         case 'Urgent':
@@ -85,9 +85,9 @@ async function addTaskToTasks() {
         'priority': priority,
         'status': task_status,
         'title': task_title,
-        'subtasks': subtask,
+        'subtasks': userSubtask,
         'selectedTask': selectedTask,
-        'width': width
+        // 'width': width
     };
 
     todos.push(task)

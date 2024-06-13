@@ -63,6 +63,7 @@ async function initBoardTasks() {
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
+    console.log(todos);
 
     generateNoTask(toDo)   
     generateToDo(toDo, task);
@@ -271,79 +272,79 @@ async function generateShowTask(id) {
 
     let selectedSubtasks = [];
 
-    if (contact.subtasks) {
-        for (let k = 0; k < contact.subtasks.length; k++) {
-            const element = contact.subtasks[k];
-            const subtaskId = `subtask-${k}`;
-            const isChecked = selectedSubtasks.includes(element) ? 'checked' : '';
+    // console.log();
 
-            show_task_subtask.innerHTML += `
-            <div class="show_task_subtask_content">
-                <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}" ${isChecked}/>
-                <label for="${subtaskId}">${element}</label>                
-            </div>
-            `;
+    // if (contact.subtasks) {
+    //     for (let k = 0; k < contact.subtasks.length; k++) {
+    //         const element = contact.subtasks[k];
+    //         const subtaskId = `subtask-${k}`;
+    //         const isChecked = selectedSubtasks.includes(element) ? 'checked' : '';
 
-        }
-        const checkboxes = document.querySelectorAll('input[name="subtask"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', (event) => {
-                const value = event.target.getAttribute('data-value');
-                if (event.target.checked) {
-                    if (!selectedSubtasks.includes(value)) {
-                        selectedSubtasks.push(value);
-                    }
-                } else {
-                    const index = selectedSubtasks.indexOf(value);
-                    if (index > -1) {
-                        selectedSubtasks.splice(index, 1);
-                    }
-                }
+    //         show_task_subtask.innerHTML += `
+    //         <div class="show_task_subtask_content">
+    //             <input type="checkbox" id="${subtaskId}" name="subtask" data-value="${element}" ${isChecked}/>
+    //             <label for="${subtaskId}">${element}</label>                
+    //         </div>
+    //         `;
 
-
-
-
-                // let progressBar = document.getElementById(`progressBar${contact.id}`);
-                // let procent100 = contact.subtasks.length;
-                // let currentProcent = selectedSubtasks.length;
-                // let width = (currentProcent / procent100 * 100).toFixed(0);
-                // let ras = width + '%'
-                // // console.log(ras);
-                // progressBar.style.width = width + '%';
+    //     }}
+    //     const checkboxes = document.querySelectorAll('input[name="subtask"]');
+    //     checkboxes.forEach(checkbox => {
+    //         checkbox.addEventListener('change', (event) => {
+    //             const value = event.target.getAttribute('data-value');
+    //             if (event.target.checked) {
+    //                 if (!selectedSubtasks.includes(value)) {
+    //                     selectedSubtasks.push(value);
+    //                 }
+    //             } else {
+    //                 const index = selectedSubtasks.indexOf(value);
+    //                 if (index > -1) {
+    //                     selectedSubtasks.splice(index, 1);
+    //                 }
+    //             }
 
 
-                contact.selectedTask = selectedSubtasks;
 
-                console.log(selectedSubtasks);
-                saveTaskToLocalStorage();
+
+    //             // let progressBar = document.getElementById(`progressBar${contact.id}`);
+    //             // let procent100 = contact.subtasks.length;
+    //             // let currentProcent = selectedSubtasks.length;
+    //             // let width = (currentProcent / procent100 * 100).toFixed(0);
+    //             // let ras = width + '%'
+    //             // // console.log(ras);
+    //             // progressBar.style.width = width + '%';
+
+
+    //             contact.selectedTask = selectedSubtasks;
+
+    //             console.log(selectedSubtasks);
+    //             saveTaskToLocalStorage();
             
-            });
-        });
+    //         });
+    //     });
 
         
-    }
+    // }
+    getshowTaskUserName(contact);
+    getCategorieBackGroundColorShowTask(contact, id);
+}
 
 
-    ///////////////////////////////  
-
-
-
+function getshowTaskUserName(contact) {
     let showTaskUserName = document.getElementById('show_task_user_name');
     showTaskUserName.innerHTML = "";
-    console.log();
+    if (contact.name) {
+        for (let i = 0; i < contact['name'].length; i++) {
+            const element = contact['name'][i];
+            showTaskUserName.innerHTML += /*html*/`
+                    <div class="show_task_assing_to_users">                
+                        <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                        <div>${element}</div>
+                    </div>
+                `;
+        }
 
-    for (let i = 0; i < contact['name'].length; i++) {
-        const element = contact['name'][i];
-        showTaskUserName.innerHTML += /*html*/`
-                <div class="show_task_assing_to_users">                
-                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
-                    <div>${element}</div>
-                </div>
-            `;
     }
-
-    getCategorieBackGroundColorShowTask(contact, id)
-    
 }
 
 
