@@ -53,6 +53,9 @@ b {
     border-radius: 10px;
     padding-left: 6px;
     cursor: pointer;
+    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
 }
 
 .add_task_input:focus {
@@ -67,6 +70,9 @@ b {
     border-radius: 10px;
     height: 120px;
     cursor: pointer;
+    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
 }
 
 .add_task_textarea:focus {

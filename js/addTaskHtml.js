@@ -1,3 +1,4 @@
+
 function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
     return /*html*/`        
@@ -25,7 +26,6 @@ function renderHtmlAddtask() {
     return /*html*/`
     <h1>Add Task</h1>
     <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">
-    <!-- onsubmit="event.preventDefault(); addTaskToTasks();"  -->
         <div>           
             <div class="add_task_form">
                 <div class="add_task_width50">
@@ -98,7 +98,7 @@ function renderHtmlAddtask() {
             <div class="add_task_footer">
                 <p id="add_task_footer"><b>*</b>This field is required</p>
                 <div class="add_task_button_group_footer">
-                    <button class="add_task_button_clear add_task_hover_button">Clear X</button>
+                    <button class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear X</button>
                     <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
                         <img src="./assets/img/vector_check.svg">
                     </button>

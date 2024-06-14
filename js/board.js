@@ -77,13 +77,16 @@ async function generateToDo(arr, categorie_id) {
     for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
         categorie_id.innerHTML += renderHtmlToDo(element);
+        let idSUb = document.getElementById(`idSUb${element.id}`);
 
-        if (element.selectedTask) {
-            let idSUb = document.getElementById(`idSUb${element.id}`);
+        if (element.subtasks) {
             idSUb.innerHTML = '';
-            idSUb.innerHTML += renderHtmlProgressBar(element);
-        }
-
+            idSUb.innerHTML = renderHtmlProgressBarEmpty(element)
+            if (element.selectedTask) {
+                idSUb.innerHTML = '';
+                idSUb.innerHTML += renderHtmlProgressBar(element);
+            }
+        }        
         getInitialsArray(element);
         getCategorieBackGroundColor(element);
     }
@@ -221,47 +224,7 @@ async function generateShowTask(id) {
 
 
     showTask.innerHTML = '';
-    showTask.innerHTML += /*html*/`
-        <div class="show_task_header">
-            <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
-            <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
-        </div>   
-        <div class="show_task_title">${contact.title}</div>    
-        <div class="show_task_description">${contact.description}</div> 
-        <div class="show_task_date">
-            <span>Due date:</span>
-            <div>${contact.date}</div>    
-        </div>
-        <div class="show_task_priory show_task_date">
-            <span>Priority:</span>
-            <div class="show_task_priority">
-                <span>${contact.priority}</span>
-                <img src="${contact.priorityImg}">
-            </div>
-        </div> 
-            <div class="show_task_user_daten">
-                <span>Assing to:</span>
-                <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
-                <div class="show_task_user_name " id="show_task_user_name"></div>            
-                <div class="show_task_show_subtasks">
-                    <span>Subtasks</span>
-                <div class="show_task_subtask" id="show_task_subtask"></div>
-            </div>
-        </div>
-            
-        </div>
-
-        <div class="show_task_footer">
-            <div class="show_task_footer_delete">
-                <button onclick="deleteTaskFromLocalStorage(${contact.id})"><img src="./assets/img/delete.svg" alt=""></button>
-                <span>Delete</span>    
-            </div>
-            <div class="show_task_footer_delete">
-                <button onclick="editTask(${contact.id})"><img src="./assets/img/edit.svg" alt=""></button>
-                <span>Edit</span>    
-            </div>
-        </div>    
-    `;
+    showTask.innerHTML += renderGenerateShowTaskHtml(contact, id)
     ///////////////////////check-box
 
 
@@ -292,6 +255,8 @@ async function generateShowTask(id) {
 }
 
 
+
+
 async function updateSubtaskStatus(contact, subtask, isChecked) {
     if (contact) {
         if (!contact.selectedTask) {
@@ -319,13 +284,12 @@ function getshowTaskUserName(contact) {
         for (let i = 0; i < contact['name'].length; i++) {
             const element = contact['name'][i];
             showTaskUserName.innerHTML += /*html*/`
-                    <div class="show_task_assing_to_users">                
-                        <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
-                        <div>${element}</div>
-                    </div>
-                `;
+                <div class="show_task_assing_to_users">                
+                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                    <div>${element}</div>
+                </div>
+            `;
         }
-
     }
 }
 
@@ -338,7 +302,6 @@ function editTask(id) {
     let showTaskEdit = document.getElementById('show_task_edit');
     idAddTask.style.display = 'none';
     showTaskEdit.style.display = 'inline';
-
 
     showTaskEdit.innerHTML = '';
     showTaskEdit.innerHTML = /*html*/` 
@@ -400,15 +363,16 @@ function editTask(id) {
                     <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
                     <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
                 </div>   
-                <div id="show_task_subtask_edit"></div>            
+                <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>            
                 
             </div>
             <div class="show_task_edit_footer">
-            <button type="submit">ok</button>
+                <button type="submit">Ok
+                    <img src="./assets/img/vector_check.svg" alt="">
+                </button>
             </div>
         </form>
     `;
-
 
 
     getcheckBoxesEdit();
@@ -468,7 +432,7 @@ function getSubtaskEdit(contact) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
             task_subtasks_edit.innerHTML += `
-                <div>${element}<div>
+                <div class="get_show_task"><li>${element}</li><div>
             `;
         }
     } else {
@@ -499,13 +463,24 @@ function getcheckBoxesEdit() {
 
 async function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
-
     contact.title = document.getElementById('task_title_edit').value;
     contact.description = document.getElementById('task_description_edit').value;
     contact.dueDate = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
 
-    let priorityImgEdit;
+    getPriorityUpdateTodos(userPriotity)
+    contact.priority = userPriotity;
+    contact.priorityImg = priorityImgEdit;
+
+    saveTaskToLocalStorage();
+    await saveTasksToServer();
+    initAddTask();
+    initBoardTasks();
+    closeShowTask();    
+}
+
+
+function getPriorityUpdateTodos(userPriotity) {    
     switch (userPriotity) {
         case 'Urgent':
             priorityImgEdit = './assets/img/vector_red.svg';
@@ -517,18 +492,6 @@ async function upgradeTodos(id) {
             priorityImgEdit = './assets/img/vector_green.svg';
             break;
     }
-    contact.priority = userPriotity;
-    contact.priorityImg = priorityImgEdit;
-
-    saveTaskToLocalStorage();
-    await saveTasksToServer();
-    initAddTask();
-    initBoardTasks();
-    // closeShowTask();    
-}
-
-function getPriorityUpdateTodos() {
-
 }
 
 

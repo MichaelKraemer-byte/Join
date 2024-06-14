@@ -36,10 +36,10 @@ async function initAddTask() {
 }
 
 
-function generateAddTasks() {
+function generateAddTasks(columId) {
     let add_task_form = document.getElementById('add_task_form');
-    add_task_form.innerHTML = renderHtmlAddtask();
-   }
+    add_task_form.innerHTML = renderHtmlAddtask(columId);
+}
 
 
 async function addTaskToTasks() {
@@ -52,7 +52,6 @@ async function addTaskToTasks() {
     let task_category = 'to_do';
     let priorityImg;
     let selectedTask = [];
-    // let width = '';
     let userSubtask = subtasks;
 
     switch (userPriotity) {
@@ -89,12 +88,12 @@ async function addTaskToTasks() {
         'selectedTask': selectedTask,
     };
 
-    todos.push(task)
-    await saveTasksToServer();
-    saveTaskToLocalStorage();
-    closeWindow();
-    initAddTask();
-    initBoardTasks();
+    // todos.push(task)
+    // await saveTasksToServer();
+    // saveTaskToLocalStorage();
+    // closeWindow();
+    // initAddTask();
+    // initBoardTasks();
 }
 
 function generateUniqueId() {
@@ -228,6 +227,11 @@ function checkGuestsName(checkedValues) {
                 `;
         }
     }
+}
+
+
+function clearForm() {
+    document.getElementById("meinFormular").reset();
 }
 
 
