@@ -43,7 +43,8 @@
                     <h1>Board</h1>
                     <div class="task_navigation">
                         <div class="input_task_navigation">
-                            <input class="input_find_task" id="input_find_task" type="text" placeholder="Find Task" onkeydown="searchTaskFromBoard()">
+                            <input class="input_find_task" id="input_find_task" type="text" placeholder="Find Task"
+                                onkeydown="searchTaskFromBoard()">
                             <div class="task_navi_line"></div>
                             <img src="./assets/img/search.svg" alt="">
                         </div>
@@ -54,7 +55,7 @@
                 <div class="title-mobile ">
                     <div class="task_navigation">
                         <h1>Board</h1>
-                        <button onclick="addTask()">+</button>
+                        <button onclick="navigateTo('/add_task.html')">+</button>
                     </div>
                     <div class="task_navigation">
                         <div class="input_task_navigation">
@@ -80,23 +81,32 @@
                     </div>
                     <div class="columm_section_add columm_section_add_done">
                         <span>Done</span>
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
             <div id="board_content"></div>
-            
-            <div class="board_content">
+
+            <div class="board_content_mobile board_content">
                 <div class="no_task" id="no_task_todo">No task To do</div>
-                <h2>To Do</h2>
+                <div class="board_content_mobile_taskTitle">
+                    <h2>To Do</h2>
+                    <button onclick="navigateTo('/add_task.html')">+</button>
+                </div>
                 <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')"
                     ondragover="allowDrop(event)">
                 </div>
-                <h2>In Progress</h2>
+                <div class="board_content_mobile_taskTitle">
+                    <h2>In Progress</h2>
+                    <button onclick="navigateTo('/add_task.html')">+</button>
+                </div>
                 <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')"
                     ondragover="allowDrop(event)">
                 </div>
-                <h2>Await Feedback</h2>
+                <div class="board_content_mobile_taskTitle">
+                    <h2>Await Feedback</h2>
+                    <button onclick="navigateTo('/add_task.html')">+</button>
+                </div>
                 <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')"
                     ondragover="allowDrop(event)">
                 </div>

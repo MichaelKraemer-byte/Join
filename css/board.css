@@ -379,8 +379,10 @@ h2 {
     }
 
     .task {
-        width: 252px;
+        min-width: 252px;
         word-break: normal;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.08);
+        -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.08);
     }
 
     .task_navigation {
@@ -436,9 +438,31 @@ h2 {
         margin-left: 0;
         overflow-x: scroll;
         overflow-y: hidden;
+        padding: 6px;
     }
 
     .bord_content_colum::-webkit-scrollbar, .bord_content_colum_left::-webkit-scrollbar, .bord_content_colum_right::-webkit-scrollbar{
         display: none;
+    }
+
+    .pop_add_task {
+        display: none;
+    }
+
+    .board_content_mobile_taskTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .board_content_mobile_taskTitle button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 30px;
+        cursor: pointer;
     }
 }
