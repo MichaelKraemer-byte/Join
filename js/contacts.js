@@ -583,6 +583,7 @@ function renderCategoryContacts(AZindex, newContact) {
 function openMobileContactOptions(){
     let mobileContactOptions = document.getElementById('mobileContactOptions');
     mobileContactOptions.style.display = 'flex';
+    mobileContactOptions.style.animation = 'slideInNav 0.3s ease-in-out forwards'
 }
 
 
@@ -630,6 +631,8 @@ function openDeletePopUp(contactName) {
     let deletePopUp = document.getElementById('deletePopUp');
     deletePopUp.innerHTML = deletePopUpHTML(contactName);
     deletePopUp.classList.remove('d-none');
+    deletePopUp.classList.remove('slideOut');
+    deletePopUp.classList.add('slideIn');
     displayGreyBackground();
 }
 
@@ -640,8 +643,12 @@ function openDeletePopUp(contactName) {
 function closeDeletePopUp(){
     let deletePopUp = document.getElementById('deletePopUp');
     if(deletePopUp.innerHTML){
-        deletePopUp.innerHTML = '';
-        deletePopUp.classList.add('d-none');
+        deletePopUp.classList.remove('slideIn');
+        deletePopUp.classList.add('slideOut');
+        setTimeout(() => {
+            deletePopUp.innerHTML = '';
+            deletePopUp.classList.add('d-none');            
+        }, 200);
         removeGreyBackground();        
     }   else {
         return;

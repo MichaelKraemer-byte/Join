@@ -76,11 +76,11 @@
     }
 }
 
-
 @media (max-width: 850px){
     #summary{
         display: none;
         width: 100%;
+        gap: 2%;
     }
     
     #summaryMainSection{
@@ -113,7 +113,6 @@
         gap: 24px;
     }
 }
-
 
 @media (max-width: 450px){
     .headerTitle {

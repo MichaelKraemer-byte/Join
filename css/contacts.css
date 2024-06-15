@@ -392,7 +392,7 @@
 }
 
 .nameAndMailListContainer{
-    min-width: 200px;
+    min-width: 240px;
     max-width: 240px;
 }
 
@@ -559,8 +559,10 @@ body {
     gap: 24px;
     width: fit-content;
     border-radius: 10px;
-    left: 50%;
-    top: 50%;
+    right: -50%;
+    top: 60%;
+    transform: translate(50%, -60%);
+    width: fit-content;
 }
 
 .deleteRequestParagraphContainer{

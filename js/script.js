@@ -180,7 +180,12 @@ async function getData() {
  */
 function openHeadNav(event) {
   let nav = document.getElementById('headerNav');
-  nav.classList.contains('d-none') ? nav.classList.remove('d-none') : nav.classList.add('d-none');
+  if (nav.classList.contains('d-none')) {
+    nav.classList.remove('d-none')
+    nav.style.animation = 'slideInNav 0.3s ease-in-out forwards';
+  } else {
+    closeNavOnOutsideClick(event);
+  }  
   event.stopPropagation();
 }
 
@@ -198,7 +203,10 @@ function closeNavOnOutsideClick(event) {
   let initialCircle = document.getElementById('initialCircle');
   // Überprüfen, ob der Klick außerhalb des Nav-Menüs erfolgt
   if (nav && event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
-    nav.classList.add('d-none');
+    nav.style.animation = 'slideOutNav 0.3s ease-in-out forwards';
+    setTimeout(() => {
+      nav.classList.add('d-none')}, 300);
+    
   }
 }
 
@@ -214,12 +222,13 @@ function closeNavOnOutsideClick(event) {
 function closeMobileContactOptionsOnOutsideClick(event) {
   let mobileContactOptions = document.getElementById('mobileContactOptions');
   let mobileViewContactButton = document.getElementById('mobileViewContactButton');
-  // Überprüfen, ob der Klick außerhalb der mobilen Kontaktoptionen erfolgt
   if (mobileContactOptions &&
     mobileContactOptions.style.display === 'flex' &&
     !mobileContactOptions.contains(event.target) &&
     !mobileViewContactButton.contains(event.target)) {
-    mobileContactOptions.style.display = 'none';
+      mobileContactOptions.style.animation = 'slideOutNav 0.3s ease-in-out forwards';
+    setTimeout(() => {
+      mobileContactOptions.style.display = 'none'}, 300);
   }
 }
 
