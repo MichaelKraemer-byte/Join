@@ -42,14 +42,14 @@
         <div id="summaryMainSection">
             <div class="summaryNumContainer">
                 <div class="toDoAndDoneSection">
-                    <div onclick="navigateTo('board.html')" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
+                    <a href="board.html" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
                         <img class="summarySvg summarySvgSize" src="assets/img/penIcon.svg">
                         <div class="countContainer">
                             <num id="toDo" class="summaryCount">0</num>
                             <span class="summarySpan">To-do</span>
                         </div>
-                    </div>
-                    <div onclick="navigateTo('board.html')" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
+                    </a>
+                    <a href="board.html" class="toDoAndDoneContainer radius-30 backgroundcolor-white invert">
                         <svg class="summarySvgSize" xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70" fill="none">
                             <circle class="whiteFill" cx="35" cy="35" r="34.5" fill="#2A3647"/>
                             <path class="darkBlueStroke" d="M20.0283 35.0001L31.2571 46.0662L49.9717 23.9341" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,10 +58,10 @@
                             <num id="done" class="summaryCount">0</num>
                             <span class="summarySpan">Done</span>
                         </div>
-                    </div>
+                    </a>
                 </div>            
 
-                <div onclick="navigateTo('board.html')" class="urgentContainer radius-30 backgroundcolor-white invert">
+                <a href="board.html" class="urgentContainer radius-30 backgroundcolor-white invert">
                     <div class="urgentCountContainerWithImg">
                         <img class="summarySvgSize" src="assets/img/urgentIcon.svg">
                         <div class="urgentCountContainer">
@@ -77,23 +77,23 @@
                         <span id="upcomingDeadline">Date,</span>
                         <span id="deadlinePhrase" class="deadlinePhrase">Upcoming Deadline</span>
                     </div>
-                </div>
+                </a>
 
                 <div class="boardProgressFeedbackSection">
-                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <a href="board.html" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num id="inBoard" class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Tasks in<br>Board</span>
-                    </div>
+                    </a>
                         
-                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <a href="board.html" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num id="inProgress" class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Tasks in<br>Progress</span>
-                    </div>
+                    </a>
 
-                    <div onclick="navigateTo('board.html')" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
+                    <a href="board.html" class="countContainer radius-30 backgroundcolor-white summaryBottomContainer invert">
                         <num id="awaitFeedback" class="summaryCount bottomSummaryCount">0</num>
                         <span class="bottomContainerText">Awaiting<br>Feedback</span>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -105,6 +105,7 @@
             </div>
         </div>
     </section>
+    
     
     <script src="./js/script.js"></script>
     <script src="./js/summary.js"></script>      
