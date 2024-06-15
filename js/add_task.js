@@ -88,12 +88,12 @@ async function addTaskToTasks() {
         'selectedTask': selectedTask,
     };
 
-    // todos.push(task)
-    // await saveTasksToServer();
-    // saveTaskToLocalStorage();
-    // closeWindow();
-    // initAddTask();
-    // initBoardTasks();
+    todos.push(task)
+    await saveTasksToServer();
+    saveTaskToLocalStorage();
+    closeWindow();
+    initAddTask();
+    initBoardTasks();
 }
 
 function generateUniqueId() {

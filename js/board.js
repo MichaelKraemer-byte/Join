@@ -373,7 +373,7 @@ function editTask(id) {
             </div>
         </form>
     `;
-
+    // console.log(selectedGuest);
 
     getcheckBoxesEdit();
     getContactPriorityEdit(contact);
