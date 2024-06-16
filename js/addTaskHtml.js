@@ -90,15 +90,19 @@ function renderHtmlAddtask() {
                     </div>
                     <div class="add_task_subtask add_task_form_row">
                         <label>Subtasks</label>
-                        <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                        <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="showAddAndDeleteSubTask()">
                         <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+                        <!-- <div>
+                            <img src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
+                            <img src="./assets/img/vector_check.svg" style=" filter: invert(1) sepia(1) hue-rotate(190deg) saturate(500%) brightness(85%);" onclick="addNewSubTask()">
+                        </div> -->
                     </div>
                 </div>
             </div>
             <div class="add_task_footer">
                 <p id="add_task_footer"><b>*</b>This field is required</p>
                 <div class="add_task_button_group_footer">
-                    <button class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear X</button>
+                    <button class="add_task_button_clear add_task_hover_button" onclick="clearForm()"><p>Clear</p><img src="./assets/img/Vector.svg" alt=""></button>
                     <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
                         <img src="./assets/img/vector_check.svg">
                     </button>

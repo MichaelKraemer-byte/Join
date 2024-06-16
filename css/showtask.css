@@ -71,11 +71,15 @@
     padding: 4px 24px;
 }
 
-.show_task_close_button {
+.show_task_close_button img{
     width: 13.15px;
     border: 0;
     background-color: white;
     cursor: pointer;
+}
+
+.show_task_close_button:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
 }
 
 .show_task_description {
@@ -186,6 +190,14 @@
     cursor: pointer;
 }
 
+.show_task_footer_delete:hover {
+    color: #29ABE2;
+}
+
+.show_task_footer_delete:hover img {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+
 .show_task_show_subtasks {
     margin-left: 10px;
     margin-top: 40px;
@@ -283,9 +295,9 @@
     gap: 8px;
 }
 
-.show_task_delete_button:hover {
+/* .show_task_delete_button:hover {
     color: #29ABE2;
-}
+} */
 
 .show_task_delete_button p {
     margin-block-start: 0;
