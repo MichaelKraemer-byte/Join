@@ -128,11 +128,17 @@ function numberOfUrgentTasks() {
 function setUpComingDeadline(urgent){
     let upcomingDeadline = document.getElementById('upcomingDeadline');   
     let deadlinePhrase = document.getElementById('deadlinePhrase'); 
+    let urgentDate = document.getElementById('urgent');
     let deadLine = getNextUrgentDate(urgent);
+    let now = new Date();
+    let pastDates = urgent.filter(item => new Date(item.date) > now);
     upcomingDeadline.innerHTML = /*html*/`
         ${deadLine}
     `;
-    deadLine === '' ? deadlinePhrase.innerHTML = 'There is nothing urgent right now' : null;
+    deadLine === '' ? deadlinePhrase.innerHTML = 'Nothing urgent right now.' : null;
+    if (upcomingDeadline === '' && urgentDate.innerHTML >= 1) {
+        deadlinePhrase.innerHTML = `There are ${pastDates.length} incomplete.`;
+    }
 }
 
 
@@ -146,7 +152,7 @@ function setUpComingDeadline(urgent){
  */
 function getNextUrgentDate(urgent) {
     let now = new Date();
-    let futureDates = urgent.filter(item => new Date(item.date) > now);
+    let futureDates = urgent.filter(item => new Date(item.date) >= now);
     futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
     return futureDates.length > 0 ? futureDates[0].date : '';
 }

@@ -179,6 +179,7 @@ function initForCurrentPage() {
     focusNavAnker();
     initAddTask();
   } else if (window.location.href.includes('board.html')) {
+    generateAddTasks();
     initBoardTasks();
   }
 }
@@ -286,8 +287,7 @@ function navigateTo(url) {
 /**
  * The function `getInitials` extracts the initials from a contact's name and returns them in
  * uppercase.
- * @param {Object} contact - The `contact` parameter is an object that contains information about a person,
- * specifically their name.
+ * @param {String} name - The `contact` parameter is a string that contains a name of our contact.
  * @returns The function `getInitials` takes a `contact` object as input and extracts the initials from
  * the `name` property of the contact. It uses a regular expression to match the first letter of each
  * word in the name and then concatenates the first letters to form the initials. The initials are then
@@ -306,6 +306,16 @@ function getInitials(name) {
 }
 
 
+/**
+ * The function `getInitials` extracts the initials from a contact's name and returns them in
+ * uppercase.
+ * @param {Object} contact - The `contact` parameter is an object that contains information about a person,
+ * specifically their name.
+ * @returns The function `getInitials` takes a `contact` object as input and extracts the initials from
+ * the `name` property of the contact. It uses a regular expression to match the first letter of each
+ * word in the name and then concatenates the first letters to form the initials. The initials are then
+ * converted to uppercase and returned.
+ */
 function getInitialsFromObject(contact) {
   let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
 
