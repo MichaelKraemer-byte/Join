@@ -125,22 +125,36 @@ function numberOfUrgentTasks() {
  * whether the upcoming deadline being set is urgent or not. This parameter likely influences the logic
  * within the `getNextUrgentDate` function to calculate the next urgent date.
  */
-function setUpComingDeadline(urgent){
-    let upcomingDeadline = document.getElementById('upcomingDeadline');   
-    let deadlinePhrase = document.getElementById('deadlinePhrase'); 
+function setUpComingDeadline(urgent) {
+    let upcomingDeadline = document.getElementById('upcomingDeadline');
+    let deadlinePhrase = document.getElementById('deadlinePhrase');
+    let pastDatesSpan = document.getElementById('pastDatesSpan');
+    let pastDatesNumber = document.getElementById('pastDatesNumber');
     let urgentDate = document.getElementById('urgent');
     let deadLine = getNextUrgentDate(urgent);
     let now = new Date();
-    let pastDates = urgent.filter(item => new Date(item.date) > now);
-    upcomingDeadline.innerHTML = /*html*/`
-        ${deadLine}
-    `;
-    deadLine === '' ? deadlinePhrase.innerHTML = 'Nothing urgent right now.' : null;
-    if (upcomingDeadline === '' && urgentDate.innerHTML >= 1) {
-        deadlinePhrase.innerHTML = `There are ${pastDates.length} incomplete.`;
+    
+    // Filtern der vergangenen Termine
+    let pastDates = urgent.filter(item => new Date(item.date) < now);
+    // Filtern der zukünftigen Termine
+    let futureDates = urgent.filter(item => new Date(item.date) >= now);
+
+    // Setzen des nächsten dringenden Termins
+    upcomingDeadline.innerHTML = deadLine ? deadLine : '';
+
+    // Logik zur Anzeige der Phrase
+    if (deadLine === '') {
+        if (pastDates.length > 0) {
+            pastDatesSpan.style.display = 'block';
+            deadlinePhrase.innerHTML = /*html*/`Nothing urgent in future`;
+            pastDatesNumber.innerHTML = /*html*/`${pastDates.length}`;
+        } else {
+            deadlinePhrase.innerHTML = 'Nothing urgent right now.';
+        }
+    } else {
+        deadlinePhrase.innerHTML = 'Upcoming deadline.';
     }
 }
-
 
 /**
  * The function `getNextUrgentDate` filters and sorts a list of urgent dates to return the next
@@ -152,7 +166,12 @@ function setUpComingDeadline(urgent){
  */
 function getNextUrgentDate(urgent) {
     let now = new Date();
-    let futureDates = urgent.filter(item => new Date(item.date) >= now);
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let futureDates = urgent.filter(item => {
+        let itemDate = new Date(item.date);
+        let itemDay = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
+        return itemDay >= today;
+    });
     futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
     return futureDates.length > 0 ? futureDates[0].date : '';
 }
