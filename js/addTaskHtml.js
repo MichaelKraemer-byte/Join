@@ -1,3 +1,7 @@
+let in_progress = true;
+let awaitt = true;
+let to_do = true;
+
 
 function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
@@ -22,12 +26,13 @@ function rendersearchNameFromGuestList() {
 `;
 }
 
-function renderHtmlAddtask() {
+function renderHtmlAddtask(column) {
+    checkColumnName(column)
     return /*html*/`
     <div class="show_add_task" id="showTaskContainer">
         <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
         <h1>Add Task</h1>
-        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">
+        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
             <div>           
                 <div class="add_task_form">
                     <div class="add_task_width50">

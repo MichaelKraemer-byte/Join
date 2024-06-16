@@ -4,7 +4,6 @@ let guesteArray = [];
 let userPriotity;
 let imgPriority;
 
-
 async function loadGuestFromServer() {
     try {
         const response = await fetch(`${BASE_URL_GUEST}/guestContacts.json`);
@@ -23,7 +22,7 @@ async function loadGuestFromServer() {
 }
 
 
-async function initAddTask() {
+async function initAddTask(column) {
     await loadGuestFromServer();
     await loadTasksFromServer();
     generateCheckBox();
@@ -35,20 +34,30 @@ async function initAddTask() {
 }
 
 
-function generateAddTasks(columId) {
+function generateAddTasks(column) {
     let boardPopUp = document.getElementById('boardPopUp');
-    boardPopUp.innerHTML = renderHtmlAddtask(columId);
+    boardPopUp.innerHTML = renderHtmlAddtask(column);
 }
 
 
 async function addTaskToTasks() {
+    let category;
+    if (to_do) {
+        category = 'to_do'
+    } 
+    if (in_progress) {
+        category = 'in_progress'
+    }
+    if (awaitt) {
+        category = 'awaitt'
+    }
+   
     generateCheckBoxName();
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_status = document.getElementById('task_category').value;
     let id = generateUniqueId();
-    let task_category = 'to_do';
     let priorityImg;
     let selectedTask = [];
     let userSubtask = subtasks;
@@ -72,7 +81,7 @@ async function addTaskToTasks() {
     let priority = userPriotity;
 
     let task = {
-        'category': task_category,
+        'category': category,
         'date': task_date,
         'description': task_description,
         'id': id,
@@ -102,6 +111,27 @@ function generateUniqueId() {
     } while (usedIds.has(id));
     usedIds.add(id);
     return id;
+}
+
+
+function checkColumnName(column) {
+    if(column) {
+        if (column == 'to_do') {
+            awaitt = false;
+            in_progress = false;
+        }
+
+        if (column == 'in_progress') {
+            awaitt = false;
+            to_do = false;
+        }
+
+        if (column == 'awaitt') {
+            in_progress = false;
+            to_do = false;
+        }
+
+    }
 }
 
 

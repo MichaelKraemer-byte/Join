@@ -61,7 +61,7 @@ async function initBoardTasks() {
 
     let toDo = todos.filter(t => t['category'] == 'to_do');
     let inProgress = todos.filter(t => t['category'] == 'in_progress');
-    let feedback = todos.filter(t => t['category'] == 'await');
+    let feedback = todos.filter(t => t['category'] == 'awaitt');
     let done = todos.filter(t => t['category'] == 'done');
 
     generateToDo(toDo, task);
@@ -160,10 +160,10 @@ function highlight(id) {
 }
 
 
-function addTask() {
+function addTask(column) {
     displayGreyBackground();
     slideInTask();
-    initAddTask();
+    initAddTask(column);
 }
 
 
