@@ -347,6 +347,10 @@ h2 {
     display: none;
 }
 
+.board_content_mobile_taskTitle button {
+    display: none;
+}
+
 @media (max-width: 850px) {
     body {
         height: auto;
@@ -363,7 +367,7 @@ h2 {
     }
 
     .board_container {
-        padding: 200px 20px;
+        padding: 100px 20px;
         width: 100%;
         box-sizing: border-box;
     }
@@ -465,5 +469,10 @@ h2 {
         border-radius: 10px;
         font-size: 30px;
         cursor: pointer;
+    }
+
+    .no_task {
+        position: relative;
+        width: 100%;
     }
 }
