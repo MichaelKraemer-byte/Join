@@ -49,10 +49,11 @@ b {
 .add_task_input {
     font-size: clamp(17px, 1.3vw, 30px);
     height: 48px;
-    width: 100%;
+    width: 95%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 6px;
+    padding-right: 16px;
     cursor: pointer;
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
@@ -405,3 +406,4 @@ b {
 .dropdown_users_name::-webkit-scrollbar-thumb:hover {
     background: lightgray;
 }
+
