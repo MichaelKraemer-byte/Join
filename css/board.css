@@ -106,7 +106,7 @@
     justify-content: space-between;
     padding-bottom: 15px;
     font-weight: 700;
-    font-size: 24px;
+    font-size: clamp(17px, 1.6vw, 24px);
     color: #42526E;
 }
 
