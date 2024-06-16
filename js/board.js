@@ -103,13 +103,13 @@ function generateNoTask(toDo) {
 }
 
 
-function getInitials(fullName) {
-    const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
-    const nameArray = fullName.split(' ');
-    const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
-    const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
-    return initials;
-}
+// function getInitials(fullName) {
+//     const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
+//     const nameArray = fullName.split(' ');
+//     const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
+//     const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
+//     return initials;
+// }
 
 
 function saveTaskToLocalStorage() {
@@ -164,67 +164,73 @@ function highlight(id) {
 
 
 function addTask() {
-    let idAddTask = document.getElementById('pop_add_task');
-    idAddTask.style.visibility = 'initial';
+    displayGreyBackground();
     slideInTask();
     initAddTask();
 }
 
 
 function slideOutTask() {
-    let idAddTask = document.getElementById('show_add_task');
-    if (idAddTask) {
-        idAddTask.classList.add('slideOut');
-        idAddTask.classList.remove('slideIn');
+    let boardPopUp = document.getElementById('boardPopUp');
+    if (boardPopUp) {
+        boardPopUp.classList.remove('slideIn');
+        boardPopUp.classList.add('slideOut');
+        setTimeout(()=> {
+            boardPopUp.style.display = 'none';}, 500);
     }
 }
 
 
 function slideInTask() {
-    let idAddTask = document.getElementById('show_add_task');
-    if (idAddTask) {
-        idAddTask.classList.add('slideIn');
-        idAddTask.classList.remove('slideOut');
+    let boardPopUp = document.getElementById('boardPopUp');
+    if (boardPopUp) {
+        boardPopUp.style.display = 'flex';
+        boardPopUp.classList.remove('slideOut');
+        boardPopUp.classList.add('slideIn');
     }
 }
 
 
 function closeWindow() {
     slideOutTask();
-    setTimeout(() => {
-        hiddenPopWindow()
-    }, 300);
+    removeGreyBackground();
+    // setTimeout(() => {
+    //     hiddenPopWindow()
+    // }, 300);
 }
 
 
-function hiddenPopWindow() {
-    let idPopTask = document.getElementById('pop_add_task');
-    idPopTask.style.visibility = 'hidden';
-}
+// function hiddenPopWindow() {
+//     let idPopTask = document.getElementById('pop_add_task');
+//     idPopTask.style.visibility = 'hidden';
+// }
 
 
 function showTask(id) {
-    let idAddTask = document.getElementById('pop_show_task');
-    idAddTask.style.visibility = 'initial';
+    let boardPopUp = document.getElementById('boardPopUp');
+    boardPopUp.style.display = 'flex';
+    slideInTask();
+    displayGreyBackground();
     generateShowTask(id);
 }
 
 
 function closeShowTask() {
-    let idAddTask = document.getElementById('pop_show_task');
-    idAddTask.style.visibility = 'hidden';
+    let boardPopUp = document.getElementById('boardPopUp');
+    slideOutTask();
+    removeGreyBackground();
+    setTimeout(()=> {
+        boardPopUp.style.display = 'none';}, 500);
     initBoardTasks();
-    location.reload()
 }
 
 
 async function generateShowTask(id) {
-    let showTask = document.getElementById('show_task');
+    let boardPopUp = document.getElementById('boardPopUp');
     let contact = todos.find(obj => obj['id'] == id);
 
 
-    showTask.innerHTML = '';
-    showTask.innerHTML += renderGenerateShowTaskHtml(contact, id)
+    boardPopUp.innerHTML = renderGenerateShowTaskHtml(contact, id);
     ///////////////////////check-box
 
 
@@ -248,6 +254,8 @@ async function generateShowTask(id) {
                 updateSubtaskStatus(contact, this.dataset.value, this.checked);
             });
         });
+    } else {
+        show_task_subtask.innerHTML = 'No subtasks here.';
     }
 
     getshowTaskUserName(contact);
@@ -284,7 +292,7 @@ function getshowTaskUserName(contact) {
         for (let i = 0; i < contact['name'].length; i++) {
             const element = contact['name'][i];
             showTaskUserName.innerHTML += /*html*/`
-                <div class="show_task_assing_to_users">                
+                <div class="show_task_assigned_to_users">                
                     <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
                     <div>${element}</div>
                 </div>
@@ -298,16 +306,15 @@ function getshowTaskUserName(contact) {
 function editTask(id) {
     let contact = todos.find(obj => obj['id'] == id);
 
-    let idAddTask = document.getElementById('show_task');
-    let showTaskEdit = document.getElementById('show_task_edit');
-    idAddTask.style.display = 'none';
-    showTaskEdit.style.display = 'inline';
+    let boardPopUp = document.getElementById('boardPopUp');
+    let showTaskContainer = document.getElementById('showTaskContainer');
 
-    showTaskEdit.innerHTML = '';
-    showTaskEdit.innerHTML = /*html*/` 
+    showTaskContainer.style.display = 'none';
+    boardPopUp.innerHTML += /*html*/` 
+    <div class="show_task" id="editContainer">
         <form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
             <div class="show_task__edit_header">
-                <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
+                <img class="show_task_close_button" onclick="closeWindow()" src="./assets/img/close.svg">
             </div>
             <div class="show_task__edit_content">
 
@@ -367,19 +374,22 @@ function editTask(id) {
                 
             </div>
             <div class="show_task_edit_footer">
-                <button type="submit">Ok
+                <button type="submit" onclick="updateTask()">Ok <!-- integriere den Edit -->
                     <img src="./assets/img/vector_check.svg" alt="">
                 </button>
             </div>
         </form>
+    </div>
     `;
+    let editContainer = document.getElementById('editContainer');
+    editContainer.style.display = ('flex');
+
     // console.log(selectedGuest);
 
     getcheckBoxesEdit();
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
     getSubtaskEdit(contact);
-
 }
 
 function getContactPriorityEdit(contact) {

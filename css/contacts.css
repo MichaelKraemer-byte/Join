@@ -68,32 +68,6 @@
     overflow: hidden; 
 }
 
-.slideIn {
-    animation: slideIn 0.4s ease-in-out forwards;
-}
-
-.slideOut {
-    animation: slideOut 0.4s ease-in-out forwards;
-}
-
-@keyframes slideIn {
-    from {
-        right: -50%;
-    }
-    to {
-        right: 50%;
-    }
-}
-
-@keyframes slideOut {
-    from {
-        right: 50%;
-    }
-    to {
-        right: -50%;
-    }
-}
-
 .viewContactContainer {
     display: flex;
     flex-direction: column;
@@ -251,7 +225,7 @@
     padding-bottom: 48px;
 }
 
-.addContactCancelX{
+.addContactCancelX {
     filter: invert(16%) sepia(50%) saturate(3598%) hue-rotate(176deg) brightness(50%) contrast(82%);
 }
 

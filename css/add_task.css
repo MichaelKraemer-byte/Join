@@ -13,8 +13,9 @@ b {
 
 .add_task_content {
     width: 70%;
-    padding-top: 245px;
-    padding-left: clamp(50px, 28vw, 328px)
+    top: 23vh;
+    left: 18vw;
+    position: relative;
 }
 
 .add_task_form_row {
@@ -64,6 +65,7 @@ b {
   }
 
 .add_task_textarea {
+    padding: 16px 16px 16px 16px;
     font-size: clamp(17px, 1.3vw, 25px);
     font-family: 'Inter';
     border: 1px solid #D1D1D1;
@@ -101,7 +103,7 @@ b {
     border-radius: 10px;
     cursor: pointer;
     background-color: white;
-    font-size: clamp(16px, 1.3vw, 30px);
+    font-size: clamp(20px, 1.3vw, 30px);
     font-weight: 500;
     display: flex;
     gap: 8px;
@@ -155,7 +157,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 146px 0 90px ;
+    padding: 146px 0 0px ;
 }
 
 .add_task_footer p {
@@ -176,7 +178,23 @@ b {
     padding: 16px;
     font-size: 20px;
     cursor: pointer;
+    display: flex;
+    gap: 16px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: auto;
 }
+
+.add_task_button_group_footer button:hover .addContactCancelX{
+    filter: invert(71%) sepia(58%) saturate(3762%) hue-rotate(165deg) brightness(93%) contrast(91%);
+}
+
+
+.addContactCancelX{
+    filter: invert(16%) sepia(50%) saturate(3598%) hue-rotate(176deg) brightness(50%) contrast(82%);
+}
+
 
 .add_task_button_clear {
     color: #2A3647;
@@ -225,14 +243,14 @@ b {
     gap: 8px;
 }
 
-.add_task_assignet {
+.add_task_assigned {
     position: relative;
     height: 80px;
     margin-top: 8px;
 }
 
 .add_task_date {
-    font-family: inter;
+    font-family: 'inter';
     margin-top: 48px;
     height: 96px;
     gap: 8px;
@@ -261,7 +279,7 @@ b {
 .add_task_button_add_subtask {
     width: 14px;
     position: absolute;
-    right: 5px;
+    right: 3%;
     bottom: 18px;
 }
 

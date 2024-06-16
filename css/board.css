@@ -1,16 +1,22 @@
 .board_container {
-    width: 70%;
-    padding-top: 256px;
-    padding-left: 298px;
-    padding-right: 64px;
+    position: relative;
+    top: 23vh;
+    left: 18vw;
+    box-sizing: border-box;
+    padding: 0px 64px 0px 0px;
+    width: 70vw;
 }
 
 .board_header {
-    height: 232px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 70vw;
+    gap: 48px;
+}
 
+.board_content_mobile_taskTitle{
+    display: none;
 }
 
 .board_header h1 {
@@ -40,7 +46,7 @@
     width: 300px;
     border-radius: 10px;
     margin-right: 32px;
-    cursor: pointer;
+    cursor: auto;
     font-size: 20px;
     line-height: 24px;
     color: #D1D1D1;
@@ -130,22 +136,23 @@
     text-align: center;
     font-size: 19px;
     font-weight: 700;
-    border: 2px solid #2A3647;
-    border-radius: 6px;
+    border: 2.4px solid #2A3647;
+    border-radius: 8px;
     color: #2A3647;
     cursor: pointer;
 }
 
 .column_section button:hover {
-    border: 2px solid #29ABE2;
+    border: 2.4px solid #29ABE2;
     color: #29ABE2;
 }
 
 .board_content {
-    height: 50vh;
+    height: 100%;
+    width: 70vw;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
     position: relative;
 }
 
@@ -235,7 +242,6 @@
 
 .board_task_user_initial {
     display: flex;
-    line-height: 14.4;
     justify-content: center;
     align-items: center;
     margin-right: -10px;
@@ -309,34 +315,6 @@
 .show_task_subtask {
     display: flex;
     flex-direction: column;
-}
-
-.slideIn {
-    animation: slideIn 0.4s ease-in-out forwards;
-}
-
-.slideOut {
-    animation: slideOut 0.4s ease-in-out forwards;
-}
-
-@keyframes slideIn {
-    from {
-        right: -100%;
-    }
-
-    to {
-        right: 8%;
-    }
-}
-
-@keyframes slideOut {
-    from {
-        right: 8%;
-    }
-
-    to {
-        right: -100%;
-    }
 }
 
 .title-mobile {

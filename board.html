@@ -23,21 +23,14 @@
 
     <div w3-include-html="./templates/header.html"></div>
     <div w3-include-html="./templates/navBar.html"></div>
-    <div class="">
+
+        <div id="greyBackground" class="addGreyBackgroundOpacity d-none" onclick="closeWindow(); closeShowTask();"></div>
+
+        <div class="pop_add_task" id="boardPopUp">
+        </div>
+
         <div class="board_container" id="board_container">
-
-            <div class="pop_add_task" id="pop_add_task">
-                <div class="show_add_task" id="show_add_task">
-                    <div id="add_task_form"></div>
-                    <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
-                </div>
-            </div>
-
-            <div class="pop_add_task" id="pop_show_task">
-                <div class="show_task" id="show_task"></div>
-                <div class="show_task_edit" id="show_task_edit"></div>
-            </div>
-
+            
             <div class="board_header">
                 <div class="title">
                     <h1>Board</h1>
@@ -117,7 +110,6 @@
             </div>
 
         </div>
-    </div>
 
 
 </body>

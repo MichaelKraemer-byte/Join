@@ -1,25 +1,27 @@
 .pop_add_task {
-    min-width: 100%;
-    height: 100%;
-    position: fixed;
-    display: flex;
     justify-content: center;
     align-items: center;
+    right: -50%;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(23, 31, 52, 0.3);
-    visibility: hidden;
-    z-index: 999;
+    transform: translate(50%, -50%);
+    z-index: 3;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    position: fixed;
+    border-radius: 30px;
+    box-sizing: border-box;
 }
 
-.show_add_task {
-    background-color: white;
-    height: 76%;
-    width: 75%;
-    position: fixed;
-    border-radius: 20px;
-    padding: 70px;
+.show_add_task{
+    width: 75vw;
+    padding: 64px 74px 64px 74px;
+}
+
+.pop_add_task h1 {
+    justify-content: start;
+    display: flex;
+    width: 100%;
 }
 
 .close_pop_add_task {
@@ -35,14 +37,10 @@
 }
 
 .show_task {
-    background-color: white;
-    height: 70%;
-    width: 30%;
-    position: fixed;
-    border-radius: 20px;
-    padding: 30px;
     word-wrap: break-word;
-    position: relative;
+    width: 525px;
+    padding: 80px 40px 48px 40px;
+    height: 70vh;
 }
 
 
@@ -50,7 +48,6 @@
     font-size: 61px;
     line-height: 73.2px;
     font-weight: 700;
-    margin-bottom: 24px;
 }
 
 
@@ -81,7 +78,6 @@
 .show_task_description {
     font-size: 20px;
     line-height: 24px;
-    margin-bottom: 24px;
 }
 
 .show_task_date {
@@ -91,7 +87,6 @@
     gap: 25px;
     font-size: 20px;
     line-height: 24px;
-    margin-bottom: 24px;
 }
 
 .show_task_priority img {
@@ -108,16 +103,11 @@
 }
 
 .show_task_user_name {
-    margin: 25px 0 20px;
-    max-height: 260px;
-    
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
-.show_task_user_name:hover {
+    min-height: 120px;
+    max-height: 160px;
     overflow-y: auto;
     overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .show_task_user_name::-webkit-scrollbar {
@@ -140,32 +130,36 @@
 
 .show_task_user_daten span {
     font-size: 20px;
-    line-height: 24px;
+    margin-bottom: -16px;
 }
 
-.show_task_assing_to_users {
+.show_task_user_daten{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.show_task_assigned_to_users {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 20px;
     font-size: 19px;
-    line-height: 22.8px;
-    margin-top: 20px;
-    margin-left: 10px;
+    margin: 20px 10px 20px 10px;
 }
 
 .show_task_user_initial {
-    width: 42px;
+    max-width: 54px;
     height: 42px;
+    min-width: 42px;
 }
 
 .show_task_footer {
-    position: absolute;
     display: flex;
     align-items: center;
-    bottom: 30px;
-    right: 50px;
     gap: 8px;
+    width: 100%;
+    justify-content: end;
 }
 
 .show_task_footer button {
@@ -184,11 +178,6 @@
 
 .show_task_footer_delete img {
     cursor: pointer;
-}
-
-.show_task_show_subtasks {
-    margin-left: 10px;
-    margin-top: 40px;
 }
 
 .show_task_subtask {
@@ -213,7 +202,6 @@
 .show_task_edit {
     background-color: white;
     height: 70%;
-    width: 30%;
     position: fixed;
     border-radius: 20px;
     padding: 30px;
@@ -228,16 +216,19 @@
 }
 
 .show_task__edit_header img {
-    margin-top: 12px;
+    position: absolute;
+    top: 40px;
 }
 
 .show_task__edit_content {
     display: flex;
     flex-direction: column;
+    padding-right: 16px;
 }
 
 .show_task_edit_form {
-    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
 
 .show_task__edit_content span {
@@ -272,9 +263,13 @@
 
 
 .show_task_edit_footer button {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    bottom: 5%;
+    right: 7%;
     position: absolute;
-    bottom: 50px;
-    right: 50px;
 }
 
 .show_task_delete_button {
@@ -297,7 +292,8 @@
     height: 48px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    padding-left: 6px;
+    padding-left: 3%;
+    padding-right: 3%;
     cursor: pointer;
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
@@ -319,10 +315,12 @@
 }
 
 .show_task_content {
-    max-height: 85%;
+    height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
-    gap: 20px;
+    gap: 4%;
+    display: flex;
+    flex-direction: column;
 }
 
 .show_task_subtask_edit {

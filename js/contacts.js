@@ -9,32 +9,6 @@ let editContactFunctionActive = false;
 
 
 /**
- * The function `displayGreyBackground` adds a grey background with increased opacity to an element
- * with the id 'greyBackground'. This is to have a grey layer background for our pop up windows.
- */
-function displayGreyBackground() {
-    document.getElementById('greyBackground').classList.remove('d-none');
-    greyBackground.classList.remove('removeGreyBackgroundOpacity');
-    document.getElementById('greyBackground').classList.add('addGreyBackgroundOpacity');
-}
-
-
-/**
- * The function removeGreyBackground removes a gray background by adjusting its opacity and hiding it after a delay. 
- * The delay ensures that the mechanics of the pop-up windows align properly and prevents users from clicking buttons 
- * that might disrupt the mechanics while they are in motion.
- */
-function removeGreyBackground(){
-    let greyBackground = document.getElementById('greyBackground');
-    greyBackground.classList.remove('addGreyBackgroundOpacity');
-    greyBackground.classList.add('removeGreyBackgroundOpacity');
-    setTimeout(() => {
-        greyBackground.classList.add('d-none');
-    }, 300); 
-}
-
-
-/**
  * The function `closeContactPopUp` closes a contact pop-up by sliding it out and removing the grey
  * background.
  */
@@ -86,7 +60,7 @@ async function addContact() {
         return;
     };
     let newContact = defineNewContact();
-    let initials = getInitials(newContact);
+    let initials = getInitials(newContact['name']);
     if (checkIfContactAlreadyExistsForAdd(newContact, initials)) {
         return; 
     };
@@ -364,7 +338,7 @@ function openEditPopUp(contactName, initials) {
 async function editContact(contactName) {
     editContactFunctionActive = true;
     let contactEdit = defineContactEdit();
-    let initials = getInitials(contactEdit);
+    let initials = getInitials(contactEdit['name']);
     if (checkValidityForEditContactForm(contactName)) {
         return;        
     } else if (checkIfContactAlreadyExistsForEdit(contactEdit, initials)) {

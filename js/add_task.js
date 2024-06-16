@@ -26,19 +26,18 @@ async function loadGuestFromServer() {
 async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
-    generateAddTasks();
     generateCheckBox();
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
-            werteAbrufen();
+            getValues();
         });
     });
 }
 
 
 function generateAddTasks(columId) {
-    let add_task_form = document.getElementById('add_task_form');
-    add_task_form.innerHTML = renderHtmlAddtask(columId);
+    let boardPopUp = document.getElementById('boardPopUp');
+    boardPopUp.innerHTML = renderHtmlAddtask(columId);
 }
 
 
@@ -191,7 +190,7 @@ function searchNameFromGuestList() {
 }
 
 
-function werteAbrufen() {
+function getValues() {
     let add_task_show_check = document.getElementById('add_task_show_check');
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     add_task_show_check.innerHTML = '';
