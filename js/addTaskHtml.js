@@ -1,3 +1,7 @@
+let in_progress = true;
+let awaitt = true;
+let to_do = true;
+
 
 function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
@@ -22,19 +26,19 @@ function rendersearchNameFromGuestList() {
 `;
 }
 
-function renderHtmlAddtask() {
+function renderHtmlAddtask(column) {
+    checkColumnName(column)
     return /*html*/`
     <div class="show_add_task" id="showTaskContainer">
         <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
         <h1>Add Task</h1>
-        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">
+        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
             <div>           
                 <div class="add_task_form">
                     <div class="add_task_width50">
                         <div class="add_task_title add_task_form_row">
                             <label for="">Title<b>*</b></label>
                             <input id="task_title" class="add_task_input" required type="text" placeholder="Enter a title">
-                            <!-- <p id="errorMessage" style="color:red; display:none;">Die Felder sollen ausgefüllt werden</p> -->
                         </div>
                         <div class="add_task_descripion add_task_form_row">
                             <label for="">Description</label>
@@ -61,7 +65,6 @@ function renderHtmlAddtask() {
                         <div class="add_task_date add_task_form_row">
                             <label for="">Due date<b>*</b></label>
                             <input id="task_date" class="add_task_input add_date" type="date" required>
-                            <!-- <p id="errorMessage" style="color:red; display:none;">Die Felder sollen ausgefüllt werden</p> -->
                         </div>
                         <div class="add_task_prio add_task_form_row">
                             <p>Prio</p>
@@ -90,16 +93,17 @@ function renderHtmlAddtask() {
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
-                            <!-- <p id="errorMessage" style="color:red; display:none;">Die Felder sollen ausgefüllt werden</p> -->
                         </div>
                         <div class="add_task_subtask add_task_form_row">
                             <label>Subtasks</label>
-                            <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="showAddAndDeleteSubTask()">
+                            <div class="add_task_button_plus" id="add_task_button_plus">
+                                <img class="add_task_button_add_subtask" src="./assets/img/add.svg"  onclick="showAddAndDeleteSubTask()">
+                            </div>
+                            <div class="add_task_check_delete" id="add_task_check_delete">
+                                <img id="delete_subtask" src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
+                                <img id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addNewSubTask()">
+                            </div>
                             <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
-                            <!-- <div>
-                                <img src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
-                                <img src="./assets/img/vector_check.svg" style=" filter: invert(1) sepia(1) hue-rotate(190deg) saturate(500%) brightness(85%);" onclick="addNewSubTask()">
-                            </div> -->
                         </div>
                     </div>
                 </div>

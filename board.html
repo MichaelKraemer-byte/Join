@@ -41,7 +41,7 @@
                             <div class="task_navi_line"></div>
                             <img src="./assets/img/search.svg" alt="">
                         </div>
-                        <button onclick="addTask()">Add task +</button>
+                        <button onclick="addTask('to_do')">Add task +</button>
                     </div>
                 </div>
 
@@ -62,15 +62,15 @@
                 <div class="column_section">
                     <div class="columm_section_add columm_section_add_todo">
                         <span>To do</span>
-                        <button onclick="addTask()">+</button>
+                        <button onclick="addTask('to_do')">+</button>
                     </div>
                     <div class="columm_section_add columm_section_add_inprogress">
                         <span>In progress</span>
-                        <button onclick="addTask()">+</button>
+                        <button onclick="addTask('in_progress')">+</button>
                     </div>
                     <div class="columm_section_add columm_section_add_await">
                         <span>Await feedback</span>
-                        <button onclick="addTask()">+</button>
+                        <button onclick="addTask('awaitt')">+</button>
                     </div>
                     <div class="columm_section_add columm_section_add_done">
                         <span>Done</span>
@@ -100,7 +100,7 @@
                     <h2>Await Feedback</h2>
                     <button onclick="navigateTo('/add_task.html')">+</button>
                 </div>
-                <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('await')"
+                <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('awaitt')"
                     ondragover="allowDrop(event)">
                 </div>
                 <h2>Done</h2>
