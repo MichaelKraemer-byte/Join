@@ -22,7 +22,7 @@ async function loadGuestFromServer() {
 }
 
 
-async function initAddTask(column) {
+async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
     generateCheckBox();
@@ -188,19 +188,21 @@ function generateCheckBoxName() {
 
 function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
-    id.innerHTML = '';
-    for (let i = 0; i < guesteArray.length; i++) {
-        const element = guesteArray[i];
-        id.innerHTML += renderHtmlGenerateCheckBox(element, i)
-    }
-    document.addEventListener('click', function (event) {
-        let checkboxes = document.getElementById("checkBoxes");
-        let selectBox = document.querySelector('.selectBox');
-        if (!selectBox.contains(event.target)) {
-            checkboxes.style.visibility = "hidden";
-            show = true;
+    if (id) {
+        id.innerHTML = '';
+        for (let i = 0; i < guesteArray.length; i++) {
+            const element = guesteArray[i];
+            id.innerHTML += renderHtmlGenerateCheckBox(element, i)
         }
-    });
+        document.addEventListener('click', function (event) {
+            let checkboxes = document.getElementById("checkBoxes");
+            let selectBox = document.querySelector('.selectBox');
+            if (!selectBox.contains(event.target)) {
+                checkboxes.style.visibility = "hidden";
+                show = true;
+            }
+        });
+    }
 }
 
 
