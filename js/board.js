@@ -371,7 +371,7 @@ function editTask(id) {
                 
             </div>
             <div class="show_task_edit_footer">
-                <button type="submit" onclick="updateTask()">Ok <!-- integriere den Edit -->
+                <button type="submit" onclick="updateTask()">Ok 
                     <img src="./assets/img/vector_check.svg" alt="">
                 </button>
             </div>
@@ -380,8 +380,6 @@ function editTask(id) {
     `;
     let editContainer = document.getElementById('editContainer');
     editContainer.style.display = ('flex');
-
-    // console.log(selectedGuest);
 
     getcheckBoxesEdit();
     getContactPriorityEdit(contact);
@@ -516,9 +514,17 @@ function showCheckboxesEdit() {
 
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
+    
     if (subtasks) {
         subtasks.push(task_subtask.value);
     }
+    
+    check.style.display = 'none';
+    deleteSubtask.style.display = 'none';
+    add_task_button_plus.style.visibility = 'initial';
     task_subtask.value = "";
 }
 

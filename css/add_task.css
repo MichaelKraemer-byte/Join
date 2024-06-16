@@ -153,12 +153,36 @@ b {
     filter: brightness(0) invert(1);
 }
 
+.add_task_check_delete {
+    display: flex;
+    align-items: center;
+    width: 14px;
+    position: absolute;
+    right: 8%;
+    gap: 4px;    
+    bottom: 9px;
+}
+
+.add_task_check_delete img {
+    display: none;
+    
+}
+
+.add_task_check_delete img:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+
+#check {
+    width: 36px;
+}
+
 .add_task_footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 146px 0 0px ;
 }
+
 
 .add_task_footer p {
     font-size: 20px;
@@ -291,6 +315,10 @@ b {
     bottom: 18px;
 }
 
+.add_task_button_add_subtask:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+/*  */
 .multipleSelection {
     width: 300px;
     background-color: #BCC2C1;

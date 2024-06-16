@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+.close_pop_add_task:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
 }

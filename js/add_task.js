@@ -235,9 +235,22 @@ function clearForm() {
 
 
 function showAddAndDeleteSubTask() {
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
 
+    add_task_button_plus.style.visibility = 'hidden';
+    check.style.display = 'inline';
+    deleteSubtask.style.display = 'inline';
 }
 
 function deleteSubtask() {
-    
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
+    let task_subtasks = document.getElementById('task_subtasks');
+    task_subtasks.value = '';
+    check.style.display = 'none';
+    deleteSubtask.style.display = 'none';
+    add_task_button_plus.style.visibility = 'initial';
 }
