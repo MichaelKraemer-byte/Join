@@ -206,7 +206,6 @@ function closeNavOnOutsideClick(event) {
     nav.style.animation = 'slideOutNav 0.3s ease-in-out forwards';
     setTimeout(() => {
       nav.classList.add('d-none')}, 300);
-    
   }
 }
 

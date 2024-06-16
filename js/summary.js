@@ -132,7 +132,7 @@ function setUpComingDeadline(urgent){
     upcomingDeadline.innerHTML = /*html*/`
         ${deadLine}
     `;
-    deadLine === '' ? deadlinePhrase.innerHTML = 'Nothing urgent right now.' : null;
+    deadLine === '' ? deadlinePhrase.innerHTML = 'There is nothing urgent right now' : null;
 }
 
 
