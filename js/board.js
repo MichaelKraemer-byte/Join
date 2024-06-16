@@ -64,7 +64,6 @@ async function initBoardTasks() {
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
 
-    generateNoTask(toDo);
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
@@ -579,10 +578,15 @@ function getInitialsArray(element) {
         for (let j = 0; j < initialsArray.length; j++) {
             let initial = initialsArray[j];
             let color = colorsArray[j];
-
-            board_task_initial.innerHTML += /*html*/`
+            if (j <= 5) {
+                board_task_initial.innerHTML += /*html*/`
                 <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
             `;
+            } else {
+                board_task_initial.innerHTML +=
+                `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify((initialsArray.length-6))}</div>`
+                break
+            }
         }
     }
 }
