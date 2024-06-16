@@ -64,7 +64,6 @@ async function initBoardTasks() {
     let feedback = todos.filter(t => t['category'] == 'await');
     let done = todos.filter(t => t['category'] == 'done');
 
-    generateNoTask(toDo)
     generateToDo(toDo, task);
     generateToDo(inProgress, progress);
     generateToDo(feedback, awaitFeedback);
@@ -74,32 +73,30 @@ async function initBoardTasks() {
 
 async function generateToDo(arr, categorie_id) {
     categorie_id.innerHTML = '';
-    for (let i = 0; i < arr.length; i++) {
-        const element = arr[i];
-        categorie_id.innerHTML += renderHtmlToDo(element);
-        let idSUb = document.getElementById(`idSUb${element.id}`);
+    if (arr.length) {
+        for (let i = 0; i < arr.length; i++) {
+            const element = arr[i];
+            categorie_id.innerHTML += renderHtmlToDo(element);
+            let idSUb = document.getElementById(`idSUb${element.id}`);
 
-        if (element.subtasks) {
-            idSUb.innerHTML = '';
-            idSUb.innerHTML = renderHtmlProgressBarEmpty(element)
-            if (element.selectedTask) {
+            if (element.subtasks) {
                 idSUb.innerHTML = '';
-                idSUb.innerHTML += renderHtmlProgressBar(element);
+                idSUb.innerHTML = renderHtmlProgressBarEmpty(element)
+                if (element.selectedTask) {
+                    idSUb.innerHTML = '';
+                    idSUb.innerHTML += renderHtmlProgressBar(element);
+                }
             }
-        }        
-        getInitialsArray(element);
-        getCategorieBackGroundColor(element);
+            getInitialsArray(element);
+            getCategorieBackGroundColor(element);
+        }
+    } else {
+        generateNoTask(categorie_id);
     }
 }
 
-
-function generateNoTask(toDo) {
-    let no_task_todo = document.getElementById('no_task_todo');
-    if (toDo.length) {
-        no_task_todo.style.visibility = 'hidden';
-    } else {
-        no_task_todo.style.visibility = 'initial';
-    }
+function generateNoTask(categorie_id) {
+    categorie_id.innerHTML += `<div class="no_task">No tasks</div>`
 }
 
 
@@ -486,11 +483,11 @@ async function upgradeTodos(id) {
     await saveTasksToServer();
     initAddTask();
     initBoardTasks();
-    closeShowTask();    
+    closeShowTask();
 }
 
 
-function getPriorityUpdateTodos(userPriotity) {    
+function getPriorityUpdateTodos(userPriotity) {
     switch (userPriotity) {
         case 'Urgent':
             priorityImgEdit = './assets/img/vector_red.svg';
@@ -591,10 +588,15 @@ function getInitialsArray(element) {
         for (let j = 0; j < initialsArray.length; j++) {
             let initial = initialsArray[j];
             let color = colorsArray[j];
-
-            board_task_initial.innerHTML += /*html*/`
+            if (j <= 5) {
+                board_task_initial.innerHTML += /*html*/`
                 <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
             `;
+            } else {
+                board_task_initial.innerHTML +=
+                `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify((initialsArray.length-6))}</div>`
+                break
+            }
         }
     }
 }

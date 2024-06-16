@@ -9,6 +9,7 @@ function showSignUpBox() {
     document.getElementById('login-section').classList.replace('d-center', 'd-none');
     document.getElementById('register-section').classList.replace('d-none', 'd-center');
     document.getElementById('signup-button-area').classList.replace('signUp', 'd-none');
+    document.getElementById('signUp-mobile-section').classList.replace('signUp-mobile', 'd-none');
 }
 
 /**
@@ -19,9 +20,11 @@ function showLoginBox() {
     document.getElementById('login-section').classList.replace('d-none', 'd-center');
     document.getElementById('register-section').classList.replace('d-center', 'd-none');
     document.getElementById('signup-button-area').classList.replace('d-none', 'signUp');
+    document.getElementById('signUp-mobile-section').classList.replace('d-none','signUp-mobile');
     document.getElementById('login-section').classList.remove('fade-in');
     document.getElementById('register-section').classList.remove('fade-in');
     document.getElementById('signup-button-area').classList.remove('fade-in');
+    document.getElementById('signup-button-area-mobile').classList.remove('fade-in');
 }
 
 /**

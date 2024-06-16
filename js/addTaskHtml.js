@@ -54,7 +54,9 @@ function renderHtmlAddtask() {
                             <div class="add_task_show_check" id="add_task_show_check"></div>   
                         </div>
                     </div>
-                <div class="add_task_line"></div>
+
+                    <div class="add_task_line"></div>
+                    
                     <div class="add_task_width50">
                         <div class="add_task_date add_task_form_row">
                             <label for="">Due date<b>*</b></label>
@@ -82,9 +84,9 @@ function renderHtmlAddtask() {
                             </div>
                         </div>                    
                         <div class="add_task_category add_task_form_row">
-                            <label for="">Category<b>*</b></label>
+                            <label for="">Categoriy<b>*</b></label>
                             <select id="task_category" class="add_task_input" required>
-                                <option value="" hidden>Select task category</option>
+                                <option value="" hidden>Select task categoriy</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
@@ -92,24 +94,28 @@ function renderHtmlAddtask() {
                         </div>
                         <div class="add_task_subtask add_task_form_row">
                             <label>Subtasks</label>
-                            <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                            <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="showAddAndDeleteSubTask()">
                             <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+                            <!-- <div>
+                                <img src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
+                                <img src="./assets/img/vector_check.svg" style=" filter: invert(1) sepia(1) hue-rotate(190deg) saturate(500%) brightness(85%);" onclick="addNewSubTask()">
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="add_task_footer">
-                    <p id="add_task_footer"><b>*</b>This field is required</p>
-                    <div class="add_task_button_group_footer">
-                        <button class="add_task_button_clear add_task_hover_button" onclick="closeWindow()">Close 
-                            <img class="addContactCancelX" src="./assets/img/cancelX.svg">
-                        </button>
-                        <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
-                            <img src="./assets/img/vector_check.svg">
-                        </button>
+                        <p id="add_task_footer"><b>*</b>This field is required</p>
+                        <div class="add_task_button_group_footer">
+                            <button class="add_task_button_clear add_task_hover_button" onclick="closeWindow()">Close 
+                                <img class="addContactCancelX" src="./assets/img/cancelX.svg">
+                            </button>
+                            <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
+                                <img src="./assets/img/vector_check.svg">
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    `;
+            </form>
+        </div>
+        `;
 }

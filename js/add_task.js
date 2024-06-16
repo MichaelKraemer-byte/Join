@@ -234,3 +234,10 @@ function clearForm() {
 }
 
 
+function showAddAndDeleteSubTask() {
+
+}
+
+function deleteSubtask() {
+    
+}

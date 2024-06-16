@@ -528,6 +528,10 @@ footer {
         left: 25%;
     }
 
+    .arrow-left-line {
+        left: 25px;
+    }
+
     @keyframes logo-mobile {
         0% {
             opacity: 1;
@@ -579,4 +583,10 @@ footer {
         }
     }
 
+}
+
+@media (max-width: 430px) {
+    .arrow-left-line {
+        position: static;
+    }
 }

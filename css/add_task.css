@@ -198,6 +198,9 @@ b {
 
 .add_task_button_clear {
     color: #2A3647;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: white;
     border: 1px solid #2A3647;
     width: 110px;
@@ -206,10 +209,15 @@ b {
     gap: 4px;
 }
 
-.add_task_button_clear:hover {
+.add_task_button_clear:hover  {
     border: 2px solid #29ABE2;
     color: #29ABE2;
+    
 } 
+
+.add_task_button_clear:hover img {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
 
 .add_task_button_create {
     font-weight: 700;
