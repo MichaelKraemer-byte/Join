@@ -306,6 +306,19 @@ function getInitials(name) {
 }
 
 
+function getInitialsFromObject(contact) {
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+  let initials = [...contact['name'].matchAll(rgx)] || [];
+
+  initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+  ).toUpperCase();
+
+  return initials;
+}
+
+
 /**
  * The function `resetCurrentUser` removes the 'currentUser' item from the localStorage.
  * This is used for a log out function, for example.

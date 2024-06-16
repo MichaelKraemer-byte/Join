@@ -60,7 +60,7 @@ async function addContact() {
         return;
     };
     let newContact = defineNewContact();
-    let initials = getInitials(newContact['name']);
+    let initials = getInitialsFromObject(newContact);
     if (checkIfContactAlreadyExistsForAdd(newContact, initials)) {
         return; 
     };
@@ -338,7 +338,7 @@ function openEditPopUp(contactName, initials) {
 async function editContact(contactName) {
     editContactFunctionActive = true;
     let contactEdit = defineContactEdit();
-    let initials = getInitials(contactEdit['name']);
+    let initials = getInitialsFromObject(contactEdit);
     if (checkValidityForEditContactForm(contactName)) {
         return;        
     } else if (checkIfContactAlreadyExistsForEdit(contactEdit, initials)) {
