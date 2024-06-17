@@ -107,3 +107,15 @@ function renderGenerateShowTaskHtml(contact, id) {
     </div>
 `;
 }
+
+function rendergetcheckBoxesEdit(guest, initial, isChecked) {
+    return `        
+        <div class="board_task_check_box_name">
+            <div class="show_task_checkbox_edit_name_input">
+                <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
+                <label for="${guest.id}">${guest.name}</label>
+            </div>
+            <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
+        </div>
+    `;
+}
