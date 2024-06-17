@@ -462,8 +462,9 @@
 }
 
 @media(max-width: 850px) {
-    .show_task {
+    .show_task, .show_task_edit {
         width: 80%;
     }
+    
 
 }
