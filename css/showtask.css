@@ -177,6 +177,31 @@
     height: 18px;
 }
 
+.board_task_check_box_name {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.board_task_check_box_name {
+    padding-right: 16px;
+    border-radius: 10px;
+}
+
+.board_task_check_box_name:hover {
+    background-color: #D1D1D1;
+}
+
+.show_task_checkbox_edit_name_input {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 20px;
+    margin: 5px 0 5px;
+}
+
 .show_task_footer_delete {
     display: flex;
     align-items: center;
@@ -395,30 +420,6 @@
 
 #checkBoxesEdit {
     display: none;
-}
-
-.check_boxes_edit_label {
-    display: flex;
-    position: relative;
-    padding: 6px;
-    border-radius: 10px;
-    font-size: 18px;
-}
-
-.check_boxes_edit_label input {
-    position: absolute;
-    right: 20px;
-    top: 12px
-}
-
-.check_boxes_edit_label:hover {
-    background-color: #D1D1D1;
-}
-
-#checkBoxesEdit p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-left: 20px;
 }
 
 #checkBoxesEdit {

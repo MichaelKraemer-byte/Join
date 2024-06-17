@@ -100,13 +100,13 @@ function generateNoTask(categorie_id) {
 }
 
 
-// function getInitials(fullName) {
-//     const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
-//     const nameArray = fullName.split(' ');
-//     const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
-//     const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
-//     return initials;
-// }
+function getInitials(fullName) {
+    const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
+    const nameArray = fullName.split(' ');
+    const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
+    const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
+    return initials;
+}
 
 
 function saveTaskToLocalStorage() {
@@ -373,7 +373,7 @@ function editTask(id) {
                 
             </div>
             <div class="show_task_edit_footer">
-                <button type="submit" onclick="updateTask()">Ok 
+                <button type="submit">Ok 
                     <img src="./assets/img/vector_check.svg" alt="">
                 </button>
             </div>
@@ -381,9 +381,10 @@ function editTask(id) {
     </div>
     `;
     let editContainer = document.getElementById('editContainer');
-    editContainer.style.display = ('flex');
+    editContainer.style.display = ('flex');  
 
-    getcheckBoxesEdit();
+
+    getcheckBoxesEdit(contact);
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
     getSubtaskEdit(contact);
@@ -448,23 +449,28 @@ function getSubtaskEdit(contact) {
 }
 
 
-function getcheckBoxesEdit() {
+function getcheckBoxesEdit(contact) {
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
+    let contactNames = contact.name;   
+    let checkBoxesHTML = '';    
+    guesteArray.forEach(guest => {
+        let isChecked = contactNames.includes(guest.name);
+        let initial = getInitials(guest.name)
+        checkBoxesHTML += `        
+            
 
-    for (let k = 0; k < guesteArray.length; k++) {
-        const element = guesteArray[k];
-        let initial = element.name;
-        checkBoxesEdit.innerHTML += `
-            <label class="check_boxes_edit_label">
-                <div class="board_task_check_box_name">
-                        <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
-                        <p id="${k}">${element.name}<p>
+            <div class="board_task_check_box_name">
+                <div class="show_task_checkbox_edit_name_input">
+                    <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
+                    <label for="${guest.id}">${guest.name}</label>
                 </div>
-                <input type="checkbox" name="optionen" value="${element.name}"/>
-            <label>
+                <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
+            </div>
         `;
-    }
+    });
+
+    checkBoxesEdit.innerHTML = checkBoxesHTML;
 }
 
 
