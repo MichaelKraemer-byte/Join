@@ -500,6 +500,7 @@ b {
     right: 50%;
     font-size: 16px;
     transform: translate(50%, 50%);
+    opacity: 0;
 }
 
 .confirmationSpan{
@@ -516,17 +517,21 @@ b {
 @keyframes slideInAddedTaskConfirmation {
     from {
         bottom: -50%;
+        opacity: 0; 
     }
     to {
         bottom: 50%;
+        opacity: 1; 
     }
 }
 
-/* @keyframes slideOutAddedTaskConfirmation {
+@keyframes fadeConfirmation {
     from {
         bottom: 50%;
+        opacity: 1;
     }
     to {
-        bottom: -50%;
+        bottom: 50%;
+        opacity: 0;
     }
-} */
+}
