@@ -56,52 +56,54 @@ function renderHtmlProgressBarEmpty(element) {
 
 function renderGenerateShowTaskHtml(contact, id) {
     return `
-    <div class="show_task_content">
-        <div class="show_task_header">
-            <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
-            <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
-        </div> 
+    <div class="show_task" id="showTaskContainer">
+        <div class="show_task_content">
+            <div class="show_task_header">
+                <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
+                <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
+            </div> 
 
-        <div class="show_task_title">${contact.title}</div>    
-        <div class="show_task_description">${contact.description}</div> 
+            <div class="show_task_title">${contact.title}</div>    
+            <div class="show_task_description">${contact.description}</div> 
 
-        <div class="show_task_date">
-            <span>Due date:</span>
-            <div>${contact.date}</div>    
+            <div class="show_task_date">
+                <span>Due date:</span>
+                <div>${contact.date}</div>    
+            </div>
+
+            <div class="show_task_priory show_task_date">
+                <span>Priority:</span>
+                <div class="show_task_priority">
+                    <span>${contact.priority}</span>
+                    <img src="${contact.priorityImg}">
+                </div>
+            </div> 
+
+            <div class="show_task_user_daten">
+                <span>Assigned to:</span>
+                <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
+                <div class="show_task_user_name " id="show_task_user_name"></div>
+                <div class="show_task_show_subtasks">
+                    <span>Subtasks:</span>
+                    <div class="show_task_subtask" id="show_task_subtask"></div>
+                </div>
+            </div>            
         </div>
 
-        <div class="show_task_priory show_task_date">
-            <span>Priority:</span>
-            <div class="show_task_priority">
-                <span>${contact.priority}</span>
-                <img src="${contact.priorityImg}">
+        <div class="show_task_footer">
+            <div class="show_task_footer_delete">
+                <div onclick="deleteTaskFromLocalStorage(${contact.id})" class="show_task_delete_button">
+                    <img src="./assets/img/delete.svg" alt="">    
+                    <p>Delete</p>
+                </div>
             </div>
-        </div> 
-
-        <div class="show_task_user_daten">
-            <span>Assing to:</span>
-            <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
-            <div class="show_task_user_name " id="show_task_user_name"></div>            
-            <div class="show_task_show_subtasks">
-                <span>Subtasks</span>
-                <div class="show_task_subtask" id="show_task_subtask"></div>
+            <div class="show_task_footer_delete">                
+                <div onclick="editTask(${contact.id})" class="show_task_delete_button">
+                    <img src="./assets/img/edit.svg" alt="">    
+                    <p>Edit</p>
+                </div>
             </div>
-        </div>            
+        </div>    
     </div>
-
-    <div class="show_task_footer">
-        <div class="show_task_footer_delete">
-            <div onclick="deleteTaskFromLocalStorage(${contact.id})" class="show_task_delete_button">
-                <img src="./assets/img/delete.svg" alt="">    
-                <p>Delete</p>
-            </div>
-        </div>
-        <div class="show_task_footer_delete">                
-            <div onclick="editTask(${contact.id})" class="show_task_delete_button">
-                <img src="./assets/img/edit.svg" alt="">    
-                <p>Edit</p>
-            </div>
-        </div>
-    </div>    
 `;
 }

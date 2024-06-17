@@ -4,7 +4,6 @@ let guesteArray = [];
 let userPriotity;
 let imgPriority;
 
-
 async function loadGuestFromServer() {
     try {
         const response = await fetch(`${BASE_URL_GUEST}/guestContacts.json`);
@@ -26,30 +25,31 @@ async function loadGuestFromServer() {
 async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
-    generateAddTasks();
+    // generateAddTasks()
     generateCheckBox();
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
-            werteAbrufen();
+            getValues();
         });
     });
 }
 
 
-function generateAddTasks(columId) {
-    let add_task_form = document.getElementById('add_task_form');
-    add_task_form.innerHTML = renderHtmlAddtask(columId);
+function generateAddTasks() {
+    let boardPopUp = document.getElementById('boardPopUp');
+    boardPopUp.innerHTML = renderHtmlAddtask();
 }
 
 
 async function addTaskToTasks() {
+       
     generateCheckBoxName();
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_status = document.getElementById('task_category').value;
     let id = generateUniqueId();
-    let task_category = 'to_do';
+    let category ='to_do'
     let priorityImg;
     let selectedTask = [];
     let userSubtask = subtasks;
@@ -73,7 +73,7 @@ async function addTaskToTasks() {
     let priority = userPriotity;
 
     let task = {
-        'category': task_category,
+        'category': category,
         'date': task_date,
         'description': task_description,
         'id': id,
@@ -103,6 +103,27 @@ function generateUniqueId() {
     } while (usedIds.has(id));
     usedIds.add(id);
     return id;
+}
+
+
+function checkColumnName(column) {
+    if(column) {
+        if (column == 'to_do') {
+            awaitt = false;
+            in_progress = false;
+        }
+
+        if (column == 'in_progress') {
+            awaitt = false;
+            to_do = false;
+        }
+
+        if (column == 'awaitt') {
+            in_progress = false;
+            to_do = false;
+        }
+
+    }
 }
 
 
@@ -159,19 +180,21 @@ function generateCheckBoxName() {
 
 function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
-    id.innerHTML = '';
-    for (let i = 0; i < guesteArray.length; i++) {
-        const element = guesteArray[i];
-        id.innerHTML += renderHtmlGenerateCheckBox(element, i)
-    }
-    document.addEventListener('click', function (event) {
-        let checkboxes = document.getElementById("checkBoxes");
-        let selectBox = document.querySelector('.selectBox');
-        if (!selectBox.contains(event.target)) {
-            checkboxes.style.visibility = "hidden";
-            show = true;
+    if (id) {
+        id.innerHTML = '';
+        for (let i = 0; i < guesteArray.length; i++) {
+            const element = guesteArray[i];
+            id.innerHTML += renderHtmlGenerateCheckBox(element, i)
         }
-    });
+        document.addEventListener('click', function (event) {
+            let checkboxes = document.getElementById("checkBoxes");
+            let selectBox = document.querySelector('.selectBox');
+            if (!selectBox.contains(event.target)) {
+                checkboxes.style.visibility = "hidden";
+                show = true;
+            }
+        });
+    }
 }
 
 
@@ -191,7 +214,7 @@ function searchNameFromGuestList() {
 }
 
 
-function werteAbrufen() {
+function getValues() {
     let add_task_show_check = document.getElementById('add_task_show_check');
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     add_task_show_check.innerHTML = '';
@@ -235,3 +258,23 @@ function clearForm() {
 }
 
 
+function showAddAndDeleteSubTask() {
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
+
+    add_task_button_plus.style.visibility = 'hidden';
+    check.style.display = 'inline';
+    deleteSubtask.style.display = 'inline';
+}
+
+function deleteSubtask() {
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
+    let task_subtasks = document.getElementById('task_subtasks');
+    task_subtasks.value = '';
+    check.style.display = 'none';
+    deleteSubtask.style.display = 'none';
+    add_task_button_plus.style.visibility = 'initial';
+}

@@ -119,7 +119,7 @@ function contactListCategoryHTML(AZindex) {
  * @returns {string} - The HTML markup for the listed contact.
  */
 function listedContactHTML(contact) {
-    let initials = getInitials(contact);
+    let initials = getInitialsFromObject(contact);
     let underscoredName = contact['name'].replace(/\s/g, '_');
     return /*html*/`
         <button onclick="slideInContact('${contact['name']}', '${initials}')" id="${underscoredName}" class="listedContactContainer">

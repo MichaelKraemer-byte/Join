@@ -198,3 +198,12 @@
     text-decoration: none;
     color: black;
 }
+
+.pastDatesSpan {
+    display: none;
+}
+
+.pastDatesNumber{
+    font-weight: 700;
+    display: inline;
+}

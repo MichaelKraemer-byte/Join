@@ -58,7 +58,7 @@ async function getBoardNumbersInSummary(){
     done.innerHTML = numberOfDoneTasks();
     toDo.innerHTML = numberOfToDoTasks();
     urgent.innerHTML = numberOfUrgentTasks();
-    inBoard.innerHTML = numberOfTasksInBoard();
+    inBoard.innerHTML = numberOfTasksInBoard(done);
     inProgress.innerHTML = numberOfTasksInProgress();
     awaitFeedback.innerHTML = numberOfAwaitFeedbackTasks();
 }
@@ -120,33 +120,61 @@ function numberOfUrgentTasks() {
 
 /**
  * The function setUpComingDeadline sets the upcoming deadline on a webpage based on the urgency level
- * provided or displays that there are no urgent tasks at the moment.
- * @param {Object[]} urgent - The `urgent` parameter in the `setUpComingDeadline` function is used to determine
- * whether the upcoming deadline being set is urgent or not. This parameter likely influences the logic
- * within the `getNextUrgentDate` function to calculate the next urgent date.
+ * provided or displays the number of past urgent tasks if there are no upcoming deadlines.
+ * 
+ * @param {Object[]} urgent - An array of objects, where each object represents an urgent task with a `date` 
+ * property indicating the due date of the task.
+ * @param {string} urgent[].date - The date property of each object, represented as a string in ISO format.
  */
-function setUpComingDeadline(urgent){
-    let upcomingDeadline = document.getElementById('upcomingDeadline');   
-    let deadlinePhrase = document.getElementById('deadlinePhrase'); 
+function setUpComingDeadline(urgent) {
+    let upcomingDeadline = document.getElementById('upcomingDeadline');
+    let deadlinePhrase = document.getElementById('deadlinePhrase');
+    let pastDatesSpan = document.getElementById('pastDatesSpan');
+    let pastDatesNumber = document.getElementById('pastDatesNumber');
+    let urgentDate = document.getElementById('urgent');
     let deadLine = getNextUrgentDate(urgent);
-    upcomingDeadline.innerHTML = /*html*/`
-        ${deadLine}
-    `;
-    deadLine === '' ? deadlinePhrase.innerHTML = 'There is nothing urgent right now' : null;
+    let now = new Date();
+    
+    // Filtern der vergangenen Termine
+    let pastDates = urgent.filter(item => new Date(item.date) < now);
+    // Filtern der zukünftigen Termine
+    let futureDates = urgent.filter(item => new Date(item.date) >= now);
+
+    // Setzen des nächsten dringenden Termins
+    upcomingDeadline.innerHTML = deadLine ? deadLine : '';
+
+    // Logik zur Anzeige der Phrase
+    if (deadLine === '') {
+        if (pastDates.length > 0) {
+            pastDatesSpan.style.display = 'block';
+            deadlinePhrase.innerHTML = /*html*/`Nothing urgent in future`;
+            pastDatesNumber.innerHTML = /*html*/`${pastDates.length}`;
+        } else {
+            deadlinePhrase.innerHTML = 'Nothing urgent right now.';
+        }
+    } else {
+        deadlinePhrase.innerHTML = 'Upcoming deadline.';
+    }
 }
 
 
 /**
  * The function `getNextUrgentDate` filters and sorts a list of urgent dates to return the next
- * upcoming date, or returns an empty string, if there are no urgent dates.
+ * upcoming date, or returns an empty string if there are no urgent dates.
  * 
  * @param {Object[]} urgent - An array of objects, where each object represents an urgent task with a `date` 
  * property indicating the due date of the task.
- * @param {string} urgent[].date - The date property of each object, represented as a string.
+ * @param {string} urgent[].date - The date property of each object, represented as a string in ISO format.
+ * @returns {string} - The next upcoming date in ISO format, or an empty string if there are no upcoming dates.
  */
 function getNextUrgentDate(urgent) {
     let now = new Date();
-    let futureDates = urgent.filter(item => new Date(item.date) > now);
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let futureDates = urgent.filter(item => {
+        let itemDate = new Date(item.date);
+        let itemDay = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
+        return itemDay >= today;
+    });
     futureDates.sort((a, b) => new Date(a.date) - new Date(b.date));
     return futureDates.length > 0 ? futureDates[0].date : '';
 }
@@ -157,9 +185,10 @@ function getNextUrgentDate(urgent) {
  * array length.
  * @returns the number of tasks in the `data` array.
  */
-function numberOfTasksInBoard(){
+function numberOfTasksInBoard(done){
+    let tasksInBoard = data.length - done.innerHTML;
     return /*html*/`
-        ${data.length}
+        ${tasksInBoard}
     `;
 }
 

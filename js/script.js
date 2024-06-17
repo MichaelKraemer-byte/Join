@@ -72,6 +72,32 @@ window.addEventListener('resize', () => {
 
 
 /**
+ * The function `displayGreyBackground` adds a grey background with increased opacity to an element
+ * with the id 'greyBackground'. This is to have a grey layer background for our pop up windows.
+ */
+function displayGreyBackground() {
+  document.getElementById('greyBackground').classList.remove('d-none');
+  greyBackground.classList.remove('removeGreyBackgroundOpacity');
+  document.getElementById('greyBackground').classList.add('addGreyBackgroundOpacity');
+}
+
+
+/**
+* The function removeGreyBackground removes a gray background by adjusting its opacity and hiding it after a delay. 
+* The delay ensures that the mechanics of the pop-up windows align properly and prevents users from clicking buttons 
+* that might disrupt the mechanics while they are in motion.
+*/
+function removeGreyBackground(){
+  let greyBackground = document.getElementById('greyBackground');
+  greyBackground.classList.remove('addGreyBackgroundOpacity');
+  greyBackground.classList.add('removeGreyBackgroundOpacity');
+  setTimeout(() => {
+      greyBackground.classList.add('d-none');
+  }, 300); 
+}
+
+
+/**
  * The function checks if the user is offline and hides the navigation bar if they are.
  */
 function isUserOfflineHideNavBar() {
@@ -153,6 +179,7 @@ function initForCurrentPage() {
     focusNavAnker();
     initAddTask();
   } else if (window.location.href.includes('board.html')) {
+    generateAddTasks();
     initBoardTasks();
   }
 }
@@ -260,6 +287,28 @@ function navigateTo(url) {
 /**
  * The function `getInitials` extracts the initials from a contact's name and returns them in
  * uppercase.
+ * @param {String} name - The `contact` parameter is a string that contains a name of our contact.
+ * @returns The function `getInitials` takes a `contact` object as input and extracts the initials from
+ * the `name` property of the contact. It uses a regular expression to match the first letter of each
+ * word in the name and then concatenates the first letters to form the initials. The initials are then
+ * converted to uppercase and returned.
+ */
+function getInitials(name) {
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+
+  let initials = [...name.matchAll(rgx)] || [];
+
+  initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+  ).toUpperCase();
+
+  return initials;
+}
+
+
+/**
+ * The function `getInitials` extracts the initials from a contact's name and returns them in
+ * uppercase.
  * @param {Object} contact - The `contact` parameter is an object that contains information about a person,
  * specifically their name.
  * @returns The function `getInitials` takes a `contact` object as input and extracts the initials from
@@ -267,7 +316,7 @@ function navigateTo(url) {
  * word in the name and then concatenates the first letters to form the initials. The initials are then
  * converted to uppercase and returned.
  */
-function getInitials(contact) {
+function getInitialsFromObject(contact) {
   let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
 
   let initials = [...contact['name'].matchAll(rgx)] || [];

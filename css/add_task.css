@@ -13,8 +13,9 @@ b {
 
 .add_task_content {
     width: 70%;
-    padding-top: 245px;
-    padding-left: clamp(50px, 28vw, 328px)
+    top: 23vh;
+    left: 18vw;
+    position: relative;
 }
 
 .add_task_form_row {
@@ -48,10 +49,11 @@ b {
 .add_task_input {
     font-size: clamp(17px, 1.3vw, 30px);
     height: 48px;
-    width: 100%;
+    width: 95%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 6px;
+    padding-right: 16px;
     cursor: pointer;
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
@@ -64,6 +66,7 @@ b {
   }
 
 .add_task_textarea {
+    padding: 16px 16px 16px 16px;
     font-size: clamp(17px, 1.3vw, 25px);
     font-family: 'Inter';
     border: 1px solid #D1D1D1;
@@ -101,7 +104,7 @@ b {
     border-radius: 10px;
     cursor: pointer;
     background-color: white;
-    font-size: clamp(16px, 1.3vw, 30px);
+    font-size: clamp(20px, 1.3vw, 30px);
     font-weight: 500;
     display: flex;
     gap: 8px;
@@ -151,12 +154,36 @@ b {
     filter: brightness(0) invert(1);
 }
 
+.add_task_check_delete {
+    display: flex;
+    align-items: center;
+    width: 14px;
+    position: absolute;
+    right: 8%;
+    gap: 4px;    
+    bottom: 9px;
+}
+
+.add_task_check_delete img {
+    display: none;
+    
+}
+
+.add_task_check_delete img:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+
+#check {
+    width: 36px;
+}
+
 .add_task_footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 146px 0 90px ;
+    padding: 146px 0 0px ;
 }
+
 
 .add_task_footer p {
     font-size: 20px;
@@ -176,10 +203,29 @@ b {
     padding: 16px;
     font-size: 20px;
     cursor: pointer;
+    display: flex;
+    gap: 16px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: auto;
 }
+
+.add_task_button_group_footer button:hover .addContactCancelX{
+    filter: invert(71%) sepia(58%) saturate(3762%) hue-rotate(165deg) brightness(93%) contrast(91%);
+}
+
+
+.addContactCancelX{
+    filter: invert(16%) sepia(50%) saturate(3598%) hue-rotate(176deg) brightness(50%) contrast(82%);
+}
+
 
 .add_task_button_clear {
     color: #2A3647;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: white;
     border: 1px solid #2A3647;
     width: 110px;
@@ -188,10 +234,15 @@ b {
     gap: 4px;
 }
 
-.add_task_button_clear:hover {
+.add_task_button_clear:hover  {
     border: 2px solid #29ABE2;
     color: #29ABE2;
+    
 } 
+
+.add_task_button_clear:hover img {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
 
 .add_task_button_create {
     font-weight: 700;
@@ -225,14 +276,14 @@ b {
     gap: 8px;
 }
 
-.add_task_assignet {
+.add_task_assigned {
     position: relative;
     height: 80px;
     margin-top: 8px;
 }
 
 .add_task_date {
-    font-family: inter;
+    font-family: 'inter';
     margin-top: 48px;
     height: 96px;
     gap: 8px;
@@ -261,10 +312,14 @@ b {
 .add_task_button_add_subtask {
     width: 14px;
     position: absolute;
-    right: 5px;
+    right: 3%;
     bottom: 18px;
 }
 
+.add_task_button_add_subtask:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+/*  */
 .multipleSelection {
     width: 300px;
     background-color: #BCC2C1;
@@ -311,7 +366,6 @@ b {
     padding: 8px;
     border-radius: 10px;
     font-size: 20px;    
-    background-color: white;
     position: relative;
 }
 
@@ -378,4 +432,58 @@ b {
 
 .dropdown_users_name::-webkit-scrollbar-thumb:hover {
     background: lightgray;
+}
+
+.checkbox-wrapper-27 .checkbox {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.checkbox-wrapper-27 .checkbox > input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.checkbox-wrapper-27 .checkbox__icon {
+  display: inline-block;
+  color: #999;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon {
+  color: #2A3647;
+}
+
+.checkbox-wrapper-27 .checkbox__icon:before {
+  font-family: "icons-27";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.checkbox-wrapper-27 .icon--check:before,
+.checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon:before {
+  content: "\e601";
+}
+
+.checkbox-wrapper-27 .icon--check-empty:before,
+.checkbox-wrapper-27 .checkbox__icon:before {
+  content: "\e600";
+}
+
+@font-face {
+  font-family: "icons-27";
+  font-weight: normal;
+  font-style: normal;
+  src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
 }
