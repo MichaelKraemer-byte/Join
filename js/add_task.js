@@ -48,7 +48,7 @@ async function addTaskToTasks() {
     } 
     addTaskProcess = true;
     createTaskButton = document.getElementById('createTaskButton');
-    createTaskButton.style.backgroundColor = '#e3e3e3';
+    createTaskButton.disabled = true;
        
     generateCheckBoxName();
     let task_description = document.getElementById('task_description').value;
@@ -113,8 +113,10 @@ function slideInConfirmation() {
     setTimeout(() => { 
         addTaskProcess = false;
         createTaskButton = document.getElementById('createTaskButton');
-        createTaskButton.style.backgroundcolor = '#2A3647';
-        navigateTo('board.html')}, 1250);
+        createTaskButton.disabled = false;
+        confirmation.style.animation = 'fadeConfirmation 0.3s ease-in-out';
+        if(window.location.href.includes('add_task.html')){navigateTo('board.html')}
+    }, 1250);
 }
 
 

@@ -162,6 +162,7 @@ function highlight(id) {
 
 
 function addTask() {
+    generateAddTasks();
     displayGreyBackground();
     slideInTask();
     initAddTask();
