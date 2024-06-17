@@ -10,7 +10,8 @@
     background-color: white;
     position: fixed;
     border-radius: 30px;
-    box-sizing: border-box;
+    height: 90%;
+    padding: 16px 40px;
 }
 
 .show_add_task{
@@ -43,7 +44,10 @@
 .show_task {
     word-wrap: break-word;
     width: 525px;
-    padding: 80px 40px 48px 40px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
@@ -110,8 +114,7 @@
 }
 
 .show_task_user_name {
-    min-height: 120px;
-    max-height: 160px;
+    max-height: 212px;
     overflow-y: auto;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -362,7 +365,7 @@
 .show_task_content {
     overflow-y: auto;
     overflow-x: hidden;
-    gap: 4%;
+    gap: 8px;
     display: flex;
     flex-direction: column;
 }
