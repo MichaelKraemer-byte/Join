@@ -384,6 +384,10 @@ function editTask(id) {
     editContainer.style.display = ('flex');  
 
 
+
+
+
+
     getcheckBoxesEdit(contact);
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
@@ -440,7 +444,14 @@ function getSubtaskEdit(contact) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
             task_subtasks_edit.innerHTML += `
-                <div class="get_show_task"><li>${element}</li><div>
+                <div class="show_task_edit_subtasks_del_edit">
+                    <div class="get_show_task"><li>${element}</li></div>
+                    <div class="show_task_edit_subtasks_del_edit_button">
+                        <img src="./assets/img/edit.svg" alt="">
+                        <div class="cross_line"></div>
+                        <img src="./assets/img/delete.svg" alt="">
+                    </div>
+                </div>    
             `;
         }
     } else {

@@ -481,6 +481,33 @@
     color: white;
 }
 
+.show_task_edit_subtasks_del_edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.show_task_edit_subtasks_del_edit_button {
+    display: flex;
+    gap: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.cross_line {
+    background-color: #2A3647;
+    width: 1px;
+    height: 20px;
+}
+
+.show_task_edit_subtasks_del_edit:hover {
+    background-color: #D1D1D1;
+}
+
+
+
 @media(max-width: 850px) {
     .show_task, .show_task_edit {
         width: 80%;
