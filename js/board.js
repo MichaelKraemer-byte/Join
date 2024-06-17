@@ -453,8 +453,7 @@ function getcheckBoxesEdit(contact) {
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
     let contactNames = contact.name;
-    let checkBoxesHTML = '';    
-    
+    let checkBoxesHTML = '';   
     guesteArray.forEach(guest => {
         let isChecked = contactNames ? contactNames.includes(guest.name) : false;
         let initial = getInitials(guest.name)
@@ -468,7 +467,6 @@ function getcheckBoxesEdit(contact) {
             </div>
         `;
     });
-
     checkBoxesEdit.innerHTML = checkBoxesHTML;
 }
 

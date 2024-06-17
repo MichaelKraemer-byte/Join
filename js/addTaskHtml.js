@@ -22,12 +22,20 @@ function renderHtmlGenerateCheckBox(element, i) {
 }
 
 
-function rendersearchNameFromGuestList() {
+function rendersearchNameFromGuestList(element, initial) {
     return  /*html*/`        
         <label>
-        <p>${element.name}<p>
-        <input type="checkbox" name="optionen" value="${element.name}"/>
-        </label>
+        <div class="board_task_check_box_name">
+            <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${initial}</div>
+            <p>${element.name}</p>
+        </div>
+        <div class="checkbox-wrapper-27">
+            <label class="checkbox">
+                <input type="checkbox" name="optionen" value="${element.name}">
+                <span class="checkbox__icon"></span>
+            </label>
+        </div>
+    </label>
 `;
 }
 
