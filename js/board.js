@@ -64,14 +64,14 @@ async function initBoardTasks() {
     let feedback = todos.filter(t => t['category'] == 'awaitt');
     let done = todos.filter(t => t['category'] == 'done');
 
-    generateToDo(toDo, task);
-    generateToDo(inProgress, progress);
-    generateToDo(feedback, awaitFeedback);
-    generateToDo(done, doneId);
+    generateToDo(toDo, task, 'to do');
+    generateToDo(inProgress, progress, 'in progress');
+    generateToDo(feedback, awaitFeedback, 'await feedback');
+    generateToDo(done, doneId, 'done');
 }
 
 
-async function generateToDo(arr, categorie_id) {
+async function generateToDo(arr, categorie_id, category) {
     categorie_id.innerHTML = '';
     if (arr.length) {
         for (let i = 0; i < arr.length; i++) {
@@ -91,23 +91,22 @@ async function generateToDo(arr, categorie_id) {
             getCategorieBackGroundColor(element);
         }
     } else {
-        generateNoTask(categorie_id);
+        generateNoTask(categorie_id, category);
     }
 }
 
-
-function generateNoTask(categorie_id) {
-    categorie_id.innerHTML += `<div class="no_task">No tasks</div>`
+function generateNoTask(categorie_id, category) {
+    categorie_id.innerHTML += `<div class="no_task">No tasks ${category}</div>`
 }
 
 
-function getInitials(fullName) {
-    const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
-    const nameArray = fullName.split(' ');
-    const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
-    const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
-    return initials;
-}
+// function getInitials(fullName) {
+//     const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
+//     const nameArray = fullName.split(' ');
+//     const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
+//     const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
+//     return initials;
+// }
 
 
 function saveTaskToLocalStorage() {
@@ -174,8 +173,9 @@ function slideOutTask() {
     if (boardPopUp) {
         boardPopUp.classList.remove('slideIn');
         boardPopUp.classList.add('slideOut');
-        setTimeout(()=> {
-            boardPopUp.style.display = 'none';}, 300);
+        setTimeout(() => {
+            boardPopUp.style.display = 'none';
+        }, 300);
     }
 }
 
@@ -380,7 +380,11 @@ function editTask(id) {
     </div>
     `;
     let editContainer = document.getElementById('editContainer');
-    editContainer.style.display = ('flex');  
+    editContainer.style.display = ('flex');
+
+
+
+
 
 
     getcheckBoxesEdit(contact);
@@ -439,7 +443,14 @@ function getSubtaskEdit(contact) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
             task_subtasks_edit.innerHTML += `
-                <div class="get_show_task"><li>${element}</li><div>
+                <div class="show_task_edit_subtasks_del_edit">
+                    <div class="get_show_task"><li>${element}</li></div>
+                    <div class="show_task_edit_subtasks_del_edit_button">
+                        <img src="./assets/img/edit.svg" alt="">
+                        <div class="cross_line"></div>
+                        <img src="./assets/img/delete.svg" alt="">
+                    </div>
+                </div>    
             `;
         }
     } else {
@@ -452,21 +463,26 @@ function getcheckBoxesEdit(contact) {
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
     let contactNames = contact.name;
-    let checkBoxesHTML = '';   
+    let checkBoxesHTML = '';
     guesteArray.forEach(guest => {
         let isChecked = contactNames ? contactNames.includes(guest.name) : false;
-        let initial = getInitials(guest.name)
-        checkBoxesHTML += `        
-            <div class="board_task_check_box_name">
-                <div class="show_task_checkbox_edit_name_input">
-                    <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
-                    <label for="${guest.id}">${guest.name}</label>
-                </div>
-                <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
-            </div>
-        `;
+        let initial = getInitials(guest.name);
+        checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked)
     });
-    checkBoxesEdit.innerHTML = checkBoxesHTML;
+    checkBoxesEdit.innerHTML = checkBoxesHTML;   
+    checkBoxClickNone(); 
+}
+
+
+function checkBoxClickNone() {
+    document.addEventListener('click', function (event) {
+        let checkboxes = document.getElementById("checkBoxesEdit");
+        let selectBox = document.querySelector('.selectBox');
+        if (!selectBox.contains(event.target) && !checkboxes.contains(event.target)) {
+            checkboxes.style.display = "none";
+            showEdit = true;
+        }
+    });
 }
 
 
@@ -521,11 +537,11 @@ function addNewSubTask() {
     let add_task_button_plus = document.getElementById('add_task_button_plus');
     let deleteSubtask = document.getElementById('delete_subtask');
     let check = document.getElementById('check');
-    
+
     if (subtasks) {
         subtasks.push(task_subtask.value);
     }
-    
+
     check.style.display = 'none';
     deleteSubtask.style.display = 'none';
     add_task_button_plus.style.visibility = 'initial';
