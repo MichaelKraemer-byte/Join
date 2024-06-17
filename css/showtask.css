@@ -326,10 +326,6 @@
     gap: 8px;
 }
 
-/* .show_task_delete_button:hover {
-    color: #29ABE2;
-} */
-
 .show_task_delete_button p {
     margin-block-start: 0;
     margin-block-end: 0;
@@ -346,6 +342,11 @@
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+}
+
+.show_task_edit_input:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
 }
 
 .task_assignet_edit {

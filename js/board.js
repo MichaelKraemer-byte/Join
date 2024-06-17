@@ -12,7 +12,6 @@ let selectedSubtasks = [];
 
 loadTaskFromLocalStorage();
 
-
 async function saveTasksToServer() {
     try {
         const response = await fetch(`${BASE_URL}/tasks.json`, {
@@ -365,7 +364,7 @@ function editTask(id) {
 
                 <div class="task_subtask_edit add_task_form_row">
                     <span>Subtasks</span>
-                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTask()">
+                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
                     <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
                 </div>   
                 <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>            
@@ -381,10 +380,6 @@ function editTask(id) {
     `;
     let editContainer = document.getElementById('editContainer');
     editContainer.style.display = ('flex');
-
-
-
-
 
 
     getcheckBoxesEdit(contact);
@@ -446,9 +441,9 @@ function getSubtaskEdit(contact) {
                 <div class="show_task_edit_subtasks_del_edit">
                     <div class="get_show_task"><li>${element}</li></div>
                     <div class="show_task_edit_subtasks_del_edit_button">
-                        <img src="./assets/img/edit.svg" alt="">
+                        <img src="./assets/img/edit.svg" onclick="showTaskEditSubtask(${i}, ${contact.id})">
                         <div class="cross_line"></div>
-                        <img src="./assets/img/delete.svg" alt="">
+                        <img src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
                     </div>
                 </div>    
             `;
@@ -456,6 +451,41 @@ function getSubtaskEdit(contact) {
     } else {
         task_subtasks_edit.innerHTML = '';
     }
+       
+}
+
+
+function showTaskEditSubtask(i, id) {
+    let contact = todos.find(obj => obj['id'] == id);
+    // let task_subtasks_edit = document.getElementById('task_subtasks_edit');
+    console.log(contact.subtasks[i])
+    console.log(contact.subtasks)
+    task_subtasks_edit.value = `${subTaskEdit[i]}`;
+
+    contact.subtasks[i] = task_subtasks_edit.value;
+    console.log(contact.subtasks)
+
+}
+
+
+async function showTaskDeleteSubtask(i, id) {
+    let contact = todos.find(obj => obj['id'] == id);
+    contact.subtasks.splice(i, 1);
+
+    saveTaskToLocalStorage();
+    await saveTasksToServer();
+    initBoardTasks(); 
+}
+
+
+async function addNewSubTaskEdit(id) {
+    let contact = todos.find(obj => obj['id'] == id);
+    let task_subtasks_edit = document.getElementById('task_subtasks_edit').value;
+    contact.subtasks.push(task_subtasks_edit);
+    
+    saveTaskToLocalStorage();
+    await saveTasksToServer();
+    initBoardTasks();    
 }
 
 
@@ -478,9 +508,12 @@ function checkBoxClickNone() {
     document.addEventListener('click', function (event) {
         let checkboxes = document.getElementById("checkBoxesEdit");
         let selectBox = document.querySelector('.selectBox');
-        if (!selectBox.contains(event.target) && !checkboxes.contains(event.target)) {
-            checkboxes.style.display = "none";
-            showEdit = true;
+        
+        if (checkboxes && selectBox) {
+            if (!selectBox.contains(event.target) && !checkboxes.contains(event.target)) {
+                checkboxes.style.display = "none";
+                showEdit = true;
+            }
         }
     });
 }
@@ -493,9 +526,13 @@ async function upgradeTodos(id) {
     contact.dueDate = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
 
-    getPriorityUpdateTodos(userPriotity)
-    contact.priority = userPriotity;
-    contact.priorityImg = priorityImgEdit;
+    if(userPriotity) {
+        contact.priority = userPriotity;
+        contact.priorityImg = getPriorityUpdateTodos(userPriotity);
+    }else {
+        contact.priority = contact.priority;
+        contact.priorityImg = contact.priorityImg;
+    }
 
     saveTaskToLocalStorage();
     await saveTasksToServer();
@@ -508,14 +545,13 @@ async function upgradeTodos(id) {
 function getPriorityUpdateTodos(userPriotity) {
     switch (userPriotity) {
         case 'Urgent':
-            priorityImgEdit = './assets/img/vector_red.svg';
-            break;
+            return './assets/img/vector_red.svg';
         case 'Medium':
-            priorityImgEdit = './assets/img/vector_strich.svg';
-            break;
+            return './assets/img/vector_strich.svg';
         case 'Low':
-            priorityImgEdit = './assets/img/vector_green.svg';
-            break;
+            return './assets/img/vector_green.svg';
+        default:
+            return ''; 
     }
 }
 

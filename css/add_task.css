@@ -343,7 +343,7 @@ b {
 .add_task_button_add_subtask:hover {
     filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
 }
-/*  */
+
 .multipleSelection {
     width: 300px;
     background-color: #BCC2C1;
@@ -372,7 +372,6 @@ b {
 }
 
 #checkBoxes {
-    /* display: none; */
     visibility: hidden;
     z-index: 99;
 }

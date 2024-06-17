@@ -26,7 +26,6 @@ async function loadGuestFromServer() {
 async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
-    // generateAddTasks()
     generateCheckBox();
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
@@ -57,27 +56,10 @@ async function addTaskToTasks() {
     let task_status = document.getElementById('task_category').value;
     let id = generateUniqueId();
     let category ='to_do'
-    let priorityImg;
+    let priorityImg = getPriorityImage(userPriotity);
     let selectedTask = [];
-    let userSubtask = subtasks;
-
-    switch (userPriotity) {
-        case 'Urgent':
-            priorityImg = './assets/img/vector_red.svg';
-            break;
-        case 'Medium':
-            priorityImg = './assets/img/vector_strich.svg';
-            break;
-        case 'Low':
-            priorityImg = './assets/img/vector_green.svg';
-            break;
-        default:
-            userPriotity = 'Medium'
-            priorityImg = './assets/img/vector_strich.svg';
-            break;
-    }
-
-    let priority = userPriotity;
+    let userSubtask = subtasks;   
+    let priority = getUserPriorityStatus(userPriotity);
 
     let task = {
         'category': category,
@@ -104,6 +86,29 @@ async function addTaskToTasks() {
     }
     initAddTask();
     slideInConfirmation();
+}
+
+
+function getPriorityImage(userPriotity) {
+    switch (userPriotity) {
+        case 'Urgent':
+            return './assets/img/vector_red.svg';
+        case 'Medium':
+            return './assets/img/vector_strich.svg';
+        case 'Low':
+            return './assets/img/vector_green.svg';
+        default:
+            return './assets/img/vector_strich.svg';
+    }
+}
+
+
+function getUserPriorityStatus(userPriotity) {
+    if(userPriotity) {
+        return userPriotity;
+    }else {
+        return 'Medium';
+    }
 }
 
 
@@ -215,7 +220,8 @@ function generateCheckBox() {
         document.addEventListener('click', function (event) {
             let checkboxes = document.getElementById("checkBoxes");
             let selectBox = document.querySelector('.selectBox');
-            if (!selectBox.contains(event.target)) {
+            
+            if (selectBox && !selectBox.contains(event.target)) {
                 checkboxes.style.visibility = "hidden";
                 show = true;
             }
