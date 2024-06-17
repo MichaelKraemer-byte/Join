@@ -24,6 +24,10 @@
     <div w3-include-html="./templates/header.html"></div>
     <div w3-include-html="./templates/navBar.html"></div>
 
+        <div id="addedTaskConfirmation" class="addedTaskConfirmation">
+            <span class="confirmationSpan">Task added to board. <img class="filterBright" src="./assets/img/boardIcon.svg"></span>
+        </div>
+
         <div class="add_task_content">
             <h1>Add Task</h1>
             <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">

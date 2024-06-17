@@ -173,7 +173,7 @@ function slideOutTask() {
         boardPopUp.classList.remove('slideIn');
         boardPopUp.classList.add('slideOut');
         setTimeout(()=> {
-            boardPopUp.style.display = 'none';}, 500);
+            boardPopUp.style.display = 'none';}, 300);
     }
 }
 
@@ -213,13 +213,10 @@ function showTask(id) {
 
 
 function closeShowTask() {
-    let boardPopUp = document.getElementById('boardPopUp');
     let input_find_task = document.getElementById('input_find_task');
     input_find_task.value = '';
     slideOutTask();
     removeGreyBackground();
-    setTimeout(()=> {
-        boardPopUp.style.display = 'none';}, 500);
     initBoardTasks();
 }
 
