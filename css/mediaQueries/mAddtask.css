@@ -1,7 +1,22 @@
+@media (max-width: 1122px) {
+    .add_task_content {
+        left: 240px;
+    }
+
+    .add_task_line {
+        margin: 50px 15px 0;
+    }
+
+    .add_button_group {
+        width: 35%;
+    }
+}
+
 @media (max-width: 850px) {
     .add_task_content {
-        padding: 200px 20px 0 20px;
-        width: 94%;
+        width: 97%;
+        left: 6px;
+        padding-bottom: 105px;
     }
 
     .selectBox img {
@@ -13,69 +28,97 @@
 
 @media (max-width: 666px) {
     .add_task_content {
-        padding: 160px 20px 0 20px;
         width: 93%;
+        padding-bottom: 0;
+    }
+
+    .add_task_textarea {
+        width: 96%;
+    }
+
+    .add_task_category {
+        width: 104%;
     }
 
     .add_task_button_create {
         font-size: 16px;
         width: 130px;
-        height: 50px;
     }
 
     .add_task_button_group_footer button {
         border-radius: 10px;
-        font-size: 12px;
         cursor: pointer;
     }
 
     .add_task_form {
         display: flex;
         flex-direction: column;
-        
+
     }
+
     .add_task_line {
         display: none;
     }
+
     .add_task_width50 {
         width: 100%;
     }
 
     .add_task_input {
-        width: 98%;        
-    }  
+        width: 98%;
+    }
 
     .add_task_title {
-        margin-top: 28px;        
+        margin-top: 28px;
     }
 
     .add_task_button_clear {
         display: none;
     }
-    
+
     .add_task_footer p {
-        font-size: clamp(15px, 2vw, 30px);        
+        font-size: clamp(15px, 2vw, 30px);
     }
+
     .add_task_footer {
         padding: 50px 20px 90px;
         justify-content: space-between;
-    }   
-
-    .add_task_date {
-        margin-top: 38px;        
     }
 
-    .dropdown_users_name {        
-        max-height: 120px;        
+    .add_task_date {
+        margin-top: 38px;
+    }
+
+    .dropdown_users_name {
+        max-height: 120px;
     }
 }
 
 @media (max-width: 450px) {
     .add_task_content {
-        padding: 100px 0 0 8px;
-        width: 93%;
+        width: 92%;
+        top: 90px;
     }
+
     .add_task_title {
-        margin-top: 18px;        
+        margin-top: 18px;
+    }
+
+    .add_task_button_group_footer button {
+        padding: 10px;
+        font-size: 15px;
+        gap: 0;
+    }
+
+    .add_task_footer {
+        padding: 50px 0px 90px;
+    }
+
+    .add_task_textarea {
+        width: 94%;
+    }
+
+    #task_category {
+        width: 102%;
     }
 }
