@@ -9,9 +9,14 @@ function renderHtmlGenerateCheckBox(element, i) {
     <label>
         <div class="board_task_check_box_name">
             <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
-            <p id="${i}">${element.name}<p>
+            <p id="${i}">${element.name}</p>
         </div>
-        <input type="checkbox" name="optionen" value="${element.name}"/>
+        <div class="checkbox-wrapper-27">
+            <label class="checkbox">
+                <input type="checkbox" name="optionen" value="${element.name}">
+                <span class="checkbox__icon"></span>
+            </label>
+        </div>
     </label>
 `;
 }
