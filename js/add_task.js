@@ -30,7 +30,7 @@ async function initAddTask() {
     generateCheckBox();
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
-            getValues();
+            getValues('add_task_show_check');
         });
     });
 }
@@ -166,6 +166,7 @@ function getTaskPriority(id) {
 
 function toggleCheckboxes(event) {
     event.stopPropagation();
+    let idInput = document.getElementById('task_assignet_input');
     let checkboxes = document.getElementById("checkBoxes");
     if (show) {
         checkboxes.style.visibility = "initial";
@@ -173,6 +174,7 @@ function toggleCheckboxes(event) {
     } else {
         checkboxes.style.visibility = "hidden";
         show = true;
+        idInput.value = ''
     }
 }
 
@@ -229,15 +231,16 @@ function searchNameFromGuestList() {
     id.innerHTML = '';
     for (let i = 0; i < guesteArray.length; i++) {
         const element = guesteArray[i];
+        let initial = getInitials(element.name)
         if (element.name.toLowerCase().includes(idInput)) {
-            id.innerHTML += rendersearchNameFromGuestList(element)
+            id.innerHTML += rendersearchNameFromGuestList(element, initial)
         }
     }
 }
 
 
-function getValues() {
-    let add_task_show_check = document.getElementById('add_task_show_check');
+function getValues(id) {
+    let add_task_show_check = document.getElementById(id);
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
     add_task_show_check.innerHTML = '';
 

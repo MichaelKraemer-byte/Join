@@ -13,8 +13,8 @@ b {
 
 .add_task_content {
     width: 70%;
-    top: 23vh;
-    left: 18vw;
+    top: 206px;
+    left: 328px;
     position: relative;
 }
 
@@ -181,7 +181,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 146px 0 0px ;
+    padding: 90px 0 0px ;
 }
 
 
