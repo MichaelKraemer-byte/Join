@@ -29,9 +29,8 @@
         </div>
 
         <div class="add_task_content">
-            <h1>Add Task</h1>
-            <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">
-                <div>           
+            <h1 class="addTaskTitle">Add Task</h1>
+            <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks();">          
                     <div class="add_task_form">
                         <div class="add_task_width50">
                             <div class="add_task_title add_task_form_row">
@@ -56,7 +55,9 @@
                                 <div class="add_task_show_check" id="add_task_show_check"></div>   
                             </div>
                         </div>
-                    <div class="add_task_line"></div>
+
+                        <div class="add_task_line"></div>
+
                         <div class="add_task_width50">
                             <div class="add_task_date add_task_form_row">
                                 <label for="">Due date<b>*</b></label>
@@ -84,7 +85,7 @@
                             </div>                    
                             <div class="add_task_category add_task_form_row">
                                 <label for="">Categoriy<b>*</b></label>
-                                <select id="task_category" class="add_task_input" required>
+                                <select id="task_category" class="taskCategorySelection" required>
                                     <option value="" hidden>Select task category</option>
                                     <option value="Technical Task">Technical Task</option>
                                     <option value="User Story">User Story</option>
@@ -114,7 +115,6 @@
                             </button>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     

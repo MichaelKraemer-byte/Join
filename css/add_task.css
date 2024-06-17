@@ -41,9 +41,23 @@ b {
 
 .add_task_line {
     width: 1px;
-    margin: 50px 45px 0;
+    margin: 50px 50px 0;
     padding-top: 20px;
     background-color: #D1D1D1;
+}
+
+.taskCategorySelection {
+    font-size: clamp(17px, 1.3vw, 30px);
+    height: 48px;
+    box-sizing: border-box;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    cursor: pointer;
+    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
 }
 
 .add_task_input {
@@ -52,7 +66,7 @@ b {
     width: 95%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    padding-left: 6px;
+    padding-left: 16px;
     padding-right: 16px;
     cursor: pointer;
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
@@ -72,10 +86,12 @@ b {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     height: 120px;
+    resize: none;
     cursor: pointer;
     -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-sizing: border-box;
 }
 
 .add_task_textarea:focus {
@@ -86,7 +102,7 @@ b {
 .add_task_button_group {
     display: flex;
     justify-content: space-between;
-    gap: 8px;
+    gap: 2%;
     cursor: pointer;
 }
 
@@ -209,6 +225,7 @@ b {
     align-items: center;
     justify-content: center;
     width: auto;
+    white-space: nowrap;
 }
 
 .add_task_button_group_footer button:hover .addContactCancelX{
@@ -268,6 +285,13 @@ b {
     margin-top: 48px;
     height: 96px;
     gap: 8px;
+}
+
+.addTaskTitle {
+    font-size: clamp(47px, 4vw, 61px);    
+    font-weight: 700;
+    color: #000000;
+    margin: 0px;
 }
 
 .add_task_descripion {
@@ -534,3 +558,32 @@ b {
         opacity: 0;
     }
 }
+
+body {
+    --sb-track-color: #ffffff;
+    --sb-thumb-color: #a8a8a8;
+    --sb-size: 24px;
+  }
+
+/* Scrollbar-Stile für WebKit-basierte Browser */
+.add_task_textarea::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  
+  .add_task_textarea::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 50px;
+  }
+  
+  .add_task_textarea::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 50px;
+    border: 8px solid #ffffff;
+  }
+
+  /* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
+@supports not selector(::-webkit-scrollbar) {
+    #listSection {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }

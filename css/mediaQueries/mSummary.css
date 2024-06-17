@@ -135,6 +135,9 @@
         font-size: clamp(14px, 3vw, 16px);
     }
 
+    .title {
+        font-size: 47px;
+    }
 }
 
 
