@@ -95,6 +95,7 @@ async function generateToDo(arr, categorie_id) {
     }
 }
 
+
 function generateNoTask(categorie_id) {
     categorie_id.innerHTML += `<div class="no_task">No tasks</div>`
 }
@@ -173,7 +174,7 @@ function slideOutTask() {
         boardPopUp.classList.remove('slideIn');
         boardPopUp.classList.add('slideOut');
         setTimeout(()=> {
-            boardPopUp.style.display = 'none';}, 500);
+            boardPopUp.style.display = 'none';}, 300);
     }
 }
 
@@ -213,11 +214,8 @@ function showTask(id) {
 
 
 function closeShowTask() {
-    let boardPopUp = document.getElementById('boardPopUp');
     slideOutTask();
     removeGreyBackground();
-    setTimeout(()=> {
-        boardPopUp.style.display = 'none';}, 500);
     initBoardTasks();
 }
 
