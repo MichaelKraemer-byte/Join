@@ -1,10 +1,8 @@
 .board_container {
     position: relative;
     top: 23vh;
-    left: 18vw;
-    box-sizing: border-box;
-    padding: 0px 64px 0px 0px;
-    width: 70vw;
+    left: 290px;
+    width: max-content;
 }
 
 .board_header {
@@ -329,6 +327,20 @@ h2 {
     display: none;
 }
 
+@media (max-width: 1022px) {
+    .board_header {
+        width: 100%;
+    }
+
+    .task_navigation input {
+        width: 180px;
+    }
+
+    .board_container {
+        left: 240px;
+    }
+}
+
 @media (max-width: 850px) {
     body {
         height: auto;
@@ -342,12 +354,16 @@ h2 {
 
     .board_header {
         height: auto;
+        width: 95%;
     }
 
     .board_container {
-        padding: 150px 20px;
+        padding: 150px 0;
         width: 100%;
-        box-sizing: border-box;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .title-mobile {
@@ -410,6 +426,7 @@ h2 {
         justify-content: baseline;
         flex-direction: column;
         height: auto;
+        width: 95%;
     }
 
     .bord_content_colum_left,

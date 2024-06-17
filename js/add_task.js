@@ -3,6 +3,7 @@ let show = true;
 let guesteArray = [];
 let userPriotity;
 let imgPriority;
+let addTaskProcess = false;
 
 async function loadGuestFromServer() {
     try {
@@ -42,6 +43,12 @@ function generateAddTasks() {
 
 
 async function addTaskToTasks() {
+    if (addTaskProcess) {
+        return;
+    } 
+    addTaskProcess = true;
+    createTaskButton = document.getElementById('createTaskButton');
+    createTaskButton.style.backgroundColor = '#e3e3e3';
        
     generateCheckBoxName();
     let task_description = document.getElementById('task_description').value;
@@ -91,10 +98,25 @@ async function addTaskToTasks() {
     todos.push(task)
     await saveTasksToServer();
     saveTaskToLocalStorage();
-    closeWindow();
+    if(window.location.href.includes('board.html')){
+        closeWindow();        
+        initBoardTasks();        
+    }
     initAddTask();
-    initBoardTasks();
+    slideInConfirmation();
 }
+
+
+function slideInConfirmation() {
+    let confirmation = document.getElementById('addedTaskConfirmation');
+    confirmation.style.animation = 'slideInAddedTaskConfirmation 1.25s cubic-bezier(0, 1.19, 0, 0.96)';
+    setTimeout(() => { 
+        addTaskProcess = false;
+        createTaskButton = document.getElementById('createTaskButton');
+        createTaskButton.style.backgroundcolor = '#2A3647';
+        navigateTo('board.html')}, 1250);
+}
+
 
 function generateUniqueId() {
     let id;

@@ -438,11 +438,11 @@ body {
 
 
 .slideIn {
-    animation: slideIn 0.4s ease-in-out forwards;
+    animation: slideIn 0.2s ease-in-out forwards;
 }
 
 .slideOut {
-    animation: slideOut 0.4s ease-in-out forwards;
+    animation: slideOut 0.2s ease-in-out forwards;
 }
 
 @keyframes slideIn {

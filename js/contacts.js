@@ -10,9 +10,12 @@ let editContactFunctionActive = false;
 
 /**
  * The function `closeContactPopUp` closes a contact pop-up by sliding it out and removing the grey
- * background.
+ * background. 
  */
 function closeContactPopUp() {
+    if (document.getElementById('greyBackground').classList.contains('d-none')) {
+        return;
+    }
     slideOut();
     removeGreyBackground();
 }
@@ -42,9 +45,12 @@ function slideIn() {
  * The function `openAddContactPopUp` displays a pop-up window with an add contact form.
  */
 function openAddContactPopUp() {
+    if (!document.getElementById('greyBackground').classList.contains('d-none')) {
+        return;
+    }
     document.getElementById('contactPopUp').innerHTML = addContactFormHTML(); 
     slideIn();
-    displayGreyBackground();
+    displayGreyBackground();            
 }
 
 
@@ -70,6 +76,7 @@ async function addContact() {
     focusAndScrollToContact(newContact);
     slideInContact(newContact['name'], initials);
     slideInAndOutConfirmation('Contact successfully created');
+    openAddContactPopUpActive = false;
 }
 
 
