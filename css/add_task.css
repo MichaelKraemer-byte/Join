@@ -13,6 +13,7 @@ b {
 
 .add_task_content {
     width: 70%;
+    max-width: 1440px;
     top: 206px;
     left: 328px;
     position: relative;

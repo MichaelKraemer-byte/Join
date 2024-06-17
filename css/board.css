@@ -13,7 +13,7 @@
     gap: 48px;
 }
 
-.board_content_mobile_taskTitle{
+.board_content_mobile_taskTitle {
     display: none;
 }
 
@@ -200,9 +200,9 @@
     font-size: 18px;
     line-height: 19.2px;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     background-color: #E7E7E7;
-    z-index: 0;  
+    z-index: 0;
 }
 
 
@@ -315,6 +315,10 @@
     flex-direction: column;
 }
 
+.show_task_close_button {
+    cursor: pointer;
+}
+
 .title-mobile {
     display: none;
 }
@@ -359,7 +363,7 @@ h2 {
 
     .board_container {
         padding: 150px 0;
-        width: 100%;
+        width: 98%;
         position: static;
         display: flex;
         flex-direction: column;
@@ -441,12 +445,15 @@ h2 {
         padding: 6px;
     }
 
-    .bord_content_colum::-webkit-scrollbar, .bord_content_colum_left::-webkit-scrollbar, .bord_content_colum_right::-webkit-scrollbar{
+    .bord_content_colum::-webkit-scrollbar,
+    .bord_content_colum_left::-webkit-scrollbar,
+    .bord_content_colum_right::-webkit-scrollbar {
         display: none;
     }
 
     .pop_add_task {
         display: none;
+        width: 95%;
     }
 
     .board_content_mobile_taskTitle {
