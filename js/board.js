@@ -452,14 +452,13 @@ function getSubtaskEdit(contact) {
 function getcheckBoxesEdit(contact) {
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
-    let contactNames = contact.name;   
+    let contactNames = contact.name;
     let checkBoxesHTML = '';    
+    
     guesteArray.forEach(guest => {
-        let isChecked = contactNames.includes(guest.name);
+        let isChecked = contactNames ? contactNames.includes(guest.name) : false;
         let initial = getInitials(guest.name)
         checkBoxesHTML += `        
-            
-
             <div class="board_task_check_box_name">
                 <div class="show_task_checkbox_edit_name_input">
                     <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
