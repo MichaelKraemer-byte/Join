@@ -44,7 +44,6 @@
     word-wrap: break-word;
     width: 525px;
     padding: 80px 40px 48px 40px;
-    height: 70vh;
 }
 
 
@@ -361,7 +360,6 @@
 }
 
 .show_task_content {
-    height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
     gap: 4%;
