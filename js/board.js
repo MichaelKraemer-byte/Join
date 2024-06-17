@@ -214,6 +214,8 @@ function showTask(id) {
 
 function closeShowTask() {
     let boardPopUp = document.getElementById('boardPopUp');
+    let input_find_task = document.getElementById('input_find_task');
+    input_find_task.value = '';
     slideOutTask();
     removeGreyBackground();
     setTimeout(()=> {
@@ -573,7 +575,7 @@ function searchSwithId(category) {
         case 'in_progress':
             searchId = 'board_in_progress';
             break;
-        case 'await':
+        case 'awaitt':
             searchId = 'board_await_feedback';
             break;
         case 'done':
