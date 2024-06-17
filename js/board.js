@@ -49,6 +49,20 @@ async function loadTasksFromServer() {
 }
 
 
+function saveTaskToLocalStorage() {
+    let todosAsText = JSON.stringify(todos);
+    localStorage.setItem('todosToServer', todosAsText)
+}
+
+
+function loadTaskFromLocalStorage() {
+    let todosAsText = localStorage.getItem('todosToServer');
+    if (todosAsText) {
+        todos = JSON.parse(todosAsText);
+    }
+}
+
+
 async function initBoardTasks() {
     await loadTasksFromServer();
     await loadGuestFromServer();
@@ -94,70 +108,6 @@ async function generateToDo(arr, categorie_id, category) {
     }
 }
 
-function generateNoTask(categorie_id, category) {
-    categorie_id.innerHTML += `<div class="no_task">No tasks ${category}</div>`
-}
-
-
-// function getInitials(fullName) {
-//     const ignoredWords = ['von', 'van', 'de', 'la', 'der', 'die', 'das', 'zu', 'zum', 'zur'];
-//     const nameArray = fullName.split(' ');
-//     const filteredNameArray = nameArray.filter(name => !ignoredWords.includes(name.toLowerCase()));
-//     const initials = filteredNameArray.map(name => name.charAt(0).toUpperCase()).join('');
-//     return initials;
-// }
-
-
-function saveTaskToLocalStorage() {
-    let todosAsText = JSON.stringify(todos);
-    localStorage.setItem('todosToServer', todosAsText)
-}
-
-
-function loadTaskFromLocalStorage() {
-    let todosAsText = localStorage.getItem('todosToServer');
-    if (todosAsText) {
-        todos = JSON.parse(todosAsText);
-    }
-}
-
-
-async function deleteTaskFromLocalStorage(id) {
-    let arr = [];
-    for (let i = 0; i < todos.length; i++) {
-        arr = (todos.filter(todo => todo.id != id));
-    }
-    todos = arr;
-    await saveTasksToServer();
-    saveTaskToLocalStorage();
-    initBoardTasks();
-    closeShowTask();
-}
-
-
-function startDragging(id) {
-    currentElement = id;
-}
-
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
-
-async function moveTo(category) {
-    let contact = todos.find(obj => obj['id'] == currentElement);
-    contact['category'] = category;
-    await saveTasksToServer();
-    saveTaskToLocalStorage();
-    initBoardTasks();
-}
-
-
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
-}
-
 
 function addTask() {
     generateAddTasks();
@@ -165,43 +115,6 @@ function addTask() {
     slideInTask();
     initAddTask();
 }
-
-
-function slideOutTask() {
-    let boardPopUp = document.getElementById('boardPopUp');
-    if (boardPopUp) {
-        boardPopUp.classList.remove('slideIn');
-        boardPopUp.classList.add('slideOut');
-        setTimeout(() => {
-            boardPopUp.style.display = 'none';
-        }, 300);
-    }
-}
-
-
-function slideInTask() {
-    let boardPopUp = document.getElementById('boardPopUp');
-    if (boardPopUp) {
-        boardPopUp.style.display = 'flex';
-        boardPopUp.classList.remove('slideOut');
-        boardPopUp.classList.add('slideIn');
-    }
-}
-
-
-function closeWindow() {
-    slideOutTask();
-    removeGreyBackground();
-    // setTimeout(() => {
-    //     hiddenPopWindow()
-    // }, 300);
-}
-
-
-// function hiddenPopWindow() {
-//     let idPopTask = document.getElementById('pop_add_task');
-//     idPopTask.style.visibility = 'hidden';
-// }
 
 
 function showTask(id) {
@@ -225,41 +138,12 @@ function closeShowTask() {
 async function generateShowTask(id) {
     let boardPopUp = document.getElementById('boardPopUp');
     let contact = todos.find(obj => obj['id'] == id);
-
-
     boardPopUp.innerHTML = renderGenerateShowTaskHtml(contact, id);
-    ///////////////////////check-box
 
-
-    let show_task_subtask = document.getElementById('show_task_subtask');
-    show_task_subtask.innerHTML = '';
-
-    if (contact && contact.subtasks) {
-        for (let i = 0; i < contact.subtasks.length; i++) {
-            const element = contact.subtasks[i];
-            const isChecked = contact.selectedTask ? contact.selectedTask.includes(element) : false;
-            show_task_subtask.innerHTML += `
-                <div class="show_task_subtask_content">
-                    <input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}/>
-                    <label for="${id}_${i}">${element}</label>
-                </div>
-            `;
-        }
-
-        document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`).forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                updateSubtaskStatus(contact, this.dataset.value, this.checked);
-            });
-        });
-    } else {
-        show_task_subtask.innerHTML = 'No subtasks here.';
-    }
-
+    generateCheckBoxSubTask(contact, id)
     getshowTaskUserName(contact);
     getCategorieBackGroundColorShowTask(contact, id);
 }
-
-
 
 
 async function updateSubtaskStatus(contact, subtask, isChecked) {
@@ -299,7 +183,6 @@ function getshowTaskUserName(contact) {
 }
 
 
-
 function editTask(id) {
     let contact = todos.find(obj => obj['id'] == id);
 
@@ -307,77 +190,7 @@ function editTask(id) {
     let showTaskContainer = document.getElementById('showTaskContainer');
 
     showTaskContainer.style.display = 'none';
-    boardPopUp.innerHTML += /*html*/` 
-    <div class="show_task" id="editContainer">
-        <form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
-            <div class="show_task__edit_header">
-                <img class="show_task_close_button" onclick="closeWindow()" src="./assets/img/close.svg">
-            </div>
-            <div class="show_task__edit_content">
-
-                <div class="task_title_edit add_task_form_row">
-                    <span>Title</span>
-                    <input id="task_title_edit" class="show_task_edit_input"  type="text" placeholder="Enter a title">
-                </div>
-
-                <div class="task_descripion_edit add_task_form_row">
-                        <span>Description</span>
-                        <textarea id="task_description_edit" class="add_task_textarea" name=""
-                            placeholder="Enter a Description"></textarea>
-                </div>
-
-                <div class="task_date_edit add_task_form_row">
-                        <span>Due date</span>
-                        <input id="task_date_edit" class="show_task_edit_input" type="date">
-                </div>
-
-                <div class="add_task_button_group">
-                    <button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_red.svg">
-                        </div>
-                    </button>
-                    <button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_strich.svg">
-                        </div>
-                    </button>
-                    <button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_green.svg">
-                        </div>
-                    </button>
-                </div>
-
-
-                <div class="task_assignet_edit add_task_form_row">
-
-                    <span id="assignet_to">Assignet to</span>
-                    <div class="selectBox" onclick="showCheckboxesEdit()">
-                        <img src="./assets/img/arrow_drop_down.svg" alt="">
-                        <input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 
-                    </div>
-                    <div class="checkBoxesEdit" id="checkBoxesEdit"></div>  
-
-                    <div class="task_edit_initial" id="task_edit_initial"></div>
-                </div>
-
-                <div class="task_subtask_edit add_task_form_row">
-                    <span>Subtasks</span>
-                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
-                    <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
-                </div>   
-                <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>            
-                
-            </div>
-            <div class="show_task_edit_footer">
-                <button type="submit">Ok 
-                    <img src="./assets/img/vector_check.svg" alt="">
-                </button>
-            </div>
-        </form>
-    </div>
-    `;
+    boardPopUp.innerHTML += renderEditTaskHtml(contact);
     let editContainer = document.getElementById('editContainer');
     editContainer.style.display = ('flex');
 
@@ -387,6 +200,7 @@ function editTask(id) {
     getContactInitialEdit(contact);
     getSubtaskEdit(contact);
 }
+
 
 function getContactPriorityEdit(contact) {
     let urgent_edit = document.getElementById('urgent_edit');
@@ -405,6 +219,7 @@ function getContactPriorityEdit(contact) {
             break
     }
 }
+
 
 function getContactInitialEdit(contact) {
     let task_title_edit = document.getElementById('task_title_edit');
@@ -458,12 +273,8 @@ function getSubtaskEdit(contact) {
 function showTaskEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
     // let task_subtasks_edit = document.getElementById('task_subtasks_edit');
-    console.log(contact.subtasks[i])
-    console.log(contact.subtasks)
-    task_subtasks_edit.value = `${subTaskEdit[i]}`;
 
     contact.subtasks[i] = task_subtasks_edit.value;
-    console.log(contact.subtasks)
 
 }
 
@@ -481,41 +292,13 @@ async function showTaskDeleteSubtask(i, id) {
 async function addNewSubTaskEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
     let task_subtasks_edit = document.getElementById('task_subtasks_edit').value;
-    contact.subtasks.push(task_subtasks_edit);
+    if (task_subtasks_edit) {
+        contact.subtasks.push(task_subtasks_edit);
+    }
     
     saveTaskToLocalStorage();
     await saveTasksToServer();
     initBoardTasks();    
-}
-
-
-function getcheckBoxesEdit(contact) {
-    let checkBoxesEdit = document.getElementById('checkBoxesEdit');
-    checkBoxesEdit.innerHTML = '';
-    let contactNames = contact.name;
-    let checkBoxesHTML = '';
-    guesteArray.forEach(guest => {
-        let isChecked = contactNames ? contactNames.includes(guest.name) : false;
-        let initial = getInitials(guest.name);
-        checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked)
-    });
-    checkBoxesEdit.innerHTML = checkBoxesHTML;   
-    checkBoxClickNone(); 
-}
-
-
-function checkBoxClickNone() {
-    document.addEventListener('click', function (event) {
-        let checkboxes = document.getElementById("checkBoxesEdit");
-        let selectBox = document.querySelector('.selectBox');
-        
-        if (checkboxes && selectBox) {
-            if (!selectBox.contains(event.target) && !checkboxes.contains(event.target)) {
-                checkboxes.style.display = "none";
-                showEdit = true;
-            }
-        }
-    });
 }
 
 
@@ -539,20 +322,6 @@ async function upgradeTodos(id) {
     initAddTask();
     initBoardTasks();
     closeShowTask();
-}
-
-
-function getPriorityUpdateTodos(userPriotity) {
-    switch (userPriotity) {
-        case 'Urgent':
-            return './assets/img/vector_red.svg';
-        case 'Medium':
-            return './assets/img/vector_strich.svg';
-        case 'Low':
-            return './assets/img/vector_green.svg';
-        default:
-            return ''; 
-    }
 }
 
 
@@ -585,14 +354,6 @@ function addNewSubTask() {
 }
 
 
-function schowSubtask(element) {
-    if (element.subtasks) {
-        return element.subtasks
-    } else {
-        return " "
-    }
-}
-
 function searchTaskFromBoard() {
     let input_find_task = document.getElementById('input_find_task');
     input_find_task = input_find_task.value.toLowerCase();
@@ -612,7 +373,6 @@ function searchTaskFromBoard() {
             searchSwithId(category);
 
             let searchResult = document.getElementById(searchId);
-
             searchResult.innerHTML = renderHtmlToDo(element)
             getInitialsArray(element);
             getCategorieBackGroundColor(element);
@@ -621,26 +381,8 @@ function searchTaskFromBoard() {
 
 }
 
-function searchSwithId(category) {
-    switch (category) {
-        case 'to_do':
-            searchId = 'board_to_do';
-            break;
-        case 'in_progress':
-            searchId = 'board_in_progress';
-            break;
-        case 'awaitt':
-            searchId = 'board_await_feedback';
-            break;
-        case 'done':
-            searchId = 'board_done';
-            break;
-    }
-}
-
 
 function getInitialsArray(element) {
-
     let initialsArray = element.initial;
     let colorsArray = element.color;
 
@@ -664,20 +406,3 @@ function getInitialsArray(element) {
 }
 
 
-function getCategorieBackGroundColor(element) {
-    let borderCategory = document.getElementById(`board_task_category${element.id}`);
-    if (element.status == 'Technical Task') {
-        borderCategory.style.backgroundColor = '#1FD7C1';
-    } else {
-        borderCategory.style.backgroundColor = '#0038FF';
-    }
-}
-
-function getCategorieBackGroundColorShowTask(contact, id) {
-    let borderCategory = document.getElementById(`show_task_category${id}`);
-    if (contact['status'] == 'Technical Task') {
-        borderCategory.style.backgroundColor = '#1FD7C1';
-    } else {
-        borderCategory.style.backgroundColor = '#0038FF';
-    }
-} 
