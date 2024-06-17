@@ -64,14 +64,14 @@ async function initBoardTasks() {
     let feedback = todos.filter(t => t['category'] == 'awaitt');
     let done = todos.filter(t => t['category'] == 'done');
 
-    generateToDo(toDo, task);
-    generateToDo(inProgress, progress);
-    generateToDo(feedback, awaitFeedback);
-    generateToDo(done, doneId);
+    generateToDo(toDo, task, 'to do');
+    generateToDo(inProgress, progress, 'in progress');
+    generateToDo(feedback, awaitFeedback, 'await feedback');
+    generateToDo(done, doneId, 'done');
 }
 
 
-async function generateToDo(arr, categorie_id) {
+async function generateToDo(arr, categorie_id, category) {
     categorie_id.innerHTML = '';
     if (arr.length) {
         for (let i = 0; i < arr.length; i++) {
@@ -91,12 +91,12 @@ async function generateToDo(arr, categorie_id) {
             getCategorieBackGroundColor(element);
         }
     } else {
-        generateNoTask(categorie_id);
+        generateNoTask(categorie_id, category);
     }
 }
 
-function generateNoTask(categorie_id) {
-    categorie_id.innerHTML += `<div class="no_task">No tasks</div>`
+function generateNoTask(categorie_id,category) {
+    categorie_id.innerHTML += `<div class="no_task">No tasks ${category}</div>`
 }
 
 
