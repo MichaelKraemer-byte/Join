@@ -34,6 +34,7 @@ b {
     font-weight: 400;
     color: #2A3647;
     cursor: pointer;
+    margin-top: 5%;
 }
 
 .add_task_width50 {
@@ -42,7 +43,7 @@ b {
 
 .add_task_line {
     width: 1px;
-    margin: 50px 50px 0;
+    margin: 0px 50px 0;
     padding-top: 20px;
     background-color: #D1D1D1;
 }
@@ -198,7 +199,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 90px 0 0px ;
+    padding: 48px 0 0px ;
 }
 
 
@@ -283,7 +284,6 @@ b {
 }
 
 .add_task_title {
-    margin-top: 48px;
     height: 96px;
     gap: 8px;
 }
@@ -309,7 +309,6 @@ b {
 
 .add_task_date {
     font-family: 'inter';
-    margin-top: 48px;
     height: 96px;
     gap: 8px;
 }
@@ -420,10 +419,9 @@ b {
 }
 
 .add_task_show_check {
-    position: absolute;
-    top: 100px;
+    padding: 8px 0px 8px 0px;
     display: flex;
-    gap: 20px;
+    box-sizing: border-box;
 }
 
 #assignet_to {
@@ -486,7 +484,6 @@ b {
 
 .checkbox-wrapper-27 .checkbox__icon:before {
   font-family: "icons-27";
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

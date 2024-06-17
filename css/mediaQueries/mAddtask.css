@@ -24,6 +24,7 @@
 }
 
 @media screen and (min-width: 850px) and (max-width: 1050px) {
+
     .taskCategorySelection{
         width: 60vw;
     }
@@ -53,6 +54,7 @@
 
     .add_task_form {
         width: 60vw;
+        margin-top: 3%;
         display: flex;
         flex-direction: column;
 
@@ -84,7 +86,7 @@
     }
 
     .add_task_footer {
-        padding: 50px 20px 90px;
+        padding: 48px 20px 24px;
         justify-content: space-between;
     }
 
@@ -117,9 +119,17 @@
         top: 25px;
         right: 19px;
     }
+
+    .add_task_form {
+        margin-top: 2%;
+    }
 }
 
 @media (max-width: 666px) {
+    .add_task_content {
+        position: fixed;
+    }
+
     .taskCategorySelection{
         width: 89vw;
     }
@@ -150,7 +160,6 @@
     .add_task_form {
         display: flex;
         flex-direction: column;
-
     }
 
     .add_task_line {
@@ -192,7 +201,7 @@
     }
 
     .add_task_form {
-        max-height: 53vh;
+        max-height: 48vh;
         overflow: auto;
         scrollbar-width: none;
     }
@@ -205,6 +214,11 @@
 }
 
 @media (max-width: 450px) {
+
+    .add_task_form{
+        max-height: 54vh;
+    }
+
     .add_task_content{
         top: 135px;
     }
