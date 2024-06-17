@@ -25,6 +25,7 @@ async function loadGuestFromServer() {
 async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
+    // generateAddTasks()
     generateCheckBox();
     document.querySelectorAll('input[name="optionen"]').forEach((checkbox) => {
         checkbox.addEventListener('change', () => {
@@ -34,30 +35,21 @@ async function initAddTask() {
 }
 
 
-function generateAddTasks(column) {
+function generateAddTasks() {
     let boardPopUp = document.getElementById('boardPopUp');
-    boardPopUp.innerHTML = renderHtmlAddtask(column);
+    boardPopUp.innerHTML = renderHtmlAddtask();
 }
 
 
 async function addTaskToTasks() {
-    let category;
-    if (to_do) {
-        category = 'to_do'
-    } 
-    if (in_progress) {
-        category = 'in_progress'
-    }
-    if (awaitt) {
-        category = 'awaitt'
-    }
-   
+       
     generateCheckBoxName();
     let task_description = document.getElementById('task_description').value;
     let task_title = document.getElementById('task_title').value;
     let task_date = document.getElementById('task_date').value;
     let task_status = document.getElementById('task_category').value;
     let id = generateUniqueId();
+    let category ='to_do'
     let priorityImg;
     let selectedTask = [];
     let userSubtask = subtasks;

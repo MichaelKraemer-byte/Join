@@ -160,10 +160,10 @@ function highlight(id) {
 }
 
 
-function addTask(column) {
+function addTask() {
     displayGreyBackground();
     slideInTask();
-    initAddTask(column);
+    initAddTask();
 }
 
 
