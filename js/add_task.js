@@ -77,15 +77,15 @@ async function addTaskToTasks() {
         'selectedTask': selectedTask,
     };
 
-    todos.push(task)
-    await saveTasksToServer();
-    saveTaskToLocalStorage();
-    if(window.location.href.includes('board.html')){
-        closeWindow();        
-        initBoardTasks();        
-    }
-    initAddTask();
-    slideInConfirmation();
+    // todos.push(task)
+    // await saveTasksToServer();
+    // saveTaskToLocalStorage();
+    // if(window.location.href.includes('board.html')){
+    //     closeWindow();        
+    //     initBoardTasks();        
+    // }
+    // initAddTask();
+    // slideInConfirmation();
 }
 
 
@@ -310,4 +310,69 @@ function deleteSubtask() {
     check.style.display = 'none';
     deleteSubtask.style.display = 'none';
     add_task_button_plus.style.visibility = 'initial';
+}
+
+
+function getSubtask() {
+    let get_subtask = document.getElementById('get_subtask');
+    get_subtask.innerHTML = '';
+    console.log(subtasks);
+    if(subtasks) {
+        for (let i = 0; i < subtasks.length; i++) {
+            const element = subtasks[i];
+            get_subtask.innerHTML = `
+                ${element}
+            `;
+        }
+    }
+}
+
+function addNewSubTask() {
+    let task_subtask = document.getElementById('task_subtasks');
+    let add_task_button_plus = document.getElementById('add_task_button_plus');
+    let deleteSubtask = document.getElementById('delete_subtask');
+    let check = document.getElementById('check');
+
+    if(task_subtask.value) {
+        subtasks.push(task_subtask.value);    
+
+    }
+    getSubTaskAddTask();
+    check.style.display = 'none';
+    deleteSubtask.style.display = 'none';
+    add_task_button_plus.style.visibility = 'initial';
+    task_subtask.value = "";
+}
+
+
+function getSubTaskAddTask() {
+    let get_subtask = document.getElementById('get_subtask');
+    get_subtask.innerHTML = '';
+    if (subtasks) {
+        for (let i = 0; i < subtasks.length; i++) {
+            const element = subtasks[i];
+            get_subtask.innerHTML += renderGetSubTaskAddTask(i, element);
+        }
+    }
+}
+
+
+function showEditNewSubTask(i) {
+    let show_task_subtask_edit_btn = document.getElementById(`show_task_subtask_edit_btn${i}`);
+    show_task_subtask_edit_btn.style.display = 'flex';
+    let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
+    show_task_subtask_edit_input.value = subtasks[i];
+}
+
+
+function addEditNewSubTask(i) {
+    let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
+    subtasks[i] = show_task_subtask_edit_input.value;
+    getSubTaskAddTask();
+}
+
+
+function deleteNewSubTask(i) {
+    subtasks.splice(i, 1);    
+    getSubTaskAddTask();
 }

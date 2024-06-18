@@ -356,21 +356,7 @@ function showCheckboxesEdit() {
 }
 
 
-function addNewSubTask() {
-    let task_subtask = document.getElementById('task_subtasks');
-    let add_task_button_plus = document.getElementById('add_task_button_plus');
-    let deleteSubtask = document.getElementById('delete_subtask');
-    let check = document.getElementById('check');
 
-    if (subtasks) {
-        subtasks.push(task_subtask.value);
-    }
-
-    check.style.display = 'none';
-    deleteSubtask.style.display = 'none';
-    add_task_button_plus.style.visibility = 'initial';
-    task_subtask.value = "";
-}
 
 
 function searchTaskFromBoard() {

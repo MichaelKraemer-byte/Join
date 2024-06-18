@@ -118,6 +118,7 @@ function renderHtmlAddtask(column) {
                             </div>
                             <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
                         </div>
+                        <div class="get_subtask" id="get_subtask"></div>
                     </div>
                 </div>
                 <div class="add_task_footer">
@@ -135,4 +136,27 @@ function renderHtmlAddtask(column) {
             </form>
         </div>
         `;
+}
+
+
+
+function renderGetSubTaskAddTask(i, element) {
+    return `
+        <div class="add_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
+            <input style="background: #F6F7F8; font-size: 13px;" type="text" id="show_task_subtask_edit_input${i}">
+            <div class="show_task_subtask_edit_btn_delete_add">
+            <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="deleteNewSubTask(${i})">
+            <img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditNewSubTask(${i})" >
+        </div>
+        </div>
+        <div class="add_task_edit_subtasks_del_edit">
+            <div class="get_show_task"><li>${element}</li></div>
+            <div class="show_task_edit_subtasks_del_edit_button">
+                <img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showEditNewSubTask(${i})">
+                <div class="cross_line"></div>
+                <img class="img_hover_btn" src="./assets/img/delete.svg"  onclick="deleteNewSubTask(${i})">
+            </div>
+        </div> 
+        
+    `;
 }

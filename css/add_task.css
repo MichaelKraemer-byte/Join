@@ -568,16 +568,71 @@ body {
     width: var(--sb-size);
   }
   
-  .add_task_textarea::-webkit-scrollbar-track {
+.add_task_textarea::-webkit-scrollbar-track {
     background: var(--sb-track-color);
     border-radius: 50px;
-  }
+}
+
+.add_task_subtask_edit_btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    display: none;
+}
+
+.add_task_subtask_edit_btn input {
+    width: 80%;
+    border: 0;
+    font-size: 14px;
+    border-bottom: 1px solid #29ABE2;
+    padding-left: 15px;
+}
+
+.add_task_subtask_edit_btn img {
+    width: 13px;
+}
+
+.add_task_edit_subtasks_del_edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.add_task_edit_subtasks_del_edit img {
+    width: 15px;
+}
+
+.get_subtask {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    border-radius: 10px;
+  } 
+
+.get_subtask::-webkit-scrollbar {
+    width: 5px;
+}
+
+.get_subtask::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.get_subtask::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.get_subtask::-webkit-scrollbar-thumb:hover {
+    background: lightgray;
+}
   
-  .add_task_textarea::-webkit-scrollbar-thumb {
+.add_task_textarea::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 50px;
     border: 8px solid #ffffff;
-  }
+}
 
   /* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
 @supports not selector(::-webkit-scrollbar) {
