@@ -28,7 +28,6 @@ function getcheckBoxesEdit(id) {
         
         checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked);
     });
-    
     checkBoxesEdit.innerHTML = checkBoxesHTML;
     let checkboxes = document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -71,7 +70,6 @@ function updateDisplayedNames() {
             `;
         });
     }
-
 }
 
 

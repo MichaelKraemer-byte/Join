@@ -245,13 +245,15 @@ function getContactInitialEdit(contact) {
     task_description_edit.value = contact.description;
     task_date_edit.value = contact.date;
 
+    generateSelectedNames(contact);   
+}
+
+
+function generateSelectedNames(contact) {
     let task_edit_initial = document.getElementById('task_edit_initial');
     task_edit_initial.innerHTML = '';
-
-
     if (selectedNames) {
         for (let i = 0; i < selectedNames.length; i++) {
-            const element = selectedNames[i];
             task_edit_initial.innerHTML += `
                 <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
                 `;
@@ -259,7 +261,6 @@ function getContactInitialEdit(contact) {
     } else {
         task_edit_initial.innerHTML = '';
     }
-
 }
 
 
