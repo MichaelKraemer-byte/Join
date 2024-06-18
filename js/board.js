@@ -123,8 +123,8 @@ async function generateToDo(arr, categorie_id, category) {
 }
 
 
-function addTask() {
-    generateAddTasks();
+function addTask(column) {
+    generateAddTasks(column);
     displayGreyBackground();
     slideInTask();
     initAddTask();
@@ -361,9 +361,6 @@ async function upgradeTodos(id) {
 }
 
 
-
-
-
 function showCheckboxesEdit() {
     let checkboxes = document.getElementById("checkBoxesEdit");
     if (showEdit) {
@@ -428,5 +425,3 @@ function getInitialsArray(element) {
         }
     }
 }
-
-

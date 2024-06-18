@@ -1,6 +1,6 @@
-let in_progress = true;
-let awaitt = true;
-let to_do = true;
+let to_do = 'to_do';
+let in_progress = 'in_progress';
+let awaitt = 'awaitt';
 
 
 function renderHtmlGenerateCheckBox(element, i) {
@@ -40,7 +40,6 @@ function rendersearchNameFromGuestList(element, initial) {
 }
 
 function renderHtmlAddtask(column) {
-    checkColumnName(column)
     return /*html*/`
     <div class="show_add_task" id="showTaskContainer">
         <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">

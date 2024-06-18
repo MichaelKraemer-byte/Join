@@ -23,7 +23,7 @@ async function loadGuestFromServer() {
 }
 
 
-async function initAddTask() {
+async function initAddTask(column) {
     await loadGuestFromServer();
     await loadTasksFromServer();
     generateCheckBox();
@@ -35,13 +35,13 @@ async function initAddTask() {
 }
 
 
-function generateAddTasks() {
+function generateAddTasks(column) {
     let boardPopUp = document.getElementById('boardPopUp');
-    boardPopUp.innerHTML = renderHtmlAddtask();
+    boardPopUp.innerHTML = renderHtmlAddtask(column);
 }
 
 
-async function addTaskToTasks() {
+async function addTaskToTasks(column) {
     if (addTaskProcess) {
         return;
     } 
@@ -55,14 +55,13 @@ async function addTaskToTasks() {
     let task_date = document.getElementById('task_date').value;
     let task_status = document.getElementById('task_category').value;
     let id = generateUniqueId();
-    let category ='to_do'
     let priorityImg = getPriorityImage(userPriotity);
     let selectedTask = [];
     let userSubtask = subtasks;   
     let priority = getUserPriorityStatus(userPriotity);
 
     let task = {
-        'category': category,
+        'category': column,
         'date': task_date,
         'description': task_description,
         'id': id,
@@ -132,27 +131,6 @@ function generateUniqueId() {
     } while (usedIds.has(id));
     usedIds.add(id);
     return id;
-}
-
-
-function checkColumnName(column) {
-    if(column) {
-        if (column == 'to_do') {
-            awaitt = false;
-            in_progress = false;
-        }
-
-        if (column == 'in_progress') {
-            awaitt = false;
-            to_do = false;
-        }
-
-        if (column == 'awaitt') {
-            in_progress = false;
-            to_do = false;
-        }
-
-    }
 }
 
 
