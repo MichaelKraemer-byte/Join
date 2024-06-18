@@ -2,10 +2,6 @@
     .add_task_line {
         margin: 25px 25px 0;
     }
-
-    .add_task_input {
-        width: 92%;
-    }
 }
 
 @media (max-width: 1122px) {
@@ -130,21 +126,9 @@
         position: fixed;
     }
 
-    .taskCategorySelection{
-        width: 89vw;
-    }
-
     .add_task_content {
         width: 93vw;
         padding-bottom: 0;
-    }
-
-    .add_task_textarea {
-        width: 96%;
-    }
-
-    .add_task_category {
-        width: 104%;
     }
 
     .add_task_button_create {
@@ -167,11 +151,10 @@
     }
 
     .add_task_width50 {
-        width: 96%;
+        width: 100%;
     }
 
     .add_task_input {
-        width: 89vw;
         box-sizing: border-box;
     }
 

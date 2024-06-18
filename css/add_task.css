@@ -57,23 +57,24 @@ b {
     padding-left: 16px;
     padding-right: 16px;
     cursor: pointer;
-    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
-    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75); */
 }
 
 .add_task_input {
     font-size: clamp(17px, 1.3vw, 30px);
     height: 48px;
-    width: 95%;
+    width: 100%;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding-left: 16px;
     padding-right: 16px;
     cursor: pointer;
-    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
-    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75); */
+    box-sizing: border-box;
 }
 
 .add_task_input:focus {
@@ -90,9 +91,9 @@ b {
     height: 120px;
     resize: none;
     cursor: pointer;
-    -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
-    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 13px -9px rgba(0,0,0,0.75); */
     box-sizing: border-box;
 }
 
