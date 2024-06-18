@@ -365,6 +365,14 @@ h2 {
     gap: 8px;
   }
   
+  /* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
+  @supports not selector(::-webkit-scrollbar) {
+    #listSection {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+  
+  
   @font-face {
     font-family: "icons-27";
     font-weight: normal;

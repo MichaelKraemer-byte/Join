@@ -114,10 +114,16 @@ function rendergetcheckBoxesEdit(guest, initial, isChecked) {
                 <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
                 <label for="${guest.id}">${guest.name}</label>
             </div>
-            <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
+            <div class="checkbox-wrapper-27">
+                <label class="checkbox">
+                    <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
+                    <span class="checkbox__icon"></span>
+                </label>
+            </div>
         </div>
     `;
 }
+
 
 
 function renderEditTaskHtml(contact) {
@@ -192,24 +198,11 @@ function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
         <div class="checkbox-wrapper-27 show_task_subtask_content">
             <label class="checkbox" for="${id}_${i}">
                 <input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}>
-                <span class="checkbox__icon">${element}</span>
+                <span class="checkbox__icon"><span class="checkboxSubject">${element}</span></span>
             </label>
         </div>
     `;
 }
-
-
-{/* <div class="show_task_subtask_content">
-<input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}/>
-<label for="${id}_${i}">${element}</label>
-</div> */}
-
-        /* <div class="checkbox-wrapper-27">
-            <label class="checkbox">
-                <input type="checkbox" name="optionen" value="Zirilla van Wengerberg">
-                <span class="checkbox__icon"></span>
-            </label>
-        </div> */
 
 
 function rendergetSubtaskEditHtml(element, contact, i) {
