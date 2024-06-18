@@ -474,7 +474,6 @@ body {
   --sb-size: 24px;
 }
 
-/* Scrollbar-Stile für WebKit-basierte Browser */
 #listSection::-webkit-scrollbar {
   width: var(--sb-size);
 }
