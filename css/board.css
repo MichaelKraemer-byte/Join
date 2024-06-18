@@ -127,7 +127,8 @@
     cursor: pointer;
 }
 
-.column_section button:hover {
+.column_section button:hover,
+.board_content_mobile_taskTitle button:hover {
     border: 2.4px solid #29ABE2;
     color: #29ABE2;
 }
@@ -322,25 +323,6 @@ h2 {
         width: 70%;
         top: 206px;
     }
-
-/* 
-@media (max-width: 1022px) {
-    .board_header {
-        width: 100%;
-    }
-
-    .task_navigation input {
-        width: 180px;
-    }
-
-    .board_container {
-        left: 240px;
-    }
-
-    .board_header h1 {
-        font-size: 47px;
-    }
-} */
 
     body {
         height: auto;

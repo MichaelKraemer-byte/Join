@@ -88,7 +88,7 @@
 }
 
 .greyVerticalLine {
-    border: 2px solid #D1D1D1;
+    border: 1px solid #D1D1D1;
     width: 0px;
     height: 88px;
     border-radius: 30px;
@@ -102,7 +102,7 @@
     padding: 28px 38px 28px 38px;
     align-items: center;
     justify-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .urgentCountContainer{

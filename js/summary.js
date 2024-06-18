@@ -131,19 +131,14 @@ function setUpComingDeadline(urgent) {
     let deadlinePhrase = document.getElementById('deadlinePhrase');
     let pastDatesSpan = document.getElementById('pastDatesSpan');
     let pastDatesNumber = document.getElementById('pastDatesNumber');
-    let urgentDate = document.getElementById('urgent');
     let deadLine = getNextUrgentDate(urgent);
     let now = new Date();
     
-    // Filtern der vergangenen Termine
     let pastDates = urgent.filter(item => new Date(item.date) < now);
-    // Filtern der zukünftigen Termine
     let futureDates = urgent.filter(item => new Date(item.date) >= now);
 
-    // Setzen des nächsten dringenden Termins
-    upcomingDeadline.innerHTML = deadLine ? deadLine : '';
+    upcomingDeadline.innerHTML = deadLine ? formatDate(deadLine) : '';
 
-    // Logik zur Anzeige der Phrase
     if (deadLine === '') {
         if (pastDates.length > 0) {
             pastDatesSpan.style.display = 'block';
@@ -155,6 +150,28 @@ function setUpComingDeadline(urgent) {
     } else {
         deadlinePhrase.innerHTML = 'Upcoming deadline.';
     }
+}
+
+
+/**
+ * Formats a date string in the format "YYYY-MM-DD" to a human-readable format.
+ *
+ * @param {string} dateString - The input date string in the format "YYYY-MM-DD".
+ * @returns {string} The formatted date in the format "Month Day, Year".
+ */
+function formatDate(dateString) {
+    let months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    let dateParts = dateString.split('-');
+    let year = dateParts[0];
+    let monthIndex = parseInt(dateParts[1]) - 1;
+    let day = parseInt(dateParts[2]);
+
+    let formattedDate = `${months[monthIndex]} ${day}, ${year}`;
+    return formattedDate;
 }
 
 

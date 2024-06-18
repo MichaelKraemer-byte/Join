@@ -1,3 +1,7 @@
+.addTaskHTMLBody{
+    overflow: hidden;
+}
+
 h1 {
     font-size: clamp(20px, 7vw, 61px);
     line-height: 73.2px;
@@ -33,6 +37,7 @@ b {
     font-size: 20px;
     line-height: 24px;
     font-weight: 400;
+    max-height: 480px;
     color: #2A3647;
     cursor: pointer;
     margin-top: 5%;
@@ -201,7 +206,6 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 48px 0 0px ;
 }
 
 
@@ -645,3 +649,9 @@ body {
       scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
   }
+
+@media (max-width: 1050) {
+    .add_task_footer{
+        padding: 48px 0 0px ;
+    }
+}
