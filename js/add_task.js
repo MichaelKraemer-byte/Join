@@ -6,6 +6,10 @@ let imgPriority;
 let addTaskProcess = false;
 
 
+/**
+ * The function `loadGuestFromServer` asynchronously fetches guest contacts data from a server and maps
+ * the response to an array.
+ */
 async function loadGuestFromServer() {
     try {
         const response = await fetch(`${BASE_URL_GUEST}/guestContacts.json`);
@@ -24,6 +28,10 @@ async function loadGuestFromServer() {
 }
 
 
+/**
+ * The `initAddTask` function asynchronously loads guest and tasks from the server, generates
+ * checkboxes, and adds an event listener to checkboxes to get their values.
+ */
 async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
@@ -36,12 +44,32 @@ async function initAddTask() {
 }
 
 
+/**
+ * The function `generateAddTasks` sets the inner HTML of an element with the id 'boardPopUp' to the
+ * result of rendering HTML for adding tasks to a specified column.
+ * @param column - The `column` parameter in the `generateAddTasks` function likely refers to a
+ * specific column in a task management board or similar interface. This column could represent a
+ * category, status, or any other grouping of tasks within the board. The function seems to be
+ * responsible for generating and rendering HTML content for
+ */
 function generateAddTasks(column) {
     let boardPopUp = document.getElementById('boardPopUp');
     boardPopUp.innerHTML = renderHtmlAddtask(column);
 }
 
 
+/**
+ * The function `addTaskToTasks` adds a new task to a list of tasks, saves it to the server and local
+ * storage, and updates the user interface.
+ * @param column - The `column` parameter in the `addTaskToTasks` function represents the category or
+ * column where the task will be added. It is used to specify the category of the task being created.
+ * @returns The `addTaskToTasks` function is an asynchronous function that adds a task to a list of
+ * tasks. It performs the following steps:
+ * 1. Checks if the `addTaskProcess` flag is set, and if so, it returns early.
+ * 2. Disables the 'createTaskButton' element on the page.
+ * 3. Generates a unique name for a checkbox.
+ * 4. Creates a task
+ */
 async function addTaskToTasks(column) {
     if (addTaskProcess) return;
     addTaskProcess = true;
@@ -78,6 +106,17 @@ async function addTaskToTasks(column) {
 
 
 
+/**
+ * The function `getPriorityImage` returns an image URL based on the user's priority level.
+ * @param userPriotity - userPriority is a parameter that represents the priority level of a task or
+ * item. It can have three possible values: 'Urgent', 'Medium', or 'Low'. The function getPriorityImage
+ * takes this userPriority as input and returns the corresponding image URL based on the priority
+ * level.
+ * @returns The function `getPriorityImage` returns the path to an image based on the user's priority
+ * level. If the user's priority is 'Urgent', it returns './assets/img/vector_red.svg'. If the priority
+ * is 'Medium', it returns './assets/img/vector_strich.svg'. If the priority is 'Low', it returns
+ * './assets/img/vector_green.svg'. If the priority is not any
+ */
 function getPriorityImage(userPriotity) {
     switch (userPriotity) {
         case 'Urgent':
@@ -92,6 +131,15 @@ function getPriorityImage(userPriotity) {
 }
 
 
+/**
+ * The function `getUserPriorityStatus` returns the user priority status, defaulting to 'Medium' if not
+ * provided.
+ * @param userPriotity - The function `getUserPriorityStatus` takes a parameter `userPriority` and
+ * checks if it has a value. If `userPriority` has a value, it returns that value. Otherwise, it
+ * returns 'Medium'.
+ * @returns If the `userPriority` parameter is provided (truthy), the function will return the value of
+ * `userPriority`. If `userPriority` is not provided (falsy), the function will return 'Medium'.
+ */
 function getUserPriorityStatus(userPriotity) {
     if(userPriotity) {
         return userPriotity;
@@ -101,6 +149,10 @@ function getUserPriorityStatus(userPriotity) {
 }
 
 
+/**
+ * The `slideInConfirmation` function animates a confirmation message sliding in and then fading out
+ * after a set duration.
+ */
 function slideInConfirmation() {
     let confirmation = document.getElementById('addedTaskConfirmation');
     confirmation.style.animation = 'slideInAddedTaskConfirmation 1.25s cubic-bezier(0, 1.19, 0, 0.96)';
@@ -114,6 +166,11 @@ function slideInConfirmation() {
 }
 
 
+/**
+ * The function `generateUniqueId` generates a unique random ID within a range and ensures it is not
+ * already in use.
+ * @returns The function `generateUniqueId` returns a randomly generated unique ID as a string.
+ */
 function generateUniqueId() {
     let id;
     do {
@@ -124,6 +181,12 @@ function generateUniqueId() {
 }
 
 
+/**
+ * The function `getTaskPriority` toggles the active state of a button and sets the user priority based
+ * on the button's text content.
+ * @param id - The `id` parameter in the `getTaskPriority` function is used to identify the specific
+ * task priority button that was clicked or interacted with.
+ */
 function getTaskPriority(id) {
     const button = document.getElementById(id);
     if (button.classList.contains('active')) {
