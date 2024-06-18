@@ -165,7 +165,7 @@ function renderEditTaskHtml(contact) {
                     </button>
                 </div>
                 <div class="task_assignet_edit add_task_form_row">
-                    <span id="assignet_to">Assignet to</span>
+                    <span id="assignet_to">Assigned to</span>
                     <div class="selectBox" onclick="showCheckboxesEdit()">
                         <img src="./assets/img/arrow_drop_down.svg" alt="">
                         <input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 

@@ -26,22 +26,19 @@ function getInitials(name) {
   }
 
 
-function getcheckBoxesEdit(id) {
+  function getcheckBoxesEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
-    let contactNames = contact.name;
-    let checkBoxesHTML = '';
-    selectedNames = contactNames ? [...contactNames] : [];
-    guesteArray.forEach(guest => {
-        let isChecked = contactNames ? contactNames.includes(guest.name) : false;
+    selectedNames = contact.name ? [...contact.name] : [];
+
+    checkBoxesEdit.innerHTML = guesteArray.map(guest => {
+        let isChecked = contact.name ? contact.name.includes(guest.name) : false;
         let initial = getInitials(guest.name);
-        
-        checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked);
-    });
-    checkBoxesEdit.innerHTML = checkBoxesHTML;
-    let checkboxes = document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
+        return rendergetcheckBoxesEdit(guest, initial, isChecked);
+    }).join('');
+
+    document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', updateSelectedNames);
     });
 
@@ -220,3 +217,48 @@ function generateCheckBoxSubTask(contact, id ) {
         show_task_subtask.innerHTML = 'No subtasks here.';
     }
 }
+
+
+function showCheckboxesEdit() {
+    let checkboxes = document.getElementById("checkBoxesEdit");
+    if (showEdit) {
+        checkboxes.style.display = "block";
+        showEdit = false;
+    } else {
+        checkboxes.style.display = "none";
+        showEdit = true;
+    }
+}
+
+
+function createInitialBlock(initial, color) {
+    return `
+        <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
+    `;
+}
+
+
+function createRemainingPersonsBlock(remainingPersonsCount) {
+    return `
+        <div class="board_task_user_initial" style="background-color: #a3a3a3;">+${remainingPersonsCount}</div>
+    `;
+}
+
+
+function showTask(id) {
+    let boardPopUp = document.getElementById('boardPopUp');
+    boardPopUp.style.display = 'flex';
+    slideInTask();
+    displayGreyBackground();
+    generateShowTask(id);
+}
+
+
+function closeShowTask() {
+    let input_find_task = document.getElementById('input_find_task');
+    input_find_task.value = '';
+    slideOutTask();
+    removeGreyBackground();
+    initBoardTasks();
+}
+

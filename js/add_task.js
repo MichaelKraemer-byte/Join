@@ -5,6 +5,7 @@ let userPriotity;
 let imgPriority;
 let addTaskProcess = false;
 
+
 async function loadGuestFromServer() {
     try {
         const response = await fetch(`${BASE_URL_GUEST}/guestContacts.json`);
@@ -23,7 +24,7 @@ async function loadGuestFromServer() {
 }
 
 
-async function initAddTask(column) {
+async function initAddTask() {
     await loadGuestFromServer();
     await loadTasksFromServer();
     generateCheckBox();
@@ -42,50 +43,39 @@ function generateAddTasks(column) {
 
 
 async function addTaskToTasks(column) {
-    if (addTaskProcess) {
-        return;
-    } 
+    if (addTaskProcess) return;
     addTaskProcess = true;
-    createTaskButton = document.getElementById('createTaskButton');
-    createTaskButton.disabled = true;
-       
+
+    document.getElementById('createTaskButton').disabled = true;
     generateCheckBoxName();
-    let task_description = document.getElementById('task_description').value;
-    let task_title = document.getElementById('task_title').value;
-    let task_date = document.getElementById('task_date').value;
-    let task_status = document.getElementById('task_category').value;
-    let id = generateUniqueId();
-    let priorityImg = getPriorityImage(userPriotity);
-    let selectedTask = [];
-    let userSubtask = subtasks;   
-    let priority = getUserPriorityStatus(userPriotity);
 
     let task = {
         'category': column,
-        'date': task_date,
-        'description': task_description,
-        'id': id,
+        'date': document.getElementById('task_date').value,
+        'description': document.getElementById('task_description').value,
+        'id': generateUniqueId(),
         'name': namelist,
         'initial': initials,
         'color': colorList,
-        'priorityImg': priorityImg,
-        'priority': priority,
-        'status': task_status,
-        'title': task_title,
-        'subtasks': userSubtask,
-        'selectedTask': selectedTask,
+        'priorityImg': getPriorityImage(userPriotity),
+        'priority': getUserPriorityStatus(userPriotity),
+        'status': document.getElementById('task_category').value,
+        'title': document.getElementById('task_title').value,
+        'subtasks': subtasks,
+        'selectedTask': [],
     };
 
-    todos.push(task)
+    todos.push(task);
     await saveTasksToServer();
     saveTaskToLocalStorage();
-    if(window.location.href.includes('board.html')){
-        closeWindow();        
-        initBoardTasks();        
-    }
+    if (window.location.href.includes('board.html')) {
+        closeWindow();
+        initBoardTasks();
+    }    
     initAddTask();
     slideInConfirmation();
 }
+
 
 
 function getPriorityImage(userPriotity) {
@@ -165,25 +155,15 @@ function toggleCheckboxes(event) {
 
 
 function generateCheckBoxName() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
-    const selectedGuests = [];
-    selectedCheckboxes.forEach(checkbox => {
-        const guestName = checkbox.value;
-        const guest = guesteArray.find(g => g.name === guestName);
-        if (guest) {
-            selectedGuests.push({
-                name: guest.name,
-                color: guest.color
-            });
-        }
+    const selectedGuests = Array.from(document.querySelectorAll('input[name="optionen"]:checked'))
+        .map(checkbox => guesteArray.find(g => g.name === checkbox.value))
+        .filter(Boolean);
+
+    selectedGuests.forEach(guest => {
+        namelist.push(guest.name);
+        colorList.push(guest.color);
+        initials.push(getInitials(guest.name));
     });
-    for (let index = 0; index < selectedGuests.length; index++) {
-        const element = selectedGuests[index];
-        let name = element.name
-        namelist.push(name);
-        colorList.push(element.color);
-        initials.push(getInitials(name));
-    }
 }
 
 
@@ -279,6 +259,7 @@ function showAddAndDeleteSubTask() {
     deleteSubtask.style.display = 'inline';
 }
 
+
 function deleteSubtask() {
     let add_task_button_plus = document.getElementById('add_task_button_plus');
     let deleteSubtask = document.getElementById('delete_subtask');
@@ -304,6 +285,7 @@ function getSubtask() {
         }
     }
 }
+
 
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');

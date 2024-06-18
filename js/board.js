@@ -131,24 +131,6 @@ function addTask(column) {
 }
 
 
-function showTask(id) {
-    let boardPopUp = document.getElementById('boardPopUp');
-    boardPopUp.style.display = 'flex';
-    slideInTask();
-    displayGreyBackground();
-    generateShowTask(id);
-}
-
-
-function closeShowTask() {
-    let input_find_task = document.getElementById('input_find_task');
-    input_find_task.value = '';
-    slideOutTask();
-    removeGreyBackground();
-    initBoardTasks();
-}
-
-
 async function generateShowTask(id) {
     let boardPopUp = document.getElementById('boardPopUp');
     let contact = todos.find(obj => obj['id'] == id);
@@ -165,7 +147,6 @@ async function updateSubtaskStatus(contact, subtask, isChecked) {
         if (!contact.selectedTask) {
             contact.selectedTask = [];
         }
-
         if (isChecked) {
             if (!contact.selectedTask.includes(subtask)) {
                 contact.selectedTask.push(subtask);
@@ -203,10 +184,7 @@ function editTask(id) {
     let showTaskContainer = document.getElementById('showTaskContainer');
 
     showTaskContainer.style.display = 'none';
-    boardPopUp.innerHTML += renderEditTaskHtml(contact);
-
-    let editContainer = document.getElementById('editContainer');
-    editContainer.style.display = ('flex');
+    boardPopUp.innerHTML += renderEditTaskHtml(contact);/** */
 
     getcheckBoxesEdit(id);
     getContactPriorityEdit(contact);
@@ -242,8 +220,8 @@ function getContactInitialEdit(contact) {
     task_title_edit.value = contact.title;
     task_description_edit.value = contact.description;
     task_date_edit.value = contact.date;
-    
-    generateSelectedNames(contact);   
+
+    generateSelectedNames(contact);
 }
 
 
@@ -328,48 +306,54 @@ async function addNewSubTaskEdit(id) {
 
 async function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
+    updateContactDetails(contact);
+    updateGuestInfo(contact);
+    updatePriority(contact);
+    await saveTaskUpdates();
+    reloadUI();
+}
+
+
+function updateContactDetails(contact) {
     contact.title = document.getElementById('task_title_edit').value;
     contact.description = document.getElementById('task_description_edit').value;
     contact.date = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
     contact.name = selectedNames;
-    let guestColor = [];
-    let initials = [];
-    
-    for (let i = 0; i < selectedNames.length; i++) {
-        const element = selectedNames[i];
-        let guest = guesteArray.find(guest => guest.name === element);
-        guestColor.push(guest.color)
-        initials.push(getInitials(guest.name));
-    }
-    contact.color = guestColor;
-    contact.initial = initials;
-
-    if (userPriotity) {
-        contact.priority = userPriotity;
-        contact.priorityImg = getPriorityUpdateTodos(userPriotity);
-    } else {
-        contact.priority = contact.priority;
-        contact.priorityImg = contact.priorityImg;
-    }
-
-    saveTaskToLocalStorage();
-    await saveTasksToServer();
-    initAddTask();
-    initBoardTasks();
-    closeShowTask();
 }
 
 
-function showCheckboxesEdit() {
-    let checkboxes = document.getElementById("checkBoxesEdit");
-    if (showEdit) {
-        checkboxes.style.display = "block";
-        showEdit = false;
-    } else {
-        checkboxes.style.display = "none";
-        showEdit = true;
+function updateGuestInfo(contact) {
+    let guestColor = [];
+    let initials = [];
+    selectedNames.forEach(element => {
+        let guest = guesteArray.find(guest => guest.name === element);
+        guestColor.push(guest.color);
+        initials.push(getInitials(guest.name));
+    });
+    contact.color = guestColor;
+    contact.initial = initials;
+}
+
+
+function updatePriority(contact) {
+    if (userPriotity) {
+        contact.priority = userPriotity;
+        contact.priorityImg = getPriorityUpdateTodos(userPriotity);
     }
+}
+
+
+async function saveTaskUpdates() {
+    saveTaskToLocalStorage();
+    await saveTasksToServer();
+}
+
+
+function reloadUI() {
+    initAddTask();
+    initBoardTasks();
+    closeShowTask();
 }
 
 
@@ -381,23 +365,16 @@ function searchTaskFromBoard() {
         const element = todos[i];
         if (element.title.toLowerCase().includes(input_find_task)) {
             let category = element.category;
-            let task = document.getElementById('board_to_do');
-            let progress = document.getElementById('board_in_progress');
-            let awaitFeedback = document.getElementById('board_await_feedback');
-            let doneId = document.getElementById('board_done');
-            task.innerHTML = '';
-            progress.innerHTML = '';
-            awaitFeedback.innerHTML = '';
-            doneId.innerHTML = '';
+            const ids = ['board_to_do', 'board_in_progress', 'board_await_feedback', 'board_done'];
+            const elements = ids.map(id => document.getElementById(id));
+            elements.forEach(element => element.innerHTML = '');
             searchSwithId(category);
-
             let searchResult = document.getElementById(searchId);
             searchResult.innerHTML = renderHtmlToDo(element)
             getInitialsArray(element);
             getCategorieBackGroundColor(element);
         }
     }
-
 }
 
 
@@ -405,22 +382,18 @@ function getInitialsArray(element) {
     let initialsArray = element.initial;
     let colorsArray = element.color;
     let showCircleWithInitials = 3;
-
     if (initialsArray) {
-        let showCircleWithRestOfPersons = (initialsArray.length - showCircleWithInitials);
-        let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
-        board_task_initial.innerHTML = '';
-        for (let j = 1; j < initialsArray.length; j++) {
+        let showCircleWithRestOfPersons = initialsArray.length - showCircleWithInitials;
+        let boardTaskInitial = document.getElementById(`board_task_initial${element.id}`);
+        boardTaskInitial.innerHTML = '';
+        for (let j = 0; j < initialsArray.length; j++) {
             let initial = initialsArray[j];
             let color = colorsArray[j];
-            if (j <= showCircleWithInitials) {
-                board_task_initial.innerHTML += /*html*/`
-                <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
-            `;
+            if (j < showCircleWithInitials) {
+                boardTaskInitial.innerHTML += createInitialBlock(initial, color);
             } else {
-                board_task_initial.innerHTML +=
-                    `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify(showCircleWithRestOfPersons)}</div>`
-                break
+                boardTaskInitial.innerHTML += createRemainingPersonsBlock(showCircleWithRestOfPersons);
+                break;
             }
         }
     }
