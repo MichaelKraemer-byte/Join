@@ -138,6 +138,15 @@
     .title {
         font-size: 47px;
     }
+
+    .deadlinePhrase, 
+    .pastDatesSpan {
+        font-size: clamp(14px, 3vw, 16px);
+    }
+
+    #upcomingDeadline {
+        font-size: clamp(16px, 4vw, 24px);
+    }
 }
 
 

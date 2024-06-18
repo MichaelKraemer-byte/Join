@@ -375,6 +375,8 @@ b {
 #checkBoxes {
     visibility: hidden;
     z-index: 99;
+    position: absolute;
+    top: 80px;
 }
 
 .checkbox_name {
@@ -422,6 +424,8 @@ b {
     padding: 8px 0px 8px 0px;
     display: flex;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
 #assignet_to {

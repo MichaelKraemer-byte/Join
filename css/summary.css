@@ -6,6 +6,10 @@
     gap: 48px;
 }
 
+.webGreetingContainer {
+    width: fit-content;
+}
+
 #summaryTitle {
     margin-bottom: -16px;
     margin-top: -16px;
@@ -23,6 +27,7 @@
     display: flex;
     align-items: center;
     gap: 8%;
+    width: min-content;
 }
 
 .greetName{
@@ -47,7 +52,8 @@
     flex-direction: column;
     gap: 16px;
     min-width: 300px;
-    max-width: 480px;
+    max-width: 500px;
+    width: 100%;
 }
 
 .summaryCount{
@@ -59,7 +65,7 @@
 
 .toDoAndDoneSection {
     display: flex;
-    gap: 16px;
+    gap: 4%;
     justify-content: space-between;
     flex: 1;
 }
