@@ -253,15 +253,19 @@ function generateCheckBox() {
             const element = guesteArray[i];
             id.innerHTML += renderHtmlGenerateCheckBox(element, i)
         }
-        document.addEventListener('click', function (event) {
-            let checkboxes = document.getElementById("checkBoxes");
-            let selectBox = document.querySelector('.selectBox');
-            
-            if (selectBox && !selectBox.contains(event.target)) {
-                checkboxes.style.visibility = "hidden";
-                show = true;
-            }
-        });
+
+        // Überprüfe, ob das Element 'checkBoxes' vorhanden ist, bevor du darauf zugreifst
+        let checkboxes = document.getElementById("checkBoxes");
+        if (checkboxes) {
+            document.addEventListener('click', function (event) {
+                let selectBox = document.querySelector('.selectBox');
+                
+                if (selectBox && !selectBox.contains(event.target)) {
+                    checkboxes.style.visibility = "hidden";
+                    show = true;
+                }
+            });
+        }
     }
 }
 
