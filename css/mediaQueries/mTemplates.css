@@ -1,28 +1,22 @@
 @media screen and (min-width: 1100px) and (max-width: 1321px) {
     .content {
-        left: 26vw;
+        left: 324px;
     }
 }
 
-@media screen and (min-width: 850px) and (max-width: 1100px) {
+@media screen and (min-width: 1000px) and (max-width: 1122px) {
     body {
         height: auto;
     }
     
     .content {
-        left: 30vw;
+        left: 290px;
     }
 }
 
-@media screen and (min-width: 890px) and (max-width: 1000px) {
+@media screen and (min-width: 851px) and (max-width: 1000px) {
     .content {
-        left: 34vw;
-    }
-}
-
-@media screen and (min-width: 850px) and (max-width: 890px) {
-    .content {
-        left: 35vw;
+        left: 280px;
     }
 }
 
