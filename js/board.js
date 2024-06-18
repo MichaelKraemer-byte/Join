@@ -405,20 +405,22 @@ function searchTaskFromBoard() {
 function getInitialsArray(element) {
     let initialsArray = element.initial;
     let colorsArray = element.color;
-
+    let showCircleWithInitials = 3;
+    
     if (initialsArray) {
+        let showCircleWithRestOfPersons = (initialsArray.length - showCircleWithInitials);
         let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
         board_task_initial.innerHTML = '';
-        for (let j = 0; j < initialsArray.length; j++) {
+        for (let j = 1; j < initialsArray.length; j++) {
             let initial = initialsArray[j];
             let color = colorsArray[j];
-            if (j <= 5) {
+            if (j <= showCircleWithInitials) {
                 board_task_initial.innerHTML += /*html*/`
                 <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
             `;
             } else {
                 board_task_initial.innerHTML +=
-                `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify((initialsArray.length-6))}</div>`
+                `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify(showCircleWithRestOfPersons)}</div>`
                 break
             }
         }
