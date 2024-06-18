@@ -202,6 +202,13 @@ function getTaskPriority(id) {
 }
 
 
+/**
+ * The function `toggleCheckboxes` toggles the visibility of checkboxes and clears the value of an
+ * input field based on a boolean variable `show`.
+ * @param event - The `event` parameter is an object that represents an event that occurs in the DOM
+ * (Document Object Model), such as a click, keypress, or mouse movement. In this context, it is likely
+ * being used to handle an event triggered by a user action, such as clicking on a checkbox or
+ */
 function toggleCheckboxes(event) {
     event.stopPropagation();
     let idInput = document.getElementById('task_assignet_input');
@@ -217,6 +224,10 @@ function toggleCheckboxes(event) {
 }
 
 
+/**
+ * The function generates a list of selected guests' names, colors, and initials based on checked
+ * checkboxes.
+ */
 function generateCheckBoxName() {
     const selectedGuests = Array.from(document.querySelectorAll('input[name="optionen"]:checked'))
         .map(checkbox => guesteArray.find(g => g.name === checkbox.value))
@@ -230,6 +241,10 @@ function generateCheckBoxName() {
 }
 
 
+/**
+ * The function generates checkboxes based on elements in an array and hides the checkboxes when
+ * clicking outside the select box.
+ */
 function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
     if (id) {
@@ -251,6 +266,10 @@ function generateCheckBox() {
 }
 
 
+/**
+ * The function `searchNameFromGuestList` searches for a name from a guest list based on user input and
+ * renders the results.
+ */
 function searchNameFromGuestList() {
     let idInput = document.getElementById('task_assignet_input').value;
     idInput = idInput.toLowerCase();
@@ -268,6 +287,12 @@ function searchNameFromGuestList() {
 }
 
 
+/**
+ * The function `getValues` retrieves the checked values of checkboxes with a specific name and calls
+ * the `checkGuestsName` function with those values.
+ * @param id - The `id` parameter in the `getValues` function is used to specify the ID of an HTML
+ * element that will be targeted to display the selected values from checkboxes.
+ */
 function getValues(id) {
     let add_task_show_check = document.getElementById(id);
     const checkboxes = document.querySelectorAll('input[name="optionen"]:checked');
@@ -281,6 +306,14 @@ function getValues(id) {
 }
 
 
+/**
+ * The function `checkGuestsName` retrieves selected guest names and their corresponding colors from
+ * checkboxes and displays their initials with respective colors on the webpage.
+ * @param checkedValues - The `checkedValues` parameter in the `checkGuestsName` function is used to
+ * determine if any checkboxes have been checked. If `checkedValues` is truthy, the function will
+ * proceed to retrieve the selected checkboxes, find the corresponding guest information, and display
+ * the initials of the selected guests with
+ */
 function checkGuestsName(checkedValues) {
     if (checkedValues) {
         const selectedCheckboxes = document.querySelectorAll('input[name="optionen"]:checked');
@@ -307,11 +340,18 @@ function checkGuestsName(checkedValues) {
 }
 
 
+/**
+ * The clearForm function resets the input fields in a form with the ID "meinFormular".
+ */
 function clearForm() {
     document.getElementById("meinFormular").reset();
 }
 
 
+/**
+ * The function `showAddAndDeleteSubTask` hides the add task button, displays a check button, and
+ * displays a delete subtask button.
+ */
 function showAddAndDeleteSubTask() {
     let add_task_button_plus = document.getElementById('add_task_button_plus');
     let deleteSubtask = document.getElementById('delete_subtask');
@@ -323,6 +363,10 @@ function showAddAndDeleteSubTask() {
 }
 
 
+/**
+ * The function `deleteSubtask` resets and hides elements related to subtasks in a task management
+ * interface.
+ */
 function deleteSubtask() {
     let add_task_button_plus = document.getElementById('add_task_button_plus');
     let deleteSubtask = document.getElementById('delete_subtask');
@@ -335,6 +379,9 @@ function deleteSubtask() {
 }
 
 
+/**
+ * The function `getSubtask` retrieves subtasks from an array and displays them on a webpage.
+ */
 function getSubtask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
@@ -350,6 +397,9 @@ function getSubtask() {
 }
 
 
+/**
+ * The function `addNewSubTask` adds a new subtask to a list and updates the display accordingly.
+ */
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
     let add_task_button_plus = document.getElementById('add_task_button_plus');
@@ -368,6 +418,9 @@ function addNewSubTask() {
 }
 
 
+/**
+ * The function `getSubTaskAddTask` populates a specified HTML element with subtasks data.
+ */
 function getSubTaskAddTask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
@@ -380,6 +433,12 @@ function getSubTaskAddTask() {
 }
 
 
+/**
+ * The function `showEditNewSubTask` displays an edit button and input field for a specific subtask
+ * based on the index `i`.
+ * @param i - The parameter `i` in the `showEditNewSubTask` function is used as an index to identify a
+ * specific subtask.
+ */
 function showEditNewSubTask(i) {
     let show_task_subtask_edit_btn = document.getElementById(`show_task_subtask_edit_btn${i}`);
     show_task_subtask_edit_btn.style.display = 'flex';
@@ -388,6 +447,12 @@ function showEditNewSubTask(i) {
 }
 
 
+/**
+ * The function `addEditNewSubTask` updates a specific subtask in an array and then calls another
+ * function to update the task.
+ * @param i - The parameter `i` in the `addEditNewSubTask` function is used as an index to access and
+ * update a specific subtask in the `subtasks` array.
+ */
 function addEditNewSubTask(i) {
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
     subtasks[i] = show_task_subtask_edit_input.value;
@@ -395,6 +460,10 @@ function addEditNewSubTask(i) {
 }
 
 
+/* The above code is a JavaScript function named `deleteNewSubTask` that takes an index `i` as a
+parameter. Inside the function, it uses the `splice` method to remove one element at the specified
+index `i` from the `subtasks` array. After removing the element, the function then calls another
+function `getSubTaskAddTask()`. */
 function deleteNewSubTask(i) {
     subtasks.splice(i, 1);    
     getSubTaskAddTask();

@@ -1,3 +1,14 @@
+/**
+ * The function `renderHtmlToDo` generates HTML code for displaying a to-do task element.
+ * @param element - The `element` parameter in the `renderHtmlToDo` function represents an object
+ * containing properties related to a task. These properties include `id`, `status`, `title`,
+ * `description`, and `priorityImg`. The function generates HTML markup for displaying this task on a
+ * web page.
+ * @returns The function `renderHtmlToDo` is returning an HTML template string that represents a task
+ * element. The template includes various elements such as task category, title, description, priority
+ * image, and other task-related information. The template also includes event handlers for
+ * drag-and-drop functionality and task click events.
+ */
 function renderHtmlToDo(element) {
     
     return /*html*/`
@@ -16,6 +27,16 @@ function renderHtmlToDo(element) {
 }
 
 
+/**
+ * The function `renderHtmlProgressBar` generates an HTML progress bar based on the number of selected
+ * subtasks compared to all subtasks within a given element.
+ * @param element - The `element` parameter in the `renderHtmlProgressBar` function represents an
+ * object that contains information about a task. It has the following properties:
+ * @returns The function `renderHtmlProgressBar` returns an HTML string that represents a progress bar
+ * for a task. The progress bar includes the current progress of selected subtasks out of all subtasks,
+ * displayed as a percentage width of the progress bar, along with the count of selected subtasks and
+ * total subtasks.
+ */
 function renderHtmlProgressBar(element) {
     let currentAllSubtask = element.subtasks.length;
     let currentSelectedSubtask = element.selectedTask.length;
@@ -37,6 +58,16 @@ function renderHtmlProgressBar(element) {
 }
 
 
+/**
+ * The function `renderHtmlProgressBarEmpty` generates an empty HTML progress bar for a task element.
+ * @param element - The `element` parameter in the `renderHtmlProgressBarEmpty` function seems to be an
+ * object representing a task with properties like `id` and `subtasks`. The function generates an HTML
+ * progress bar for this task with the number of completed subtasks shown as 0 out of the total number
+ * of
+ * @returns The `renderHtmlProgressBarEmpty` function returns an HTML string that represents an empty
+ * progress bar for a task. The HTML structure includes a progress bar element with a specific ID based
+ * on the `element.id`, a subtask count, and the total number of subtasks for the task.
+ */
 function renderHtmlProgressBarEmpty(element) {
     return `
             <div class="board_task_progress_line">
@@ -53,6 +84,20 @@ function renderHtmlProgressBarEmpty(element) {
         `;
 }
 
+/**
+ * The function `renderGenerateShowTaskHtml` generates HTML content for displaying a task with details
+ * like title, description, date, priority, assigned user, and options to delete or edit the task.
+ * @param contact - The `contact` parameter in the `renderGenerateShowTaskHtml` function seems to
+ * represent an object containing information about a task. It includes properties such as `status`,
+ * `title`, `description`, `date`, `priority`, `priorityImg`, and `id`.
+ * @param id - The `id` parameter in the `renderGenerateShowTaskHtml` function is used to dynamically
+ * generate unique IDs for elements in the rendered HTML based on the task's ID. This helps in
+ * identifying and manipulating specific elements related to a particular task when rendering the task
+ * details on the webpage.
+ * @returns The function `renderGenerateShowTaskHtml` returns an HTML template string that represents
+ * the structure of a task display container. It includes various elements such as task title,
+ * description, due date, priority, assigned user, subtasks, and options to delete or edit the task.
+ */
 function renderGenerateShowTaskHtml(contact, id) {
     return `
     <div class="show_task" id="showTaskContainer">
@@ -107,6 +152,23 @@ function renderGenerateShowTaskHtml(contact, id) {
 `;
 }
 
+/**
+ * The function `rendergetcheckBoxesEdit` generates HTML markup for a checkbox input with guest
+ * information and initial values.
+ * @param guest - The `guest` parameter in the `rendergetcheckBoxesEdit` function represents an object
+ * containing information about a guest. It likely has properties such as `id`, `name`, and `color`
+ * that are used to render a checkbox element for the guest.
+ * @param initial - The `initial` parameter in the `rendergetcheckBoxesEdit` function represents the
+ * initials of a guest. It is used to display the guest's initials in a colored circle next to their
+ * name in the rendered HTML output.
+ * @param isChecked - The `isChecked` parameter in the `rendergetcheckBoxesEdit` function is a boolean
+ * value that determines whether a checkbox should be initially checked or not. If `isChecked` is
+ * `true`, the checkbox will be checked by default when the component is rendered. If `isChecked` is
+ * `false`,
+ * @returns The function `rendergetcheckBoxesEdit` returns an HTML template string that includes a
+ * checkbox element with the specified guest information (name, initial, color) and whether it is
+ * checked based on the `isChecked` parameter.
+ */
 function rendergetcheckBoxesEdit(guest, initial, isChecked) {
     return `        
         <div class="board_task_check_box_name">
@@ -126,6 +188,16 @@ function rendergetcheckBoxesEdit(guest, initial, isChecked) {
 
 
 
+/**
+ * The function `renderEditTaskHtml` returns HTML code for editing a task with various input fields and
+ * buttons.
+ * @param contact - The `renderEditTaskHtml` function generates HTML for editing a task based on the
+ * `contact` object passed as a parameter. The HTML structure includes form elements for editing task
+ * details such as title, description, due date, priority, assignee, subtasks, and a submit button.
+ * @returns The function `renderEditTaskHtml(contact)` returns an HTML template string that represents
+ * a form for editing a task. The form includes input fields for title, description, due date, task
+ * priority buttons (urgent, medium, low), assigned to dropdown, subtasks, and a submit button.
+ */
 function renderEditTaskHtml(contact) {
     return /*html*/` 
     <div class="show_task" id="editContainer">
@@ -192,6 +264,24 @@ function renderEditTaskHtml(contact) {
 }
 
 
+/**
+ * The function `rendergenerateCheckBoxSubTaskHtml` generates HTML for a checkbox element with a label
+ * and optional checked state based on the provided parameters.
+ * @param contact - The `contact` parameter seems to be an object containing information related to a
+ * contact or a task. It likely includes details such as the selected task and other relevant data.
+ * @param element - The `element` parameter in the `rendergenerateCheckBoxSubTaskHtml` function
+ * represents the individual subtask element that needs to be rendered as a checkbox in the HTML
+ * output.
+ * @param id - The `id` parameter in the `rendergenerateCheckBoxSubTaskHtml` function is used to
+ * generate unique IDs for the checkboxes created in the HTML output. These IDs are constructed by
+ * combining the `id` parameter with the index `i` to ensure each checkbox has a distinct identifier.
+ * @param i - The parameter `i` in the `rendergenerateCheckBoxSubTaskHtml` function is used as an index
+ * or counter variable within the function. It is typically used to keep track of the position of the
+ * current element being processed in a loop or iteration.
+ * @returns The function `rendergenerateCheckBoxSubTaskHtml` returns an HTML string representing a
+ * checkbox element with a label and a span containing the `element` value. The checkbox is checked if
+ * `contact.selectedTask` includes the `element`, otherwise it is unchecked.
+ */
 function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
     const isChecked = contact.selectedTask ? contact.selectedTask.includes(element) : false;
     return `
@@ -205,6 +295,21 @@ function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
 }
 
 
+/**
+ * The function `rendergetSubtaskEditHtml` generates HTML elements for displaying and editing subtasks
+ * within a task.
+ * @param element - The `element` parameter in the `rendergetSubtaskEditHtml` function represents the
+ * subtask element that will be displayed in the HTML. It is used to dynamically generate the HTML
+ * structure for displaying and editing subtasks within a task.
+ * @param contact - The `contact` parameter seems to represent an object with an `id` property. In the
+ * provided function `rendergetSubtaskEditHtml`, this `id` property of the `contact` object is used in
+ * various places as part of the HTML element attributes or in function calls.
+ * @param i - The parameter `i` in the `rendergetSubtaskEditHtml` function represents the index or
+ * position of the subtask element being rendered. It is used to dynamically generate unique IDs for
+ * elements within the HTML template based on the index value.
+ * @returns The `rendergetSubtaskEditHtml` function returns an HTML template string that includes input
+ * fields, buttons, and images for editing and deleting subtasks within a task.
+ */
 function rendergetSubtaskEditHtml(element, contact, i) {
     return `
         <div class="show_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
