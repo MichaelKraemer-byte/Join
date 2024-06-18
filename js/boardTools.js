@@ -1,3 +1,5 @@
+
+
 function checkBoxClickNone() {
     document.addEventListener('click', function (event) {
         let checkboxes = document.getElementById("checkBoxesEdit");
@@ -13,18 +15,63 @@ function checkBoxClickNone() {
 }
 
 
-function getcheckBoxesEdit(contact) {
+function getcheckBoxesEdit(id) {
+    let contact = todos.find(obj => obj['id'] == id);
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
     let contactNames = contact.name;
     let checkBoxesHTML = '';
+    selectedNames = contactNames ? [...contactNames] : [];
     guesteArray.forEach(guest => {
         let isChecked = contactNames ? contactNames.includes(guest.name) : false;
         let initial = getInitials(guest.name);
-        checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked)
+        
+        checkBoxesHTML += rendergetcheckBoxesEdit(guest, initial, isChecked);
     });
-    checkBoxesEdit.innerHTML = checkBoxesHTML;   
-    checkBoxClickNone(); 
+    
+    checkBoxesEdit.innerHTML = checkBoxesHTML;
+    let checkboxes = document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedNames);
+    });
+
+    checkBoxClickNone();
+    updateDisplayedNames();
+}
+
+
+
+function updateSelectedNames(event) {
+    let checkbox = event.target;
+    let name = checkbox.value;
+    if (checkbox.checked) {
+        if (!selectedNames.includes(name)) {
+            selectedNames.push(name);
+        }
+    } else {
+        let index = selectedNames.indexOf(name);
+        if (index > -1) {
+            selectedNames.splice(index, 1);
+        }
+    }
+
+    updateDisplayedNames();
+}
+
+function updateDisplayedNames() {
+    let task_edit_initial = document.getElementById('task_edit_initial');
+    task_edit_initial.innerHTML = '';      
+    if (selectedNames.length > 0) {
+        selectedNames.forEach((element, i) => { 
+            let name = element;
+            let guest = guesteArray.find(guest => guest.name === name);
+                     
+            task_edit_initial.innerHTML += `
+                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${guest.color};">${getInitials(element)}</div>
+            `;
+        });
+    }
+
 }
 
 
