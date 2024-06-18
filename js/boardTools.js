@@ -14,10 +14,16 @@ function checkBoxClickNone() {
 
 
 function getInitials(name) {
-    const words = name.trim().split(' ');
-    const initials = words.map(word => word.charAt(0).toUpperCase());
-    return initials.join('');
-}
+    let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+  
+    let initials = [...name.matchAll(rgx)] || [];
+  
+    initials = (
+      (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+    ).toUpperCase();
+  
+    return initials;
+  }
 
 
 function getcheckBoxesEdit(id) {
