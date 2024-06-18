@@ -206,6 +206,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 100px;
 }
 
 
@@ -607,12 +608,19 @@ body {
 }
 
 .add_task_edit_subtasks_del_edit {
+    margin: 2px;
+    padding-left: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 15px;    
 }
+
+.add_task_edit_subtasks_del_edit:hover {
+    background-color: #D1D1D1;
+}
+
 .add_task_edit_subtasks_del_edit img {
     width: 15px;
 }
