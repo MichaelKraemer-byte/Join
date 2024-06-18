@@ -347,7 +347,7 @@ h2 {
 
     .board_container {
         width: 98%;
-        top: 135px;
+        top: 206px;
         left: 0px;
         position: relative;
         display: flex;
@@ -468,8 +468,8 @@ h2 {
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 450px) {
     .board_container{
-        top: 206px;
+        top: 135px;
     }
 }
