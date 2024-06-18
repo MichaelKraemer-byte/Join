@@ -198,7 +198,6 @@ function getshowTaskUserName(contact) {
 
 function editTask(id) {
     let contact = todos.find(obj => obj['id'] == id);
-
     let boardPopUp = document.getElementById('boardPopUp');
     let showTaskContainer = document.getElementById('showTaskContainer');
 
@@ -326,7 +325,7 @@ async function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
     contact.title = document.getElementById('task_title_edit').value;
     contact.description = document.getElementById('task_description_edit').value;
-    contact.dueDate = document.getElementById('task_date_edit').value;
+    contact.date = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
 
     if(userPriotity) {
