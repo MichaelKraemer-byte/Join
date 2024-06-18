@@ -508,12 +508,41 @@
     background-color: #D1D1D1;
 }
 
-
-
 @media(max-width: 850px) {
     .show_task, .show_task_edit {
         width: 80%;
-    }
-    
+    }   
+}
+
+.show_task_subtask_edit_btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    display: none;
 
 }
+
+.show_task_subtask_edit_btn input {
+    width: 80%;
+    border: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #29ABE2;
+}
+
+.show_task_subtask_edit_btn_delete_add {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show_task_subtask_edit_btn_delete_add {
+    margin-right: 7px;
+    gap: 3px;
+}
+
+.img_hover_btn:hover {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
+}
+

@@ -173,7 +173,8 @@ function renderEditTaskHtml(contact) {
                     <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
                     <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
                 </div>   
-                <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>            
+                            
+                <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>
             </div>
             <div class="show_task_edit_footer">
                 <button type="submit">Ok 
@@ -193,5 +194,26 @@ function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
             <input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}/>
             <label for="${id}_${i}">${element}</label>
         </div>
+    `;
+}
+
+
+function rendergetSubtaskEditHtml(element, contact, i) {
+    return `
+        <div class="show_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
+            <input type="text" id="show_task_subtask_edit_input${i}">
+            <div class="show_task_subtask_edit_btn_delete_add">
+                <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
+                <img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditSubtask(${i}, ${contact.id})">
+            </div>
+        </div>
+        <div class="show_task_edit_subtasks_del_edit">
+            <div class="get_show_task"><li>${element}</li></div>
+            <div class="show_task_edit_subtasks_del_edit_button">
+                <img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showTaskEditSubtask(${i}, ${contact.id})">
+                <div class="cross_line"></div>
+                <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
+            </div>
+        </div>    
     `;
 }

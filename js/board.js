@@ -49,6 +49,19 @@ async function loadTasksFromServer() {
 }
 
 
+async function deleteTaskFromLocalStorage(id) {
+    let arr = [];
+    for (let i = 0; i < todos.length; i++) {
+        arr = (todos.filter(todo => todo.id != id));
+    }
+    todos = arr;
+    await saveTasksToServer();
+    saveTaskToLocalStorage();
+    initBoardTasks();
+    closeShowTask();
+}
+
+
 function saveTaskToLocalStorage() {
     let todosAsText = JSON.stringify(todos);
     localStorage.setItem('todosToServer', todosAsText)
@@ -252,39 +265,42 @@ function getSubtaskEdit(contact) {
     if (contact.subtasks) {
         for (let i = 0; i < contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
-            task_subtasks_edit.innerHTML += `
-                <div class="show_task_edit_subtasks_del_edit">
-                    <div class="get_show_task"><li>${element}</li></div>
-                    <div class="show_task_edit_subtasks_del_edit_button">
-                        <img src="./assets/img/edit.svg" onclick="showTaskEditSubtask(${i}, ${contact.id})">
-                        <div class="cross_line"></div>
-                        <img src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
-                    </div>
-                </div>    
-            `;
+            task_subtasks_edit.innerHTML += rendergetSubtaskEditHtml(element, contact, i);
         }
     } else {
         task_subtasks_edit.innerHTML = '';
-    }
-       
+    }       
 }
 
 
 function showTaskEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
-    // let task_subtasks_edit = document.getElementById('task_subtasks_edit');
+    let show_task_subtask_edit_btn = document.getElementById(`show_task_subtask_edit_btn${i}`);
+    show_task_subtask_edit_btn.style.display = 'flex';
+    let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
 
-    contact.subtasks[i] = task_subtasks_edit.value;
+    show_task_subtask_edit_input.value = contact.subtasks[i];  
+}
 
+
+async function addEditSubtask(i, id) {
+    let contact = todos.find(obj => obj['id'] == id);
+    let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
+    contact.subtasks[i] = show_task_subtask_edit_input.value;
+
+    saveTaskToLocalStorage();
+    await saveTasksToServer();
+    getSubtaskEdit(contact);
+    initBoardTasks();
 }
 
 
 async function showTaskDeleteSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
     contact.subtasks.splice(i, 1);
-
     saveTaskToLocalStorage();
     await saveTasksToServer();
+    getSubtaskEdit(contact);
     initBoardTasks(); 
 }
 
@@ -292,12 +308,15 @@ async function showTaskDeleteSubtask(i, id) {
 async function addNewSubTaskEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
     let task_subtasks_edit = document.getElementById('task_subtasks_edit').value;
+    if (!contact.subtasks) {
+        contact.subtasks = [];
+    }
     if (task_subtasks_edit) {
         contact.subtasks.push(task_subtasks_edit);
     }
-    
     saveTaskToLocalStorage();
     await saveTasksToServer();
+    getSubtaskEdit(contact);
     initBoardTasks();    
 }
 

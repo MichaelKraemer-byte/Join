@@ -94,19 +94,6 @@ function generateNoTask(categorie_id, category) {
 }
 
 
-async function deleteTaskFromLocalStorage(id) {
-    let arr = [];
-    for (let i = 0; i < todos.length; i++) {
-        arr = (todos.filter(todo => todo.id != id));
-    }
-    todos = arr;
-    await saveTasksToServer();
-    saveTaskToLocalStorage();
-    initBoardTasks();
-    closeShowTask();
-}
-
-
 function startDragging(id) {
     currentElement = id;
 }
