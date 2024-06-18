@@ -11,6 +11,7 @@
     position: fixed;
     border-radius: 30px;
     height: 80%;
+    padding: 24px 24px 24px 24px;
 }
 
 .show_add_task{
@@ -234,13 +235,18 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+    gap: 16px;
 }
 
 .show_task_subtask_content {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-top: 3px;
+    height: 1em;
+}
+
+.checkboxSubject{
+    margin-left: 16px;
 }
 
 .show_task_show_subtasks span {

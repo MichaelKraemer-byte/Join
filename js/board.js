@@ -9,6 +9,7 @@ let colorList = [];
 let initials = [];
 let subtasks = [];
 let selectedSubtasks = [];
+let selectedNames = [];
 
 loadTaskFromLocalStorage();
 
@@ -203,11 +204,13 @@ function editTask(id) {
 
     showTaskContainer.style.display = 'none';
     boardPopUp.innerHTML += renderEditTaskHtml(contact);
+
+
     let editContainer = document.getElementById('editContainer');
     editContainer.style.display = ('flex');
 
 
-    getcheckBoxesEdit(contact);
+    getcheckBoxesEdit(id);
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
     getSubtaskEdit(contact);
@@ -242,14 +245,18 @@ function getContactInitialEdit(contact) {
     task_description_edit.value = contact.description;
     task_date_edit.value = contact.date;
 
+    generateSelectedNames(contact);   
+}
+
+
+function generateSelectedNames(contact) {
     let task_edit_initial = document.getElementById('task_edit_initial');
     task_edit_initial.innerHTML = '';
-
-    if (contact.initial) {
-        for (let j = 0; j < contact.initial.length; j++) {
+    if (selectedNames) {
+        for (let i = 0; i < selectedNames.length; i++) {
             task_edit_initial.innerHTML += `
-            <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[j]};">${contact.initial[j]}</div>
-            `;
+                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                `;
         }
     } else {
         task_edit_initial.innerHTML = '';
@@ -268,7 +275,7 @@ function getSubtaskEdit(contact) {
         }
     } else {
         task_subtasks_edit.innerHTML = '';
-    }       
+    }
 }
 
 
@@ -278,7 +285,7 @@ function showTaskEditSubtask(i, id) {
     show_task_subtask_edit_btn.style.display = 'flex';
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
 
-    show_task_subtask_edit_input.value = contact.subtasks[i];  
+    show_task_subtask_edit_input.value = contact.subtasks[i];
 }
 
 
@@ -299,7 +306,7 @@ async function showTaskDeleteSubtask(i, id) {
     saveTaskToLocalStorage();
     await saveTasksToServer();
     getSubtaskEdit(contact);
-    initBoardTasks(); 
+    initBoardTasks();
 }
 
 
@@ -317,7 +324,7 @@ async function addNewSubTaskEdit(id) {
     saveTaskToLocalStorage();
     await saveTasksToServer();
     getSubtaskEdit(contact);
-    initBoardTasks();    
+    initBoardTasks();
 }
 
 
@@ -328,10 +335,10 @@ async function upgradeTodos(id) {
     contact.date = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
 
-    if(userPriotity) {
+    if (userPriotity) {
         contact.priority = userPriotity;
         contact.priorityImg = getPriorityUpdateTodos(userPriotity);
-    }else {
+    } else {
         contact.priority = contact.priority;
         contact.priorityImg = contact.priorityImg;
     }
@@ -354,9 +361,6 @@ function showCheckboxesEdit() {
         showEdit = true;
     }
 }
-
-
-
 
 
 function searchTaskFromBoard() {
@@ -391,7 +395,7 @@ function getInitialsArray(element) {
     let initialsArray = element.initial;
     let colorsArray = element.color;
     let showCircleWithInitials = 3;
-    
+
     if (initialsArray) {
         let showCircleWithRestOfPersons = (initialsArray.length - showCircleWithInitials);
         let board_task_initial = document.getElementById(`board_task_initial${element.id}`);
@@ -405,7 +409,7 @@ function getInitialsArray(element) {
             `;
             } else {
                 board_task_initial.innerHTML +=
-                `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify(showCircleWithRestOfPersons)}</div>`
+                    `<div class="board_task_user_initial" style="background-color: #a3a3a3;">+${JSON.stringify(showCircleWithRestOfPersons)}</div>`
                 break
             }
         }
