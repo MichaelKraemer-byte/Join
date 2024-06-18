@@ -287,7 +287,6 @@ async function addEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
     contact.subtasks[i] = show_task_subtask_edit_input.value;
-
     saveTaskToLocalStorage();
     await saveTasksToServer();
     getSubtaskEdit(contact);
@@ -307,13 +306,15 @@ async function showTaskDeleteSubtask(i, id) {
 
 async function addNewSubTaskEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
-    let task_subtasks_edit = document.getElementById('task_subtasks_edit').value;
+    let task_subtasks = document.getElementById('task_subtasks_edit');
+    let task_subtasks_edit = task_subtasks.value
     if (!contact.subtasks) {
         contact.subtasks = [];
     }
     if (task_subtasks_edit) {
         contact.subtasks.push(task_subtasks_edit);
     }
+    task_subtasks.value = '';
     saveTaskToLocalStorage();
     await saveTasksToServer();
     getSubtaskEdit(contact);
