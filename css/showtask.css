@@ -10,7 +10,7 @@
     background-color: white;
     position: fixed;
     border-radius: 30px;
-    height: 90%;
+    height: 80%;
 }
 
 .show_add_task{
@@ -47,7 +47,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 16px 40px;
+    padding: 16px 0px 16px 24px;
+    box-sizing: border-box;
 }
 
 
@@ -271,7 +272,7 @@
 .show_task__edit_content {
     display: flex;
     flex-direction: column;
-    padding-right: 16px;
+    padding-right: 24px;
 }
 
 .show_task_edit_form {
@@ -307,17 +308,6 @@
 
 .show_task__edit_content::-webkit-scrollbar-thumb:hover {
     background: lightgray;
-}
-
-
-.show_task_edit_footer button {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    bottom: 5%;
-    right: 7%;
-    position: absolute;
 }
 
 .show_task_delete_button {
@@ -392,6 +382,13 @@
     padding: 8px 16px;
     gap: 4px;
     cursor: pointer;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    bottom: 5%;
+    right: 7%;
+    position: absolute;
 }
 
 .show_task_edit_footer button:hover {
@@ -511,11 +508,7 @@
 @media(max-width: 850px) {
     .show_task, .show_task_edit {
         width: 90%;
-    }
-
-    .pop_add_task {
-        width: 80%;
-    }
+    } 
 }
 
 .show_task_subtask_edit_btn {
@@ -549,3 +542,55 @@
     filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
 }
 
+.checkbox-wrapper-27 .checkbox {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  
+  .checkbox-wrapper-27 .checkbox > input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .checkbox-wrapper-27 .checkbox__icon {
+    display: inline-block;
+    color: #999;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  .checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon {
+    color: #2A3647;
+  }
+  
+  .checkbox-wrapper-27 .checkbox__icon:before {
+    font-family: "icons-27";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .checkbox-wrapper-27 .icon--check:before,
+  .checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon:before {
+    content: "\e601";
+  }
+  
+  .checkbox-wrapper-27 .icon--check-empty:before,
+  .checkbox-wrapper-27 .checkbox__icon:before {
+    content: "\e600";
+  }
+  
+  @font-face {
+    font-family: "icons-27";
+    font-weight: normal;
+    font-style: normal;
+    src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
+}
