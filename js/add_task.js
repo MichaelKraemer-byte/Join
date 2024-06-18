@@ -77,15 +77,15 @@ async function addTaskToTasks() {
         'selectedTask': selectedTask,
     };
 
-    // todos.push(task)
-    // await saveTasksToServer();
-    // saveTaskToLocalStorage();
-    // if(window.location.href.includes('board.html')){
-    //     closeWindow();        
-    //     initBoardTasks();        
-    // }
-    // initAddTask();
-    // slideInConfirmation();
+    todos.push(task)
+    await saveTasksToServer();
+    saveTaskToLocalStorage();
+    if(window.location.href.includes('board.html')){
+        closeWindow();        
+        initBoardTasks();        
+    }
+    initAddTask();
+    slideInConfirmation();
 }
 
 
