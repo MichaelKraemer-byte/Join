@@ -205,10 +205,8 @@ function editTask(id) {
     showTaskContainer.style.display = 'none';
     boardPopUp.innerHTML += renderEditTaskHtml(contact);
 
-
     let editContainer = document.getElementById('editContainer');
     editContainer.style.display = ('flex');
-
 
     getcheckBoxesEdit(id);
     getContactPriorityEdit(contact);
@@ -244,7 +242,7 @@ function getContactInitialEdit(contact) {
     task_title_edit.value = contact.title;
     task_description_edit.value = contact.description;
     task_date_edit.value = contact.date;
-
+    
     generateSelectedNames(contact);   
 }
 
@@ -334,6 +332,18 @@ async function upgradeTodos(id) {
     contact.description = document.getElementById('task_description_edit').value;
     contact.date = document.getElementById('task_date_edit').value;
     contact.assignedTo = document.getElementById('task_assignet_input_edit').value;
+    contact.name = selectedNames;
+    let guestColor = [];
+    let initials = [];
+    
+    for (let i = 0; i < selectedNames.length; i++) {
+        const element = selectedNames[i];
+        let guest = guesteArray.find(guest => guest.name === element);
+        guestColor.push(guest.color)
+        initials.push(getInitials(guest.name));
+    }
+    contact.color = guestColor;
+    contact.initial = initials;
 
     if (userPriotity) {
         contact.priority = userPriotity;
@@ -349,6 +359,9 @@ async function upgradeTodos(id) {
     initBoardTasks();
     closeShowTask();
 }
+
+
+
 
 
 function showCheckboxesEdit() {

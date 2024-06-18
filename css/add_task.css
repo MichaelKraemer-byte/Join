@@ -362,7 +362,11 @@ b {
 .selectBox img {
     position: absolute;
     top: 25px;
-    right: 5px;
+    right: 16px;
+}
+
+.selectBox:hover img {
+    filter: invert(43%) sepia(76%) saturate(438%) hue-rotate(157deg) brightness(96%) contrast(97%);
 }
 
 .selectBox select {

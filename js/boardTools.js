@@ -1,5 +1,3 @@
-
-
 function checkBoxClickNone() {
     document.addEventListener('click', function (event) {
         let checkboxes = document.getElementById("checkBoxesEdit");
@@ -12,6 +10,13 @@ function checkBoxClickNone() {
             }
         }
     });
+}
+
+
+function getInitials(name) {
+    const words = name.trim().split(' ');
+    const initials = words.map(word => word.charAt(0).toUpperCase());
+    return initials.join('');
 }
 
 
@@ -58,13 +63,13 @@ function updateSelectedNames(event) {
 }
 
 function updateDisplayedNames() {
+
     let task_edit_initial = document.getElementById('task_edit_initial');
     task_edit_initial.innerHTML = '';      
     if (selectedNames.length > 0) {
         selectedNames.forEach((element, i) => { 
             let name = element;
             let guest = guesteArray.find(guest => guest.name === name);
-                     
             task_edit_initial.innerHTML += `
                 <div class="board_task_user_initial show_task_user_initial" style="background-color: ${guest.color};">${getInitials(element)}</div>
             `;

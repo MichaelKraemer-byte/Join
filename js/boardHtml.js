@@ -9,8 +9,7 @@ function renderHtmlToDo(element) {
         <div id="idSUb${element.id}"></div>
         <div class="board_task_footer_status">  
             <div class="board_task_initial" id="board_task_initial${element.id}"></div>
-            <img src="${element.priorityImg}">
-           
+            <img src="${element.priorityImg}">           
         </div>
     </div>
     `;
