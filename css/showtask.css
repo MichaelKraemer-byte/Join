@@ -510,8 +510,12 @@
 
 @media(max-width: 850px) {
     .show_task, .show_task_edit {
+        width: 90%;
+    }
+
+    .pop_add_task {
         width: 80%;
-    }   
+    }
 }
 
 .show_task_subtask_edit_btn {
