@@ -80,7 +80,6 @@
     }
 
     .add_task_footer {
-        padding: 48px 20px 24px;
         justify-content: space-between;
     }
 
@@ -103,6 +102,7 @@
     .add_task_content {
         width: 97%;
         left: 16px;
+        top: 160px;
         padding-bottom: 105px;
         padding-right: 16px;
         box-sizing: border-box;
@@ -117,9 +117,17 @@
     .add_task_form {
         margin-top: 2%;
     }
+
+    .get_subtask {
+        height: 60px;
+    }
 }
 
 @media (max-width: 666px) {
+    .get_subtask {
+        height: 100px;
+    }
+
     .add_task_content {
         position: fixed;
     }
@@ -169,7 +177,6 @@
     }
 
     .add_task_footer {
-        padding: 50px 20px 90px;
         justify-content: space-between;
     }
 
@@ -217,7 +224,8 @@
     }
 
     .add_task_footer {
-        padding: 50px 0px 90px;
+        padding: 0;
+        flex-direction: column;
     }
 
     .add_task_textarea {

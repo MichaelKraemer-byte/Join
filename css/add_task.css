@@ -103,6 +103,12 @@ b {
     box-sizing: border-box;
 }
 
+#meinFormular {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
 .add_task_textarea:focus {
     border: 1px solid #29ABE2;
     outline: none;
@@ -206,7 +212,6 @@ b {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 100px;
 }
 
 
@@ -665,5 +670,27 @@ body {
 @media (max-width: 1050) {
     .add_task_footer{
         padding: 48px 0 0px ;
+    }
+
+    #meinFormular {
+        gap: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    
+    .add_task_button_group {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    
+    .add_task_button_group button{
+        width: 100%;
+    }
+
+    .add_task_prio {
+        height: max-content;
     }
 }
