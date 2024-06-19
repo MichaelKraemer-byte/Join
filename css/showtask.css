@@ -497,6 +497,7 @@
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
+    transition: 250ms;
 }
 
 .show_task_edit_subtasks_del_edit:hover > .show_task_edit_subtasks_del_edit_button {
@@ -517,7 +518,7 @@
 }
 
 .show_task_edit_subtasks_del_edit:hover {
-    background-color: #D1D1D1;
+    background-color: #f1f1f1e0;
 }
 
 @media(max-width: 850px) {
