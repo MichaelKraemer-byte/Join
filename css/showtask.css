@@ -10,8 +10,7 @@
     background-color: white;
     position: fixed;
     border-radius: 30px;
-    height: 80%;
-    padding: 24px 24px 24px 24px;
+    padding: 48px 40px;
 }
 
 .show_add_task{
@@ -44,11 +43,9 @@
 .show_task {
     word-wrap: break-word;
     width: 525px;
-    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 16px 24px;
     box-sizing: border-box;
 }
 
@@ -227,7 +224,6 @@
 
 .show_task_show_subtasks {
     margin-left: 10px;
-    margin-top: 40px;
 }
 
 .show_task_subtask {
@@ -293,7 +289,7 @@
 }
 
 .show_task__edit_content {
-    max-height: 85%;
+    max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
     gap: 20px;
@@ -360,19 +356,25 @@
 }
 
 .show_task_content {
-    overflow-y: auto;
-    overflow-x: hidden;
     gap: 8px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 20px;
+    max-height: 85vh;
+    overflow-x: hidden;
 }
 
 .show_task_subtask_edit {
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .get_show_task {
     margin-bottom: 5px;
+}
+
+.show_task_edit_footer {
+    height: 50px;
 }
 
 .show_task_edit_footer button {
@@ -512,11 +514,13 @@
 }
 
 @media(max-width: 850px) {
-    .show_task, .show_task_edit {
-        width: 100%;
-    } 
     .pop_add_task {
-        width: 90%;
+        width: 85%;
+        padding: 34.5px 24px;
+    } 
+
+    .show_task {
+        width: 100%;
     }
     
     .show_task_title {
