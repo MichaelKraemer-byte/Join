@@ -199,7 +199,7 @@ function rendergetcheckBoxesEdit(guest, initial, isChecked) {
  * priority buttons (urgent, medium, low), assigned to dropdown, subtasks, and a submit button.
  */
 function renderEditTaskHtml(contact) {
-    return /*html*/` 
+    return /* html */` 
     <div class="show_task" id="editContainer">
         <form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
             <div class="show_task__edit_header">
@@ -217,26 +217,38 @@ function renderEditTaskHtml(contact) {
                 </div>
                 <div class="task_date_edit add_task_form_row">
                         <span>Due date</span>
-                        <input id="task_date_edit" class="show_task_edit_input" type="date">
-                </div>
-                <div class="add_task_button_group">
-                    <button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_red.svg">
-                        </div>
-                    </button>
-                    <button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_strich.svg">
-                        </div>
-                    </button>
-                    <button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
-                        <div class="add_task_button_vector">
-                            <img src="./assets/img/vector_green.svg">
-                        </div>
-                    </button>
+                        <input id="task_date_edit" class="show_task_edit_input" type="date" min="${setDate()}">
                 </div>
                 <div class="task_assignet_edit add_task_form_row">
+                    <span><b style="color:black;">Priority</b></span>
+                    <div class="add_task_button_group">
+                        <button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
+                            <div class="add_task_button_vector">
+                                <img src="./assets/img/vector_red.svg">
+                            </div>
+                        </button>
+                        <button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
+                            <div class="add_task_button_vector">
+                                <img src="./assets/img/vector_strich.svg">
+                            </div>
+                        </button>
+                        <button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
+                            <div class="add_task_button_vector">
+                                <img src="./assets/img/vector_green.svg">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="task_date_edit add_task_form_row">
+                <span>Task category</span>
+                    <select name="task_category" id="task_category" class="show_task_edit_input">
+                        <option value="Todo">To do</option>
+                        <option value="Inprogress">In progress</option>
+                        <option value="Awaitfeedback">Await feedback</option>
+                        <option value="Done" selected>Done</option>
+                    </select>
+                </div>
+                <div class="task_date_edit add_task_form_row">
                     <span id="assignet_to">Assigned to</span>
                     <div class="selectBox" onclick="showCheckboxesEdit()">
                         <img src="./assets/img/arrow_drop_down.svg" alt="">
