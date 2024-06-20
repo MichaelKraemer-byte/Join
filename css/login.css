@@ -444,10 +444,18 @@ footer {
         width: 100%;
     }
 
+    .logo {
+        width: 80px;
+        height: 80px;
+        animation: logo-mobile 2s;
+    }
+
     #logo-mobile {
         display: flex;
         animation: logo-mobile 2s;
         opacity: 0;
+        width: 80px;
+        height: 80px;
     }
 
     @keyframes logo-mobile {
@@ -469,8 +477,8 @@ footer {
 
         100% {
             transform: translate(-50%, -50%) scale(1);
-            width: 100.03px;
-            height: 121.97px;
+            width: 80px;
+            height: 80px;
             top: 15%;
             left: 15%;
         }
@@ -522,10 +530,15 @@ footer {
         /* Glatter Übergang von 2 Sekunden */
         z-index: 10;
         animation: logoMoveIn 2s;
-        width: 100.03px;
-        height: 121.97px;
+        width: 64px;
+        height: 64px;
         top: 15%;
         left: 25%;
+    }
+
+    #logo-mobile {
+        width: 64px;
+        height: 64px;
     }
 
     .arrow-left-line {
@@ -552,8 +565,8 @@ footer {
         100% {
             opacity: 0;
             transform: translate(-50%, -50%) scale(1);
-            width: 100.03px;
-            height: 121.97px;
+            width: 64px;
+            height: 64px;
             top: 15%;
             left: 25%;
         }
@@ -576,8 +589,8 @@ footer {
 
         100% {
             transform: translate(-50%, -50%) scale(1);
-            width: 100.03px;
-            height: 121.97px;
+            width: 64px;
+            height: 64px;
             top: 15%;
             left: 25%;
         }

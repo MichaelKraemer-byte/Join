@@ -10,12 +10,11 @@
     background-color: white;
     position: fixed;
     border-radius: 30px;
-    padding: 48px 40px;
+    padding: 64px
 }
 
 .show_add_task{
     width: 75vw;
-    padding: 64px 74px 64px 74px;
 }
 
 .pop_add_task h1 {
