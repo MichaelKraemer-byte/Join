@@ -105,7 +105,6 @@ async function addTaskToTasks(column) {
 }
 
 
-
 /**
  * The function `getPriorityImage` returns an image URL based on the user's priority level.
  * @param userPriotity - userPriority is a parameter that represents the priority level of a task or
@@ -348,7 +347,11 @@ function checkGuestsName(checkedValues) {
  * The clearForm function resets the input fields in a form with the ID "meinFormular".
  */
 function clearForm() {
+    let idChekBox = document.getElementById('add_task_show_check');
+    idChekBox.innerHTML = '';
+    subtasks = [];
     document.getElementById("meinFormular").reset();
+    getSubTaskAddTask(); 
 }
 
 

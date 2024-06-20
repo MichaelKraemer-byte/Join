@@ -159,7 +159,7 @@ function renderHtmlAddtask(column) {
                 <div class="add_task_footer">
                         <p id="add_task_footer"><b>*</b>This field is required</p>
                         <div class="add_task_button_group_footer">
-                            <button class="add_task_button_clear add_task_hover_button" onclick="closeWindow()">Close 
+                            <button type="button" class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear
                                 <img class="addContactCancelX" src="./assets/img/cancelX.svg">
                             </button>
                             <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
@@ -203,7 +203,6 @@ function renderGetSubTaskAddTask(i, element) {
                 <div class="cross_line"></div>
                 <img class="img_hover_btn" src="./assets/img/delete.svg"  onclick="deleteNewSubTask(${i})">
             </div>
-        </div> 
-        
+        </div>         
     `;
 }
