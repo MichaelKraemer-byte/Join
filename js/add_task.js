@@ -99,7 +99,7 @@ async function addTaskToTasks(column) {
     if (window.location.href.includes('board.html')) {
         closeWindow();
         initBoardTasks();
-    }    
+    }
     initAddTask();
     slideInConfirmation();
 }
@@ -140,9 +140,9 @@ function getPriorityImage(userPriotity) {
  * `userPriority`. If `userPriority` is not provided (falsy), the function will return 'Medium'.
  */
 function getUserPriorityStatus(userPriotity) {
-    if(userPriotity) {
+    if (userPriotity) {
         return userPriotity;
-    }else {
+    } else {
         return 'Medium';
     }
 }
@@ -155,12 +155,12 @@ function getUserPriorityStatus(userPriotity) {
 function slideInConfirmation() {
     let confirmation = document.getElementById('addedTaskConfirmation');
     confirmation.style.animation = 'slideInAddedTaskConfirmation 1.25s cubic-bezier(0, 1.19, 0, 0.96)';
-    setTimeout(() => { 
+    setTimeout(() => {
         addTaskProcess = false;
         createTaskButton = document.getElementById('createTaskButton');
         createTaskButton.disabled = false;
         confirmation.style.animation = 'fadeConfirmation 0.3s ease-in-out';
-        if(window.location.href.includes('add_task.html')){navigateTo('board.html')}
+        if (window.location.href.includes('add_task.html')) { navigateTo('board.html') }
     }, 1250);
 }
 
@@ -258,7 +258,7 @@ function generateCheckBox() {
         if (checkboxes) {
             document.addEventListener('click', function (event) {
                 let selectBox = document.querySelector('.selectBox');
-                
+
                 if (selectBox && !selectBox.contains(event.target)) {
                     checkboxes.style.visibility = "hidden";
                     show = true;
@@ -351,7 +351,7 @@ function clearForm() {
     idChekBox.innerHTML = '';
     subtasks = [];
     document.getElementById("meinFormular").reset();
-    getSubTaskAddTask(); 
+    getSubTaskAddTask();
 }
 
 
@@ -393,7 +393,7 @@ function getSubtask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
     console.log(subtasks);
-    if(subtasks) {
+    if (subtasks) {
         for (let i = 0; i < subtasks.length; i++) {
             const element = subtasks[i];
             get_subtask.innerHTML = `
@@ -413,8 +413,8 @@ function addNewSubTask() {
     let deleteSubtask = document.getElementById('delete_subtask');
     let check = document.getElementById('check');
 
-    if(task_subtask.value) {
-        subtasks.push(task_subtask.value);    
+    if (task_subtask.value) {
+        subtasks.push(task_subtask.value);
 
     }
     getSubTaskAddTask();
@@ -472,7 +472,7 @@ parameter. Inside the function, it uses the `splice` method to remove one elemen
 index `i` from the `subtasks` array. After removing the element, the function then calls another
 function `getSubTaskAddTask()`. */
 function deleteNewSubTask(i) {
-    subtasks.splice(i, 1);    
+    subtasks.splice(i, 1);
     getSubTaskAddTask();
 }
 
@@ -486,10 +486,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             const minDate = `${year}-${month}-${day}`;
-            
+
             input.min = minDate;
         }
     }
 
     setMinDate();
 });
+
+function setDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const minDate = `${year}-${month}-${day}`;
+
+    return minDate
+}

@@ -112,7 +112,7 @@ function renderHtmlAddtask(column) {
                     <div class="add_task_width50">
                         <div class="add_task_date add_task_form_row">
                             <label for="">Due date<b>*</b></label>
-                            <input id="task_date" class="add_task_input add_date" type="date" required>
+                            <input id="task_date" class="add_task_input add_date" type="date" required min="${setDate()}">
                         </div>
                         <div class="add_task_prio add_task_form_row">
                             <p>Prio</p>
