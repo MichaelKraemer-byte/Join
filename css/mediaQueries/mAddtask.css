@@ -92,7 +92,6 @@
     }
 
     .add_task_form {
-        max-height: 53vh;
         overflow: auto;
         scrollbar-width: none;
     }
@@ -189,7 +188,6 @@
     }
 
     .add_task_form {
-        max-height: 48vh;
         overflow: auto;
         scrollbar-width: none;
     }
@@ -201,11 +199,7 @@
     }
 }
 
-@media (max-width: 450px) {
-
-    .add_task_form{
-        max-height: 54vh;
-    }
+@media (max-width: 450px) { 
 
     .add_task_content{
         top: 135px;
@@ -230,5 +224,12 @@
 
     .add_task_textarea {
         width: 100%;
+    }
+}
+
+
+@media (max-height: 880px) {
+    .add_task_form {
+        max-height: 45vh;
     }
 }

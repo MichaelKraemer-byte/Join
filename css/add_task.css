@@ -699,3 +699,9 @@ body {
         height: max-content;
     }
 }
+
+@media (max-height: 880px) {
+    .add_task_form {
+        max-height: 45vh;
+    }
+}
