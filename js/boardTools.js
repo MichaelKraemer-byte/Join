@@ -263,6 +263,7 @@ async function moveTo(category) {
     contact['category'] = category;
     await saveTasksToServer();
     saveTaskToLocalStorage();
+    removeHighlightTaskCategory('board_' + category);
     initBoardTasks();
 }
 
@@ -272,8 +273,16 @@ async function moveTo(category) {
  * @param id - The `id` parameter in the `highlight` function is used to specify the ID of the HTML
  * element that you want to highlight by adding the `drag-area-highlight` class to it.
  */
-function highlight(id) {
+function highlightTaskCategory(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlightTaskCategory(id) {
+    let ID = id
+    if(ID === 'board_awaitt'){
+        ID = 'board_await_feedback';
+    }
+    document.getElementById(ID).classList.remove('drag-area-highlight');
 }
 
 

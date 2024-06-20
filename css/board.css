@@ -158,15 +158,21 @@
 
 .bord_content_colum {
     width: 25%;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .bord_content_colum_left {
     width: 25%;
     z-index: 1;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .bord_content_colum_right {
     width: 25%;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 
