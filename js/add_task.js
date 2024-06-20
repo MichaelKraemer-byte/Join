@@ -105,7 +105,6 @@ async function addTaskToTasks(column) {
 }
 
 
-
 /**
  * The function `getPriorityImage` returns an image URL based on the user's priority level.
  * @param userPriotity - userPriority is a parameter that represents the priority level of a task or
@@ -348,7 +347,11 @@ function checkGuestsName(checkedValues) {
  * The clearForm function resets the input fields in a form with the ID "meinFormular".
  */
 function clearForm() {
+    let idChekBox = document.getElementById('add_task_show_check');
+    idChekBox.innerHTML = '';
+    subtasks = [];
     document.getElementById("meinFormular").reset();
+    getSubTaskAddTask(); 
 }
 
 
@@ -472,3 +475,21 @@ function deleteNewSubTask(i) {
     subtasks.splice(i, 1);    
     getSubTaskAddTask();
 }
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    function setMinDate() {
+        const input = document.getElementById('task_date');
+        if (input) {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const minDate = `${year}-${month}-${day}`;
+            
+            input.min = minDate;
+        }
+    }
+
+    setMinDate();
+});

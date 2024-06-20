@@ -544,20 +544,25 @@ function searchTaskFromBoard() {
     let input_find_task = document.getElementById('input_find_task');
     input_find_task = input_find_task.value.toLowerCase();
 
-    for (let i = 0; i < todos.length; i++) {
-        const element = todos[i];
-        if (element.title.toLowerCase().includes(input_find_task)) {
-            let category = element.category;
-            const ids = ['board_to_do', 'board_in_progress', 'board_await_feedback', 'board_done'];
-            const elements = ids.map(id => document.getElementById(id));
-            elements.forEach(element => element.innerHTML = '');
-            searchSwithId(category);
-            let searchResult = document.getElementById(searchId);
-            searchResult.innerHTML = renderHtmlToDo(element)
-            getInitialsArray(element);
-            getCategorieBackGroundColor(element);
+    if(input_find_task) {
+        for (let i = 0; i < todos.length; i++) {
+            const element = todos[i];
+            if (element.title.toLowerCase().includes(input_find_task)) {
+                let category = element.category;
+                const ids = ['board_to_do', 'board_in_progress', 'board_await_feedback', 'board_done'];
+                const elements = ids.map(id => document.getElementById(id));
+                elements.forEach(element => element.innerHTML = '');
+                searchSwithId(category);
+                let searchResult = document.getElementById(searchId);
+                searchResult.innerHTML = renderHtmlToDo(element)
+                getInitialsArray(element);
+                getCategorieBackGroundColor(element);
+            }
         }
+    }else {
+        initBoardTasks();
     }
+        
 }
 
 
