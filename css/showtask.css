@@ -499,12 +499,12 @@
     transition: 250ms;
 }
 
-.show_task_edit_subtasks_del_edit:hover > .show_task_edit_subtasks_del_edit_button {
+/* .show_task_edit_subtasks_del_edit:hover > .show_task_edit_subtasks_del_edit_button {
     display: flex;
-}
+} */
 
 .show_task_edit_subtasks_del_edit_button {
-    display: none;
+    display: flex;
     gap: 5px;
     margin-right: 5px;
     cursor: pointer;
@@ -516,9 +516,9 @@
     height: 20px;
 }
 
-.show_task_edit_subtasks_del_edit:hover {
+/* .show_task_edit_subtasks_del_edit:hover {
     background-color: #f1f1f1e0;
-}
+} */
 
 @media(max-width: 850px) {
     .pop_add_task {

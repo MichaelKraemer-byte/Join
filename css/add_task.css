@@ -19,7 +19,7 @@ b {
     width: 70%;
     height: 100vh;
     max-width: 1440px;
-    top: 206px;
+    top: 185px;
     left: 328px;
     position: relative;
 }
@@ -106,7 +106,7 @@ b {
 #meinFormular {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 54px;
 }
 
 .add_task_textarea:focus {
@@ -697,11 +697,5 @@ body {
 
     .add_task_prio {
         height: max-content;
-    }
-}
-
-@media (max-height: 880px) {
-    .add_task_form {
-        max-height: 45vh;
     }
 }
