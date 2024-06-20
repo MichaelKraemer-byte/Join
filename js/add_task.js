@@ -394,7 +394,6 @@ function deleteSubtask() {
 function getSubtask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
-    console.log(subtasks);
     if (subtasks) {
         for (let i = 0; i < subtasks.length; i++) {
             const element = subtasks[i];

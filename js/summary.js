@@ -110,7 +110,6 @@ function numberOfToDoTasks() {
  */
 function numberOfUrgentTasks() {
     let urgent = data.filter(item => item['priority'] === 'Urgent');
-    console.log(urgent);
     setUpComingDeadline(urgent);
     return /*html*/`
         ${urgent.length}
