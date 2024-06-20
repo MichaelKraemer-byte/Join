@@ -241,11 +241,11 @@ function renderEditTaskHtml(contact) {
                 </div>
                 <div class="task_date_edit add_task_form_row">
                 <span>Task category</span>
-                    <select name="task_category" id="task_category" class="show_task_edit_input">
-                        <option value="Todo">To do</option>
-                        <option value="Inprogress">In progress</option>
-                        <option value="Awaitfeedback">Await feedback</option>
-                        <option value="Done" selected>Done</option>
+                    <select name="task_category" id="task_category_edit" class="show_task_edit_input">
+                        <option value="to_do">To do</option>
+                        <option value="in_progress">In progress</option>
+                        <option value="awaitt">Await feedback</option>
+                        <option value="done" selected>Done</option>
                     </select>
                 </div>
                 <div class="task_date_edit add_task_form_row">

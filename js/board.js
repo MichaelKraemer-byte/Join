@@ -271,6 +271,7 @@ function editTask(id) {
     getContactPriorityEdit(contact);
     getContactInitialEdit(contact);
     getSubtaskEdit(contact);
+    getCurrentTaskCategoryEdit(contact);
 }
 
 
@@ -362,6 +363,19 @@ function getSubtaskEdit(contact) {
         }
     } else {
         task_subtasks_edit.innerHTML = '';
+    }
+}
+
+function getCurrentTaskCategoryEdit(contact) {
+    let task_taskCategory_edit = document.getElementById('task_category_edit');
+    let currentTaskCategory = contact.category;
+    let options = task_taskCategory_edit.options
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === currentTaskCategory) {
+            options[i].selected = true;
+        } else {
+            options[i].selected = false;
+        }
     }
 }
 
@@ -460,6 +474,7 @@ async function upgradeTodos(id) {
     updateContactDetails(contact);
     updateGuestInfo(contact);
     updatePriority(contact);
+    updateTaskCategory(contact);
     await saveTaskUpdates();
     reloadUI();
 }
@@ -513,6 +528,10 @@ function updatePriority(contact) {
         contact.priority = userPriotity;
         contact.priorityImg = getPriorityUpdateTodos(userPriotity);
     }
+}
+
+function updateTaskCategory(contact) {
+    contact.category = document.getElementById('task_category_edit').value;
 }
 
 
