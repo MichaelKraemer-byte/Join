@@ -475,3 +475,21 @@ function deleteNewSubTask(i) {
     subtasks.splice(i, 1);    
     getSubTaskAddTask();
 }
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    function setMinDate() {
+        const input = document.getElementById('task_date');
+        if (input) {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const minDate = `${year}-${month}-${day}`;
+            
+            input.min = minDate;
+        }
+    }
+
+    setMinDate();
+});
