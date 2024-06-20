@@ -81,7 +81,6 @@ function renderHtmlAddtask(column) {
         <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
         <h1>Add Task</h1>
         <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
-            <div>           
                 <div class="add_task_form">
                     <div class="add_task_width50">
                         <div class="add_task_title add_task_form_row">
@@ -167,7 +166,6 @@ function renderHtmlAddtask(column) {
                             </button>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
         `;

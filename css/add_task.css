@@ -441,7 +441,6 @@ b {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
-    overflow-y: hidden;
 }
 
 .add_task_show_check::-webkit-scrollbar {

@@ -350,6 +350,8 @@ function clearForm() {
     let idChekBox = document.getElementById('add_task_show_check');
     idChekBox.innerHTML = '';
     subtasks = [];
+    document.getElementById('add_task_show_check').innerHTML = '';
+    document.getElementById('get_subtask').innerHTML = '';
     document.getElementById("meinFormular").reset();
     getSubTaskAddTask();
 }
