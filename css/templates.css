@@ -93,7 +93,6 @@ body::-webkit-scrollbar {
     border: 8px solid #ffffff;
   }
   
-  /* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
   @supports not selector(::-webkit-scrollbar) {
     body {
       scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
@@ -240,6 +239,7 @@ body {
     font-size: 16px;
     padding: 8px 0px 8px 0px;
     text-decoration: none;
+    overflow: hidden;
 }
 
 .navBarLink:hover {

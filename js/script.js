@@ -345,21 +345,24 @@ function resetCurrentUser() {
  */
 function focusNavAnker() {
   if (window.location.href.includes('summary.html')) {
-    document.getElementById('summaryNav').classList.add('navBarFocusAnker');
-    document.getElementById('navBarSummaryImg').classList.add('navBarImgFocus');
-    document.getElementById('summaryNav').classList.remove('mainNavLinkTransition');
+      document.getElementById('summaryNav').classList.add('navBarFocusAnker');
+      document.getElementById('navBarSummaryImg').classList.add('navBarImgFocus');
+      document.getElementById('summaryNav').classList.remove('mainNavLinkTransition');
   } else if (window.location.href.includes('contacts.html')) {
-    document.getElementById('contactsNav').classList.add('navBarFocusAnker');
-    document.getElementById('navBarContactsImg').classList.add('navBarImgFocus');
-    document.getElementById('contactsNav').classList.remove('mainNavLinkTransition');
+      document.getElementById('contactsNav').classList.add('navBarFocusAnker');
+      document.getElementById('navBarContactsImg').classList.add('navBarImgFocus');
+      document.getElementById('contactsNav').classList.remove('mainNavLinkTransition');
   } else if (window.location.href.includes('board.html')) {
-    document.getElementById('boardNav').classList.add('navBarFocusAnker');
-    document.getElementById('navBarBoardImg').classList.add('navBarImgFocus');
-    document.getElementById('boardNav').classList.remove('mainNavLinkTransition');
+      document.getElementById('boardNav').classList.add('navBarFocusAnker');
+      document.getElementById('navBarBoardImg').classList.add('navBarImgFocus');
+      document.getElementById('boardNav').classList.remove('mainNavLinkTransition');
+      document.getElementById('mobileBoardNav').classList.add('navBarFocusAnker');
+      document.getElementById('mobileNavBarBoardImg').classList.add('navBarImgFocus');
+      document.getElementById('mobileBoardNav').classList.remove('mainNavLinkTransition');
   } else if (window.location.href.includes('add_task.html')) {
-    document.getElementById('addTaskNav').classList.add('navBarFocusAnker');
-    document.getElementById('navBarAddTaskImg').classList.add('navBarImgFocus');
-    document.getElementById('addTaskNav').classList.remove('mainNavLinkTransition');
+      document.getElementById('addTaskNav').classList.add('navBarFocusAnker');
+      document.getElementById('navBarAddTaskImg').classList.add('navBarImgFocus');
+      document.getElementById('addTaskNav').classList.remove('mainNavLinkTransition');
   }
 }
 
