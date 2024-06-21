@@ -225,11 +225,21 @@
     .add_task_textarea {
         width: 100%;
     }
+
+    #meinFormular {
+        gap: 50px;
+    }
 }
 
 
 @media (max-height: 880px) {
     .add_task_form {
         max-height: 45vh;
+    }
+}
+
+@media (max-height: 770px) {
+    #meinFormular {
+        gap: 0;
     }
 }

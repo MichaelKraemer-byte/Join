@@ -106,7 +106,6 @@ b {
 #meinFormular {
     display: flex;
     flex-direction: column;
-    gap: 54px;
 }
 
 .add_task_textarea:focus {
