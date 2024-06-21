@@ -81,8 +81,8 @@
 
     .add_task_footer {
         justify-content: space-between;
+        width: 60vw;
     }
-
     .add_task_date {
         margin-top: 38px;
     }
@@ -119,6 +119,11 @@
 
     .get_subtask {
         height: 60px;
+    }
+
+    .add_task_footer{
+        width: 95vw;
+        bottom: 96px;
     }
 }
 
@@ -176,7 +181,7 @@
     }
 
     .add_task_footer {
-        justify-content: space-between;
+        width: 88vw;
     }
 
     .add_task_date {
@@ -220,6 +225,8 @@
     .add_task_footer {
         padding: 0;
         flex-direction: column;
+        display: flex;
+        gap: 16px;
     }
 
     .add_task_textarea {

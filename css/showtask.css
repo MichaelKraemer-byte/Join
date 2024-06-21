@@ -10,11 +10,12 @@
     background-color: white;
     position: fixed;
     border-radius: 30px;
-    padding: 64px
 }
 
 .show_add_task{
     width: 75vw;
+    padding: 64px;
+    height: 75vh;
 }
 
 .pop_add_task h1 {
@@ -41,18 +42,22 @@
 
 .show_task {
     word-wrap: break-word;
-    width: 525px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    max-width: 524px;
+    min-width: 400px;
+    height: 90vh;
+    padding: 32px 24px 32px 24px ;
 }
 
 
 .show_task_title {
     font-size: 61px;
-    line-height: 73.2px;
     font-weight: 700;
+    margin-bottom: 16px;
+    color: black;
 }
 
 
@@ -61,7 +66,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .show_task_category {
@@ -87,6 +92,9 @@
 .show_task_description {
     font-size: 20px;
     line-height: 24px;
+    color: black;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .show_task_date {
@@ -131,13 +139,23 @@
     border-radius: 10px;
 }
 
+.taskAssignedToSpan {
+    margin-top: 8px;
+    margin-bottom: -24px !important;
+}
+
+.showTaskFirstInfoSection{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .show_task_user_name::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
 .show_task_user_daten span {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: -16px;
 }
 
@@ -153,7 +171,7 @@
     align-items: center;
     gap: 20px;
     font-size: 19px;
-    margin: 20px 10px 20px 10px;
+    margin: 10px;
 }
 
 .show_task_user_initial {
@@ -245,7 +263,6 @@
 }
 
 .show_task_show_subtasks span {
-    font-size: 20px;
     line-height: 24px;
 }
 
@@ -355,7 +372,6 @@
 }
 
 .show_task_content {
-    gap: 8px;
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
@@ -499,6 +515,44 @@
     transition: 250ms;
 }
 
+.show_task_subtask::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  
+  .show_task_subtask::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 50px;
+  }
+  
+  .show_task_subtask::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 50px;
+    border: 8px solid #ffffff;
+  }
+
+  .show_task_subtask::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  
+  .show_task_subtask::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 50px;
+  }
+  
+  .show_task_subtask::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 50px;
+    border: 8px solid #ffffff;
+  }
+  
+  /* Fallback für Browser, die ::-webkit-scrollbar nicht unterstützen */
+  @supports not selector(::-webkit-scrollbar) {
+    .show_task_subtask {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+
+
 /* .show_task_edit_subtasks_del_edit:hover > .show_task_edit_subtasks_del_edit_button {
     display: flex;
 } */
@@ -520,39 +574,6 @@
     background-color: #f1f1f1e0;
 } */
 
-@media(max-width: 850px) {
-    .pop_add_task {
-        width: 85%;
-        padding: 34.5px 24px;
-    } 
-
-    .show_task {
-        width: 100%;
-    }
-    
-    .show_task_title {
-        font-size: 36px;
-    }
-    
-    .show_task_description, .show_task_date, .show_task_priory, .show_task_user_daten, .show_task_assigned_to_users, .show_task_footer p, .show_task_category {
-        font-size: 16px;
-
-    }
-}
-
-@media(max-width: 450px) {
-    .show_task {
-        padding: 0;
-    }
-
-    .task_edit_initial {
-        overflow-x: scroll;
-    }
-
-    .task_edit_initial::-webkit-scrollbar {
-        display: none;
-    }
-}
 
 .show_task_subtask_edit_btn {
     width: 100%;
@@ -636,4 +657,43 @@
     font-weight: normal;
     font-style: normal;
     src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
+}
+
+
+
+@media(max-width: 850px) {
+    
+    .show_task_title {
+        font-size: 36px;
+    }
+    
+    .show_task_description, .show_task_date, .show_task_priory, .show_task_user_daten, .show_task_assigned_to_users, .show_task_footer p, .show_task_category {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 630px) {
+    .show_task {
+        max-width: 400px;
+        min-width: 300px;
+        height: 80vh;
+        width: max-content;
+    }
+}
+
+@media(max-width: 450px) {
+
+    .show_task {
+        width: fit-content;
+        padding: 24px 16px 24px 16px;
+        min-width: 288px;
+    }
+
+    .task_edit_initial {
+        overflow-x: scroll;
+    }
+
+    .task_edit_initial::-webkit-scrollbar {
+        display: none;
+    }
 }

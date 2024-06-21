@@ -108,23 +108,26 @@ function renderGenerateShowTaskHtml(contact, id) {
             </div> 
 
             <div class="show_task_title">${contact.title}</div>    
-            <div class="show_task_description">${contact.description}</div> 
+            
+            <div class="showTaskFirstInfoSection">
+                <div class="show_task_description">${contact.description}</div> 
 
-            <div class="show_task_date">
-                <span>Due date:</span>
-                <div>${contact.date}</div>    
+                <div class="show_task_date">
+                    <span>Due date:</span>
+                    <div>${contact.date}</div>    
+                </div>
+
+                <div class="show_task_priory show_task_date">
+                    <span>Priority:</span>
+                    <div class="show_task_priority">
+                        <span>${contact.priority}</span>
+                        <img src="${contact.priorityImg}">
+                    </div>
+                </div> 
             </div>
 
-            <div class="show_task_priory show_task_date">
-                <span>Priority:</span>
-                <div class="show_task_priority">
-                    <span>${contact.priority}</span>
-                    <img src="${contact.priorityImg}">
-                </div>
-            </div> 
-
             <div class="show_task_user_daten">
-                <span>Assigned to:</span>
+                <span class="taskAssignedToSpan">Assigned to:</span>
                 <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
                 <div class="show_task_user_name " id="show_task_user_name"></div>
                 <div class="show_task_show_subtasks">

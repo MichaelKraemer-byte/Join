@@ -21,6 +21,13 @@
 }
 
 @media (max-width: 850px) {
+    #boardNav{
+        display: none;
+    }
+
+    #mobileBoardNav{
+        display: flex;
+    }
 
     #helpLink{
         display: block;

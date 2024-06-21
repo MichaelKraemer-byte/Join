@@ -29,7 +29,6 @@ async function saveTasksToServer() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        console.log('Tasks saved to server');
     } catch (error) {
         console.error('Failed to save tasks to server:', error);
     }

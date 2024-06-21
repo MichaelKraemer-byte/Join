@@ -1,5 +1,6 @@
 .privacy {
     max-width: 1440px;
+    padding-bottom: 40px;
 }
 
 h2 {
@@ -40,8 +41,8 @@ h3 {
 }
 
 .privacy-container {
-    top: 23vh;
-    left: 23vw;    
+    top: 185px;
+    left: 328px;  
     box-sizing: border-box;
     position: relative;
     width: 70%;
@@ -49,15 +50,28 @@ h3 {
 
 @media(max-width: 1100px){
     .privacy-container {
-        left: 30vw;
+        left: 290px;
     }
 }
 
-@media(max-width: 850px) {
+@media (max-width: 1000px) {
+    .privacy-container {
+        left: 280px;
+    }
+}
+
+
+@media (max-width: 850px) {
     .privacy-container {
         left: 0px;
         width: 100%;
         padding-inline: 50px;
         padding-bottom: 100px;
+    }
+}
+
+@media (max-width: 450px) {
+    .privacy-container {
+        top: 135px;
     }
 }

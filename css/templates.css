@@ -59,6 +59,10 @@
 /* CSS TOOLS */
 
 
+#mobileBoardNav{
+    display: none;
+}
+
 body::-webkit-scrollbar {
     width: var(--sb-size);
   }
