@@ -282,6 +282,7 @@
 }
 
 .board_task_progress_subcount {
+    white-space: nowrap;
     width: 40%;
     font-size: 10px;
     font-weight: 700;
