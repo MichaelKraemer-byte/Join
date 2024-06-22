@@ -235,4 +235,3 @@ function numberOfAwaitFeedbackTasks() {
     ${awaitFeedback.length}
 `;
 }
-

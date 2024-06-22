@@ -116,10 +116,10 @@ function checkIfContactAlreadyExistsForAdd(contactObject, initials) {
 /**
  * The function `checkIfContactAlreadyExistsForEdit` checks if a contact already exists based on phone
  * number, email, and name for editing purposes.
- * @param contactObject - The `contactObject` parameter in the `checkIfContactAlreadyExistsForEdit`
+ * @param {Object} contactObject - The `contactObject` parameter in the `checkIfContactAlreadyExistsForEdit`
  * function is an object that represents a contact. It likely contains properties such as `phone`,
  * `email`, and `name` that are used to identify and manage the contact's information.
- * @param initials - The `initials` parameter is likely a string representing the initials of a
+ * @param {String} initials - The `initials` parameter is likely a string representing the initials of a
  * contact. It is used as a parameter in the `checkIfContactAlreadyExistsForEdit` function to help
  * identify a contact when checking if it already exists based on certain criteria such as phone
  * number, email, and name.

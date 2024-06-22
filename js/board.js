@@ -476,6 +476,7 @@ async function upgradeTodos(id) {
     updateTaskCategory(contact);
     await saveTaskUpdates();
     reloadUI();
+    showTask(id);
 }
 
 
@@ -551,7 +552,6 @@ async function saveTaskUpdates() {
 function reloadUI() {
     initAddTask();
     initBoardTasks();
-    closeShowTask();
 }
 
 
