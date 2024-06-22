@@ -674,11 +674,6 @@
     .show_task_description, .show_task_date, .show_task_priory, .show_task_user_daten, .show_task_assigned_to_users, .show_task_footer p, .show_task_category {
         font-size: 16px;
     }
-
-    .show_task_content {
-        width: 480px;
-    }
-
 }
 
 @media (max-width: 630px) {

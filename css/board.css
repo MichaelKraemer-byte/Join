@@ -125,6 +125,8 @@
     border-radius: 8px;
     color: #2A3647;
     cursor: pointer;
+    box-sizing: border-box;
+    padding-bottom: 22px;
 }
 
 .column_section button:hover,
