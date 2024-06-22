@@ -1,0 +1,47 @@
+@media(max-width: 850px) {
+    
+    .show_task_title {
+        font-size: 36px;
+    }
+    
+    .show_task_description, .show_task_date, .show_task_priory, .show_task_user_daten, .show_task_assigned_to_users, .show_task_footer p, .show_task_category {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 630px) {
+    .show_task {
+        height: 80vh;
+        width: 400px;
+    }
+}
+
+@media(max-width: 450px) {
+    .show_task {
+        width: 360px;
+    }
+}
+
+@media(max-width: 450px) {
+
+    .show_task {
+        width: 90vw;
+        padding: 24px 16px 24px 16px;
+    }
+
+    .task_edit_initial {
+        overflow-x: scroll;
+    }
+
+    .task_edit_initial::-webkit-scrollbar {
+        display: none;
+    }
+
+    .show_task_subtask_edit{
+        margin-left: 0px;
+    }
+
+    .show_task__edit_content{
+        padding-right: 0px;
+    }
+}
