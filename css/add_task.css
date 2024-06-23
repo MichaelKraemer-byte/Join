@@ -422,8 +422,8 @@ b {
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 18px;
-    line-height: 1em;
-    max-height: 1em;
+    line-height: 1.5em;
+    max-height: 1.5em;
     width: 80%;
 }
 
@@ -443,8 +443,6 @@ b {
 
 #checkBoxes label:hover {
     background-color: #D1D1D1;
-    /* color: white; */
-    /* Added text color for better visibility */
 }
 
 .add_task_show_check {
