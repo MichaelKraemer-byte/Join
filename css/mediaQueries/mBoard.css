@@ -163,12 +163,29 @@
     }
 }
 
+@media (max-width: 650px) {
+    .checkBoxLabelEditTask {
+        width: 240px;
+    }
+}
+
+
 @media (max-width: 450px) {
     .board_container{
         top: 135px;
     }
 
+    .checkBoxLabelEditTask {
+        width: 180px;
+    }
+
     .task {
         width: 196px;
+    }
+}
+
+@media (max-width: 360px) {
+    .checkBoxLabelEditTask {
+        width: 140px;
     }
 }

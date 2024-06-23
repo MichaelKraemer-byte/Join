@@ -234,11 +234,20 @@
     position: relative;
 }
 
+.checkBoxLabelEditTask{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 1.5em;
+    max-height: 1.5em;
+    width: 320px;
+}
+
 .board_task_user_initial {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: -10px;
     width: 32px;
     height: 32px;
     border-radius: 45px;

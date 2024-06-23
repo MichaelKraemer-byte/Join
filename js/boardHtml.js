@@ -177,7 +177,7 @@ function rendergetcheckBoxesEdit(guest, initial, isChecked) {
         <div class="board_task_check_box_name">
             <div class="show_task_checkbox_edit_name_input">
                 <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
-                <label for="${guest.id}">${guest.name}</label>
+                <label class="checkBoxLabelEditTask" for="${guest.id}">${guest.name}</label>
             </div>
             <div class="checkbox-wrapper-27">
                 <label class="checkbox">

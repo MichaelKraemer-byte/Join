@@ -20,7 +20,7 @@ let awaitt = 'awaitt';
 function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
     return /*html*/`        
-    <label>
+    <label class="checkBoxLabel">
         <div class="board_task_check_box_name">
             <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
             <p id="${i}">${element.name}</p>

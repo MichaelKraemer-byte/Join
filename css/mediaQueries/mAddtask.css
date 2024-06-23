@@ -236,6 +236,10 @@
     #meinFormular {
         gap: 50px;
     }
+
+    .board_task_check_box_name {
+        gap: 8px !important;
+    }
 }
 
 
