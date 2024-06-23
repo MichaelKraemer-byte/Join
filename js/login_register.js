@@ -136,7 +136,7 @@ function setDefaultUser() {
 /**
  * this function is used to set the current user in localstorage
  * 
- * @param {*} data 
+ * @param {object} data 
  */
 function setCurrentUserInLocalStorage(data) {
     let user = {
@@ -152,8 +152,8 @@ function setCurrentUserInLocalStorage(data) {
 /**
  * this function is used to check if the email already appears in the string
  * 
- * @param {*} data
- * @param {*} email
+ * @param {object} data
+ * @param {string} email
  * @returns 
  */
 function checkEmailInDB(data, email) {
@@ -167,8 +167,8 @@ function checkEmailInDB(data, email) {
 /**
  * this function is used to check if the password right
  * 
- * @param {*} data 
- * @param {*} checkPassword 
+ * @param {object} data 
+ * @param {string} checkPassword 
  * @returns 
  */
 function checkPasswortInDB(data, checkPassword) {
@@ -183,7 +183,7 @@ function checkPasswortInDB(data, checkPassword) {
 /**
  * this function is used to set the email to localstorage
  * 
- * @param {*} email 
+ * @param {string} email 
  */
 function setEmailToLocalstorage(email) {
     localStorage.setItem('login-name', email);
@@ -265,7 +265,7 @@ function togglePasswordVisibility(id) {
 /**
  * this function is used to toggle icon in password inputfield between hide oder show icon
  * 
- * @param {*} id document id from the password field
+ * @param {integer} id document id from the password field
  */
 function togglePasswordIcon(id) {
     const passwordField = document.getElementById(id + '-password')
@@ -280,7 +280,7 @@ function togglePasswordIcon(id) {
 /**
  * this function is used to set the icon from password inputfield to lock icon
  * 
- * @param {*} id document id from the password field
+ * @param {integer} id document id from the password field
  */
 function setPasswordIconToLock(id) {
     const toggleContainer = document.getElementById(id + '-password-icon-container');
@@ -295,7 +295,7 @@ function setPasswordIconToLock(id) {
 /**
  * this function is used to set the icon from password inputfield to eye icon
  * 
- * @param {*} id document id from the password field - 'login' or 'register'
+ * @param {integer} id document id from the password field - 'login' or 'register'
  */
 function setPasswordIconToEye(id) {
     const toggleContainer = document.getElementById(id + '-password-icon-container');
@@ -349,7 +349,7 @@ function wrongPassword(val) {
 /**
  * this function is used to show the password no matching with the first password from inputfiel
  * 
- * @param {*} val 'show' or 'hide' infotext
+ * @param {string} val 'show' or 'hide' infotext
  */
 function noMatchingPassword(val) {
     const wrongPassword = document.getElementById('match-password');
@@ -428,7 +428,7 @@ function postTestData() {
 /**
  * this function is used to generate the initials from name.
  * 
- * @param {*} contact 
+ * @param {string} contact 
  * @returns the first letter from first name and first letter from last name
  */
 function getInitials(contact) {
