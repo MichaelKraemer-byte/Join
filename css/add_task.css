@@ -365,6 +365,7 @@ b {
 
 .selectBox {
     position: relative;
+    width: 100%;
 }
 
 .selectBox img {
@@ -398,11 +399,11 @@ b {
 
 .checkbox_name {
     border-radius: 10px;
+    width: 100%;
 }
 
 #checkBoxes label {
     display: flex;
-    width: 100%;
     justify-content: space-between;
     align-items: center;
     word-wrap: break-word;
@@ -410,12 +411,20 @@ b {
     border-radius: 10px;
     font-size: 20px;    
     position: relative;
+    width: 96%;
 }
 
 #checkBoxes label p {
-   margin-block-start: 0;
-   margin-block-end: 0;
-   margin-left: 20px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-left: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 1em;
+    max-height: 1em;
+    width: 80%;
 }
 
 .check_box_initial {
@@ -429,6 +438,7 @@ b {
 .board_task_check_box_name {
     display: flex;
     align-items: center;
+    width: 96%;
 }
 
 #checkBoxes label:hover {
@@ -463,6 +473,7 @@ b {
     -webkit-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     -moz-box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
     box-shadow: 0px 6px 7px -3px rgba(0, 0, 0, 0.37);
+    width: 100%;
 }
 
 .dropdown_users_name::-webkit-scrollbar {

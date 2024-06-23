@@ -212,6 +212,13 @@
     line-height: 19.2px;
     color: #2A3647;
     margin-bottom: 8px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1.5em;
 }
 
 .board_task_descripton {
@@ -282,6 +289,7 @@
 }
 
 .board_task_progress_subcount {
+    white-space: nowrap;
     width: 40%;
     font-size: 10px;
     font-weight: 700;
