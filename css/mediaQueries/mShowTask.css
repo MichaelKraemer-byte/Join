@@ -20,6 +20,10 @@
     .show_task {
         width: 360px;
     }
+
+    .board_task_check_box_name{
+        padding: 12px 8px
+    }
 }
 
 @media(max-width: 450px) {

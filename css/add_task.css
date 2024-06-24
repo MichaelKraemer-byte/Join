@@ -409,8 +409,8 @@ b {
     position: relative;
 }
 
-.checkBoxLabel {
-    padding: 8px;
+.checkBoxLabel:hover {
+    cursor: pointer;
 }
 
 #checkBoxes label p {
@@ -442,11 +442,14 @@ b {
     margin-right: 25px;
 }
 
+.addTaskCheckBoxContainer{
+    width: 80%;
+}
+
 .board_task_check_box_name {
     display: flex;
     align-items: center;
     padding: 8px;
-    justify-content: space-between;
 }
 
 #checkBoxes label:hover {
@@ -459,6 +462,7 @@ b {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
+    flex-wrap: wrap;
 }
 
 .add_task_show_check::-webkit-scrollbar {
@@ -687,4 +691,9 @@ body {
     #listSection {
       scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
+  }
+
+  .checkedLabel:hover{
+    background-color: #1d2632 !important;
+    cursor: pointer;
   }

@@ -21,14 +21,14 @@ function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
     return /*html*/`        
     <label class="checkBoxLabel">
-        <div class="board_task_check_box_name">
+        <div class="board_task_check_box_name addTaskCheckBoxContainer">
             <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
             <p id="${i}">${element.name}</p>
         </div>
         <div class="checkbox-wrapper-27">
             <label class="checkbox">
                 <input type="checkbox" name="optionen" value="${element.name}">
-                <span class="checkbox__icon"></span>
+                <span class="checkbox__icon padding-right"></span>
             </label>
         </div>
     </label>

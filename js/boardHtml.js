@@ -174,7 +174,7 @@ function renderGenerateShowTaskHtml(contact, id) {
  */
 function rendergetcheckBoxesEdit(guest, initial, isChecked) {
     return `        
-        <div class="board_task_check_box_name">
+        <div class="board_task_check_box_name editTaskCheckBoxGreyHover">
             <div class="show_task_checkbox_edit_name_input">
                 <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
                 <label class="checkBoxLabelEditTask" for="${guest.id}">${guest.name}</label>

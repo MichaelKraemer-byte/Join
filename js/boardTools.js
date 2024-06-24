@@ -84,14 +84,18 @@ function updateSelectedNames(event) {
     let checkbox = event.target;
     let name = checkbox.value;
     let checkBoxParent = checkbox.closest('.board_task_check_box_name');
+    let chechkboxLabel = checkbox.closest('.checkbox');
+
 
     if (checkbox.checked) {
         checkBoxParent.classList.add('checked-checkbox');
+        chechkboxLabel.classList.add('whiteCheckbox');
         if (!selectedNames.includes(name)) {
             selectedNames.push(name);
         }
     } else {
         checkBoxParent.classList.remove('checked-checkbox');
+        chechkboxLabel.classList.remove('whiteCheckbox');
         let index = selectedNames.indexOf(name);
         if (index > -1) {
             selectedNames.splice(index, 1);

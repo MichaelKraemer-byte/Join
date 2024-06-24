@@ -75,7 +75,7 @@ async function loadData(path = '') {
  * this function is used to upload data to the databank
  * 
  * @param {string} path this is the path from the BASE_URL
- * @param {*} data the data that you want to upload
+ * @param {object} data the data that you want to upload
  * @returns 
  */
 async function postData(path = '', data = {}) {

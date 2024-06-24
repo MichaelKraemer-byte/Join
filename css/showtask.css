@@ -195,6 +195,14 @@
     height: 18px;
 }
 
+.board_task_check_box_name:hover {
+    cursor: pointer;
+}
+
+.checked-checkbox:hover {
+    background-color: #1d2632 !important;
+}
+
 .board_task_check_box_name {
     display: flex;
     gap: 20px;
@@ -202,12 +210,22 @@
 }
 
 .board_task_check_box_name {
-    padding-right: 16px;
+    padding: 12px 0px 12px 24px;    
     border-radius: 10px;
 }
 
+.padding-right{
+    padding-right: 16px !important;
+}
+
 .board_task_check_box_name:hover {
-    background-color: #D1D1D1;
+    cursor: pointer;
+}
+
+
+
+.checkBoxLabelEditTask:hover{
+    cursor: pointer;
 }
 
 .show_task_checkbox_edit_name_input {
@@ -368,6 +386,7 @@
     display: flex;
     gap: 20px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .task_subtask_edit {
@@ -580,6 +599,10 @@
     background-color: #f1f1f1e0;
 } */
 
+
+.editTaskCheckBoxGreyHover:hover{
+    background-color: #F6F7F8;
+}
 
 .show_task_subtask_edit_btn {
     width: 100%;
