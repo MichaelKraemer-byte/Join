@@ -436,7 +436,8 @@ b {
 
 
 .checkbox input[type="checkbox"]:checked + .checkbox__icon {
-    background-color: white;
+    /* background-color: white; */
+    filter: invert(2) sepia(2);
 }
 
 #checkBoxes label input {
