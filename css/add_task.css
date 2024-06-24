@@ -216,7 +216,6 @@ b {
     width: 70vw;
 }
 
-
 .add_task_footer p {
     font-size: 20px;
     line-height: 24px;
@@ -248,11 +247,9 @@ b {
     filter: invert(71%) sepia(58%) saturate(3762%) hue-rotate(165deg) brightness(93%) contrast(91%);
 }
 
-
 .addContactCancelX{
     filter: invert(16%) sepia(50%) saturate(3598%) hue-rotate(176deg) brightness(50%) contrast(82%);
 }
-
 
 .add_task_button_clear {
     color: #2A3647;
