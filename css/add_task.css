@@ -425,6 +425,20 @@ b {
     width: 80%;
 }
 
+.checkedLabel {
+    background-color: #2A3647;
+    color: white;
+}
+
+.checkbox input[type="checkbox"] {
+    display: none;
+}
+
+
+.checkbox input[type="checkbox"]:checked + .checkbox__icon {
+    background-color: white;
+}
+
 #checkBoxes label input {
     margin-right: 25px;
 }

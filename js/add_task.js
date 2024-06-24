@@ -337,10 +337,23 @@ function checkGuestsName(checkedValues) {
             const element = selectedGuests[index];
             let initial = getInitials(element.name);
             add_task_show_check.innerHTML += `
-                    <div class="add_task_checkbox_name board_task_user_initial show_task_user_initial" style="background-color: ${element.color};">${initial}</div>
-                `;
+                <div class="add_task_checkbox_name board_task_user_initial show_task_user_initial" style="background-color: ${element.color};">${initial}</div>
+            `;
         }
     }
+
+    // Add event listeners to checkboxes
+    const checkboxes = document.querySelectorAll('input[name="optionen"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const label = checkbox.closest('.checkBoxLabel');
+            if (checkbox.checked) {
+                label.classList.add('checkedLabel');
+            } else {
+                label.classList.remove('checkedLabel');
+            }
+        });
+    });
 }
 
 
