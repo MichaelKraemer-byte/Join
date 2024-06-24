@@ -56,6 +56,13 @@ function getcheckBoxesEdit(id) {
         return rendergetcheckBoxesEdit(guest, initial, isChecked);
     }).join('');
 
+    document.querySelectorAll('#checkBoxesEdit .board_task_check_box_name').forEach(box => {
+        let checkbox = box.querySelector('input[type="checkbox"]');
+        if (checkbox.checked) {
+            box.classList.add('checked-checkbox');
+        }
+    });
+
     document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', updateSelectedNames);
     });
@@ -76,11 +83,15 @@ function getcheckBoxesEdit(id) {
 function updateSelectedNames(event) {
     let checkbox = event.target;
     let name = checkbox.value;
+    let checkBoxParent = checkbox.closest('.board_task_check_box_name');
+
     if (checkbox.checked) {
+        checkBoxParent.classList.add('checked-checkbox');
         if (!selectedNames.includes(name)) {
             selectedNames.push(name);
         }
     } else {
+        checkBoxParent.classList.remove('checked-checkbox');
         let index = selectedNames.indexOf(name);
         if (index > -1) {
             selectedNames.splice(index, 1);

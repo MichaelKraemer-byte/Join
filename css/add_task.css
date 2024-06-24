@@ -434,10 +434,8 @@ b {
     display: none;
 }
 
-
 .checkbox input[type="checkbox"]:checked + .checkbox__icon {
-    /* background-color: white; */
-    filter: invert(2) sepia(2);
+    filter: invert(1%) sepia(1%) contrast(1%);
 }
 
 #checkBoxes label input {
