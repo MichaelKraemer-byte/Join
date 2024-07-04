@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/fonts/inter.css">
-    <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/templates.css">
-    <link rel="stylesheet" href="css/add_task.css">
-    <link rel="stylesheet" href="css/showtask.css">
-    <link rel="stylesheet" href="css/mediaQueries/mShowTask.css">
+    <link rel="stylesheet" href="./css/fonts/inter.css">
+    <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/templates.css">
+    <link rel="stylesheet" href="./css/add_task.css">
+    <link rel="stylesheet" href="./css/showtask.css">
+    <link rel="stylesheet" href="./css/mediaQueries/mShowTask.css">
     <link rel="stylesheet" href="./css/mediaQueries/mTemplates.css">
-    <link rel="stylesheet" href="css/mediaQueries/mTemplates.css">
-    <link rel="stylesheet" href="css/mediaQueries/mBoard.css">
-    <link rel="icon" type="image/x-icon" href="assets/img/joinIconSmall.svg">
+    <link rel="stylesheet" href="./css/mediaQueries/mTemplates.css">
+    <link rel="stylesheet" href="./css/mediaQueries/mBoard.css">
+    <link rel="icon" type="image/x-icon" href="./assets/img/joinIconSmall.svg">
     <script src="./js/script.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/add_task.js"></script>
@@ -55,7 +55,7 @@
             <div class="title-mobile ">
                 <div class="task_navigation">
                     <h1>Board</h1>
-                    <button onclick="navigateTo('/add_task.html')">+</button>
+                    <button onclick="navigateTo('./add_task.html')">+</button>
                 </div>
                 <div class="task_navigation">
                     <div class="input_task_navigation">
@@ -90,21 +90,21 @@
         <div class="board_content_mobile board_content">
             <div class="board_content_mobile_taskTitle">
                 <h2>To Do</h2>
-                <button onclick="navigateTo('/add_task.html'); changeAddTaskCategory()">+</button>
+                <button onclick="navigateTo('./add_task.html'); changeAddTaskCategory()">+</button>
             </div>
             <div class="bord_content_colum_left" id="board_to_do" ondrop="moveTo('to_do')"
                 ondragover="allowDrop(event); highlightTaskCategory('board_to_do')" ondragleave="removeHighlightTaskCategory('board_to_do')">
             </div>
             <div class="board_content_mobile_taskTitle">
                 <h2>In Progress</h2>
-                <button onclick="navigateTo('/add_task.html')">+</button>
+                <button onclick="navigateTo('./add_task.html')">+</button>
             </div>
             <div class="bord_content_colum" id="board_in_progress" ondrop="moveTo('in_progress')"
                 ondragover="allowDrop(event); highlightTaskCategory('board_in_progress')" ondragleave="removeHighlightTaskCategory('board_in_progress')">
             </div>
             <div class="board_content_mobile_taskTitle">
                 <h2>Await Feedback</h2>
-                <button onclick="navigateTo('/add_task.html')">+</button>
+                <button onclick="navigateTo('./add_task.html')">+</button>
             </div>
             <div class="bord_content_colum" id="board_await_feedback" ondrop="moveTo('awaitt')"
                 ondragover="allowDrop(event); highlightTaskCategory('board_await_feedback')" ondragleave="removeHighlightTaskCategory('board_await_feedback')">
