@@ -58,12 +58,9 @@ async function loadTasksFromServer() {
 
 
 /**
- * The function `deleteTaskFromLocalStorage` deletes a task with a specific ID from local storage,
- * updates the task list, saves the updated tasks to the server, and initializes the board tasks.
- * @param id - The `id` parameter in the `deleteTaskFromLocalStorage` function represents the unique
- * identifier of the task that needs to be deleted from the local storage. This identifier is used to
- * find and remove the specific task from the `todos` array before saving the updated tasks to the
- * server and local storage.
+ * Deletes a task with a specific ID from local storage, updates the task list,
+ * saves the updated tasks to the server, and initializes the board tasks.
+ * @param {string} id - The unique identifier of the task to be deleted from local storage.
  */
 async function deleteTaskFromLocalStorage(id) {
     let arr = [];
@@ -125,17 +122,13 @@ async function initBoardTasks() {
 
 
 /**
- * The function `generateToDo` populates a specified HTML element with to-do items from an array,
- * including rendering subtasks and progress bars.
- * @param arr - The `arr` parameter in the `generateToDo` function is an array that contains the tasks
- * to be displayed in a to-do list. Each element in the array represents a task object with properties
- * like `id`, `subtasks`, `selectedTask`, etc. The function iterates over this array
- * @param categorie_id - `categorie_id` is a DOM element that represents the container where the
- * generated to-do items will be displayed. The function `generateToDo` populates this container with
- * to-do items based on the input array and category information.
- * @param category - The `category` parameter in the `generateToDo` function is used to specify the
- * category of the to-do items being generated. It is likely used for rendering the to-do items in the
- * appropriate category section on the user interface.
+ * Populates a specified HTML element with to-do items from an array, including rendering subtasks
+ * and progress bars.
+ * @param {Array} arr - An array containing task objects to be displayed in a to-do list.
+ * Each task object should have properties like `id`, `subtasks`, `selectedTask`, etc.
+ * @param {HTMLElement} categorie_id - The DOM element where the generated to-do items will be displayed.
+ * @param {string} category - Specifies the category of the to-do items being generated.
+ * This parameter is used for rendering the to-do items in the appropriate category section.
  */
 async function generateToDo(arr, categorie_id, category) {
     categorie_id.innerHTML = '';
@@ -163,10 +156,10 @@ async function generateToDo(arr, categorie_id, category) {
 
 
 /**
- * The function `addTask` adds a new task to a specified column in a task management system.
- * @param column - The `column` parameter in the `addTask` function likely refers to the column or
- * section where the task is being added. This parameter is used to specify the location within the
- * task management system where the new task will be created.
+ * Adds a new task to a specified column in a task management system.
+ * @param {string} column - Specifies the column or section where the task will be added.
+ * This parameter is used to indicate the location within the task management system
+ * where the new task will be created.
  */
 function addTask(column) {
     generateAddTasks(column);
@@ -177,11 +170,9 @@ function addTask(column) {
 
 
 /**
- * The function `generateShowTask` populates a popup with information about a specific task, including
- * subtasks and user details.
- * @param id - The `id` parameter in the `generateShowTask` function is used to identify the specific
- * task or contact that needs to be displayed in the pop-up on the board. It is used to find the
- * corresponding task object in the `todos` array and then render the task details in the pop-up
+ * Populates a popup with information about a specific task, including subtasks and user details.
+ * @param {string} id - The identifier of the specific task or contact to be displayed in the popup on the board.
+ * This parameter is used to find the corresponding task object in the `todos` array and render its details in the popup.
  */
 async function generateShowTask(id) {
     let boardPopUp = document.getElementById('boardPopUp');
@@ -195,18 +186,13 @@ async function generateShowTask(id) {
 
 
 /**
- * The function `updateSubtaskStatus` updates the status of a subtask for a given contact by adding or
- * removing it from the selected tasks list, saving the changes to local storage, sending the updated
- * tasks to the server, and initializing the board tasks.
- * @param contact - Contact is an object representing a user or a person. It likely contains
- * information such as name, email, phone number, and other details.
- * @param subtask - The `subtask` parameter in the `updateSubtaskStatus` function represents the
- * specific subtask that you want to update the status for. It is used to identify the subtask within
- * the `contact` object and determine whether it should be added to or removed from the `selectedTask`
- * array
- * @param isChecked - The `isChecked` parameter is a boolean value that indicates whether a subtask is
- * checked or not. If `isChecked` is `true`, it means the subtask is checked; if `isChecked` is
- * `false`, it means the subtask is not checked.
+ * Updates the status of a subtask for a given contact by adding or removing it from the selected tasks list,
+ * saving the changes to local storage, sending the updated tasks to the server, and initializing the board tasks.
+ * @param {Object} contact - An object representing a user or a person. It contains information such as name,
+ * email, phone number, and other details.
+ * @param {string} subtask - The specific subtask that you want to update the status for within the `contact` object.
+ * @param {boolean} isChecked - A boolean value indicating whether the subtask is checked (true) or not checked (false).
+ * If `isChecked` is true, the subtask will be added to the `selectedTask` array of the `contact`; if false, it will be removed.
  */
 async function updateSubtaskStatus(contact, subtask, isChecked) {
     if (contact) {
@@ -228,11 +214,9 @@ async function updateSubtaskStatus(contact, subtask, isChecked) {
 
 
 /**
- * The function `getshowTaskUserName` populates the `show_task_user_name` element with user names and
- * initials from a given contact object.
- * @param contact - It seems like the information about the `contact` object is missing in your
- * message. Could you please provide the details or properties of the `contact` object so that I can
- * assist you further with the `getshowTaskUserName` function?
+ * Populates the `show_task_user_name` element with user names and initials from a given contact object.
+ * @param {Object} contact - An object containing information about a contact, likely including properties
+ * such as `name`, `color`, and `initial` for each user.
  */
 function getshowTaskUserName(contact) {
     let showTaskUserName = document.getElementById('show_task_user_name');
@@ -252,11 +236,9 @@ function getshowTaskUserName(contact) {
 
 
 /**
- * The `editTask` function retrieves a task by its ID, hides the task container, and populates a popup
- * with the task details for editing.
- * @param id - The `id` parameter in the `editTask` function is used to identify the specific task that
- * needs to be edited. It is passed to the function to locate the task within the `todos` array and
- * retrieve its details for editing.
+ * Retrieves a task by its ID, hides the task container, and populates a popup with the task details for editing.
+ * @param {number} id - The unique identifier of the task to be edited. This ID is used to locate the task within
+ * the `todos` array and retrieve its details.
  */
 function editTask(id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -275,11 +257,9 @@ function editTask(id) {
 
 
 /**
- * The function `getContactPriorityEdit` sets the active class on the corresponding HTML element based
- * on the priority of a contact.
- * @param contact - The function `getContactPriorityEdit` takes a `contact` object as a parameter. The
- * `contact` object likely has a property called `priority` which specifies the priority level of the
- * contact. The function then selects elements with IDs 'urgent_edit', 'medium_edit', and 'low_edit'
+ * Sets the active class on the corresponding HTML element based on the priority of a contact.
+ * @param {Object} contact - The contact object containing the priority property.
+ * @param {string} contact.priority - The priority level of the contact ('Urgent', 'Medium', or 'Low').
  */
 function getContactPriorityEdit(contact) {
     let urgent_edit = document.getElementById('urgent_edit');
@@ -301,12 +281,11 @@ function getContactPriorityEdit(contact) {
 
 
 /**
- * The function `getContactInitialEdit` populates input fields with contact information and calls
- * another function to generate selected names.
- * @param contact - The `contact` parameter in the `getContactInitialEdit` function seems to represent
- * an object with properties like `title`, `description`, and `date`. These properties are used to
- * populate input fields in a form with IDs `task_title_edit`, `task_description_edit`, and
- * `task_date_edit
+ * Populates input fields with contact information and calls another function to generate selected names.
+ * @param {Object} contact - The contact object containing information such as title, description, and date.
+ * @param {string} contact.title - The title of the contact task to be edited.
+ * @param {string} contact.description - The description of the contact task to be edited.
+ * @param {string} contact.date - The date associated with the contact task to be edited.
  */
 function getContactInitialEdit(contact) {
     let task_title_edit = document.getElementById('task_title_edit');
@@ -322,11 +301,10 @@ function getContactInitialEdit(contact) {
 
 
 /**
- * The function `generateSelectedNames` populates a specified HTML element with user initials and
- * background colors based on the provided contact data.
- * @param contact - It seems like you haven't provided the complete information about the `contact`
- * parameter. Could you please provide more details or the structure of the `contact` object so that I
- * can assist you better in completing the `generateSelectedNames` function?
+ * Populates a specified HTML element with user initials and background colors based on the provided contact data.
+ * @param {Object} contact - The contact object containing information such as color and initial.
+ * @param {string[]} contact.color - An array of background colors corresponding to each user.
+ * @param {string[]} contact.initial - An array of initials representing each user.
  */
 function generateSelectedNames(contact) {
     let task_edit_initial = document.getElementById('task_edit_initial');
@@ -344,12 +322,12 @@ function generateSelectedNames(contact) {
 
 
 /**
- * The function `getSubtaskEdit` populates a specified HTML element with subtask information based on a
- * given contact object.
- * @param contact - The `contact` parameter in the `getSubtaskEdit` function seems to be an object that
- * contains information about a contact, including their subtasks. The function loops through the
- * subtasks of the contact and renders HTML elements based on the subtask data. If the contact has
- * subtasks, it
+ * Populates a specified HTML element with subtask information based on the given contact object.
+ * @param {Object} contact - The contact object containing subtask information.
+ * @param {Object[]} contact.subtasks - An array of subtasks belonging to the contact.
+ * @param {string} contact.subtasks[].title - The title of the subtask.
+ * @param {string} contact.subtasks[].description - The description of the subtask.
+ * @param {string} contact.subtasks[].date - The date associated with the subtask.
  */
 function getSubtaskEdit(contact) {
     let task_subtasks_edit = document.getElementById('show_task_subtask_edit');
@@ -365,6 +343,12 @@ function getSubtaskEdit(contact) {
     }
 }
 
+
+/**
+ * Sets the selected option in a dropdown menu based on the current task category of a contact.
+ * @param {Object} contact - The contact object containing information about the task category.
+ * @param {string} contact.category - The current category of the task associated with the contact.
+ */
 function getCurrentTaskCategoryEdit(contact) {
     let task_taskCategory_edit = document.getElementById('task_category_edit');
     let currentTaskCategory = contact.category;
@@ -380,12 +364,9 @@ function getCurrentTaskCategoryEdit(contact) {
 
 
 /**
- * The function `showTaskEditSubtask` displays a specific subtask for editing within a task.
- * @param i - The parameter `i` in the `showTaskEditSubtask` function is likely representing the index
- * of the subtask within the `subtasks` array of the `contact` object.
- * @param id - The `id` parameter in the `showTaskEditSubtask` function is used to find the specific
- * task object in the `todos` array based on its `id` property. This allows the function to retrieve
- * the task details, including its subtasks, for further manipulation.
+ * Displays a specific subtask for editing within a task.
+ * @param {number} i - The index of the subtask within the `subtasks` array of the `contact` object.
+ * @param {string} id - The unique identifier of the task to be edited, used to locate the task in the `todos` array.
  */
 function showTaskEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -398,13 +379,10 @@ function showTaskEditSubtask(i, id) {
 
 
 /**
- * The function `addEditSubtask` updates a subtask for a specific task and saves the changes to local
- * storage and the server.
- * @param i - The parameter `i` in the `addEditSubtask` function represents the index of the subtask
- * within the `contact` object's subtasks array that you want to add or edit.
- * @param id - The `id` parameter in the `addEditSubtask` function is used to identify the specific
- * task in the `todos` array that needs to be updated. It is used to find the task object with the
- * matching `id` value in the `todos` array.
+ * Updates a subtask for a specific task and saves the changes to local storage and the server.
+ * @param {number} i - The index of the subtask within the `contact` object's subtasks array to add or edit.
+ * @param {string} id - The unique identifier of the task to be updated, used to locate the task in the `todos` array.
+ * @returns {Promise<void>} A Promise that resolves once the subtask is updated and changes are saved.
  */
 async function addEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -418,13 +396,12 @@ async function addEditSubtask(i, id) {
 
 
 /**
- * The function `showTaskDeleteSubtask` deletes a subtask from a task, saves the updated task to local
- * storage, sends the updated tasks to the server, and then retrieves the edited subtask for display.
- * @param i - The parameter `i` in the `showTaskDeleteSubtask` function represents the index of the
- * subtask that needs to be deleted from the `subtasks` array of a task.
- * @param id - The `id` parameter in the `showTaskDeleteSubtask` function is used to identify the task
- * for which a subtask needs to be deleted. It is used to find the specific task object from the
- * `todos` array.
+ * Deletes a subtask from a task, saves the updated task to local storage, sends the updated tasks to
+ * the server, and retrieves the edited subtask for display.
+ * @param {number} i - The index of the subtask to be deleted from the `subtasks` array of a task.
+ * @param {string} id - The unique identifier of the task from which the subtask needs to be deleted,
+ * used to locate the task in the `todos` array.
+ * @returns {Promise<void>} A Promise that resolves once the subtask is deleted and changes are saved.
  */
 async function showTaskDeleteSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -437,10 +414,10 @@ async function showTaskDeleteSubtask(i, id) {
 
 
 /**
- * The function `addNewSubTaskEdit` adds a new subtask to a task, saves it to local storage, sends it
- * to the server, and updates the UI.
- * @param id - The `id` parameter in the `addNewSubTaskEdit` function is used to identify the specific
- * task in the `todos` array that needs to be updated with a new subtask.
+ * Adds a new subtask to a task, saves it to local storage, sends it to the server, and updates the UI.
+ * @param {string} id - The unique identifier of the task in the `todos` array that needs to be updated
+ * with a new subtask.
+ * @returns {Promise<void>} A Promise that resolves once the new subtask is added and changes are saved.
  */
 async function addNewSubTaskEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -461,12 +438,12 @@ async function addNewSubTaskEdit(id) {
 
 
 /**
- * The function `upgradeTodos` updates a specific todo item by finding it in the `todos` array,
- * updating its details, guest information, and priority, saving the updates, and then reloading the
- * user interface.
- * @param id - The `id` parameter in the `upgradeTodos` function is used to identify the specific todo
- * item that needs to be upgraded. It is used to find the corresponding todo object in the `todos`
- * array based on the provided `id`.
+ * Updates a specific todo item by finding it in the `todos` array, updating its details, guest
+ * information, priority, saving the updates, and then reloading the user interface.
+ * @param {string} id - The unique identifier of the todo item in the `todos` array that needs to be
+ * upgraded.
+ * @returns {Promise<void>} A Promise that resolves once the todo item is upgraded and changes are
+ * saved.
  */
 async function upgradeTodos(id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -481,10 +458,13 @@ async function upgradeTodos(id) {
 
 
 /**
- * The function `updateContactDetails` updates contact details based on input values from specific
- * elements in a form.
- * @param contact - The `contact` parameter is an object that represents a contact or task. It contains
- * the following properties:
+ * Updates contact details based on input values from specific elements in a form.
+ * @param {Object} contact - The contact object to be updated. It contains the following properties:
+ * @param {string} contact.title - The title of the contact or task.
+ * @param {string} contact.description - The description or details of the contact or task.
+ * @param {string} contact.date - The date associated with the contact or task.
+ * @param {string} contact.assignedTo - The person assigned to the contact or task.
+ * @param {Array<string>} contact.name - An array of names or initials associated with the contact or task.
  */
 function updateContactDetails(contact) {
     contact.title = document.getElementById('task_title_edit').value;
@@ -496,11 +476,11 @@ function updateContactDetails(contact) {
 
 
 /**
- * The function `updateGuestInfo` updates the color and initials of a contact based on selected guest
- * names.
- * @param contact - The `contact` parameter is an object that contains information about a guest, such
- * as their name, color, and initials. The `updateGuestInfo` function takes this `contact` object and
- * updates its `color` and `initial` properties based on the selected guest names in the `selectedNames
+ * Updates the color and initials of a contact based on selected guest names.
+ * @param {Object} contact - The contact object to be updated. It contains information about a guest,
+ * including their name, color, and initials.
+ * @param {Array<string>} selectedNames - An array of selected guest names whose colors and initials
+ * will be updated in the contact object.
  */
 function updateGuestInfo(contact) {
     let guestColor = [];
@@ -516,12 +496,11 @@ function updateGuestInfo(contact) {
 
 
 /**
- * The function `updatePriority` updates the priority and priority image of a contact based on a
- * user-defined priority value.
- * @param contact - The `contact` parameter seems to be an object representing a contact. It appears
- * that the function `updatePriority` is designed to update the priority of this contact based on the
- * value of `userPriority`. If `userPriority` is truthy, the function sets the `priority` property of
- * the
+ * Updates the priority and priority image of a contact based on a user-defined priority value.
+ * @param {Object} contact - The contact object to be updated. It represents a contact and contains
+ * properties like `priority` and `priorityImg` that will be updated based on the user-defined priority.
+ * @param {string} userPriority - The user-defined priority value to update in the contact object.
+ * This value will be assigned to the `priority` property of the contact object if truthy.
  */
 function updatePriority(contact) {
     if (userPriotity) {
@@ -530,6 +509,12 @@ function updatePriority(contact) {
     }
 }
 
+
+/**
+ * Updates the category of a task contact based on user input from a specific HTML element.
+ * @param {Object} contact - The contact object representing a task. It contains properties
+ * such as `category` that will be updated based on user input.
+ */
 function updateTaskCategory(contact) {
     contact.category = document.getElementById('task_category_edit').value;
 }
@@ -585,12 +570,10 @@ function searchTaskFromBoard() {
 
 
 /**
- * The function `getInitialsArray` populates a board with initials and colors, showing a limited number
- * of initials with circles and displaying the rest as a count.
- * @param element - The `element` parameter in the `getInitialsArray` function seems to represent an
- * object with properties like `initial`, `color`, and `id`. The function retrieves the initials and
- * colors arrays from the `element` object, sets a limit for the number of initials to display, and
- * then
+ * Populates a board with initials and colors, displaying a limited number of initials with circles
+ * and showing the rest as a count.
+ * @param {Object} element - The object containing properties like `initial`, `color`, and `id`.
+ * It represents the element for which initials and colors are to be populated on the board.
  */
 function getInitialsArray(element) {
     let initialsArray = element.initial;

@@ -19,10 +19,8 @@ function checkBoxClickNone() {
 
 /**
  * The function `getInitials` takes a name as input and returns the initials of the name in uppercase.
- * @param name - The `getInitials` function takes a `name` parameter, which is a string representing a
- * person's name.
- * @returns The function `getInitials` takes a `name` as input and returns the initials of the name as
- * a string in uppercase.
+ * @param {string} name - A string representing a person's name from which initials are extracted.
+ * @returns {string} Returns the initials of the name as a string in uppercase.
  */
 function getInitials(name) {
     let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
@@ -40,9 +38,8 @@ function getInitials(name) {
 /**
  * The function `getcheckBoxesEdit` populates a list of checkboxes based on a selected contact's name
  * and updates the displayed names accordingly.
- * @param id - The `id` parameter in the `getcheckBoxesEdit` function is used to find a specific
- * contact in the `todos` array based on its ID. This contact's information will then be used to
- * populate and update a list of checkboxes in the HTML with the corresponding names and initials.
+ * @param {number} id - The ID of the contact in the `todos` array that is selected to populate checkboxes.
+ * This ID is used to find and retrieve the contact's information from `todos`.
  */
 function getcheckBoxesEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -76,7 +73,7 @@ function getcheckBoxesEdit(id) {
 /**
  * The function `updateSelectedNames` updates an array of selected names based on checkbox input and
  * then calls another function to update the displayed names.
- * @param event - The `event` parameter in the `updateSelectedNames` function is an object that
+ * @param {Event} event - The `event` parameter in the `updateSelectedNames` function is an object that
  * represents the event that occurred, such as a click event on a checkbox. It contains information
  * about the event, including the target element that triggered the event (in this case, a checkbox).
  */
@@ -84,18 +81,18 @@ function updateSelectedNames(event) {
     let checkbox = event.target;
     let name = checkbox.value;
     let checkBoxParent = checkbox.closest('.board_task_check_box_name');
-    let chechkboxLabel = checkbox.closest('.checkbox');
+    let checkboxLabel = checkbox.closest('.checkbox');
 
 
     if (checkbox.checked) {
         checkBoxParent.classList.add('checked-checkbox');
-        chechkboxLabel.classList.add('whiteCheckbox');
+        checkboxLabel.classList.add('whiteCheckbox');
         if (!selectedNames.includes(name)) {
             selectedNames.push(name);
         }
     } else {
         checkBoxParent.classList.remove('checked-checkbox');
-        chechkboxLabel.classList.remove('whiteCheckbox');
+        checkboxLabel.classList.remove('whiteCheckbox');
         let index = selectedNames.indexOf(name);
         if (index > -1) {
             selectedNames.splice(index, 1);
@@ -129,14 +126,13 @@ function updateDisplayedNames() {
 /**
  * The function `getPriorityUpdateTodos` returns an image path based on the priority level provided as
  * input.
- * @param userPriotity - The `getPriorityUpdateTodos` function takes a user's priority level as input
- * and returns the corresponding image path based on that priority level. The priority levels it
- * accepts are 'Urgent', 'Medium', and 'Low'. If the input priority level does not match any of these,
- * it will
- * @returns The function `getPriorityUpdateTodos` returns the path to an image based on the user's
- * priority input. If the user priority is 'Urgent', it returns './assets/img/vector_red.svg'. If the
- * user priority is 'Medium', it returns './assets/img/vector_strich.svg'. If the user priority is
- * 'Low', it returns './assets/img/vector_green.svg'. If the user priority
+ * @param {string} userPriority - The `userPriority` parameter in the `getPriorityUpdateTodos` function
+ * represents the priority level of a task, which can be 'Urgent', 'Medium', or 'Low'.
+ * @returns {string} The function `getPriorityUpdateTodos` returns the path to an image corresponding
+ * to the input priority level. If the priority is 'Urgent', it returns './assets/img/vector_red.svg'.
+ * If the priority is 'Medium', it returns './assets/img/vector_strich.svg'. If the priority is 'Low',
+ * it returns './assets/img/vector_green.svg'. If the input priority does not match any of these, an
+ * empty string is returned.
  */
 function getPriorityUpdateTodos(userPriotity) {
     switch (userPriotity) {
@@ -155,10 +151,10 @@ function getPriorityUpdateTodos(userPriotity) {
 /**
  * The function `showSubtask` returns the subtasks of an element if they exist, or an empty string if
  * they do not.
- * @param element - The `element` parameter in the `schowSubtask` function is expected to be an object
- * that may contain a property `subtasks`. If the `subtasks` property exists in the `element` object,
- * the function will return the value of `element.subtasks`. Otherwise, it will
- * @returns The function `schowSubtask` returns the subtasks of the given element if they exist,
+ * @param {object} element - The `element` parameter in the `showSubtask` function is expected to be
+ * an object that may contain a property `subtasks`. If the `subtasks` property exists in the `element`
+ * object, the function will return the value of `element.subtasks`. Otherwise, it will return an empty string.
+ * @returns {string} The function `showSubtask` returns the subtasks of the given element if they exist,
  * otherwise it returns an empty string.
  */
 function schowSubtask(element) {
@@ -173,9 +169,11 @@ function schowSubtask(element) {
 /**
  * The function `searchSwithId` uses a switch statement to assign different board IDs based on the
  * input category.
- * @param category - The function `searchSwithId` takes a `category` parameter and assigns a
- * corresponding `searchId` based on the value of `category`. The possible values for `category` are
- * 'to_do', 'in_progress', 'awaitt', and 'done'. When `category` is '
+ * @param {string} category - The `category` parameter specifies the category for which the board ID
+ * is assigned. Possible values are 'to_do', 'in_progress', 'awaitt', and 'done'.
+ * @returns {string} The function returns a board ID based on the `category`. If `category` is one of
+ * the specified values, the corresponding board ID is returned. If `category` is not recognized,
+ * returns an empty string.
  */
 function searchSwithId(category) {
     switch (category) {
@@ -196,11 +194,11 @@ function searchSwithId(category) {
 
 
 /**
- * The function `getCategorieBackGroundColor` changes the background color of a specified element based
- * on its status.
- * @param element - The `element` parameter seems to be an object that has a `status` property. The
- * `getCategorieBackGroundColor` function uses this `status` property to determine the background color
- * for a specific element on the page. If the `status` is 'Technical Task', it sets the background
+ * The function `getCategorieBackGroundColor` changes the background color of a specified element
+ * based on its status.
+ * @param {Object} element - The `element` parameter represents an object that has a `status`
+ * property. This status property is used to determine the background color for a specific element
+ * on the page.
  */
 function getCategorieBackGroundColor(element) {
     let borderCategory = document.getElementById(`board_task_category${element.id}`);
@@ -215,12 +213,12 @@ function getCategorieBackGroundColor(element) {
 /**
  * The function `getCategorieBackGroundColorShowTask` changes the background color of a specified
  * element based on the status of a contact.
- * @param contact - The `contact` parameter is an object that likely contains information about a task
- * or a contact. In this function, it is being used to determine the background color of a category
- * based on the `status` property of the `contact` object. If the `status` is 'Technical Task', the
- * @param id - The `id` parameter in the `getCategorieBackGroundColorShowTask` function is used to
- * identify a specific element on the webpage. It is likely used to target and update the background
- * color of a specific element with the id `show_task_category` based on the status of a contact
+ * @param {Object} contact - An object representing task or contact information, likely containing
+ * a `status` property. This property determines the background color for a specific element on the
+ * page.
+ * @param {string} id - The `id` parameter is used to identify a specific element on the webpage,
+ * typically with the format `show_task_category${id}`. It helps target and update the background
+ * color of this specific element based on the `status` of the contact.
  */
 function getCategorieBackGroundColorShowTask(contact, id) {
     let borderCategory = document.getElementById(`show_task_category${id}`);
@@ -234,13 +232,13 @@ function getCategorieBackGroundColorShowTask(contact, id) {
 
 /**
  * The function `generateNoTask` appends a message indicating no tasks for a specific category to the
- * specified element.
- * @param categorie_id - The `categorie_id` parameter seems to be referring to an HTML element where
- * you want to append a message indicating that there are no tasks for a specific category. This
- * function `generateNoTask` is designed to dynamically generate and display this message within the
  * specified HTML element.
- * @param category - The `category` parameter in the `generateNoTask` function is a string that
- * represents the category for which no tasks are available.
+ * @param {HTMLElement} categorie_id - The `categorie_id` parameter is an HTML element where the
+ * message indicating no tasks for a specific category will be appended. It should be a valid
+ * reference to an HTML element that can accept inner HTML content.
+ * @param {string} category - The `category` parameter is a string representing the category for
+ * which no tasks are available. It is used to dynamically generate the message indicating the lack
+ * of tasks within that category.
  */
 function generateNoTask(categorie_id, category) {
     categorie_id.innerHTML += `<div class="no_task">No tasks ${category}</div>`
@@ -248,10 +246,10 @@ function generateNoTask(categorie_id, category) {
 
 
 /**
- * The function `startDragging` sets the currentElement variable to the provided id.
- * @param id - The `id` parameter in the `startDragging` function is used to specify the element that
- * is being dragged. When the `startDragging` function is called with an element's ID as the argument,
- * it sets the `currentElement` variable to that ID, indicating that this element is currently being
+ * The function `startDragging` sets the `currentElement` variable to the provided ID, indicating
+ * that this element is currently being dragged.
+ * @param {string} id - The ID of the element that is being dragged. This ID is used to specify
+ * the element that will be tracked as it is dragged across the interface.
  */
 function startDragging(id) {
     currentElement = id;
@@ -259,9 +257,9 @@ function startDragging(id) {
 
 
 /**
- * The function `allowDrop` is used to allow a drop event to occur by preventing the default behavior.
- * @param ev - The `ev` parameter in the `allowDrop` function is an event object that represents the
- * event being handled, such as a drag-and-drop event.
+ * The function `allowDrop` prevents the default behavior for a drop event, allowing the drop to occur.
+ * @param {Event} ev - The `ev` parameter is an event object that represents the drag-and-drop event
+ * being handled.
  */
 function allowDrop(ev) {
     ev.preventDefault();
@@ -271,7 +269,7 @@ function allowDrop(ev) {
 /**
  * The `moveTo` function updates the category of a task, saves the changes to the server and local
  * storage, and initializes the board tasks.
- * @param category - Category is the new category to which the task will be moved.
+ * @param {string} category - The new category to which the task will be moved.
  */
 async function moveTo(category) {
     let contact = todos.find(obj => obj['id'] == currentElement);
@@ -284,14 +282,20 @@ async function moveTo(category) {
 
 
 /**
- * The function "highlight" adds a CSS class to highlight a specific element on the webpage.
- * @param id - The `id` parameter in the `highlight` function is used to specify the ID of the HTML
- * element that you want to highlight by adding the `drag-area-highlight` class to it.
+ * The function `highlightTaskCategory` adds a CSS class to highlight a specific element on the webpage.
+ * @param {string} id - The ID of the HTML element to highlight. The function adds the `drag-area-highlight`
+ * class to the element with the specified ID.
  */
 function highlightTaskCategory(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
 
+
+/**
+ * The function `removeHighlightTaskCategory` removes a CSS class that highlights a specific element on the webpage.
+ * @param {string} id - The ID of the HTML element from which to remove the highlight. The function removes the
+ * `drag-area-highlight` class from the element with the specified ID.
+ */
 function removeHighlightTaskCategory(id) {
     let ID = id
     if(ID === 'board_awaitt'){
@@ -341,13 +345,12 @@ function closeWindow() {
 
 /**
  * The function `generateCheckBoxSubTask` dynamically generates checkboxes for subtasks associated with
- * a contact and updates their status.
- * @param contact - The `contact` parameter in the `generateCheckBoxSubTask` function seems to be an
- * object that contains information about a task, including its subtasks. The function loops through
- * the subtasks of the task and generates HTML checkboxes for each subtask.
- * @param id - The `id` parameter in the `generateCheckBoxSubTask` function seems to be used to
- * identify the specific task for which the subtasks are being generated. It is likely used to
- * differentiate between different tasks and their corresponding subtasks.
+ * a contact and updates their status based on user interaction.
+ * @param {object} contact - The `contact` parameter represents an object containing information about
+ * a task, including its subtasks. The function uses this information to generate HTML checkboxes for
+ * each subtask associated with the task.
+ * @param {string} id - The `id` parameter is used to identify the specific task for which the subtasks
+ * are being generated. It helps differentiate between different tasks and their corresponding subtasks.
  */
 function generateCheckBoxSubTask(contact, id) {
     let show_task_subtask = document.getElementById('show_task_subtask');
@@ -385,13 +388,12 @@ function showCheckboxesEdit() {
 
 
 /**
- * The function `createInitialBlock` generates a styled HTML div element displaying an initial with a
+ * The function `createInitialBlock` generates a styled HTML div element displaying initials with a
  * specified background color.
- * @param initial - The `initial` parameter is a string representing the initials of a user or a task.
- * @param color - Color parameter is used to specify the background color of the block that will be
- * created.
- * @returns A string containing an HTML div element with the class "board_task_user_initial", a
- * background color set to the provided color, and the text content set to the provided initial.
+ * @param {string} initial - The `initial` parameter represents the initials of a user or a task.
+ * @param {string} color - The `color` parameter specifies the background color of the block created.
+ * @returns {string} A string containing an HTML div element with the class "board_task_user_initial",
+ * a background color set to the provided `color`, and text content set to the provided `initial`.
  */
 function createInitialBlock(initial, color) {
     return `
@@ -403,12 +405,10 @@ function createInitialBlock(initial, color) {
 /**
  * The function `createRemainingPersonsBlock` generates a block displaying the count of remaining
  * persons with a specified background color.
- * @param remainingPersonsCount - The `remainingPersonsCount` parameter represents the number of
- * remaining persons for a task or a board. This function `createRemainingPersonsBlock` generates an
- * HTML block that visually represents the count of remaining persons with a colored background and a
- * plus sign.
- * @returns A string containing an HTML block with a div element having the class
- * "board_task_user_initial", a gray background color, and displaying the remainingPersonsCount
+ * @param {number} remainingPersonsCount - The `remainingPersonsCount` parameter represents the number
+ * of remaining persons for a task or a board.
+ * @returns {string} A string containing an HTML block with a div element having the class
+ * "board_task_user_initial", a gray background color, and displaying the `remainingPersonsCount`
  * preceded by a plus sign.
  */
 function createRemainingPersonsBlock(remainingPersonsCount) {
@@ -421,9 +421,9 @@ function createRemainingPersonsBlock(remainingPersonsCount) {
 /**
  * The function `showTask` displays a task popup on a webpage and generates content based on the
  * provided task ID.
- * @param id - The `id` parameter in the `showTask` function is used to identify the specific task that
- * needs to be displayed. It is passed to the function to determine which task information should be
- * shown on the boardPopUp element.
+ * @param {string} id - The `id` parameter in the `showTask` function is used to identify the specific
+ * task that needs to be displayed. It is passed to the function to determine which task information
+ * should be shown on the `boardPopUp` element.
  */
 function showTask(id) {
     let boardPopUp = document.getElementById('boardPopUp');
@@ -441,8 +441,8 @@ function showTask(id) {
 function closeShowTask() {
     let input_find_task = document.getElementById('input_find_task');
     input_find_task.value = '';
+    clearForm(); 
     slideOutTask();
     removeGreyBackground();
     initBoardTasks();
 }
-

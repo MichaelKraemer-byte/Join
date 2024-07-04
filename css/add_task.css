@@ -452,8 +452,8 @@ b {
     padding: 8px;
 }
 
-#checkBoxes label:hover {
-    background-color: #D1D1D1;
+.checkBoxLabel:hover {
+    background-color: #f5f5f5;
 }
 
 .add_task_show_check {
@@ -697,3 +697,7 @@ body {
     background-color: #1d2632 !important;
     cursor: pointer;
   }
+
+  #checkBoxes label.checkedLabel:hover{
+    background-color: #2A3647;
+}
