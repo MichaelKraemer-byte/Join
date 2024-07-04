@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: jsdoc.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: jsdoc.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Global variables and functions for the login and register HTML, called index.html.
  * 
  * @constant {Object} contactColor - An object mapping numerical keys to RGB color values for contacts.
@@ -44,7 +72,7 @@ checkIsUserLoginFromLastSession();
  * @constant {string} baseUrl - The base URL for accessing the Firebase real-time database.
  * @type {Array} data - An array to store data retrieved from the database.
  * @type {string} path - The path to the guest contacts in the database.
- * @type {Array<string>} contactColors - An array of color codes used for contact colors.
+ * @type {Array&lt;string>} contactColors - An array of color codes used for contact colors.
  * @type {number} colorIndex - An index to keep track of the current color in the contactColors array.
  * @type {boolean} popUpAction - A flag indicating whether a popup action is active.
  * @type {Object} user - An object representing the current user.
@@ -74,7 +102,7 @@ getCurrentUserFromLocalStorage();
  * @type {Array} allGuestNames - An array to store all guest names.
  * @type {Array} currentAlphabetNames - An array to store guest names filtered by the current alphabet letter.
  * @type {Object} selectedContact - An object representing the currently selected contact.
- * @type {Array<string>} alphabet - An array of alphabet letters used for filtering contacts.
+ * @type {Array&lt;string>} alphabet - An array of alphabet letters used for filtering contacts.
  * @type {boolean} renderContactListFunctionActive - A flag indicating whether the render contact list function is active.
  * @type {boolean} deleteContactFunctionActive - A flag indicating whether the delete contact function is active.
  * @type {boolean} editContactFunctionActive - A flag indicating whether the edit contact function is active.
@@ -232,7 +260,7 @@ async function login() {
     const data = await loadData('/users');
     let indexOfEmail;
 
-    if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
+    if (checkEmailInDB(data, email) &amp;&amp; checkPasswortInDB(data, password)) {
         setCurrentUserInLocalStorage(data);
         window.location.href = './summary.html';
         if (rememberMe) {
@@ -358,7 +386,7 @@ async function register() {
     const passwordCheck = document.getElementById('register2-password').value;
     const listOfUser = await loadData('/users');
 
-    if (password == passwordCheck && !checkEmailInDB(listOfUser, email)) {
+    if (password == passwordCheck &amp;&amp; !checkEmailInDB(listOfUser, email)) {
         listOfUser.push(
             {
                 'name': name,
@@ -451,7 +479,7 @@ function setPasswordIconToEye(id) {
  */
 async function deleteUser(username) {
     const users = await loadData('/users');
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i &lt; users.length; i++) {
         const user = users[i];
         if (user['email'] == username) {
             users.splice(i, 1);
@@ -576,7 +604,7 @@ function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
     z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
+    for (i = 0; i &lt; z.length; i++) {
       elmnt = z[i];
       /*search for elements with a certain atrribute:*/
       file = elmnt.getAttribute("w3-include-html");
@@ -671,7 +699,7 @@ function includeHTML() {
   function isUserOfflineHideMobileNavBar() {
     let localstorage = localStorage.getItem('currentUser');
     if (localstorage == null) {
-      if (window.innerWidth <= 850) {
+      if (window.innerWidth &lt;= 850) {
         document.getElementById('navBar').style.display = 'none';
       } else {
         document.getElementById('navBar').style.display = 'flex';
@@ -782,7 +810,7 @@ function includeHTML() {
     let nav = document.getElementById('headerNav');
     let initialCircle = document.getElementById('initialCircle');
     // Überprüfen, ob der Klick außerhalb des Nav-Menüs erfolgt
-    if (nav && event.target !== nav && !nav.contains(event.target) && event.target !== initialCircle) {
+    if (nav &amp;&amp; event.target !== nav &amp;&amp; !nav.contains(event.target) &amp;&amp; event.target !== initialCircle) {
       nav.style.animation = 'slideOutNav 0.3s ease-in-out forwards';
       setTimeout(() => {
         nav.classList.add('d-none')}, 300);
@@ -801,9 +829,9 @@ function includeHTML() {
   function closeMobileContactOptionsOnOutsideClick(event) {
     let mobileContactOptions = document.getElementById('mobileContactOptions');
     let mobileViewContactButton = document.getElementById('mobileViewContactButton');
-    if (mobileContactOptions &&
-      mobileContactOptions.style.display === 'flex' &&
-      !mobileContactOptions.contains(event.target) &&
+    if (mobileContactOptions &amp;&amp;
+      mobileContactOptions.style.display === 'flex' &amp;&amp;
+      !mobileContactOptions.contains(event.target) &amp;&amp;
       !mobileViewContactButton.contains(event.target)) {
         mobileContactOptions.style.animation = 'slideOutNav 0.3s ease-in-out forwards';
       setTimeout(() => {
@@ -930,7 +958,7 @@ function includeHTML() {
     let loginGrettingScreen = document.getElementById('loginGrettingScreen');
     let summary = document.getElementById('summary');
   
-    if (document.referrer.includes('index.html') && window.innerWidth < 850) {
+    if (document.referrer.includes('index.html') &amp;&amp; window.innerWidth &lt; 850) {
       loginGrettingScreen.classList.remove('d-none');
       setTimeout(() => {
         loginGrettingScreen.style.animation = 'greeting 0.8s ease-in-out forwards'
@@ -954,13 +982,13 @@ function updateGreeting() {
     const now = new Date();
     const hour = now.getHours();
     let greeting;
-    if (hour < 6) {
+    if (hour &lt; 6) {
         greeting = `Good night${greetName()}`;
-    } else if (hour < 12) {
+    } else if (hour &lt; 12) {
         greeting = `Good morning${greetName()}`;
-    } else if (hour < 18) {
+    } else if (hour &lt; 18) {
         greeting = `Good day${greetName()}`;
-    } else if (hour < 21) {
+    } else if (hour &lt; 21) {
         greeting = `Good afternoon${greetName()}`;
     } else {
         greeting = `Good evening${greetName()}`;
@@ -1080,7 +1108,7 @@ function setUpComingDeadline(urgent) {
     let deadLine = getNextUrgentDate(urgent);
     let now = new Date();
     
-    let pastDates = urgent.filter(item => new Date(item.date) < now);
+    let pastDates = urgent.filter(item => new Date(item.date) &lt; now);
     let futureDates = urgent.filter(item => new Date(item.date) >= now);
 
     upcomingDeadline.innerHTML = deadLine ? formatDate(deadLine) : '';
@@ -1274,12 +1302,12 @@ function checkIfContactAlreadyExistsForAdd(contactObject, initials) {
     let foundByName = data.find(obj => obj['name'] === contactObject['name']);
     let foundByPhone = data.find(obj => obj['phone'] === contactObject['phone']);
 
-    if (foundByName !== undefined && foundByName['name'] === contactObject['name']) {
+    if (foundByName !== undefined &amp;&amp; foundByName['name'] === contactObject['name']) {
         focusAndScrollToContact(contactObject);
         slideInContact(contactObject['name'], initials);
         slideInAndOutConfirmation('Contact name already exists');
         return true;
-    } else if (foundByPhone !== undefined && foundByPhone['phone'] === contactObject['phone']) {
+    } else if (foundByPhone !== undefined &amp;&amp; foundByPhone['phone'] === contactObject['phone']) {
         focusAndScrollToContactOfPhoneNumber(contactObject, initials);
         slideInAndOutConfirmation('Phone number already exists');
         return true;
@@ -1306,7 +1334,7 @@ function checkIfContactAlreadyExistsForEdit(contactObject, initials) {
     let email = document.getElementById('emailEditContactPopUp').value;
     let name = document.getElementById('nameEditContactPopUp').value;
     let foundByPhone = data.find(obj => obj['phone'] === contactObject['phone']);
-    if (foundByPhone !== undefined && selectedContact['email'] === email && selectedContact['name'] === name) {
+    if (foundByPhone !== undefined &amp;&amp; selectedContact['email'] === email &amp;&amp; selectedContact['name'] === name) {
         focusAndScrollToContactOfPhoneNumber(contactObject, initials);
         slideInAndOutConfirmation('Phone number already exists');
         return true;
@@ -1463,7 +1491,7 @@ function checkValidityForEditContactForm() {
     let emailEditContactPopUp = document.getElementById('emailEditContactPopUp').value;
     let phoneEditContactPopUp = document.getElementById('phoneEditContactPopUp').value;
 
-    if (nameEditContactPopUp === selectedContact['name'] && emailEditContactPopUp === selectedContact['email'] && phoneEditContactPopUp === selectedContact['phone']) {
+    if (nameEditContactPopUp === selectedContact['name'] &amp;&amp; emailEditContactPopUp === selectedContact['email'] &amp;&amp; phoneEditContactPopUp === selectedContact['phone']) {
         closeContactPopUp();
         return true;
     } else if(editContactForm.checkValidity()) {
@@ -1561,7 +1589,7 @@ async function getTokenFrom(contactName) {
  *                               of the contact data stored in Firebase.
  * @param {string} token - The authentication token used to access and modify the specific contact information
  *                         in the Firebase database. It uniquely identifies the resource being updated.
- * @returns {Promise<Object>} The JSON response from the Firebase database after updating the contact information.
+ * @returns {Promise&lt;Object>} The JSON response from the Firebase database after updating the contact information.
  */
 async function editContactInFirebase(contactEdit, token) {
     let response = await fetch(baseUrl + path + token + ".json", {
@@ -1639,7 +1667,7 @@ function getAZindexOfName(newContact) {
  */
 function renderContactList() {
     renderContactListFunctionActive = true;
-    for (let AZindex = 0; AZindex < 26; AZindex++) {
+    for (let AZindex = 0; AZindex &lt; 26; AZindex++) {
         renderAlphabetCategoryOfLetter(AZindex); 
         renderCategoryContacts(AZindex); 
         hideOrDisplayCategories(AZindex);            
@@ -1721,7 +1749,7 @@ function setCurrentAlphabetNames(AZindex) {
 function renderCategoryContacts(AZindex, newContact) {
     currentAlphabetNames.sort();
     let list = document.getElementById(`list${AZindex}`);
-    for (let i = 0; i < currentAlphabetNames.length; i++) {
+    for (let i = 0; i &lt; currentAlphabetNames.length; i++) {
         let contact = data.find(obj => obj.name === currentAlphabetNames[i]);
         if (!list.innerHTML.includes(contact['name']) || contact['name'] === newContact['name']) {
         list.innerHTML += listedContactHTML(contact);
@@ -1813,7 +1841,7 @@ function closeDeletePopUp(){
  * Deletes a contact by its name, asynchronously sending a request to the server.
  * 
  * @param {string} contactName - The name of the contact to be deleted.
- * @returns {Promise<Object>} - A promise that resolves to the response JSON object after deleting the contact.
+ * @returns {Promise&lt;Object>} - A promise that resolves to the response JSON object after deleting the contact.
  */
 async function deleteContact(contactName) {
     deleteContactFunctionActive = true;
@@ -1872,38 +1900,38 @@ function removeDeletedContact(contactName) {
  */
 function addContactFormHTML() {
     return /*html*/`
-        <div class="addContactPopUpTitleContainer">
-            <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
-            <h2 class="popUpTitle">Add contact</h2>
-            <p class="subTitle mobileSubTitle whiteColor padding-left-0px">Tasks are better with a team!</p>
-            <div class="blueHorizontalLine">
-            </div>
-        </div>
+        &lt;div class="addContactPopUpTitleContainer">
+            &lt;img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
+            &lt;h2 class="popUpTitle">Add contact&lt;/h2>
+            &lt;p class="subTitle mobileSubTitle whiteColor padding-left-0px">Tasks are better with a team!&lt;/p>
+            &lt;div class="blueHorizontalLine">
+            &lt;/div>
+        &lt;/div>
 
-        <div class="addContactFormContainer">
-            <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
-            <div class="contactFormAndImgContainer">
-                <img class="contactPopUpProfileImg" src="./assets/img/ProfileImg.svg">
-                <form id="addContactForm" class="formContainer" onsubmit="return false;">
-                    <div class="contactsInputContainer">
-                        <input id="nameAddContactPopUp" type="text" required class="nameEmailTel" placeholder="Name">
-                        <img src="./assets/img/person.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="contactsInputContainer">
-                        <input id="emailAddContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email">
-                        <img src="./assets/img/mail.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="contactsInputContainer">
-                    <input id="phoneAddContactPopUp" type="tel" required pattern="\\+?[0-9\\s\\-\\(\\)]{10,}" class="nameEmailTel" placeholder="Phone">
-                        <img src="./assets/img/call.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="cancelAndCreateContainer">
-                        <button onclick="closeContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-                        <button class="contactCreateButton" onclick="addContact()">Create Contact <img src="./assets/img/miniCheckIcon.svg"></button>
-                    </div>                  
-                </form>
-            </div>
-        </div>
+        &lt;div class="addContactFormContainer">
+            &lt;img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
+            &lt;div class="contactFormAndImgContainer">
+                &lt;img class="contactPopUpProfileImg" src="./assets/img/ProfileImg.svg">
+                &lt;form id="addContactForm" class="formContainer" onsubmit="return false;">
+                    &lt;div class="contactsInputContainer">
+                        &lt;input id="nameAddContactPopUp" type="text" required class="nameEmailTel" placeholder="Name">
+                        &lt;img src="./assets/img/person.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="contactsInputContainer">
+                        &lt;input id="emailAddContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email">
+                        &lt;img src="./assets/img/mail.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="contactsInputContainer">
+                    &lt;input id="phoneAddContactPopUp" type="tel" required pattern="\\+?[0-9\\s\\-\\(\\)]{10,}" class="nameEmailTel" placeholder="Phone">
+                        &lt;img src="./assets/img/call.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="cancelAndCreateContainer">
+                        &lt;button onclick="closeContactPopUp()" class="contactCancelButton">Cancel &lt;img class="addContactCancelX" src="./assets/img/cancelX.svg">&lt;/button>
+                        &lt;button class="contactCreateButton" onclick="addContact()">Create Contact &lt;img src="./assets/img/miniCheckIcon.svg">&lt;/button>
+                    &lt;/div>                  
+                &lt;/form>
+            &lt;/div>
+        &lt;/div>
     `;
 }
 
@@ -1919,40 +1947,40 @@ function editContactFormHTML(contactName, initials) {
     let contact = data.find(obj => obj['name'] === contactName);
   
     return /*html*/`
-        <div class="addContactPopUpTitleContainer">
-            <img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
-            <h2 class="popUpTitle">Edit contact</h2>
-            <div class="blueHorizontalLine">
-            </div>
-        </div>
+        &lt;div class="addContactPopUpTitleContainer">
+            &lt;img class="addContactJoinLogo" src="./assets/img/joinLogoSmallWhite.svg">
+            &lt;h2 class="popUpTitle">Edit contact&lt;/h2>
+            &lt;div class="blueHorizontalLine">
+            &lt;/div>
+        &lt;/div>
 
-        <div class="addContactFormContainer">
-            <img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
-            <div class="contactFormAndImgContainer">
-                <svg class="editContactSVG mobileEditContactProfileSVG" xmlns="http://www.w3.org/2000/svg" fill="none">
-                    <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" id="editViewContactCircle" fill="${contact['color']}"/>
-                    <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="inter" fill="white">${initials}</text>
-                </svg>
-                <form id="editContactForm" class="formContainer" onsubmit="return false">
-                    <div class="contactsInputContainer">
-                        <input id="nameEditContactPopUp" type="text" required class="nameEmailTel" placeholder="Name" value="${contact['name']}">
-                        <img src="./assets/img/person.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="contactsInputContainer">
-                        <input id="emailEditContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email" value="${contact['email']}">
-                        <img src="./assets/img/mail.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="contactsInputContainer">
-                        <input id="phoneEditContactPopUp" type="tel" required pattern="\\+?[0-9\\s\\-\\(\\)]{10,}" class="nameEmailTel" placeholder="Phone" value="${contact['phone']}">
-                        <img src="./assets/img/call.svg" class="contactsInputIcon">
-                    </div>
-                    <div class="cancelAndCreateContainer">
-                        <button onclick="closeContactPopUp()" class="contactCancelButton">Cancel <img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-                        <button class="contactCreateButton" onclick="editContact('${contactName}')">Save <img src="./assets/img/miniCheckIcon.svg"></button>
-                    </div>                  
-                </form>
-            </div>
-        </div>
+        &lt;div class="addContactFormContainer">
+            &lt;img onclick="closeContactPopUp()" class="popUpRightCornerCloseButton" src="./assets/img/cancelX.svg">
+            &lt;div class="contactFormAndImgContainer">
+                &lt;svg class="editContactSVG mobileEditContactProfileSVG" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    &lt;circle class="listedContactSVGCircle" cx="60" cy="60" r="60" id="editViewContactCircle" fill="${contact['color']}"/>
+                    &lt;text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="inter" fill="white">${initials}&lt;/text>
+                &lt;/svg>
+                &lt;form id="editContactForm" class="formContainer" onsubmit="return false">
+                    &lt;div class="contactsInputContainer">
+                        &lt;input id="nameEditContactPopUp" type="text" required class="nameEmailTel" placeholder="Name" value="${contact['name']}">
+                        &lt;img src="./assets/img/person.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="contactsInputContainer">
+                        &lt;input id="emailEditContactPopUp" type="email" required pattern="[a-z0-9._%+\\-]+@[a-z0-9\\-]+\\.[a-z]{2,}$" class="nameEmailTel" placeholder="Email" value="${contact['email']}">
+                        &lt;img src="./assets/img/mail.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="contactsInputContainer">
+                        &lt;input id="phoneEditContactPopUp" type="tel" required pattern="\\+?[0-9\\s\\-\\(\\)]{10,}" class="nameEmailTel" placeholder="Phone" value="${contact['phone']}">
+                        &lt;img src="./assets/img/call.svg" class="contactsInputIcon">
+                    &lt;/div>
+                    &lt;div class="cancelAndCreateContainer">
+                        &lt;button onclick="closeContactPopUp()" class="contactCancelButton">Cancel &lt;img class="addContactCancelX" src="./assets/img/cancelX.svg">&lt;/button>
+                        &lt;button class="contactCreateButton" onclick="editContact('${contactName}')">Save &lt;img src="./assets/img/miniCheckIcon.svg">&lt;/button>
+                    &lt;/div>                  
+                &lt;/form>
+            &lt;/div>
+        &lt;/div>
     `;    
 }
 
@@ -1965,16 +1993,16 @@ function editContactFormHTML(contactName, initials) {
  */
 function contactListCategoryHTML(AZindex) {
     return /*html*/`
-    <div id="category${AZindex}" class="">
-        <div class="alphabetCategoryContainer">
-            <p class="alphabetCategoryLetter">${alphabet[AZindex]}</p>
-        </div>
-        <div class="alphabetSplitLineContainer">
-            <div class="alphabetSplitLine">
-            </div> 
-        </div> 
-        <div id="list${AZindex}"></div>   
-    </div>        
+    &lt;div id="category${AZindex}" class="">
+        &lt;div class="alphabetCategoryContainer">
+            &lt;p class="alphabetCategoryLetter">${alphabet[AZindex]}&lt;/p>
+        &lt;/div>
+        &lt;div class="alphabetSplitLineContainer">
+            &lt;div class="alphabetSplitLine">
+            &lt;/div> 
+        &lt;/div> 
+        &lt;div id="list${AZindex}">&lt;/div>   
+    &lt;/div>        
     `;    
 }
 
@@ -1989,18 +2017,18 @@ function listedContactHTML(contact) {
     let initials = getInitialsFromObject(contact);
     let underscoredName = contact['name'].replace(/\s/g, '_');
     return /*html*/`
-        <button onclick="slideInContact('${contact['name']}', '${initials}')" id="${underscoredName}" class="listedContactContainer">
-            <div class="listedContactSVGContainer">
-                <svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
-                    <circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
-                    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="12" font-family="Arial" fill="white">${initials}</text>
-                </svg>
-            </div>
-            <div class="nameAndMailListContainer">
-                <p class="listedName">${contact['name']}</p>
-                <p class="listedEmail">${contact['email']}</p>
-            </div>
-        </button>
+        &lt;button onclick="slideInContact('${contact['name']}', '${initials}')" id="${underscoredName}" class="listedContactContainer">
+            &lt;div class="listedContactSVGContainer">
+                &lt;svg class="listedContactSVG" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="${contact['color']}">
+                    &lt;circle cx="21" cy="21" r="20" stroke="white" stroke-width="2"/>
+                    &lt;text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="12" font-family="Arial" fill="white">${initials}&lt;/text>
+                &lt;/svg>
+            &lt;/div>
+            &lt;div class="nameAndMailListContainer">
+                &lt;p class="listedName">${contact['name']}&lt;/p>
+                &lt;p class="listedEmail">${contact['email']}&lt;/p>
+            &lt;/div>
+        &lt;/button>
     `;
 }
 
@@ -2019,44 +2047,44 @@ function slideInContact(contactName, initials) {
     let contact = data.find(obj => obj['name'] === contactName);
 
     contactView.innerHTML = /*html*/`
-        <div class="viewContactHeadContainer">
-            <svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-                <circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
-                <text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}</text>
-            </svg>
+        &lt;div class="viewContactHeadContainer">
+            &lt;svg class="viewContactSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+                &lt;circle class="listedContactSVGCircle" cx="60" cy="60" r="60" fill="${contact['color']}"/>
+                &lt;text x="50%" y="54%" text-anchor="middle" dy=".3em" font-size="47" font-family="Arial" fill="white">${initials}&lt;/text>
+            &lt;/svg>
 
-            <div class="viewContactNameContainer">
-                <h3 class="viewContactName">${contact['name']}</h3>
-                <div class="viewContactButtonsContainer">
-                    <button onclick="openEditPopUp('${contactName}', '${initials}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit</button>
-                    <button onclick="openDeletePopUp('${contactName}')" class="viewContactButton"><img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete</button>
-                </div>
-            </div>
-        </div>
+            &lt;div class="viewContactNameContainer">
+                &lt;h3 class="viewContactName">${contact['name']}&lt;/h3>
+                &lt;div class="viewContactButtonsContainer">
+                    &lt;button onclick="openEditPopUp('${contactName}', '${initials}')" class="viewContactButton">&lt;img class="editAndDeleteIcon" src="./assets/img/editGreyIcon.svg">Edit&lt;/button>
+                    &lt;button onclick="openDeletePopUp('${contactName}')" class="viewContactButton">&lt;img class="editAndDeleteIcon" src="./assets/img/deleteGreyIcon.svg">Delete&lt;/button>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
             
-        <h4 class="viewContactSubTitle">Contact Information</h4>
+        &lt;h4 class="viewContactSubTitle">Contact Information&lt;/h4>
 
-        <div class="emailPhoneContainer">
-            <div class="emailPhoneTitleContainer">
-                <p class="emailPhoneTitle">Email</p>
-                <a id="email" class="email" href="mailto:antonmayer@gmail.com">${contact['email']}</a>
-            </div>
-            <div class="emailPhoneTitleContainer">
-                <p class="emailPhoneTitle">Phone</p>
-                <a id="phone" class="phone" type="tel" href="tel:+491234567890">${contact['phone']}</a>
-            </div>
-        </div>
+        &lt;div class="emailPhoneContainer">
+            &lt;div class="emailPhoneTitleContainer">
+                &lt;p class="emailPhoneTitle">Email&lt;/p>
+                &lt;a id="email" class="email" href="mailto:antonmayer@gmail.com">${contact['email']}&lt;/a>
+            &lt;/div>
+            &lt;div class="emailPhoneTitleContainer">
+                &lt;p class="emailPhoneTitle">Phone&lt;/p>
+                &lt;a id="phone" class="phone" type="tel" href="tel:+491234567890">${contact['phone']}&lt;/a>
+            &lt;/div>
+        &lt;/div>
 
-        <button id="mobileViewContactButton" onclick="openMobileContactOptions(event)" class="btn mobileViewContactButton">
-            <img src="./assets/img/menuDotsButton.svg">
-        </button>
+        &lt;button id="mobileViewContactButton" onclick="openMobileContactOptions(event)" class="btn mobileViewContactButton">
+            &lt;img src="./assets/img/menuDotsButton.svg">
+        &lt;/button>
 
-        <div id="mobileContactOptions" class="mobileContactOptions">
-            <button onclick="openEditPopUp('${contactName}', '${initials}')" class="btn mobileEditAndDeleteButton"><img class="mobileEditAndDeleteImg" src="./assets/img/editGreyIcon.svg">Edit</button>
-            <button onclick="openDeletePopUp('${contactName}')" class="btn mobileEditAndDeleteButton"><img class="mobileEditAndDeleteImg" src="./assets/img/deleteGreyIcon.svg">Delete</button>
-        </div>
+        &lt;div id="mobileContactOptions" class="mobileContactOptions">
+            &lt;button onclick="openEditPopUp('${contactName}', '${initials}')" class="btn mobileEditAndDeleteButton">&lt;img class="mobileEditAndDeleteImg" src="./assets/img/editGreyIcon.svg">Edit&lt;/button>
+            &lt;button onclick="openDeletePopUp('${contactName}')" class="btn mobileEditAndDeleteButton">&lt;img class="mobileEditAndDeleteImg" src="./assets/img/deleteGreyIcon.svg">Delete&lt;/button>
+        &lt;/div>
     `;
-    if (window.innerWidth <= 660) {
+    if (window.innerWidth &lt;= 660) {
         slideInContactViewScreenForMobile(contactView);
     } else { 
         contactView.classList.remove('slideOutContactView');
@@ -2073,13 +2101,13 @@ function slideInContact(contactName, initials) {
  */
 function deletePopUpHTML(contactName) {
     return /*html*/`
-        <div class="deleteRequestParagraphContainer">
-            <p class="deleteRequestParagraph">Are you sure you want to delete <br><span class="deleteName">${contactName}<span>?</p>
-        </div>
-        <div class="yesNoButtonContainer">
-            <button class="contactCancelButton noButton" onclick="closeDeletePopUp()">No<img class="addContactCancelX" src="./assets/img/cancelX.svg"></button>
-            <button class="contactCreateButton yesButton" onclick="deleteContact('${contactName}')" class="btn">Yes<img src="./assets/img/miniCheckIcon.svg"></button>
-        </div>
+        &lt;div class="deleteRequestParagraphContainer">
+            &lt;p class="deleteRequestParagraph">Are you sure you want to delete &lt;br>&lt;span class="deleteName">${contactName}&lt;span>?&lt;/p>
+        &lt;/div>
+        &lt;div class="yesNoButtonContainer">
+            &lt;button class="contactCancelButton noButton" onclick="closeDeletePopUp()">No&lt;img class="addContactCancelX" src="./assets/img/cancelX.svg">&lt;/button>
+            &lt;button class="contactCreateButton yesButton" onclick="deleteContact('${contactName}')" class="btn">Yes&lt;img src="./assets/img/miniCheckIcon.svg">&lt;/button>
+        &lt;/div>
     `;
 }
 
@@ -2142,7 +2170,7 @@ function generateAddTasks(column) {
  * Adds a new task to a list of tasks, saves it to the server and local storage, and updates the user interface.
  * 
  * @param {string} column - The category or column where the task will be added.
- * @returns {Promise<void>} - A promise that resolves once the task is successfully added and saved.
+ * @returns {Promise&lt;void>} - A promise that resolves once the task is successfully added and saved.
  * 
  * @description
  * This asynchronous function performs the following steps:
@@ -2347,7 +2375,7 @@ function generateCheckBox() {
     let id = document.getElementById('check_box_user_name');
     if (id) {
         id.innerHTML = '';
-        for (let i = 0; i < guesteArray.length; i++) {
+        for (let i = 0; i &lt; guesteArray.length; i++) {
             const element = guesteArray[i];
             id.innerHTML += renderHtmlGenerateCheckBox(element, i)
         }
@@ -2357,7 +2385,7 @@ function generateCheckBox() {
             document.addEventListener('click', function (event) {
                 let selectBox = document.querySelector('.selectBox');
 
-                if (selectBox && !selectBox.contains(event.target)) {
+                if (selectBox &amp;&amp; !selectBox.contains(event.target)) {
                     checkboxes.style.visibility = "hidden";
                     show = true;
                 }
@@ -2378,7 +2406,7 @@ function searchNameFromGuestList() {
     let id = document.getElementById('check_box_user_name');
 
     id.innerHTML = '';
-    for (let i = 0; i < guesteArray.length; i++) {
+    for (let i = 0; i &lt; guesteArray.length; i++) {
         const element = guesteArray[i];
         let initial = getInitials(element.name)
         if (element.name.toLowerCase().includes(idInput)) {
@@ -2414,7 +2442,7 @@ function getValues(id) {
 /**
  * Retrieves selected guest names and their corresponding colors from checkboxes and displays their initials with respective colors on the webpage.
  * 
- * @param {Array<string>} checkedValues - An array of strings representing the names of guests selected through checkboxes.
+ * @param {Array&lt;string>} checkedValues - An array of strings representing the names of guests selected through checkboxes.
  * 
  * @description
  * This function checks if any checkboxes have been checked by verifying the truthiness of the `checkedValues` parameter.
@@ -2437,11 +2465,11 @@ function checkGuestsName(checkedValues) {
             }
         });
         add_task_show_check.innerHTML = '';
-        for (let index = 0; index < selectedGuests.length; index++) {
+        for (let index = 0; index &lt; selectedGuests.length; index++) {
             const element = selectedGuests[index];
             let initial = getInitials(element.name);
             add_task_show_check.innerHTML += `
-                <div class="add_task_checkbox_name board_task_user_initial show_task_user_initial" style="background-color: ${element.color};">${initial}</div>
+                &lt;div class="add_task_checkbox_name board_task_user_initial show_task_user_initial" style="background-color: ${element.color};">${initial}&lt;/div>
             `;
         }
     }
@@ -2533,7 +2561,7 @@ function getSubtask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
     if (subtasks) {
-        for (let i = 0; i < subtasks.length; i++) {
+        for (let i = 0; i &lt; subtasks.length; i++) {
             const element = subtasks[i];
             get_subtask.innerHTML = `
                 ${element}
@@ -2570,7 +2598,7 @@ function getSubTaskAddTask() {
     let get_subtask = document.getElementById('get_subtask');
     get_subtask.innerHTML = '';
     if (subtasks) {
-        for (let i = 0; i < subtasks.length; i++) {
+        for (let i = 0; i &lt; subtasks.length; i++) {
             const element = subtasks[i];
             get_subtask.innerHTML += renderGetSubTaskAddTask(i, element);
         }
@@ -2679,18 +2707,18 @@ function setDate() {
 function renderHtmlGenerateCheckBox(element, i) {
     let initial = element.name;
     return /*html*/`        
-    <label class="checkBoxLabel" onclick="addOrRemoveCheckboxLabelColor(event)">
-        <div class="board_task_check_box_name addTaskCheckBoxContainer">
-            <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}</div>
-            <p id="${i}">${element.name}</p>
-        </div>
-        <div class="checkbox-wrapper-27">
-            <label class="checkbox">
-                <input type="checkbox" name="optionen" value="${element.name}">
-                <span class="checkbox__icon padding-right"></span>
-            </label>
-        </div>
-    </label>
+    &lt;label class="checkBoxLabel" onclick="addOrRemoveCheckboxLabelColor(event)">
+        &lt;div class="board_task_check_box_name addTaskCheckBoxContainer">
+            &lt;div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${getInitials(initial)}&lt;/div>
+            &lt;p id="${i}">${element.name}&lt;/p>
+        &lt;/div>
+        &lt;div class="checkbox-wrapper-27">
+            &lt;label class="checkbox">
+                &lt;input type="checkbox" name="optionen" value="${element.name}">
+                &lt;span class="checkbox__icon padding-right">&lt;/span>
+            &lt;/label>
+        &lt;/div>
+    &lt;/label>
 `;
 }
 
@@ -2703,18 +2731,18 @@ function renderHtmlGenerateCheckBox(element, i) {
  */
 function rendersearchNameFromGuestList(element, initial) {
     return  /*html*/`        
-        <label>
-        <div class="board_task_check_box_name">
-            <div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${initial}</div>
-            <p>${element.name}</p>
-        </div>
-        <div class="checkbox-wrapper-27">
-            <label class="checkbox">
-                <input type="checkbox" name="optionen" value="${element.name}">
-                <span class="checkbox__icon"></span>
-            </label>
-        </div>
-    </label>
+        &lt;label>
+        &lt;div class="board_task_check_box_name">
+            &lt;div class="board_task_user_initial check_box_initial" style="background-color:${element.color}">${initial}&lt;/div>
+            &lt;p>${element.name}&lt;/p>
+        &lt;/div>
+        &lt;div class="checkbox-wrapper-27">
+            &lt;label class="checkbox">
+                &lt;input type="checkbox" name="optionen" value="${element.name}">
+                &lt;span class="checkbox__icon">&lt;/span>
+            &lt;/label>
+        &lt;/div>
+    &lt;/label>
 `;
 }
 
@@ -2728,97 +2756,97 @@ function rendersearchNameFromGuestList(element, initial) {
  */
 function renderHtmlAddtask(column) {
     return /*html*/`
-    <div class="show_add_task" id="showTaskContainer">
-        <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
-        <h1>Add Task</h1>
-        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
-                <div class="add_task_form">
-                    <div class="add_task_width50">
-                        <div class="add_task_title add_task_form_row">
-                            <label for="">Title<b>*</b></label>
-                            <input id="task_title" class="add_task_input" required type="text" placeholder="Enter a title">
-                        </div>
-                        <div class="add_task_descripion add_task_form_row">
-                            <label for="">Description</label>
-                            <textarea id="task_description" class="add_task_textarea" name=""
-                                placeholder="Enter a Description"></textarea>
-                        </div>
+    &lt;div class="show_add_task" id="showTaskContainer">
+        &lt;img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
+        &lt;h1>Add Task&lt;/h1>
+        &lt;form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
+                &lt;div class="add_task_form">
+                    &lt;div class="add_task_width50">
+                        &lt;div class="add_task_title add_task_form_row">
+                            &lt;label for="">Title&lt;b>*&lt;/b>&lt;/label>
+                            &lt;input id="task_title" class="add_task_input" required type="text" placeholder="Enter a title">
+                        &lt;/div>
+                        &lt;div class="add_task_descripion add_task_form_row">
+                            &lt;label for="">Description&lt;/label>
+                            &lt;textarea id="task_description" class="add_task_textarea" name=""
+                                placeholder="Enter a Description">&lt;/textarea>
+                        &lt;/div>
 
-                        <div class="add_task_assigned add_task_form_row">
-                            <label id="assignet_to">Assignet to</label>
-                            <div class="selectBox" onclick="toggleCheckboxes(event)">
-                                <img src="./assets/img/arrow_drop_down.svg" alt="">
-                                <input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
-                            </div>
-                            <div class="checkbox_name" id="checkBoxes" onclick="event.stopPropagation()">
-                                <div class="dropdown_users_name" id="check_box_user_name"></div>
-                            </div> 
-                            <div class="add_task_show_check" id="add_task_show_check"></div>   
-                        </div>
-                    </div>
+                        &lt;div class="add_task_assigned add_task_form_row">
+                            &lt;label id="assignet_to">Assignet to&lt;/label>
+                            &lt;div class="selectBox" onclick="toggleCheckboxes(event)">
+                                &lt;img src="./assets/img/arrow_drop_down.svg" alt="">
+                                &lt;input class="add_task_input" id="task_assignet_input" placeholder="Select options" onkeydown="searchNameFromGuestList()"/>
+                            &lt;/div>
+                            &lt;div class="checkbox_name" id="checkBoxes" onclick="event.stopPropagation()">
+                                &lt;div class="dropdown_users_name" id="check_box_user_name">&lt;/div>
+                            &lt;/div> 
+                            &lt;div class="add_task_show_check" id="add_task_show_check">&lt;/div>   
+                        &lt;/div>
+                    &lt;/div>
 
-                    <div class="add_task_line"></div>
+                    &lt;div class="add_task_line">&lt;/div>
                     
-                    <div class="add_task_width50">
-                        <div class="add_task_date add_task_form_row">
-                            <label for="">Due date<b>*</b></label>
-                            <input id="task_date" class="add_task_input add_date" type="date" required min="${setDate()}">
-                        </div>
-                        <div class="add_task_prio add_task_form_row">
-                            <p>Prio</p>
-                            <div class="add_task_button_group">
-                                <button id="urgent" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent')">Urgent
-                                    <div class="add_task_button_vector">
-                                        <img src="./assets/img/vector_red.svg">
-                                    </div>
-                                </button>
-                                <button id="medium" type="button" class="add_button_group add_task_button_medium add_task_hover_button active" onclick="getTaskPriority('medium')">Medium
-                                    <div class="add_task_button_vector">
-                                        <img src="./assets/img/vector_strich.svg">
-                                    </div>
-                                </button>
-                                <button id="low" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low')">Low
-                                    <div class="add_task_button_vector">
-                                        <img src="./assets/img/vector_green.svg">
-                                    </div>
-                                </button>
-                            </div>
-                        </div>                    
-                        <div class="add_task_category add_task_form_row">
-                            <label for="">Categoriy<b>*</b></label>
-                            <select id="task_category" class="add_task_input" required>
-                                <option value="" hidden>Select task categoriy</option>
-                                <option value="Technical Task">Technical Task</option>
-                                <option value="User Story">User Story</option>
-                            </select>
-                        </div>
-                        <div class="add_task_subtask add_task_form_row">
-                            <label>Subtasks</label>
-                            <div class="add_task_button_plus" id="add_task_button_plus">
-                                <img class="add_task_button_add_subtask" src="./assets/img/add.svg"  onclick="showAddAndDeleteSubTask()">
-                            </div>
-                            <div class="add_task_check_delete" id="add_task_check_delete">
-                                <img id="delete_subtask" src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
-                                <img id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addNewSubTask()">
-                            </div>
-                            <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
-                        </div>
-                        <div class="get_subtask" id="get_subtask"></div>
-                    </div>
-                </div>
-                <div class="add_task_footer">
-                        <p id="add_task_footer"><b>*</b>This field is required</p>
-                        <div class="add_task_button_group_footer">
-                            <button type="button" class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear
-                                <img class="addContactCancelX" src="./assets/img/cancelX.svg">
-                            </button>
-                            <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
-                                <img src="./assets/img/vector_check.svg">
-                            </button>
-                        </div>
-                    </div>
-            </form>
-        </div>
+                    &lt;div class="add_task_width50">
+                        &lt;div class="add_task_date add_task_form_row">
+                            &lt;label for="">Due date&lt;b>*&lt;/b>&lt;/label>
+                            &lt;input id="task_date" class="add_task_input add_date" type="date" required min="${setDate()}">
+                        &lt;/div>
+                        &lt;div class="add_task_prio add_task_form_row">
+                            &lt;p>Prio&lt;/p>
+                            &lt;div class="add_task_button_group">
+                                &lt;button id="urgent" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent')">Urgent
+                                    &lt;div class="add_task_button_vector">
+                                        &lt;img src="./assets/img/vector_red.svg">
+                                    &lt;/div>
+                                &lt;/button>
+                                &lt;button id="medium" type="button" class="add_button_group add_task_button_medium add_task_hover_button active" onclick="getTaskPriority('medium')">Medium
+                                    &lt;div class="add_task_button_vector">
+                                        &lt;img src="./assets/img/vector_strich.svg">
+                                    &lt;/div>
+                                &lt;/button>
+                                &lt;button id="low" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low')">Low
+                                    &lt;div class="add_task_button_vector">
+                                        &lt;img src="./assets/img/vector_green.svg">
+                                    &lt;/div>
+                                &lt;/button>
+                            &lt;/div>
+                        &lt;/div>                    
+                        &lt;div class="add_task_category add_task_form_row">
+                            &lt;label for="">Categoriy&lt;b>*&lt;/b>&lt;/label>
+                            &lt;select id="task_category" class="add_task_input" required>
+                                &lt;option value="" hidden>Select task categoriy&lt;/option>
+                                &lt;option value="Technical Task">Technical Task&lt;/option>
+                                &lt;option value="User Story">User Story&lt;/option>
+                            &lt;/select>
+                        &lt;/div>
+                        &lt;div class="add_task_subtask add_task_form_row">
+                            &lt;label>Subtasks&lt;/label>
+                            &lt;div class="add_task_button_plus" id="add_task_button_plus">
+                                &lt;img class="add_task_button_add_subtask" src="./assets/img/add.svg"  onclick="showAddAndDeleteSubTask()">
+                            &lt;/div>
+                            &lt;div class="add_task_check_delete" id="add_task_check_delete">
+                                &lt;img id="delete_subtask" src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
+                                &lt;img id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addNewSubTask()">
+                            &lt;/div>
+                            &lt;input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+                        &lt;/div>
+                        &lt;div class="get_subtask" id="get_subtask">&lt;/div>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="add_task_footer">
+                        &lt;p id="add_task_footer">&lt;b>*&lt;/b>This field is required&lt;/p>
+                        &lt;div class="add_task_button_group_footer">
+                            &lt;button type="button" class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear
+                                &lt;img class="addContactCancelX" src="./assets/img/cancelX.svg">
+                            &lt;/button>
+                            &lt;button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
+                                &lt;img src="./assets/img/vector_check.svg">
+                            &lt;/button>
+                        &lt;/div>
+                    &lt;/div>
+            &lt;/form>
+        &lt;/div>
         `;
 }
 
@@ -2834,21 +2862,21 @@ function renderHtmlAddtask(column) {
  */
 function renderGetSubTaskAddTask(i, element) {
     return `
-        <div class="add_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
-            <input style="background: #F6F7F8; font-size: 13px;" type="text" id="show_task_subtask_edit_input${i}">
-            <div class="show_task_subtask_edit_btn_delete_add">
-            <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="deleteNewSubTask(${i})">
-            <img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditNewSubTask(${i})" >
-        </div>
-        </div>
-        <div class="add_task_edit_subtasks_del_edit">
-            <div class="get_show_task"><li>${element}</li></div>
-            <div class="show_task_edit_subtasks_del_edit_button">
-                <img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showEditNewSubTask(${i})">
-                <div class="cross_line"></div>
-                <img class="img_hover_btn" src="./assets/img/delete.svg"  onclick="deleteNewSubTask(${i})">
-            </div>
-        </div>         
+        &lt;div class="add_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
+            &lt;input style="background: #F6F7F8; font-size: 13px;" type="text" id="show_task_subtask_edit_input${i}">
+            &lt;div class="show_task_subtask_edit_btn_delete_add">
+            &lt;img class="img_hover_btn" src="./assets/img/delete.svg" onclick="deleteNewSubTask(${i})">
+            &lt;img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditNewSubTask(${i})" >
+        &lt;/div>
+        &lt;/div>
+        &lt;div class="add_task_edit_subtasks_del_edit">
+            &lt;div class="get_show_task">&lt;li>${element}&lt;/li>&lt;/div>
+            &lt;div class="show_task_edit_subtasks_del_edit_button">
+                &lt;img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showEditNewSubTask(${i})">
+                &lt;div class="cross_line">&lt;/div>
+                &lt;img class="img_hover_btn" src="./assets/img/delete.svg"  onclick="deleteNewSubTask(${i})">
+            &lt;/div>
+        &lt;/div>         
     `;
 }
 
@@ -2904,7 +2932,7 @@ async function loadTasksFromServer() {
  */
 async function deleteTaskFromLocalStorage(id) {
     let arr = [];
-    for (let i = 0; i < todos.length; i++) {
+    for (let i = 0; i &lt; todos.length; i++) {
         arr = (todos.filter(todo => todo.id != id));
     }
     todos = arr;
@@ -2973,7 +3001,7 @@ async function initBoardTasks() {
 async function generateToDo(arr, categorie_id, category) {
     categorie_id.innerHTML = '';
     if (arr.length) {
-        for (let i = 0; i < arr.length; i++) {
+        for (let i = 0; i &lt; arr.length; i++) {
             const element = arr[i];
             categorie_id.innerHTML += renderHtmlToDo(element);
             let idSUb = document.getElementById(`idSUb${element.id}`);
@@ -3062,13 +3090,13 @@ function getshowTaskUserName(contact) {
     let showTaskUserName = document.getElementById('show_task_user_name');
     showTaskUserName.innerHTML = "";
     if (contact.name) {
-        for (let i = 0; i < contact['name'].length; i++) {
+        for (let i = 0; i &lt; contact['name'].length; i++) {
             const element = contact['name'][i];
             showTaskUserName.innerHTML += /*html*/`
-                <div class="show_task_assigned_to_users">                
-                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
-                    <div>${element}</div>
-                </div>
+                &lt;div class="show_task_assigned_to_users">                
+                    &lt;div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}&lt;/div>
+                    &lt;div>${element}&lt;/div>
+                &lt;/div>
             `;
         }
     }
@@ -3150,9 +3178,9 @@ function generateSelectedNames(contact) {
     let task_edit_initial = document.getElementById('task_edit_initial');
     task_edit_initial.innerHTML = '';
     if (selectedNames) {
-        for (let i = 0; i < selectedNames.length; i++) {
+        for (let i = 0; i &lt; selectedNames.length; i++) {
             task_edit_initial.innerHTML += `
-                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                &lt;div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}&lt;/div>
                 `;
         }
     } else {
@@ -3174,7 +3202,7 @@ function getSubtaskEdit(contact) {
     task_subtasks_edit.innerHTML = '';
 
     if (contact.subtasks) {
-        for (let i = 0; i < contact.subtasks.length; i++) {
+        for (let i = 0; i &lt; contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
             task_subtasks_edit.innerHTML += rendergetSubtaskEditHtml(element, contact, i);
         }
@@ -3193,7 +3221,7 @@ function getCurrentTaskCategoryEdit(contact) {
     let task_taskCategory_edit = document.getElementById('task_category_edit');
     let currentTaskCategory = contact.category;
     let options = task_taskCategory_edit.options
-    for (let i = 0; i < options.length; i++) {
+    for (let i = 0; i &lt; options.length; i++) {
         if (options[i].value === currentTaskCategory) {
             options[i].selected = true;
         } else {
@@ -3222,7 +3250,7 @@ function showTaskEditSubtask(i, id) {
  * Updates a subtask for a specific task and saves the changes to local storage and the server.
  * @param {number} i - The index of the subtask within the `contact` object's subtasks array to add or edit.
  * @param {string} id - The unique identifier of the task to be updated, used to locate the task in the `todos` array.
- * @returns {Promise<void>} A Promise that resolves once the subtask is updated and changes are saved.
+ * @returns {Promise&lt;void>} A Promise that resolves once the subtask is updated and changes are saved.
  */
 async function addEditSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -3241,7 +3269,7 @@ async function addEditSubtask(i, id) {
  * @param {number} i - The index of the subtask to be deleted from the `subtasks` array of a task.
  * @param {string} id - The unique identifier of the task from which the subtask needs to be deleted,
  * used to locate the task in the `todos` array.
- * @returns {Promise<void>} A Promise that resolves once the subtask is deleted and changes are saved.
+ * @returns {Promise&lt;void>} A Promise that resolves once the subtask is deleted and changes are saved.
  */
 async function showTaskDeleteSubtask(i, id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -3257,7 +3285,7 @@ async function showTaskDeleteSubtask(i, id) {
  * Adds a new subtask to a task, saves it to local storage, sends it to the server, and updates the UI.
  * @param {string} id - The unique identifier of the task in the `todos` array that needs to be updated
  * with a new subtask.
- * @returns {Promise<void>} A Promise that resolves once the new subtask is added and changes are saved.
+ * @returns {Promise&lt;void>} A Promise that resolves once the new subtask is added and changes are saved.
  */
 async function addNewSubTaskEdit(id) {
     let contact = todos.find(obj => obj['id'] == id);
@@ -3282,7 +3310,7 @@ async function addNewSubTaskEdit(id) {
  * information, priority, saving the updates, and then reloading the user interface.
  * @param {string} id - The unique identifier of the todo item in the `todos` array that needs to be
  * upgraded.
- * @returns {Promise<void>} A Promise that resolves once the todo item is upgraded and changes are
+ * @returns {Promise&lt;void>} A Promise that resolves once the todo item is upgraded and changes are
  * saved.
  */
 async function upgradeTodos(id) {
@@ -3304,7 +3332,7 @@ async function upgradeTodos(id) {
  * @param {string} contact.description - The description or details of the contact or task.
  * @param {string} contact.date - The date associated with the contact or task.
  * @param {string} contact.assignedTo - The person assigned to the contact or task.
- * @param {Array<string>} contact.name - An array of names or initials associated with the contact or task.
+ * @param {Array&lt;string>} contact.name - An array of names or initials associated with the contact or task.
  */
 function updateContactDetails(contact) {
     contact.title = document.getElementById('task_title_edit').value;
@@ -3319,7 +3347,7 @@ function updateContactDetails(contact) {
  * Updates the color and initials of a contact based on selected guest names.
  * @param {Object} contact - The contact object to be updated. It contains information about a guest,
  * including their name, color, and initials.
- * @param {Array<string>} selectedNames - An array of selected guest names whose colors and initials
+ * @param {Array&lt;string>} selectedNames - An array of selected guest names whose colors and initials
  * will be updated in the contact object.
  */
 function updateGuestInfo(contact) {
@@ -3392,7 +3420,7 @@ function searchTaskFromBoard() {
         const elements = ids.map(id => document.getElementById(id));
         elements.forEach(element => element.innerHTML = '');
 
-        for (let i = 0; i < todos.length; i++) {
+        for (let i = 0; i &lt; todos.length; i++) {
             const element = todos[i];
             if (element.title.toLowerCase().includes(input_find_task)) {
                 let category = element.category;
@@ -3423,10 +3451,10 @@ function getInitialsArray(element) {
         let showCircleWithRestOfPersons = initialsArray.length - showCircleWithInitials;
         let boardTaskInitial = document.getElementById(`board_task_initial${element.id}`);
         boardTaskInitial.innerHTML = '';
-        for (let j = 0; j < initialsArray.length; j++) {
+        for (let j = 0; j &lt; initialsArray.length; j++) {
             let initial = initialsArray[j];
             let color = colorsArray[j];
-            if (j < showCircleWithInitials) {
+            if (j &lt; showCircleWithInitials) {
                 boardTaskInitial.innerHTML += createInitialBlock(initial, color);
             } else {
                 boardTaskInitial.innerHTML += createRemainingPersonsBlock(showCircleWithRestOfPersons);
@@ -3453,17 +3481,17 @@ function getInitialsArray(element) {
 function renderHtmlToDo(element) {
     
     return /*html*/`
-    <div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
-        <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
-        <div class="board_task_title">${element.title}</div>  
+    &lt;div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
+        &lt;div class="board_task_category" id="board_task_category${element.id}">${element.status}&lt;/div>
+        &lt;div class="board_task_title">${element.title}&lt;/div>  
 
-        <div class="board_task_descripton board_task_toDo">${element.description}</div>          
-        <div id="idSUb${element.id}"></div>
-        <div class="board_task_footer_status">  
-            <div class="board_task_initial" id="board_task_initial${element.id}"></div>
-            <img src="${element.priorityImg}">           
-        </div>
-    </div>
+        &lt;div class="board_task_descripton board_task_toDo">${element.description}&lt;/div>          
+        &lt;div id="idSUb${element.id}">&lt;/div>
+        &lt;div class="board_task_footer_status">  
+            &lt;div class="board_task_initial" id="board_task_initial${element.id}">&lt;/div>
+            &lt;img src="${element.priorityImg}">           
+        &lt;/div>
+    &lt;/div>
     `;
 }
 
@@ -3484,17 +3512,17 @@ function renderHtmlProgressBar(element) {
 
     let width = (currentSelectedSubtask / currentAllSubtask * 100).toFixed(0);
     return `
-        <div class="board_task_progress_line">
-            <div class="board_task_progressbar">
-                <div id="progressBar${element.id}" class="progress-bar" style="width: ${width}%"></div>
-            </div>  
-            <div class="board_task_progress_subcount">
-                <div>${currentSelectedSubtask}</div>
-                <div>/</div>
-                <div>${currentAllSubtask}</div>
-                <div style="margin-left: 2px">Subtasks</div>
-            </div>            
-        </div>
+        &lt;div class="board_task_progress_line">
+            &lt;div class="board_task_progressbar">
+                &lt;div id="progressBar${element.id}" class="progress-bar" style="width: ${width}%">&lt;/div>
+            &lt;/div>  
+            &lt;div class="board_task_progress_subcount">
+                &lt;div>${currentSelectedSubtask}&lt;/div>
+                &lt;div>/&lt;/div>
+                &lt;div>${currentAllSubtask}&lt;/div>
+                &lt;div style="margin-left: 2px">Subtasks&lt;/div>
+            &lt;/div>            
+        &lt;/div>
     `;
 }
 
@@ -3510,17 +3538,17 @@ function renderHtmlProgressBar(element) {
  */
 function renderHtmlProgressBarEmpty(element) {
     return `
-            <div class="board_task_progress_line">
-        <div class="board_task_progressbar">
-            <div id="progressBar${element.id}" class="progress-bar"></div>
-        </div>  
-        <div class="board_task_progress_subcount">
-            <div>0</div>
-            <div>/</div>
-            <div>${element.subtasks.length}</div>
-            <div style="margin-left: 2px">Subtasks</div>
-        </div>            
-        </div>
+            &lt;div class="board_task_progress_line">
+        &lt;div class="board_task_progressbar">
+            &lt;div id="progressBar${element.id}" class="progress-bar">&lt;/div>
+        &lt;/div>  
+        &lt;div class="board_task_progress_subcount">
+            &lt;div>0&lt;/div>
+            &lt;div>/&lt;/div>
+            &lt;div>${element.subtasks.length}&lt;/div>
+            &lt;div style="margin-left: 2px">Subtasks&lt;/div>
+        &lt;/div>            
+        &lt;/div>
         `;
 }
 
@@ -3543,58 +3571,58 @@ function renderHtmlProgressBarEmpty(element) {
  */
 function renderGenerateShowTaskHtml(contact, id) {
     return `
-    <div class="show_task" id="showTaskContainer">
-        <div class="show_task_content">
-            <div class="show_task_header">
-                <div class="show_task_category" id="show_task_category${id}">${contact.status}</div> 
-                <img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
-            </div> 
+    &lt;div class="show_task" id="showTaskContainer">
+        &lt;div class="show_task_content">
+            &lt;div class="show_task_header">
+                &lt;div class="show_task_category" id="show_task_category${id}">${contact.status}&lt;/div> 
+                &lt;img class="show_task_close_button" onclick="closeShowTask()" src="./assets/img/close.svg">
+            &lt;/div> 
 
-            <div class="show_task_title">${contact.title}</div>    
+            &lt;div class="show_task_title">${contact.title}&lt;/div>    
             
-            <div class="showTaskFirstInfoSection">
-                <div class="show_task_description">${contact.description}</div> 
+            &lt;div class="showTaskFirstInfoSection">
+                &lt;div class="show_task_description">${contact.description}&lt;/div> 
 
-                <div class="show_task_date">
-                    <span>Due date:</span>
-                    <div>${contact.date}</div>    
-                </div>
+                &lt;div class="show_task_date">
+                    &lt;span>Due date:&lt;/span>
+                    &lt;div>${contact.date}&lt;/div>    
+                &lt;/div>
 
-                <div class="show_task_priory show_task_date">
-                    <span>Priority:</span>
-                    <div class="show_task_priority">
-                        <span>${contact.priority}</span>
-                        <img src="${contact.priorityImg}">
-                    </div>
-                </div> 
-            </div>
+                &lt;div class="show_task_priory show_task_date">
+                    &lt;span>Priority:&lt;/span>
+                    &lt;div class="show_task_priority">
+                        &lt;span>${contact.priority}&lt;/span>
+                        &lt;img src="${contact.priorityImg}">
+                    &lt;/div>
+                &lt;/div> 
+            &lt;/div>
 
-            <div class="show_task_user_daten">
-                <span class="taskAssignedToSpan">Assigned to:</span>
-                <div class="div_show_task_user_initial" id="show_task_user_initial"></div>
-                <div class="show_task_user_name " id="show_task_user_name"></div>
-                <div class="show_task_show_subtasks">
-                    <span>Subtasks:</span>
-                    <div class="show_task_subtask" id="show_task_subtask"></div>
-                </div>
-            </div>            
-        </div>
+            &lt;div class="show_task_user_daten">
+                &lt;span class="taskAssignedToSpan">Assigned to:&lt;/span>
+                &lt;div class="div_show_task_user_initial" id="show_task_user_initial">&lt;/div>
+                &lt;div class="show_task_user_name " id="show_task_user_name">&lt;/div>
+                &lt;div class="show_task_show_subtasks">
+                    &lt;span>Subtasks:&lt;/span>
+                    &lt;div class="show_task_subtask" id="show_task_subtask">&lt;/div>
+                &lt;/div>
+            &lt;/div>            
+        &lt;/div>
 
-        <div class="show_task_footer">
-            <div class="show_task_footer_delete">
-                <div onclick="deleteTaskFromLocalStorage(${contact.id})" class="show_task_delete_button">
-                    <img src="./assets/img/delete.svg" alt="">    
-                    <p>Delete</p>
-                </div>
-            </div>
-            <div class="show_task_footer_delete">                
-                <div onclick="editTask(${contact.id})" class="show_task_delete_button">
-                    <img src="./assets/img/edit.svg" alt="">    
-                    <p>Edit</p>
-                </div>
-            </div>
-        </div>    
-    </div>
+        &lt;div class="show_task_footer">
+            &lt;div class="show_task_footer_delete">
+                &lt;div onclick="deleteTaskFromLocalStorage(${contact.id})" class="show_task_delete_button">
+                    &lt;img src="./assets/img/delete.svg" alt="">    
+                    &lt;p>Delete&lt;/p>
+                &lt;/div>
+            &lt;/div>
+            &lt;div class="show_task_footer_delete">                
+                &lt;div onclick="editTask(${contact.id})" class="show_task_delete_button">
+                    &lt;img src="./assets/img/edit.svg" alt="">    
+                    &lt;p>Edit&lt;/p>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>    
+    &lt;/div>
 `;
 }
 
@@ -3613,18 +3641,18 @@ function renderGenerateShowTaskHtml(contact, id) {
  */
 function rendergetcheckBoxesEdit(guest, initial, isChecked) {
     return `        
-        <div class="board_task_check_box_name editTaskCheckBoxGreyHover">
-            <div class="show_task_checkbox_edit_name_input">
-                <div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}</div>
-                <label class="checkBoxLabelEditTask" for="${guest.id}">${guest.name}</label>
-            </div>
-            <div class="checkbox-wrapper-27">
-                <label class="checkbox">
-                    <input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
-                    <span class="checkbox__icon"></span>
-                </label>
-            </div>
-        </div>
+        &lt;div class="board_task_check_box_name editTaskCheckBoxGreyHover">
+            &lt;div class="show_task_checkbox_edit_name_input">
+                &lt;div class="board_task_user_initial check_box_initial" style="background-color:${guest.color}">${initial}&lt;/div>
+                &lt;label class="checkBoxLabelEditTask" for="${guest.id}">${guest.name}&lt;/label>
+            &lt;/div>
+            &lt;div class="checkbox-wrapper-27">
+                &lt;label class="checkbox">
+                    &lt;input type="checkbox" id="${guest.id}" name="guest" value="${guest.name}" ${isChecked ? 'checked' : ''}>
+                    &lt;span class="checkbox__icon">&lt;/span>
+                &lt;/label>
+            &lt;/div>
+        &lt;/div>
     `;
 }
 
@@ -3640,78 +3668,78 @@ function rendergetcheckBoxesEdit(guest, initial, isChecked) {
  */
 function renderEditTaskHtml(contact) {
     return /* html */` 
-    <div class="show_task" id="editContainer">
-        <form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
-            <div class="show_task__edit_header">
-                <img class="show_task_close_button" onclick="closeWindow()" src="./assets/img/close.svg">
-            </div>
-            <div class="show_task__edit_content">
-                <div class="task_title_edit add_task_form_row">
-                    <span>Title</span>
-                    <input id="task_title_edit" class="show_task_edit_input"  type="text" placeholder="Enter a title">
-                </div>
-                <div class="task_descripion_edit add_task_form_row">
-                        <span>Description</span>
-                        <textarea id="task_description_edit" class="add_task_textarea" name=""
-                            placeholder="Enter a Description"></textarea>
-                </div>
-                <div class="task_date_edit add_task_form_row">
-                        <span>Due date</span>
-                        <input id="task_date_edit" class="show_task_edit_input" type="date" min="${setDate()}">
-                </div>
-                <div class="task_assignet_edit add_task_form_row">
-                    <span><b style="color:black;">Priority</b></span>
-                    <div class="add_task_button_group">
-                        <button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
-                            <div class="add_task_button_vector">
-                                <img src="./assets/img/vector_red.svg">
-                            </div>
-                        </button>
-                        <button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
-                            <div class="add_task_button_vector">
-                                <img src="./assets/img/vector_strich.svg">
-                            </div>
-                        </button>
-                        <button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
-                            <div class="add_task_button_vector">
-                                <img src="./assets/img/vector_green.svg">
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                <div class="task_date_edit add_task_form_row">
-                <span>Task category</span>
-                    <select name="task_category" id="task_category_edit" class="show_task_edit_input">
-                        <option value="to_do">To do</option>
-                        <option value="in_progress">In progress</option>
-                        <option value="awaitt">Await feedback</option>
-                        <option value="done" selected>Done</option>
-                    </select>
-                </div>
-                <div class="task_date_edit add_task_form_row">
-                    <span id="assignet_to">Assigned to</span>
-                    <div class="selectBox" onclick="showCheckboxesEdit()">
-                        <img src="./assets/img/arrow_drop_down.svg" alt="">
-                        <input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 
-                    </div>
-                    <div class="checkBoxesEdit" id="checkBoxesEdit"></div> 
-                    <div class="task_edit_initial" id="task_edit_initial"></div>
-                </div>
-                <div class="task_subtask_edit add_task_form_row">
-                    <span>Subtasks</span>
-                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
-                    <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
-                </div>   
+    &lt;div class="show_task" id="editContainer">
+        &lt;form class="show_task_edit_form" onsubmit="event.preventDefault(); upgradeTodos(${contact.id});">
+            &lt;div class="show_task__edit_header">
+                &lt;img class="show_task_close_button" onclick="closeWindow()" src="./assets/img/close.svg">
+            &lt;/div>
+            &lt;div class="show_task__edit_content">
+                &lt;div class="task_title_edit add_task_form_row">
+                    &lt;span>Title&lt;/span>
+                    &lt;input id="task_title_edit" class="show_task_edit_input"  type="text" placeholder="Enter a title">
+                &lt;/div>
+                &lt;div class="task_descripion_edit add_task_form_row">
+                        &lt;span>Description&lt;/span>
+                        &lt;textarea id="task_description_edit" class="add_task_textarea" name=""
+                            placeholder="Enter a Description">&lt;/textarea>
+                &lt;/div>
+                &lt;div class="task_date_edit add_task_form_row">
+                        &lt;span>Due date&lt;/span>
+                        &lt;input id="task_date_edit" class="show_task_edit_input" type="date" min="${setDate()}">
+                &lt;/div>
+                &lt;div class="task_assignet_edit add_task_form_row">
+                    &lt;span>&lt;b style="color:black;">Priority&lt;/b>&lt;/span>
+                    &lt;div class="add_task_button_group">
+                        &lt;button id="urgent_edit" type="button" class="add_button_group add_task_hover_button" onclick="getTaskPriority('urgent_edit')">Urgent
+                            &lt;div class="add_task_button_vector">
+                                &lt;img src="./assets/img/vector_red.svg">
+                            &lt;/div>
+                        &lt;/button>
+                        &lt;button id="medium_edit" type="button" class="add_button_group add_task_button_medium add_task_hover_button" onclick="getTaskPriority('medium_edit')">Medium
+                            &lt;div class="add_task_button_vector">
+                                &lt;img src="./assets/img/vector_strich.svg">
+                            &lt;/div>
+                        &lt;/button>
+                        &lt;button id="low_edit" type="button" class="add_button_group add_task_button_low  add_task_hover_button" onclick="getTaskPriority('low_edit')">Low
+                            &lt;div class="add_task_button_vector">
+                                &lt;img src="./assets/img/vector_green.svg">
+                            &lt;/div>
+                        &lt;/button>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="task_date_edit add_task_form_row">
+                &lt;span>Task category&lt;/span>
+                    &lt;select name="task_category" id="task_category_edit" class="show_task_edit_input">
+                        &lt;option value="to_do">To do&lt;/option>
+                        &lt;option value="in_progress">In progress&lt;/option>
+                        &lt;option value="awaitt">Await feedback&lt;/option>
+                        &lt;option value="done" selected>Done&lt;/option>
+                    &lt;/select>
+                &lt;/div>
+                &lt;div class="task_date_edit add_task_form_row">
+                    &lt;span id="assignet_to">Assigned to&lt;/span>
+                    &lt;div class="selectBox" onclick="showCheckboxesEdit()">
+                        &lt;img src="./assets/img/arrow_drop_down.svg" alt="">
+                        &lt;input class="add_task_input" id="task_assignet_input_edit" placeholder="Select options" /> 
+                    &lt;/div>
+                    &lt;div class="checkBoxesEdit" id="checkBoxesEdit">&lt;/div> 
+                    &lt;div class="task_edit_initial" id="task_edit_initial">&lt;/div>
+                &lt;/div>
+                &lt;div class="task_subtask_edit add_task_form_row">
+                    &lt;span>Subtasks&lt;/span>
+                    &lt;img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
+                    &lt;input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
+                &lt;/div>   
                             
-                <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>
-            </div>
-            <div class="show_task_edit_footer">
-                <button type="submit">Ok 
-                    <img src="./assets/img/vector_check.svg" alt="">
-                </button>
-            </div>
-        </form>
-    </div>
+                &lt;div class="show_task_subtask_edit" id="show_task_subtask_edit">&lt;/div>
+            &lt;/div>
+            &lt;div class="show_task_edit_footer">
+                &lt;button type="submit">Ok 
+                    &lt;img src="./assets/img/vector_check.svg" alt="">
+                &lt;/button>
+            &lt;/div>
+        &lt;/form>
+    &lt;/div>
     `;
 }
 
@@ -3731,12 +3759,12 @@ function renderEditTaskHtml(contact) {
 function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
     const isChecked = contact.selectedTask ? contact.selectedTask.includes(element) : false;
     return `
-        <div class="checkbox-wrapper-27 show_task_subtask_content">
-            <label class="checkbox" for="${id}_${i}">
-                <input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}>
-                <span class="checkbox__icon"><span class="checkboxSubject">${element}</span></span>
-            </label>
-        </div>
+        &lt;div class="checkbox-wrapper-27 show_task_subtask_content">
+            &lt;label class="checkbox" for="${id}_${i}">
+                &lt;input type="checkbox" id="${id}_${i}" name="subtask" data-value="${element}" ${isChecked ? 'checked' : ''}>
+                &lt;span class="checkbox__icon">&lt;span class="checkboxSubject">${element}&lt;/span>&lt;/span>
+            &lt;/label>
+        &lt;/div>
     `;
 }
 
@@ -3754,21 +3782,21 @@ function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
  */
 function rendergetSubtaskEditHtml(element, contact, i) {
     return `
-        <div class="show_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
-            <input type="text" id="show_task_subtask_edit_input${i}">
-            <div class="show_task_subtask_edit_btn_delete_add">
-                <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
-                <img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditSubtask(${i}, ${contact.id})">
-            </div>
-        </div>
-        <div class="show_task_edit_subtasks_del_edit">
-            <div class="get_show_task"><li>${element}</li></div>
-            <div class="show_task_edit_subtasks_del_edit_button">
-                <img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showTaskEditSubtask(${i}, ${contact.id})">
-                <div class="cross_line"></div>
-                <img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
-            </div>
-        </div>    
+        &lt;div class="show_task_subtask_edit_btn" id="show_task_subtask_edit_btn${i}">
+            &lt;input type="text" id="show_task_subtask_edit_input${i}">
+            &lt;div class="show_task_subtask_edit_btn_delete_add">
+                &lt;img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
+                &lt;img class="img_hover_btn" id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addEditSubtask(${i}, ${contact.id})">
+            &lt;/div>
+        &lt;/div>
+        &lt;div class="show_task_edit_subtasks_del_edit">
+            &lt;div class="get_show_task">&lt;li>${element}&lt;/li>&lt;/div>
+            &lt;div class="show_task_edit_subtasks_del_edit_button">
+                &lt;img class="img_hover_btn" src="./assets/img/edit.svg" onclick="showTaskEditSubtask(${i}, ${contact.id})">
+                &lt;div class="cross_line">&lt;/div>
+                &lt;img class="img_hover_btn" src="./assets/img/delete.svg" onclick="showTaskDeleteSubtask(${i}, ${contact.id})">
+            &lt;/div>
+        &lt;/div>    
     `;
 }
 
@@ -3782,8 +3810,8 @@ function checkBoxClickNone() {
         let checkboxes = document.getElementById("checkBoxesEdit");
         let selectBox = document.querySelector('.selectBox');
 
-        if (checkboxes && selectBox) {
-            if (!selectBox.contains(event.target) && !checkboxes.contains(event.target)) {
+        if (checkboxes &amp;&amp; selectBox) {
+            if (!selectBox.contains(event.target) &amp;&amp; !checkboxes.contains(event.target)) {
                 checkboxes.style.display = "none";
                 showEdit = true;
             }
@@ -3873,7 +3901,7 @@ function updateDisplayedNames() {
             let name = element;
             let guest = guesteArray.find(guest => guest.name === name);
             task_edit_initial.innerHTML += `
-                <div class="board_task_user_initial show_task_user_initial" style="background-color: ${guest.color};">${getInitials(element)}</div>
+                &lt;div class="board_task_user_initial show_task_user_initial" style="background-color: ${guest.color};">${getInitials(element)}&lt;/div>
             `;
         });
     }
@@ -3998,7 +4026,7 @@ function getCategorieBackGroundColorShowTask(contact, id) {
  * of tasks within that category.
  */
 function generateNoTask(categorie_id, category) {
-    categorie_id.innerHTML += `<div class="no_task">No tasks ${category}</div>`
+    categorie_id.innerHTML += `&lt;div class="no_task">No tasks ${category}&lt;/div>`
 }
 
 
@@ -4112,8 +4140,8 @@ function closeWindow() {
 function generateCheckBoxSubTask(contact, id) {
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
-    if (contact && contact.subtasks) {
-        for (let i = 0; i < contact.subtasks.length; i++) {
+    if (contact &amp;&amp; contact.subtasks) {
+        for (let i = 0; i &lt; contact.subtasks.length; i++) {
             const element = contact.subtasks[i];
 
             show_task_subtask.innerHTML += rendergenerateCheckBoxSubTaskHtml(contact, element, id, i);
@@ -4154,7 +4182,7 @@ function showCheckboxesEdit() {
  */
 function createInitialBlock(initial, color) {
     return `
-        <div class="board_task_user_initial" style="background-color: ${color};">${initial}</div>
+        &lt;div class="board_task_user_initial" style="background-color: ${color};">${initial}&lt;/div>
     `;
 }
 
@@ -4170,7 +4198,7 @@ function createInitialBlock(initial, color) {
  */
 function createRemainingPersonsBlock(remainingPersonsCount) {
     return `
-        <div class="board_task_user_initial" style="background-color: #a3a3a3;">+${remainingPersonsCount}</div>
+        &lt;div class="board_task_user_initial" style="background-color: #a3a3a3;">+${remainingPersonsCount}&lt;/div>
     `;
 }
 
@@ -4202,4 +4230,26 @@ function closeShowTask() {
     slideOutTask();
     removeGreyBackground();
     initBoardTasks();
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#BASE_URL_GUEST">BASE_URL_GUEST</a></li><li><a href="global.html#SetRememberData">SetRememberData</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addContactFormHTML">addContactFormHTML</a></li><li><a href="global.html#addEditNewSubTask">addEditNewSubTask</a></li><li><a href="global.html#addEditSubtask">addEditSubtask</a></li><li><a href="global.html#addNewSubTask">addNewSubTask</a></li><li><a href="global.html#addNewSubTaskEdit">addNewSubTaskEdit</a></li><li><a href="global.html#addOrRemoveCheckboxLabelColor">addOrRemoveCheckboxLabelColor</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskToTasks">addTaskToTasks</a></li><li><a href="global.html#allGuestNames">allGuestNames</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#baseUrl">baseUrl</a></li><li><a href="global.html#capitalizeFirstAndLastName">capitalizeFirstAndLastName</a></li><li><a href="global.html#checkBoxClickNone">checkBoxClickNone</a></li><li><a href="global.html#checkEmailInDB">checkEmailInDB</a></li><li><a href="global.html#checkGuestsName">checkGuestsName</a></li><li><a href="global.html#checkIfContactAlreadyExistsForAdd">checkIfContactAlreadyExistsForAdd</a></li><li><a href="global.html#checkIfContactAlreadyExistsForEdit">checkIfContactAlreadyExistsForEdit</a></li><li><a href="global.html#checkIsUserLoginFromLastSession">checkIsUserLoginFromLastSession</a></li><li><a href="global.html#checkPasswortInDB">checkPasswortInDB</a></li><li><a href="global.html#checkValidityForAddContactForm">checkValidityForAddContactForm</a></li><li><a href="global.html#checkValidityForEditContactForm">checkValidityForEditContactForm</a></li><li><a href="global.html#clearForm">clearForm</a></li><li><a href="global.html#closeContactPopUp">closeContactPopUp</a></li><li><a href="global.html#closeDeletePopUp">closeDeletePopUp</a></li><li><a href="global.html#closeMobileContactOptionsOnOutsideClick">closeMobileContactOptionsOnOutsideClick</a></li><li><a href="global.html#closeNavOnOutsideClick">closeNavOnOutsideClick</a></li><li><a href="global.html#closeShowTask">closeShowTask</a></li><li><a href="global.html#closeWindow">closeWindow</a></li><li><a href="global.html#contactListCategoryHTML">contactListCategoryHTML</a></li><li><a href="global.html#createInitialBlock">createInitialBlock</a></li><li><a href="global.html#createRemainingPersonsBlock">createRemainingPersonsBlock</a></li><li><a href="global.html#defineContactEdit">defineContactEdit</a></li><li><a href="global.html#defineNewContact">defineNewContact</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteNewSubTask">deleteNewSubTask</a></li><li><a href="global.html#deletePopUpHTML">deletePopUpHTML</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteTaskFromLocalStorage">deleteTaskFromLocalStorage</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#displayGreyBackground">displayGreyBackground</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#editContactFormHTML">editContactFormHTML</a></li><li><a href="global.html#editContactInFirebase">editContactInFirebase</a></li><li><a href="global.html#editTask">editTask</a></li><li><a href="global.html#focusAndScrollToContact">focusAndScrollToContact</a></li><li><a href="global.html#focusAndScrollToContactOfPhoneNumber">focusAndScrollToContactOfPhoneNumber</a></li><li><a href="global.html#focusNavAnker">focusNavAnker</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#generateAddTasks">generateAddTasks</a></li><li><a href="global.html#generateCheckBox">generateCheckBox</a></li><li><a href="global.html#generateCheckBoxName">generateCheckBoxName</a></li><li><a href="global.html#generateCheckBoxSubTask">generateCheckBoxSubTask</a></li><li><a href="global.html#generateNoTask">generateNoTask</a></li><li><a href="global.html#generateSelectedNames">generateSelectedNames</a></li><li><a href="global.html#generateShowTask">generateShowTask</a></li><li><a href="global.html#generateToDo">generateToDo</a></li><li><a href="global.html#generateUniqueId">generateUniqueId</a></li><li><a href="global.html#getAZindexOfName">getAZindexOfName</a></li><li><a href="global.html#getBoardData">getBoardData</a></li><li><a href="global.html#getBoardNumbersInSummary">getBoardNumbersInSummary</a></li><li><a href="global.html#getCategorieBackGroundColor">getCategorieBackGroundColor</a></li><li><a href="global.html#getCategorieBackGroundColorShowTask">getCategorieBackGroundColorShowTask</a></li><li><a href="global.html#getContactInitialEdit">getContactInitialEdit</a></li><li><a href="global.html#getContactPriorityEdit">getContactPriorityEdit</a></li><li><a href="global.html#getCurrentTaskCategoryEdit">getCurrentTaskCategoryEdit</a></li><li><a href="global.html#getCurrentUserFromLocalStorage">getCurrentUserFromLocalStorage</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getInitialsArray">getInitialsArray</a></li><li><a href="global.html#getInitialsFromObject">getInitialsFromObject</a></li><li><a href="global.html#getNextColor">getNextColor</a></li><li><a href="global.html#getNextUrgentDate">getNextUrgentDate</a></li><li><a href="global.html#getPriorityImage">getPriorityImage</a></li><li><a href="global.html#getPriorityUpdateTodos">getPriorityUpdateTodos</a></li><li><a href="global.html#getSubTaskAddTask">getSubTaskAddTask</a></li><li><a href="global.html#getSubtask">getSubtask</a></li><li><a href="global.html#getSubtaskEdit">getSubtaskEdit</a></li><li><a href="global.html#getTaskPriority">getTaskPriority</a></li><li><a href="global.html#getTokenFrom">getTokenFrom</a></li><li><a href="global.html#getUserPriorityStatus">getUserPriorityStatus</a></li><li><a href="global.html#getValues">getValues</a></li><li><a href="global.html#getcheckBoxesEdit">getcheckBoxesEdit</a></li><li><a href="global.html#getshowTaskUserName">getshowTaskUserName</a></li><li><a href="global.html#greetName">greetName</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#hideOrDisplayCategories">hideOrDisplayCategories</a></li><li><a href="global.html#highlightTaskCategory">highlightTaskCategory</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initAddTask">initAddTask</a></li><li><a href="global.html#initBoardTasks">initBoardTasks</a></li><li><a href="global.html#initForCurrentPage">initForCurrentPage</a></li><li><a href="global.html#isUserOfflineHideMobileNavBar">isUserOfflineHideMobileNavBar</a></li><li><a href="global.html#isUserOfflineHideNavBar">isUserOfflineHideNavBar</a></li><li><a href="global.html#listedContactHTML">listedContactHTML</a></li><li><a href="global.html#loadColorIndex">loadColorIndex</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadGuestFromServer">loadGuestFromServer</a></li><li><a href="global.html#loadTaskFromLocalStorage">loadTaskFromLocalStorage</a></li><li><a href="global.html#loadTasksFromServer">loadTasksFromServer</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginGreeting">loginGreeting</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#navigateTo">navigateTo</a></li><li><a href="global.html#noMatchingPassword">noMatchingPassword</a></li><li><a href="global.html#numberOfAwaitFeedbackTasks">numberOfAwaitFeedbackTasks</a></li><li><a href="global.html#numberOfDoneTasks">numberOfDoneTasks</a></li><li><a href="global.html#numberOfTasksInBoard">numberOfTasksInBoard</a></li><li><a href="global.html#numberOfTasksInProgress">numberOfTasksInProgress</a></li><li><a href="global.html#numberOfToDoTasks">numberOfToDoTasks</a></li><li><a href="global.html#numberOfUrgentTasks">numberOfUrgentTasks</a></li><li><a href="global.html#openAddContactPopUp">openAddContactPopUp</a></li><li><a href="global.html#openDeletePopUp">openDeletePopUp</a></li><li><a href="global.html#openEditPopUp">openEditPopUp</a></li><li><a href="global.html#openHeadNav">openHeadNav</a></li><li><a href="global.html#openMobileContactOptions">openMobileContactOptions</a></li><li><a href="global.html#postContactInFirebase">postContactInFirebase</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#randomContactColor">randomContactColor</a></li><li><a href="global.html#randomNumber">randomNumber</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#reloadUI">reloadUI</a></li><li><a href="global.html#removeDeletedContact">removeDeletedContact</a></li><li><a href="global.html#removeEmailFromLocalstorage">removeEmailFromLocalstorage</a></li><li><a href="global.html#removeGreyBackground">removeGreyBackground</a></li><li><a href="global.html#removeHighlightTaskCategory">removeHighlightTaskCategory</a></li><li><a href="global.html#renderAlphabetCategoryOfLetter">renderAlphabetCategoryOfLetter</a></li><li><a href="global.html#renderCategoryContacts">renderCategoryContacts</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderEditTaskHtml">renderEditTaskHtml</a></li><li><a href="global.html#renderGenerateShowTaskHtml">renderGenerateShowTaskHtml</a></li><li><a href="global.html#renderGetSubTaskAddTask">renderGetSubTaskAddTask</a></li><li><a href="global.html#renderHtmlAddtask">renderHtmlAddtask</a></li><li><a href="global.html#renderHtmlGenerateCheckBox">renderHtmlGenerateCheckBox</a></li><li><a href="global.html#renderHtmlProgressBar">renderHtmlProgressBar</a></li><li><a href="global.html#renderHtmlProgressBarEmpty">renderHtmlProgressBarEmpty</a></li><li><a href="global.html#renderHtmlToDo">renderHtmlToDo</a></li><li><a href="global.html#renderNewContact">renderNewContact</a></li><li><a href="global.html#rendergenerateCheckBoxSubTaskHtml">rendergenerateCheckBoxSubTaskHtml</a></li><li><a href="global.html#rendergetSubtaskEditHtml">rendergetSubtaskEditHtml</a></li><li><a href="global.html#rendergetcheckBoxesEdit">rendergetcheckBoxesEdit</a></li><li><a href="global.html#rendersearchNameFromGuestList">rendersearchNameFromGuestList</a></li><li><a href="global.html#resetCurrentUser">resetCurrentUser</a></li><li><a href="global.html#saveTaskToLocalStorage">saveTaskToLocalStorage</a></li><li><a href="global.html#saveTaskUpdates">saveTaskUpdates</a></li><li><a href="global.html#saveTasksToServer">saveTasksToServer</a></li><li><a href="global.html#schowSubtask">schowSubtask</a></li><li><a href="global.html#searchNameFromGuestList">searchNameFromGuestList</a></li><li><a href="global.html#searchSwithId">searchSwithId</a></li><li><a href="global.html#searchTaskFromBoard">searchTaskFromBoard</a></li><li><a href="global.html#setAllContactNames">setAllContactNames</a></li><li><a href="global.html#setCurrentAlphabetNames">setCurrentAlphabetNames</a></li><li><a href="global.html#setCurrentAlphabetNamesWithA">setCurrentAlphabetNamesWithA</a></li><li><a href="global.html#setCurrentUserInLocalStorage">setCurrentUserInLocalStorage</a></li><li><a href="global.html#setDate">setDate</a></li><li><a href="global.html#setDefaultUser">setDefaultUser</a></li><li><a href="global.html#setEmailToLocalstorage">setEmailToLocalstorage</a></li><li><a href="global.html#setInitialsInHeader">setInitialsInHeader</a></li><li><a href="global.html#setPasswordIconToEye">setPasswordIconToEye</a></li><li><a href="global.html#setPasswordIconToLock">setPasswordIconToLock</a></li><li><a href="global.html#setSelectedContact">setSelectedContact</a></li><li><a href="global.html#setUpComingDeadline">setUpComingDeadline</a></li><li><a href="global.html#showAddAndDeleteSubTask">showAddAndDeleteSubTask</a></li><li><a href="global.html#showCheckboxesEdit">showCheckboxesEdit</a></li><li><a href="global.html#showEditNewSubTask">showEditNewSubTask</a></li><li><a href="global.html#showLoginBox">showLoginBox</a></li><li><a href="global.html#showSignUpBox">showSignUpBox</a></li><li><a href="global.html#showTask">showTask</a></li><li><a href="global.html#showTaskDeleteSubtask">showTaskDeleteSubtask</a></li><li><a href="global.html#showTaskEditSubtask">showTaskEditSubtask</a></li><li><a href="global.html#signUpSuccesfullyInfoBox">signUpSuccesfullyInfoBox</a></li><li><a href="global.html#slideIn">slideIn</a></li><li><a href="global.html#slideInAndOutConfirmation">slideInAndOutConfirmation</a></li><li><a href="global.html#slideInConfirmation">slideInConfirmation</a></li><li><a href="global.html#slideInContact">slideInContact</a></li><li><a href="global.html#slideInContactViewScreenForMobile">slideInContactViewScreenForMobile</a></li><li><a href="global.html#slideInTask">slideInTask</a></li><li><a href="global.html#slideOut">slideOut</a></li><li><a href="global.html#slideOutContact">slideOutContact</a></li><li><a href="global.html#slideOutContactViewScreenForMobile">slideOutContactViewScreenForMobile</a></li><li><a href="global.html#slideOutTask">slideOutTask</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#to_do">to_do</a></li><li><a href="global.html#toggleCheckboxes">toggleCheckboxes</a></li><li><a href="global.html#togglePasswordIcon">togglePasswordIcon</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#updateContactDetails">updateContactDetails</a></li><li><a href="global.html#updateDisplayedNames">updateDisplayedNames</a></li><li><a href="global.html#updateGreeting">updateGreeting</a></li><li><a href="global.html#updateGuestInfo">updateGuestInfo</a></li><li><a href="global.html#updatePriority">updatePriority</a></li><li><a href="global.html#updateSelectedNames">updateSelectedNames</a></li><li><a href="global.html#updateSubtaskStatus">updateSubtaskStatus</a></li><li><a href="global.html#updateTaskCategory">updateTaskCategory</a></li><li><a href="global.html#upgradeTodos">upgradeTodos</a></li><li><a href="global.html#usedIds">usedIds</a></li><li><a href="global.html#wrongPassword">wrongPassword</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jul 04 2024 17:48:37 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
