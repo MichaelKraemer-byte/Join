@@ -69,7 +69,6 @@ function getcheckBoxesEdit(id) {
 }
 
 
-
 /**
  * The function `updateSelectedNames` updates an array of selected names based on checkbox input and
  * then calls another function to update the displayed names.

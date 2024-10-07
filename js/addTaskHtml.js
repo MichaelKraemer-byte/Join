@@ -71,7 +71,7 @@ function renderHtmlAddtask(column) {
     <div class="show_add_task" id="showTaskContainer">
         <img class="close_pop_add_task" src="./assets/img/close.svg" onclick="closeWindow()">
         <h1>Add Task</h1>
-        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column});">
+        <form id="meinFormular" onsubmit="event.preventDefault(); addTaskToTasks(${column}); clearFormForBoard();">
                 <div class="add_task_form">
                     <div class="add_task_width50">
                         <div class="add_task_title add_task_form_row">
@@ -149,7 +149,7 @@ function renderHtmlAddtask(column) {
                 <div class="add_task_footer">
                         <p id="add_task_footer"><b>*</b>This field is required</p>
                         <div class="add_task_button_group_footer">
-                            <button type="button" class="add_task_button_clear add_task_hover_button" onclick="clearForm()">Clear
+                            <button type="button" class="add_task_button_clear add_task_hover_button" onclick="clearFormForBoard()">Clear
                                 <img class="addContactCancelX" src="./assets/img/cancelX.svg">
                             </button>
                             <button id="createTaskButton" type="submit" class="add_task_button_create add_task_hover_button">Create Task
@@ -190,4 +190,25 @@ function renderGetSubTaskAddTask(i, element) {
             </div>
         </div>         
     `;
+}
+
+
+/**
+ * The clearForm function resets the input fields in a form with the ID "meinFormular".
+ */
+function clearFormForBoard() {
+    const addTaskShowCheckElement = document.getElementById('add_task_show_check');
+
+    if (addTaskShowCheckElement) {
+        subtasks = [];
+        namelist = [];
+        colorList = [];
+        initials = [];
+        document.getElementById('add_task_show_check').innerHTML = '';
+        document.getElementById('get_subtask').innerHTML = '';
+        document.getElementById("meinFormular").reset();
+        getSubTaskAddTask();        
+    } else {
+        return;
+    }
 }

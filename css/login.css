@@ -1,17 +1,8 @@
-@font-face {
-    font-family: Inter-Bold;
-    src: url(/out/fonts/Inter-Bold.ttf);
-}
-
-@font-face {
-    font-family: Inter;
-    src: url(/out/fonts/Inter-Regular.ttf);
-}
 
 body {
     background-color: rgb(246, 247, 249);
     margin: 0;
-    font-family: Inter;
+    font-family: 'Inter';
     display: flex;
     justify-content: center;
 }
@@ -114,8 +105,8 @@ body {
 .box h1 {
     font-size: 61px;
     margin: 0;
-    font-family: Inter-Bold;
     line-height: 73.2px;
+    font-weight: 700;
 }
 
 .box form {
@@ -192,7 +183,6 @@ body {
     cursor: pointer;
     transition: 150ms;
     height: 48px;
-    font-family: Inter-Bold;
     font-weight: 700;
     font-size: 21px;
     display: flex;
