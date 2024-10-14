@@ -36,19 +36,19 @@ function getInitials(name) {
 
 
 /**
- * The function `getcheckBoxesEdit` populates a list of checkboxes based on a selected contact's name
+ * The function `getcheckBoxesEdit` populates a list of checkboxes based on a selected currentTask's name
  * and updates the displayed names accordingly.
- * @param {number} id - The ID of the contact in the `todos` array that is selected to populate checkboxes.
- * This ID is used to find and retrieve the contact's information from `todos`.
+ * @param {number} id - The ID of the currentTask in the `todos` array that is selected to populate checkboxes.
+ * This ID is used to find and retrieve the currentTask's information from `todos`.
  */
 function getcheckBoxesEdit(id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let currentTask = todos.find(obj => obj['id'] == id);
     let checkBoxesEdit = document.getElementById('checkBoxesEdit');
     checkBoxesEdit.innerHTML = '';
-    selectedNames = contact.name ? [...contact.name] : [];
+    selectedNames = currentTask.name ? [...currentTask.name] : [];
 
     checkBoxesEdit.innerHTML = guesteArray.map(guest => {
-        let isChecked = contact.name ? contact.name.includes(guest.name) : false;
+        let isChecked = currentTask.name ? currentTask.name.includes(guest.name) : false;
         let initial = getInitials(guest.name);
         return rendergetcheckBoxesEdit(guest, initial, isChecked);
     }).join('');
@@ -63,7 +63,6 @@ function getcheckBoxesEdit(id) {
     document.querySelectorAll('#checkBoxesEdit input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', updateSelectedNames);
     });
-
     checkBoxClickNone();
     updateDisplayedNames();
 }
@@ -351,18 +350,18 @@ function closeWindow() {
  * @param {string} id - The `id` parameter is used to identify the specific task for which the subtasks
  * are being generated. It helps differentiate between different tasks and their corresponding subtasks.
  */
-function generateCheckBoxSubTask(contact, id) {
+function generateCheckBoxSubTask(currentTask, id) {
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
-    if (contact && contact.subtasks) {
-        for (let i = 0; i < contact.subtasks.length; i++) {
-            const element = contact.subtasks[i];
+    if (currentTask && currentTask.subtasks) {
+        for (let i = 0; i < currentTask.subtasks.length; i++) {
+            const element = currentTask.subtasks[i];
 
-            show_task_subtask.innerHTML += rendergenerateCheckBoxSubTaskHtml(contact, element, id, i);
+            show_task_subtask.innerHTML += rendergenerateCheckBoxSubTaskHtml(currentTask, element, id, i);
         }
         document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`).forEach(checkbox => {
             checkbox.addEventListener('change', function () {
-                updateSubtaskStatus(contact, this.dataset.value, this.checked);
+                updateSubtaskStatus(currentTask, this.dataset.value, this.checked);
             });
         });
     } else {

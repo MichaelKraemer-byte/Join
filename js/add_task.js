@@ -107,7 +107,7 @@ async function addTaskToTasks(column) {
     saveTaskToLocalStorage();
     if (window.location.href.includes('board.html')) {
         closeWindow();
-        initBoardTasks();
+        await initBoardTasks();
     }
     initAddTask();
     slideInConfirmation();

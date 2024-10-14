@@ -39,15 +39,15 @@ function renderHtmlToDo(element) {
  * displays the current progress of selected subtasks out of all subtasks, shown as a percentage width,
  * along with the count of selected subtasks and total subtasks.
  */
-function renderHtmlProgressBar(element) {
-    let currentAllSubtask = element.subtasks.length;
-    let currentSelectedSubtask = element.selectedTask.length;
+function renderHtmlProgressBar(currentTask) {
+    let currentAllSubtask = currentTask.subtasks.length;
+    let currentSelectedSubtask = currentTask.selectedTask.length;
 
     let width = (currentSelectedSubtask / currentAllSubtask * 100).toFixed(0);
     return `
         <div class="board_task_progress_line">
             <div class="board_task_progressbar">
-                <div id="progressBar${element.id}" class="progress-bar" style="width: ${width}%"></div>
+                <div id="progressBar${currentTask.id}" class="progress-bar" style="width: ${width}%"></div>
             </div>  
             <div class="board_task_progress_subcount">
                 <div>${currentSelectedSubtask}</div>

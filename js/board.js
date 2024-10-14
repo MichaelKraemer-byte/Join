@@ -10,6 +10,7 @@ let initials = [];
 let subtasks = [];
 let selectedSubtasks = [];
 let selectedNames = [];
+let currentTask = [];
 
 loadTaskFromLocalStorage();
 
@@ -70,7 +71,7 @@ async function deleteTaskFromLocalStorage(id) {
     todos = arr;
     await saveTasksToServer();
     saveTaskToLocalStorage();
-    initBoardTasks();
+    await initBoardTasks();
     closeShowTask();
 }
 
@@ -176,57 +177,74 @@ function addTask(column) {
  */
 async function generateShowTask(id) {
     let boardPopUp = document.getElementById('boardPopUp');
-    let contact = todos.find(obj => obj['id'] == id);
-    boardPopUp.innerHTML = renderGenerateShowTaskHtml(contact, id);
+    currentTask = todos.find(obj => obj['id'] == id);
+    boardPopUp.innerHTML = renderGenerateShowTaskHtml(currentTask, id);
 
-    generateCheckBoxSubTask(contact, id)
-    getshowTaskUserName(contact);
-    getCategorieBackGroundColorShowTask(contact, id);
+    generateCheckBoxSubTask(currentTask, id)
+    getshowTaskUserName(currentTask);
+    getCategorieBackGroundColorShowTask(currentTask, id);
 }
 
 
 /**
- * Updates the status of a subtask for a given contact by adding or removing it from the selected tasks list,
+ * Updates the status of a subtask for a given currentTask by adding or removing it from the selected tasks list,
  * saving the changes to local storage, sending the updated tasks to the server, and initializing the board tasks.
  * @param {Object} contact - An object representing a user or a person. It contains information such as name,
  * email, phone number, and other details.
- * @param {string} subtask - The specific subtask that you want to update the status for within the `contact` object.
+ * @param {string} subtask - The specific subtask that you want to update the status for within the `currentTask` object.
  * @param {boolean} isChecked - A boolean value indicating whether the subtask is checked (true) or not checked (false).
- * If `isChecked` is true, the subtask will be added to the `selectedTask` array of the `contact`; if false, it will be removed.
+ * If `isChecked` is true, the subtask will be added to the `selectedTask` array of the `currentTask`; if false, it will be removed.
  */
-async function updateSubtaskStatus(contact, subtask, isChecked) {
-    if (contact) {
-        if (!contact.selectedTask) {
-            contact.selectedTask = [];
+async function updateSubtaskStatus(currentTask, subtask, isChecked) {
+    if (currentTask) {
+        if (!currentTask.selectedTask) {
+            currentTask.selectedTask = [];
         }
         if (isChecked) {
-            if (!contact.selectedTask.includes(subtask)) {
-                contact.selectedTask.push(subtask);
-            }
+                currentTask.selectedTask.push(subtask);
         } else {
-            contact.selectedTask = contact.selectedTask.filter(task => task !== subtask);
+            const indexToRemove = currentTask.selectedTask.findIndex(task => task === subtask);
+            if (indexToRemove !== -1) {
+                currentTask.selectedTask.splice(indexToRemove, 1);
+            }        
         }
+        updateTodosWith(currentTask);
         saveTaskToLocalStorage();
         await saveTasksToServer();
-        initBoardTasks();
+        await initBoardTasks();
     }
 }
 
 
+function updateTodosWith(currentTask) {
+    todos.splice(
+        findIndexOfToDosIndexWith(currentTask),
+        1,
+        currentTask
+    )
+}
+
+
+function findIndexOfToDosIndexWith(currentTask){
+    const toDosIndex = todos.findIndex(id => id === currentTask.id);
+    return toDosIndex;
+}
+
+
 /**
- * Populates the `show_task_user_name` element with user names and initials from a given contact object.
- * @param {Object} contact - An object containing information about a contact, likely including properties
+ * Populates the `show_task_user_name` element with user names and initials from a given currentTask object.
+ * @param {Object} currentTask - An object containing information about a currentTask, likely including properties
  * such as `name`, `color`, and `initial` for each user.
  */
-function getshowTaskUserName(contact) {
+function getshowTaskUserName(currentTask) {
     let showTaskUserName = document.getElementById('show_task_user_name');
     showTaskUserName.innerHTML = "";
-    if (contact.name) {
-        for (let i = 0; i < contact['name'].length; i++) {
-            const element = contact['name'][i];
+    if (currentTask.name) {
+        for (let i = 0; i < currentTask['name'].length; i++) {
+            const element = currentTask['name'][i];
             showTaskUserName.innerHTML += /*html*/`
                 <div class="show_task_assigned_to_users">                
-                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${contact.color[i]};">${contact.initial[i]}</div>
+                    <div class="board_task_user_initial show_task_user_initial" style="background-color: ${currentTask.color[i]};">${currentTask.initial[i]}</div>
                     <div>${element}</div>
                 </div>
             `;
@@ -241,18 +259,18 @@ function getshowTaskUserName(contact) {
  * the `todos` array and retrieve its details.
  */
 function editTask(id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let currentTask = todos.find(obj => obj['id'] == id);
     let boardPopUp = document.getElementById('boardPopUp');
     let showTaskContainer = document.getElementById('showTaskContainer');
 
     showTaskContainer.style.display = 'none';
-    boardPopUp.innerHTML += renderEditTaskHtml(contact);/** */
+    boardPopUp.innerHTML += renderEditTaskHtml(currentTask);/** */
 
     getcheckBoxesEdit(id);
-    getContactPriorityEdit(contact);
-    getContactInitialEdit(contact);
-    getSubtaskEdit(contact);
-    getCurrentTaskCategoryEdit(contact);
+    getContactPriorityEdit(currentTask);
+    getContactInitialEdit(currentTask);
+    getSubtaskEdit(currentTask);
+    getCurrentTaskCategoryEdit(currentTask);
 }
 
 
@@ -380,17 +398,28 @@ function showTaskEditSubtask(i, id) {
 
 /**
  * Updates a subtask for a specific task and saves the changes to local storage and the server.
- * @param {number} i - The index of the subtask within the `contact` object's subtasks array to add or edit.
+ * @param {number} i - The index of the subtask within the `currentTask` object's subtasks array to add or edit.
  * @param {string} id - The unique identifier of the task to be updated, used to locate the task in the `todos` array.
  * @returns {Promise<void>} A Promise that resolves once the subtask is updated and changes are saved.
  */
 async function addEditSubtask(i, id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let currentTask = todos.find(obj => obj['id'] == id);
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
-    contact.subtasks[i] = show_task_subtask_edit_input.value;
+
+    if (show_task_subtask_edit_input.value !== '') {
+        currentTask.subtasks[i] = show_task_subtask_edit_input.value;
+    } else {
+        const subtaskToRemove = currentTask.subtasks[i]; 
+        currentTask.subtasks.splice(i, 1);    
+        const indexInSelectedTask = currentTask.selectedTask.findIndex(task => task === subtaskToRemove);
+        if (indexInSelectedTask !== -1) {
+            currentTask.selectedTask.splice(indexInSelectedTask, 1);
+            await updateSubtaskStatus(currentTask, subtaskToRemove, false);
+        }
+    }
     saveTaskToLocalStorage();
     await saveTasksToServer();
-    getSubtaskEdit(contact);
+    getSubtaskEdit(currentTask);
     initBoardTasks();
 }
 
@@ -404,11 +433,22 @@ async function addEditSubtask(i, id) {
  * @returns {Promise<void>} A Promise that resolves once the subtask is deleted and changes are saved.
  */
 async function showTaskDeleteSubtask(i, id) {
-    let contact = todos.find(obj => obj['id'] == id);
-    contact.subtasks.splice(i, 1);
+
+    let currentTask = todos.find(obj => obj['id'] == id);
+    const subtaskToRemove = currentTask.subtasks[i]; 
+
+    currentTask.subtasks.splice(i, 1);
+
+    if (currentTask.selectedTask) {
+        const indexInSelectedTask = currentTask.selectedTask.findIndex(task => task === subtaskToRemove);
+        if (indexInSelectedTask !== -1) {
+            currentTask.selectedTask.splice(indexInSelectedTask, 1);
+            await updateSubtaskStatus(currentTask, subtaskToRemove, false);
+        }
+    }
     saveTaskToLocalStorage();
     await saveTasksToServer();
-    getSubtaskEdit(contact);
+    getSubtaskEdit(currentTask);
     initBoardTasks();
 }
 
@@ -446,11 +486,11 @@ async function addNewSubTaskEdit(id) {
  * saved.
  */
 async function upgradeTodos(id) {
-    let contact = todos.find(obj => obj['id'] == id);
-    updateContactDetails(contact);
-    updateGuestInfo(contact);
-    updatePriority(contact);
-    updateTaskCategory(contact);
+    let currentTask = todos.find(obj => obj['id'] == id);
+    updateContactDetails(currentTask);
+    updateGuestInfo(currentTask);
+    updatePriority(currentTask);
+    updateTaskCategory(currentTask);
     await saveTaskUpdates();
     reloadUI();
     showTask(id);

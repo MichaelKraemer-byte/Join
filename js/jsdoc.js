@@ -3034,17 +3034,17 @@ async function generateShowTask(id) {
  * @param {boolean} isChecked - A boolean value indicating whether the subtask is checked (true) or not checked (false).
  * If `isChecked` is true, the subtask will be added to the `selectedTask` array of the `contact`; if false, it will be removed.
  */
-async function updateSubtaskStatus(contact, subtask, isChecked) {
-    if (contact) {
-        if (!contact.selectedTask) {
-            contact.selectedTask = [];
+async function updateSubtaskStatus(currentTask, subtask, isChecked) {
+    if (currentTask) {
+        if (!currentTask.selectedTask) {
+            currentTask.selectedTask = [];
         }
         if (isChecked) {
-            if (!contact.selectedTask.includes(subtask)) {
-                contact.selectedTask.push(subtask);
+            if (!currentTask.selectedTask.includes(subtask)) {
+                currentTask.selectedTask.push(subtask);
             }
         } else {
-            contact.selectedTask = contact.selectedTask.filter(task => task !== subtask);
+            currentTask.selectedTask = currentTask.selectedTask.filter(task => task !== subtask);
         }
         saveTaskToLocalStorage();
         await saveTasksToServer();
@@ -3205,32 +3205,37 @@ function getCurrentTaskCategoryEdit(contact) {
 
 /**
  * Displays a specific subtask for editing within a task.
- * @param {number} i - The index of the subtask within the `subtasks` array of the `contact` object.
+ * @param {number} i - The index of the subtask within the `subtasks` array of the `currentTask` object.
  * @param {string} id - The unique identifier of the task to be edited, used to locate the task in the `todos` array.
  */
 function showTaskEditSubtask(i, id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let currentTask = todos.find(obj => obj['id'] == id);
     let show_task_subtask_edit_btn = document.getElementById(`show_task_subtask_edit_btn${i}`);
     show_task_subtask_edit_btn.style.display = 'flex';
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
 
-    show_task_subtask_edit_input.value = contact.subtasks[i];
+    show_task_subtask_edit_input.value = currentTask.subtasks[i];
 }
 
 
 /**
  * Updates a subtask for a specific task and saves the changes to local storage and the server.
- * @param {number} i - The index of the subtask within the `contact` object's subtasks array to add or edit.
+ * @param {number} i - The index of the subtask within the `currentTask` object's subtasks array to add or edit.
  * @param {string} id - The unique identifier of the task to be updated, used to locate the task in the `todos` array.
  * @returns {Promise<void>} A Promise that resolves once the subtask is updated and changes are saved.
  */
 async function addEditSubtask(i, id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let currentTask = todos.find(obj => obj['id'] == id);
     let show_task_subtask_edit_input = document.getElementById(`show_task_subtask_edit_input${i}`);
-    contact.subtasks[i] = show_task_subtask_edit_input.value;
+    if (show_task_subtask_edit_input.value !== '') {
+        currentTask.subtasks[i] = show_task_subtask_edit_input.value;
+    } else {
+        currentTask.subtasks.splice(i, 1)
+        
+    }
     saveTaskToLocalStorage();
     await saveTasksToServer();
-    getSubtaskEdit(contact);
+    getSubtaskEdit(currentTask);
     initBoardTasks();
 }
 
