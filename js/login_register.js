@@ -53,7 +53,7 @@ function showLoginBox() {
 function checkIsUserLoginFromLastSession() {
     let localstorage = localStorage.getItem('currentUser');
     if (localstorage != null) {
-        window.location.href = './summary.html';
+        window.location.href = '/join/summary.html';
     }
 }
 
@@ -102,7 +102,7 @@ async function login() {
 
     if (checkEmailInDB(data, email) && checkPasswortInDB(data, password)) {
         setCurrentUserInLocalStorage(data);
-        window.location.href = './summary.html';
+        window.location.href = '/join/summary.html';
         if (rememberMe) {
             setEmailToLocalstorage(email);
         } else { removeEmailFromLocalstorage() }
@@ -115,7 +115,7 @@ async function login() {
  */
 function guestLogin() {
     setDefaultUser();
-    window.location.href = '/summary.html';
+    window.location.href = '/join/summary.html';
 }
 
 /**
