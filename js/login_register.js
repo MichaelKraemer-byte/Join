@@ -254,10 +254,10 @@ function togglePasswordVisibility(id) {
     const toggleIcon = document.getElementById(id + '-password-icon');
     if (passwordField.type === "password") {
         passwordField.type = "text";
-        toggleIcon.src = "/assets/img/password-show.png"; // Symbol zum Verbergen
+        toggleIcon.src = "./assets/img/password-show.png"; // Symbol zum Verbergen
     } else {
         passwordField.type = "password";
-        toggleIcon.src = "/assets/img/password-hide.png";
+        toggleIcon.src = "./assets/img/password-hide.png";
     }
 }
 
@@ -304,9 +304,9 @@ function setPasswordIconToEye(id) {
     toggleIcon.style.cursor = 'pointer'
     toggleContainer.setAttribute('onclick', 'togglePasswordVisibility("' + id + '")');
     if (passwordField.type === 'password') {
-        toggleIcon.src = "/assets/img/password-hide.png";
+        toggleIcon.src = "./assets/img/password-hide.png";
     } else {
-        toggleIcon.src = "/assets/img/password-show.png";
+        toggleIcon.src = "./assets/img/password-show.png";
     }
 }
 
