@@ -40,22 +40,29 @@ async function saveTasksToServer() {
  * The function `loadTasksFromServer` asynchronously fetches tasks data from a server and maps the
  * response to an array of todos.
  */
+/**
+ * Die Funktion `loadTasksFromServer` ruft asynchron die Aufgaben von einem Server ab
+ * und mappt die Antwort auf ein Array von Todos.
+ */
 async function loadTasksFromServer() {
     try {
         const response = await fetch(`${BASE_URL}/tasks.json`);
+        // Prüfen, ob die Antwort erfolgreich war (Status 200 OK)
         if (!response.ok) {
             throw new Error('Netzwerkantwort war nicht ok.');
         }
+        // Wenn die Datei existiert und geladen werden kann
         const data = await response.json();
         todos = Object.keys(data).map(id => ({
             id,
             ...data[id]
         }));
-
     } catch (error) {
-        console.error('Fehler beim Abrufen der Daten:', error);
+        todos = [];
+        return;
     }
 }
+
 
 
 /**
@@ -201,28 +208,51 @@ async function updateSubtaskStatus(currentTask, subtask, isChecked) {
             currentTask.selectedTask = [];
         }
         if (isChecked) {
-                currentTask.selectedTask.push(subtask);
+            currentTask.selectedTask.push(subtask);
         } else {
             const indexToRemove = currentTask.selectedTask.findIndex(task => task === subtask);
             if (indexToRemove !== -1) {
                 currentTask.selectedTask.splice(indexToRemove, 1);
-            }        
+            }
         }
-        updateTodosWith(currentTask);
-        saveTaskToLocalStorage();
-        await saveTasksToServer();
+        await updateSubtasksOnServer(currentTask.id, currentTask.selectedTask);
         await initBoardTasks();
     }
 }
 
 
-function updateTodosWith(currentTask) {
-    todos.splice(
-        findIndexOfToDosIndexWith(currentTask),
-        1,
-        currentTask
-    )
+async function updateSubtasksOnServer(taskId, updatedSubtasks) {
+    try {
+        const taskIndex = todos.findIndex(task => task.id === taskId);
+        const taskToUpdate = todos[taskIndex];
+        if (taskIndex === -1 || !taskToUpdate) {
+            console.error(`Task mit der ID ${taskId} wurde nicht gefunden.`);
+            return;
+        }
+        taskToUpdate.subtasks = updatedSubtasks;
+        const response = await fetch(`${BASE_URL}/tasks/${taskIndex}/selectedTask.json`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedSubtasks) 
+        });
+        if (!response.ok) {
+            throw new Error('Server hat das Update nicht akzeptiert.');
+        }
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Subtasks auf dem Server:', error);
+    }
 }
+
+
+// function updateTodosWith(currentTask) {
+//     todos.splice(
+//         findIndexOfToDosIndexWith(currentTask),
+//         1,
+//         currentTask
+//     )
+// }
 
 
 function findIndexOfToDosIndexWith(currentTask){

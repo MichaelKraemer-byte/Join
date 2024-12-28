@@ -353,21 +353,25 @@ function closeWindow() {
 function generateCheckBoxSubTask(currentTask, id) {
     let show_task_subtask = document.getElementById('show_task_subtask');
     show_task_subtask.innerHTML = '';
+
     if (currentTask && currentTask.subtasks) {
         for (let i = 0; i < currentTask.subtasks.length; i++) {
             const element = currentTask.subtasks[i];
-
             show_task_subtask.innerHTML += rendergenerateCheckBoxSubTaskHtml(currentTask, element, id, i);
         }
-        document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`).forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                updateSubtaskStatus(currentTask, this.dataset.value, this.checked);
-            });
+
+        // Eventlistener nur einmal hinzufügen und alte entfernen
+        const checkboxes = document.querySelectorAll(`#show_task_subtask input[type="checkbox"]`);
+        checkboxes.forEach(checkbox => {
+            checkbox.onchange = async function () {
+                await updateSubtaskStatus(currentTask, this.dataset.value, this.checked);
+            };
         });
     } else {
         show_task_subtask.innerHTML = 'No subtasks here.';
     }
 }
+
 
 
 /**

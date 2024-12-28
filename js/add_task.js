@@ -168,7 +168,9 @@ function slideInConfirmation() {
     setTimeout(() => {
         addTaskProcess = false;
         createTaskButton = document.getElementById('createTaskButton');
-        createTaskButton.disabled = false;
+        if (createTaskButton) {
+            createTaskButton.disabled = false;
+        }
         confirmation.style.animation = 'fadeConfirmation 0.3s ease-in-out';
         if (window.location.href.includes('add_task.html')) { navigateTo('board.html') }
     }, 1250);

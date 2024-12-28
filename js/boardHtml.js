@@ -285,7 +285,7 @@ function renderEditTaskHtml(contact) {
 /**
  * The function `rendergenerateCheckBoxSubTaskHtml` generates HTML for a checkbox element with a label
  * and optional checked state based on the provided parameters.
- * @param {Object} contact - An object containing information related to a contact or task.
+ * @param {Object} currentTask - An object containing information related to a contact or task.
  * @param {any} element - The individual subtask element that needs to be rendered as a checkbox.
  * @param {string} id - A string used to generate unique IDs for the checkboxes in the HTML output.
  * @param {number} i - An index or counter variable used within the function to track the position of
@@ -294,8 +294,8 @@ function renderEditTaskHtml(contact) {
  * containing the subtask `element`. The checkbox is checked if `contact.selectedTask` includes the
  * `element`, otherwise it is unchecked.
  */
-function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
-    const isChecked = contact.selectedTask ? contact.selectedTask.includes(element) : false;
+function rendergenerateCheckBoxSubTaskHtml(currentTask, element, id, i) {
+    const isChecked = currentTask.selectedTask ? currentTask.selectedTask.includes(element) : false;
     return `
         <div class="checkbox-wrapper-27 show_task_subtask_content">
             <label class="checkbox" for="${id}_${i}">
@@ -305,6 +305,7 @@ function rendergenerateCheckBoxSubTaskHtml(contact, element, id, i) {
         </div>
     `;
 }
+
 
 
 /**
