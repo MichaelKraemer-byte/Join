@@ -156,6 +156,7 @@
     box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.36);
     text-align: start;
     cursor: pointer;
+    transition: transform 0.3s ease; 
 }
 
 .bord_content_colum {
@@ -417,3 +418,10 @@ h2 {
     filter: brightness(200%);
 }
 
+.dragging {
+    opacity: 1;
+    cursor: grabbing;
+    transition: transform 0.1s ease-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(30deg);
+}

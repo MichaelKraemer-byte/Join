@@ -37,7 +37,8 @@
 }
 
 .drag-area-highlight {
-    background-color: #e1e1e1;;
+    background-color: #e1e1e1;
+    transition: background-color 0.125s ease-in-out;
 }
 
 .show_task {

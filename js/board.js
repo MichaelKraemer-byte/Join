@@ -246,15 +246,6 @@ async function updateSubtasksOnServer(taskId, updatedSubtasks) {
 }
 
 
-// function updateTodosWith(currentTask) {
-//     todos.splice(
-//         findIndexOfToDosIndexWith(currentTask),
-//         1,
-//         currentTask
-//     )
-// }
-
-
 function findIndexOfToDosIndexWith(currentTask){
     const toDosIndex = todos.findIndex(id => id === currentTask.id);
     return toDosIndex;

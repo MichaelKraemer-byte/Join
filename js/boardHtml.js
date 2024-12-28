@@ -12,12 +12,14 @@
  * are also included.
  */
 function renderHtmlToDo(element) {
-    
     return /*html*/`
-    <div class="task" draggable="true" ondragstart=" startDragging(${element.id})" onclick="showTask(${element.id})">
+    <div class="task" id="draggableElement${element.id}" draggable="true" 
+        ondragstart="startDragging(${element.id}, event)" 
+        ondragend="stopDragging()" 
+        onclick="showTask(${element.id})"
+    >
         <div class="board_task_category" id="board_task_category${element.id}">${element.status}</div>
         <div class="board_task_title">${element.title}</div>  
-
         <div class="board_task_descripton board_task_toDo">${element.description}</div>          
         <div id="idSUb${element.id}"></div>
         <div class="board_task_footer_status">  

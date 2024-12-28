@@ -243,25 +243,29 @@ function generateNoTask(categorie_id, category) {
 }
 
 
-/**
- * The function `startDragging` sets the `currentElement` variable to the provided ID, indicating
- * that this element is currently being dragged.
- * @param {string} id - The ID of the element that is being dragged. This ID is used to specify
- * the element that will be tracked as it is dragged across the interface.
- */
+draggableElement = null;
+
 function startDragging(id) {
+    draggableElement = document.getElementById(`draggableElement${id}`);
+    draggableElement.classList.add('dragging');  
     currentElement = id;
+    draggableElement.style.transform = `rotate(20deg)`; 
 }
 
 
-/**
- * The function `allowDrop` prevents the default behavior for a drop event, allowing the drop to occur.
- * @param {Event} ev - The `ev` parameter is an event object that represents the drag-and-drop event
- * being handled.
- */
-function allowDrop(ev) {
-    ev.preventDefault();
+function stopDragging() {
+    if (draggableElement) {
+        draggableElement.classList.remove('dragging'); 
+        draggableElement.style.transform = '';
+        draggableElement = null;
+    }
 }
+
+
+function allowDrop(event) {
+    event.preventDefault(); 
+}
+
 
 
 /**
