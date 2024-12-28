@@ -162,6 +162,7 @@
     width: 25%;
     padding: 8px;
     border-radius: 10px;
+    min-height: 50vh;
 }
 
 .bord_content_colum_left {

@@ -107,10 +107,12 @@
         display: flex;
         gap: 16px;
         width: 100%;
+        min-width: 280px;
         margin-left: 0;
         overflow-x: scroll;
         overflow-y: hidden;
         padding: 6px;
+        min-height: unset;
     }
 
     .bord_content_colum::-webkit-scrollbar,
@@ -180,7 +182,8 @@
     }
 
     .task {
-        width: 196px;
+        width: 220px;
+        min-width: 220px;
     }
 }
 
