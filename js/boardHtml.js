@@ -260,8 +260,13 @@ function renderEditTaskHtml(contact) {
                 </div>
                 <div class="task_subtask_edit add_task_form_row">
                     <span>Subtasks</span>
-                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
-                    <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
+                    <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt=""  
+                        onkeydown="checkIfKeyisEnterThenAddNewSubTaskEdit(event, ${contact.id})" 
+                        onclick="addNewSubTaskEdit(${contact.id})"
+                    >
+                    <input 
+                        onkeydown="checkIfKeyisEnterThenAddNewSubTaskEdit(event, ${contact.id})" 
+                        class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
                 </div>   
                             
                 <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>

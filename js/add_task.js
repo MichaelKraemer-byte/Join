@@ -380,22 +380,25 @@ function checkGuestsName(checkedValues) {
  * appearance. If the checkbox is checked, both classes are added; if unchecked, both classes are removed.
  */
 function addOrRemoveCheckboxLabelColor(event) {
-    let checkbox = event.target;
-    let checkboxLabel = checkbox.closest('.checkbox');
-    const checkboxes = document.querySelectorAll('input[name="optionen"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const label = checkbox.closest('.checkBoxLabel');
-            if (checkbox.checked) {
-                label.classList.add('checkedLabel');
-                checkboxLabel.classList.add('whiteCheckbox');
-            } else {
-                label.classList.remove('checkedLabel');
-                checkboxLabel.classList.remove('whiteCheckbox');
-            }
-        });
-    });    
+    const checkbox = event.target;
+    if (checkbox.tagName !== 'INPUT' || checkbox.type !== 'checkbox') return;
+    const label = checkbox.closest('.checkBoxLabel'); 
+    const checkboxLabel = checkbox.closest('.checkbox'); 
+    if (!label || !checkboxLabel) return; 
+    if (checkbox.checked) {
+        label.classList.add('checkedLabel');
+        checkboxLabel.classList.add('whiteCheckbox');
+    } else {
+        label.classList.remove('checkedLabel');
+        checkboxLabel.classList.remove('whiteCheckbox');
+    }
 }
+
+document.addEventListener('change', function (event) {
+    if (event.target.matches('input[name="optionen"]')) {
+        addOrRemoveCheckboxLabelColor(event);
+    }
+});
 
 
 /**
@@ -470,18 +473,26 @@ function getSubtask() {
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
     let add_task_button_plus = document.getElementById('add_task_button_plus');
-    let deleteSubtask = document.getElementById('delete_subtask');
-    let check = document.getElementById('check');
-
     if (task_subtask.value) {
         subtasks.push(task_subtask.value);
     }
     getSubTaskAddTask();
-    check.style.display = 'none';
-    deleteSubtask.style.display = 'none';
     add_task_button_plus.style.visibility = 'initial';
     task_subtask.value = "";
 }
+
+function checkIfKeyisEnterThenAddNewSubTask(event) {
+    if (event.key === 'Enter') { 
+        event.preventDefault(); 
+        const subtaskInput = document.getElementById('task_subtasks'); 
+        const inputValue = subtaskInput.value.trim(); 
+        if (inputValue) {
+            addNewSubTask();
+            subtaskInput.value = ''; 
+        }
+    }
+}
+
 
 
 /**

@@ -477,6 +477,19 @@ async function addNewSubTaskEdit(id) {
 }
 
 
+function checkIfKeyisEnterThenAddNewSubTaskEdit(event, id) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+        const subtaskInput = document.getElementById('task_subtasks_edit'); 
+        const inputValue = subtaskInput.value.trim(); 
+        if (inputValue) {
+            addNewSubTaskEdit(id);
+            subtaskInput.value = ''; 
+        }
+    }
+}
+
+
 /**
  * Updates a specific todo item by finding it in the `todos` array, updating its details, guest
  * information, priority, saving the updates, and then reloading the user interface.

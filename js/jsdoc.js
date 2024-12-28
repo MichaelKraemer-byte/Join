@@ -3707,7 +3707,6 @@ function renderEditTaskHtml(contact) {
                     <img class="add_task_button_add_subtask" src="./assets/img/add.svg" alt="" onclick="addNewSubTaskEdit(${contact.id})">
                     <input class="show_task_edit_input" id="task_subtasks_edit" placeholder="Add new subtask" type="text">
                 </div>   
-                            
                 <div class="show_task_subtask_edit" id="show_task_subtask_edit"></div>
             </div>
             <div class="show_task_edit_footer">

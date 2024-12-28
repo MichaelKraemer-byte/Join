@@ -135,13 +135,9 @@ function renderHtmlAddtask(column) {
                         <div class="add_task_subtask add_task_form_row">
                             <label>Subtasks</label>
                             <div class="add_task_button_plus" id="add_task_button_plus">
-                                <img class="add_task_button_add_subtask" src="./assets/img/add.svg"  onclick="showAddAndDeleteSubTask()">
+                                <img class="add_task_button_add_subtask" src="./assets/img/add.svg"  onclick="addNewSubTask()">
                             </div>
-                            <div class="add_task_check_delete" id="add_task_check_delete">
-                                <img id="delete_subtask" src="./assets/img/Vector.svg" alt="" onclick="deleteSubtask()">
-                                <img id="check" src="./assets/img/check-small-svgrepo-com.svg" onclick="addNewSubTask()">
-                            </div>
-                            <input class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
+                            <input   onkeydown="checkIfKeyisEnterThenAddNewSubTask(event)" class="add_task_input" id="task_subtasks" placeholder="Add new subtask" type="text">
                         </div>
                         <div class="get_subtask" id="get_subtask"></div>
                     </div>
