@@ -460,21 +460,28 @@ async function showTaskDeleteSubtask(i, id) {
  * @returns {Promise<void>} A Promise that resolves once the new subtask is added and changes are saved.
  */
 async function addNewSubTaskEdit(id) {
-    let contact = todos.find(obj => obj['id'] == id);
+    let contact = todos.find(obj => obj['id'] == id); 
     let task_subtasks = document.getElementById('task_subtasks_edit');
-    let task_subtasks_edit = task_subtasks.value
+    let task_subtasks_edit = task_subtasks.value.trim(); 
     if (!contact.subtasks) {
         contact.subtasks = [];
     }
     if (task_subtasks_edit) {
-        contact.subtasks.push(task_subtasks_edit);
+        const isDuplicate = contact.subtasks.some(subtask => subtask === task_subtasks_edit);
+        if (isDuplicate) {
+            alert('Subtask already exists!'); 
+            return; 
+        } else {
+            contact.subtasks.push(task_subtasks_edit);
+            task_subtasks.value = ''; 
+            saveTaskToLocalStorage(); 
+            await saveTasksToServer(); 
+            getSubtaskEdit(contact); 
+            initBoardTasks();
+        }
     }
-    task_subtasks.value = '';
-    saveTaskToLocalStorage();
-    await saveTasksToServer();
-    getSubtaskEdit(contact);
-    initBoardTasks();
 }
+
 
 
 function checkIfKeyisEnterThenAddNewSubTaskEdit(event, id) {

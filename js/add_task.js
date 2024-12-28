@@ -469,17 +469,26 @@ function getSubtask() {
 
 /**
  * The function `addNewSubTask` adds a new subtask to a list and updates the display accordingly.
+ * It prevents duplicate subtasks from being added.
  */
 function addNewSubTask() {
     let task_subtask = document.getElementById('task_subtasks');
     let add_task_button_plus = document.getElementById('add_task_button_plus');
     if (task_subtask.value) {
-        subtasks.push(task_subtask.value);
+        const inputValue = task_subtask.value.trim();
+        const isDuplicate = subtasks.some(subtask => subtask === inputValue);
+        if (isDuplicate) {
+            alert('Subtask already exists!'); 
+            return; 
+        } else{ 
+            subtasks.push(inputValue);
+            getSubTaskAddTask();
+            add_task_button_plus.style.visibility = 'initial';
+            task_subtask.value = "";
+        }
     }
-    getSubTaskAddTask();
-    add_task_button_plus.style.visibility = 'initial';
-    task_subtask.value = "";
 }
+
 
 function checkIfKeyisEnterThenAddNewSubTask(event) {
     if (event.key === 'Enter') { 
@@ -492,7 +501,6 @@ function checkIfKeyisEnterThenAddNewSubTask(event) {
         }
     }
 }
-
 
 
 /**

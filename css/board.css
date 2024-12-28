@@ -269,6 +269,7 @@
 }
 
 .board_task_footer_status {
+    margin-top: 8px;
     height: 32px;
     display: flex;
     align-items: center;
